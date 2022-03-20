@@ -1,8 +1,0 @@
-.idea
-.php_cs.cache
-/node_modules
-package-lock.json
-mix-manifest.json
-/images/
-pre-dist
-*.bak.*
