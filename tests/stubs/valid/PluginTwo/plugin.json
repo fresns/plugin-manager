@@ -1,0 +1,21 @@
+{
+    "unikey": "PluginTwo",
+    "alias": "plugin-two",
+    "name": "Plugin Two",
+    "description": "Test plugin two demo",
+    "author": "Jarvis",
+    "authorLink": "https://github.com/jarvis-tang",
+    "version": "0.1",
+    "scene": [],
+    "accessPath": null,
+    "settingPath": null,
+    "priority": 0,
+    "composer": {
+        "require": {},
+        "require-dev": {}
+    },
+    "providers": [],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

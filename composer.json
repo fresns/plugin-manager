@@ -1,0 +1,88 @@
+{
+    "name": "fresns/plugin-manager",
+    "type": "library",
+    "description": "Plugin Management In Laravel",
+    "keywords": ["fresns", "laravel-plugin", "laravel-extension"],
+    "license": "Apache-2.0",
+    "homepage": "https://fresns.org",
+    "support": {
+        "issues": "https://github.com/fresns/plugin-manager/issues",
+        "source": "https://github.com/fresns/plugin-manager",
+        "docs": "https://fresns.org/extensions/plugin/"
+    },
+    "authors": [
+        {
+            "name": "Jarvis Tang",
+            "email": "jarvis.okay@gmail.com",
+            "homepage": "https://github.com/jarvis-tang",
+            "role": "Creator"
+        },
+        {
+            "name": "mouyong",
+            "email": "my24251325@gmail.com",
+            "homepage": "https://github.com/mouyong",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.0.2",
+        "ext-json": "*",
+        "ext-zip": "*",
+        "laravel/framework": "^8.0|^9.0",
+        "spatie/laravel-enum": "^3.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.0",
+        "orchestra/testbench": "^4.0|^5.0|^6.0",
+        "friendsofphp/php-cs-fixer": "^3.6",
+        "phpstan/phpstan": "^1.4",
+        "brainmaestro/composer-git-hooks": "^2.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "Fresns\\PluginManager\\": "src/"
+        },
+        "files": [
+            "src/Support/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Fresns\\PluginManager\\Tests\\": "tests",
+            "PluginTest\\": "tests/stubs/valid/"
+        }
+    },
+    "scripts": {
+        "post-update-cmd": [
+            "cghooks remove",
+            "cghooks add --ignore-lock",
+            "cghooks update"
+        ],
+        "post-merge": "composer install",
+        "post-install-cmd": [
+            "cghooks remove",
+            "cghooks add --ignore-lock",
+            "cghooks update"
+        ],
+        "test": "vendor/bin/phpunit  --colors",
+        "test-commands": "vendor/bin/phpunit --colors --testsuite Commands",
+        "phpstan": "vendor/bin/phpstan analyse",
+        "style:check": "vendor/bin/php-cs-fixer fix --using-cache=no --config=.php-cs-fixer.dist.php --allow-risky=yes --ansi --dry-run --diff",
+        "style:fix": "vendor/bin/php-cs-fixer fix --using-cache=no --config=.php-cs-fixer.dist.php --allow-risky=yes --ansi"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Fresns\\PluginManager\\Providers\\PluginServiceProvider"
+            ]
+        },
+        "hooks": {
+            "pre-commit": [
+                "composer style:fix"
+            ],
+            "pre-push": [
+            ]
+        }
+    },
+    "minimum-stability": "stable"
+}
