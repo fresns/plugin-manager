@@ -1,8 +1,9 @@
-<p align="center"><a href="https://fresns.cn" target="_blank"><img src="https://cdn.fresns.cn/images/logo.png" width="300"></a></p>
+<p align="center"><a href="https://fresns.org" target="_blank"><img src="https://raw.githubusercontent.com/fresns/docs/main/images/Fresns%20Logo.png" width="300"></a></p>
 
 <p align="center">
-<img src="https://img.shields.io/badge/PHP-%5E8.0-blue" alt="PHP">
-<img src="https://img.shields.io/badge/License-Apache--2.0-green" alt="License">
+<img src="https://img.shields.io/badge/PHP-%5E8.0-green" alt="PHP">
+<img src="https://img.shields.io/badge/Laravel-%5E8.0%7C%5E9.0-orange" alt="Laravel">
+<img src="https://img.shields.io/badge/License-Apache--2.0-blue" alt="License">
 </p>
 
 ## About Plugin Manager
