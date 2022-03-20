@@ -1,19 +1,25 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\Support\Client;
 
+use Fresns\PluginManager\Contracts\ClientInterface;
+use Fresns\PluginManager\Traits\HasGuzzleClient;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\StreamInterface;
-use Fresns\PluginManager\Contracts\ClientInterface;
-use Fresns\PluginManager\Traits\HasGuzzleClient;
 
 class AppStore implements ClientInterface
 {
     use HasGuzzleClient;
 
     /**
-     * Developer Login
+     * Developer Login.
      *
      * @param  string  $account
      * @param  string  $password
@@ -31,7 +37,7 @@ class AppStore implements ClientInterface
 
     /**
      * Developer Register
-     * Pending deletion function
+     * Pending deletion function.
      *
      * @param  string  $account
      * @param  string  $password
@@ -53,7 +59,7 @@ class AppStore implements ClientInterface
 
     /**
      * Select the plugin version to download.
-     * Pending deletion function
+     * Pending deletion function.
      *
      * @param  int  $versionId
      * @return StreamInterface
@@ -78,7 +84,7 @@ class AppStore implements ClientInterface
 
     /**
      * Plugin Upload
-     * Split into plugin uploads and theme uploads
+     * Split into plugin uploads and theme uploads.
      *
      * @param  array  $options
      * @return array
@@ -91,8 +97,8 @@ class AppStore implements ClientInterface
     }
 
     /**
-     * Get the plugins released by the Plugin Marketplace. 
-     * Pending deletion function
+     * Get the plugins released by the Plugin Marketplace.
+     * Pending deletion function.
      *
      * @param  int  $page
      * @return array

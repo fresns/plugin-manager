@@ -1,10 +1,16 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\Tests\Commands;
 
-use Illuminate\Filesystem\Filesystem;
 use Fresns\PluginManager\Contracts\RepositoryInterface;
 use Fresns\PluginManager\Tests\TestCase;
+use Illuminate\Filesystem\Filesystem;
 
 class PluginMakeMigrationTest extends TestCase
 {
@@ -40,7 +46,7 @@ class PluginMakeMigrationTest extends TestCase
     {
         $code = $this->artisan('plugin:make-migration', ['name' => 'create_posts_table', 'plugin' => 'Blog']);
 
-        $fileCount = count($this->finder->files($this->pluginPath."/Database/Migrations/"));
+        $fileCount = count($this->finder->files($this->pluginPath.'/Database/Migrations/'));
         $this->assertGreaterThan(0, $fileCount, 'Create migration file failure.');
 
         $this->assertSame(0, $code);

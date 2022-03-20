@@ -1,10 +1,16 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\Support;
 
-use Illuminate\Filesystem\Filesystem;
 use Fresns\PluginManager\Contracts\RepositoryInterface;
 use Fresns\PluginManager\Exceptions\DecompressPluginException;
+use Illuminate\Filesystem\Filesystem;
 
 class DecompressPlugin
 {
@@ -57,7 +63,7 @@ class DecompressPlugin
             default => 'plugin.json',
         };
 
-        if (!$this->filesystem->exists("{$this->tmpDecompressPath}/{$jsonFileName}")) {
+        if (! $this->filesystem->exists("{$this->tmpDecompressPath}/{$jsonFileName}")) {
             throw new DecompressPluginException("{$this->tmpDecompressPath}/{$jsonFileName} parsing error.");
         }
 
@@ -68,7 +74,7 @@ class DecompressPlugin
             default => base_path("plugins/$pluginName"),
         };
 
-        if (!$this->filesystem->isDirectory($decompressPath)) {
+        if (! $this->filesystem->isDirectory($decompressPath)) {
             $this->filesystem->makeDirectory($decompressPath, 0775, true);
         }
 

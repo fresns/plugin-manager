@@ -1,19 +1,25 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\Support\Repositories;
 
+use Fresns\PluginManager\Enums\PluginStatus;
+use Fresns\PluginManager\Exceptions\PluginNotFoundException;
+use Fresns\PluginManager\Models\InstallPlugin;
+use Fresns\PluginManager\Support\Plugin;
 use Illuminate\Cache\CacheManager;
 use Illuminate\Contracts\Config\Repository as ConfigRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Traits\Macroable;
-use Fresns\PluginManager\Enums\PluginStatus;
-use Fresns\PluginManager\Exceptions\PluginNotFoundException;
-use Fresns\PluginManager\Models\InstallPlugin;
-use Fresns\PluginManager\Support\Plugin;
 use Illuminate\Support\Str;
+use Illuminate\Support\Traits\Macroable;
 
 class MysqlRepository
 {
@@ -65,7 +71,7 @@ class MysqlRepository
      */
     public function all(): Collection
     {
-        if (!$this->config('cache.enabled')) {
+        if (! $this->config('cache.enabled')) {
             return $this->scan();
         }
 
@@ -178,7 +184,7 @@ class MysqlRepository
     /**
      * Find all plugins that are required by a plugin. If the plugin cannot be found, throw an exception.
      *
-     * @param string $name
+     * @param  string  $name
      * @return array
      */
     public function findRequirements(string $name): array
@@ -189,7 +195,7 @@ class MysqlRepository
     /**
      * Find a specific plugin. If there return that, otherwise throw exception.
      *
-     * @param string $name
+     * @param  string  $name
      * @return InstallPlugin
      *
      * @throws PluginNotFoundException

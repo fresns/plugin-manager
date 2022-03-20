@@ -1,11 +1,17 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\Contracts;
 
-use Illuminate\Filesystem\Filesystem;
 use Fresns\PluginManager\Exceptions\PluginNotFoundException;
 use Fresns\PluginManager\Support\Collection;
 use Fresns\PluginManager\Support\Plugin;
+use Illuminate\Filesystem\Filesystem;
 
 interface RepositoryInterface
 {
@@ -84,7 +90,7 @@ interface RepositoryInterface
     /**
      * Find a specific plugin.
      *
-     * @param string $name
+     * @param  string  $name
      * @return Plugin|null
      */
     public function find(string $name): ?Plugin;
@@ -92,7 +98,7 @@ interface RepositoryInterface
     /**
      * Find all plugins that are required by a plugin. If the plugin cannot be found, throw an exception.
      *
-     * @param string $name
+     * @param  string  $name
      * @return array
      *
      * @throws PluginNotFoundException
@@ -102,7 +108,7 @@ interface RepositoryInterface
     /**
      * Find a specific plugin. If there return that, otherwise throw exception.
      *
-     * @param string $name
+     * @param  string  $name
      * @return Plugin
      */
     public function findOrFail(string $name): Plugin;
@@ -173,8 +179,7 @@ interface RepositoryInterface
     /**
      * Get plugin directory.
      *
-     * @param string $name
-     *
+     * @param  string  $name
      * @return string
      */
     public function getPluginDirectoryPath(string $name): string;
@@ -182,8 +187,7 @@ interface RepositoryInterface
     /**
      * Delete plugin directory.
      *
-     * @param string $name
-     *
+     * @param  string  $name
      * @return bool
      */
     public function deletePluginDirectory(string $name): bool;

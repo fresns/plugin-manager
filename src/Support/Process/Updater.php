@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\Support\Process;
 
 use Fresns\PluginManager\Support\Plugin;
@@ -44,7 +50,7 @@ class Updater extends Runner
             $concatenatedPackages .= "\"{$name}:{$version}\" ";
         }
 
-        if (!empty($concatenatedPackages)) {
+        if (! empty($concatenatedPackages)) {
             $this->run("composer require {$concatenatedPackages}{$this->isComposerSilenced()}");
         }
     }
@@ -61,7 +67,7 @@ class Updater extends Runner
             $concatenatedPackages .= "\"{$name}:{$version}\" ";
         }
 
-        if (!empty($concatenatedPackages)) {
+        if (! empty($concatenatedPackages)) {
             $this->run("composer require --dev {$concatenatedPackages}{$this->isComposerSilenced()}");
         }
     }

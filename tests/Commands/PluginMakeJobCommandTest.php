@@ -1,10 +1,16 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\Tests\Commands;
 
-use Illuminate\Filesystem\Filesystem;
 use Fresns\PluginManager\Contracts\RepositoryInterface;
 use Fresns\PluginManager\Tests\TestCase;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 
 class PluginMakeJobCommandTest extends TestCase
@@ -43,7 +49,6 @@ class PluginMakeJobCommandTest extends TestCase
 
         $this->assertFileExists($filepath = $this->pluginPath.'/Jobs/FooBarJob.php');
 
-
         $this->assertTrue(Str::contains($content = file_get_contents($filepath), 'namespace Plugins\Blog\Jobs;'));
         $this->assertTrue(Str::contains($content, 'class FooBarJob'));
         $this->assertTrue(Str::contains($content, 'use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;'));
@@ -59,7 +64,6 @@ class PluginMakeJobCommandTest extends TestCase
         ]);
 
         $this->assertFileExists($filepath = $this->pluginPath.'/Jobs/FooBarJob.php');
-
 
         $this->assertTrue(Str::contains($content = file_get_contents($filepath), 'namespace Plugins\Blog\Jobs;'));
         $this->assertTrue(Str::contains($content, 'class FooBarJob'));

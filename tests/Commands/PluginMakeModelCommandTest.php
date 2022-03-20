@@ -1,10 +1,16 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\Tests\Commands;
 
-use Illuminate\Filesystem\Filesystem;
 use Fresns\PluginManager\Contracts\RepositoryInterface;
 use Fresns\PluginManager\Tests\TestCase;
+use Illuminate\Filesystem\Filesystem;
 
 class PluginMakeModelCommandTest extends TestCase
 {
@@ -41,7 +47,7 @@ class PluginMakeModelCommandTest extends TestCase
         $code = $this->artisan('plugin:make-model', ['model' => 'Post', 'plugin' => 'Blog']);
         $this->assertFileExists($this->pluginPath.'/Models/Post.php');
 
-        $fileCount = count($this->finder->files($this->pluginPath."/Models/"));
+        $fileCount = count($this->finder->files($this->pluginPath.'/Models/'));
         $this->assertGreaterThan(0, $fileCount, 'Create model file failure.');
 
         $this->assertSame(0, $code);
@@ -52,7 +58,7 @@ class PluginMakeModelCommandTest extends TestCase
         $code = $this->artisan('plugin:make-model', ['model' => 'Post', 'plugin' => 'Blog', '-m' => true]);
         $this->assertFileExists($this->pluginPath.'/Models/Post.php');
 
-        $fileCount = count($this->finder->files($this->pluginPath."/Database/Migrations/"));
+        $fileCount = count($this->finder->files($this->pluginPath.'/Database/Migrations/'));
         $this->assertGreaterThan(0, $fileCount, 'Create model migration file failure.');
 
         $this->assertSame(0, $code);

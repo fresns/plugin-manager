@@ -1,11 +1,17 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\Tests\Support;
 
-use PluginTest\PluginOne\Providers\PluginOneServiceProvider;
 use Fresns\PluginManager\Contracts\ActivatorInterface;
 use Fresns\PluginManager\Support\Plugin;
 use Fresns\PluginManager\Tests\TestCase;
+use PluginTest\PluginOne\Providers\PluginOneServiceProvider;
 
 class PluginTest extends TestCase
 {

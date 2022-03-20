@@ -1,14 +1,20 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\Console\Commands;
 
-use Illuminate\Console\Command;
-use Fresns\PluginManager\Support\Json;
-use Fresns\PluginManager\Support\PluginConstant;
-use Fresns\PluginManager\Support\DecompressPlugin;
-use Symfony\Component\Console\Input\InputArgument;
 use Fresns\PluginManager\Exceptions\LocalPathNotFoundException;
 use Fresns\PluginManager\Exceptions\PluginAlreadyExistException;
+use Fresns\PluginManager\Support\DecompressPlugin;
+use Fresns\PluginManager\Support\Json;
+use Fresns\PluginManager\Support\PluginConstant;
+use Illuminate\Console\Command;
+use Symfony\Component\Console\Input\InputArgument;
 
 class ThemeUnzipCommand extends Command
 {
@@ -36,7 +42,7 @@ class ThemeUnzipCommand extends Command
         $this->localPath = $this->argument('path');
 
         if ($this->filesystem->isDirectory($this->localPath)) {
-            if (!$this->filesystem->exists("{$this->localPath}/theme.json")) {
+            if (! $this->filesystem->exists("{$this->localPath}/theme.json")) {
                 throw new LocalPathNotFoundException("Local Path [{$this->localPath}] does not exist!");
             }
 
@@ -48,7 +54,7 @@ class ThemeUnzipCommand extends Command
 
             $buildPluginPath = $this->getBuildThemePath($pluginName);
 
-            if (!$this->filesystem->isDirectory($buildPluginPath)) {
+            if (! $this->filesystem->isDirectory($buildPluginPath)) {
                 $this->filesystem->makeDirectory($buildPluginPath, 0775, true);
             }
 

@@ -1,10 +1,16 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\Tests\Commands;
 
-use Illuminate\Filesystem\Filesystem;
 use Fresns\PluginManager\Contracts\RepositoryInterface;
 use Fresns\PluginManager\Tests\TestCase;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 
 class PluginMakeTestCommandTest extends TestCase
@@ -43,7 +49,6 @@ class PluginMakeTestCommandTest extends TestCase
 
         $this->assertFileExists($filepath = $this->pluginPath.'/Tests/Feature/FooBarFeature.php');
 
-
         $this->assertTrue(Str::contains(file_get_contents($filepath), 'namespace Plugins\Blog\Tests\Feature;'));
         $this->assertTrue(Str::contains(file_get_contents($filepath), 'class FooBarFeature'));
         $this->assertTrue(Str::contains(file_get_contents($filepath), 'A basic feature test example.'));
@@ -55,7 +60,6 @@ class PluginMakeTestCommandTest extends TestCase
         $code = $this->artisan('plugin:make-test', ['name' => 'FooBarUnit', 'plugin' => 'Blog']);
 
         $this->assertFileExists($filepath = $this->pluginPath.'/Tests/Unit/FooBarUnit.php');
-
 
         $this->assertTrue(Str::contains(file_get_contents($filepath), 'namespace Plugins\Blog\Tests\Unit;'));
         $this->assertTrue(Str::contains(file_get_contents($filepath), 'class FooBarUnit'));

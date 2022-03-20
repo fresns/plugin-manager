@@ -1,16 +1,22 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\Console\Commands;
 
-use Illuminate\Support\Str;
-use Illuminate\Console\Command;
-use Fresns\PluginManager\Support\Plugin;
-use Illuminate\Contracts\Debug\ExceptionHandler;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputArgument;
-use Fresns\PluginManager\Traits\PluginCommandTrait;
 use Fresns\PluginManager\Contracts\RepositoryInterface;
 use Fresns\PluginManager\Support\Config\GenerateConfigReader;
+use Fresns\PluginManager\Support\Plugin;
+use Fresns\PluginManager\Traits\PluginCommandTrait;
+use Illuminate\Console\Command;
+use Illuminate\Contracts\Debug\ExceptionHandler;
+use Illuminate\Support\Str;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 
 class PluginSeedCommand extends Command
 {
@@ -61,13 +67,14 @@ class PluginSeedCommand extends Command
     }
 
     /**
-     * @throws \RuntimeException
      * @return RepositoryInterface
+     *
+     * @throws \RuntimeException
      */
     public function getPluginRepository(): RepositoryInterface
     {
         $plugins = $this->laravel['plugins.repository'];
-        if (!$plugins instanceof RepositoryInterface) {
+        if (! $plugins instanceof RepositoryInterface) {
             throw new \RuntimeException('plugin repository not found!');
         }
 
@@ -76,10 +83,9 @@ class PluginSeedCommand extends Command
 
     /**
      * @param $name
+     * @return Plugin
      *
      * @throws \RuntimeException
-     *
-     * @return Plugin
      */
     public function getPluginByName($name)
     {
@@ -92,8 +98,7 @@ class PluginSeedCommand extends Command
     }
 
     /**
-     * @param Plugin $plugin
-     *
+     * @param  Plugin  $plugin
      * @return void
      */
     public function pluginSeed(Plugin $plugin)
@@ -102,7 +107,7 @@ class PluginSeedCommand extends Command
         $name = $plugin->getName();
         $config = $plugin->get('migration');
         if (is_array($config) && array_key_exists('seeds', $config)) {
-            foreach ((array)$config['seeds'] as $class) {
+            foreach ((array) $config['seeds'] as $class) {
                 if (class_exists($class)) {
                     $seeders[] = $class;
                 }
@@ -131,12 +136,12 @@ class PluginSeedCommand extends Command
     /**
      * Seed the specified Plugin.
      *
-     * @param string $className
+     * @param  string  $className
      */
     protected function dbSeed($className)
     {
         if ($option = $this->option('class')) {
-            $params['--class'] = Str::finish(substr($className, 0, strrpos($className, '\\')), '\\') . $option;
+            $params['--class'] = Str::finish(substr($className, 0, strrpos($className, '\\')), '\\').$option;
         } else {
             $params = ['--class' => $className];
         }
@@ -155,8 +160,7 @@ class PluginSeedCommand extends Command
     /**
      * Get master database seeder name for the specified Plugin.
      *
-     * @param string $name
-     *
+     * @param  string  $name
      * @return string
      */
     public function getSeederName($name)
@@ -167,14 +171,13 @@ class PluginSeedCommand extends Command
         $config = GenerateConfigReader::read('seeder');
         $seederPath = str_replace('/', '\\', $config->getPath());
 
-        return $namespace . '\\' . $name . '\\' . $seederPath . '\\' . $name . 'DatabaseSeeder';
+        return $namespace.'\\'.$name.'\\'.$seederPath.'\\'.$name.'DatabaseSeeder';
     }
 
     /**
      * Get master database seeder name for the specified Plugin under a different namespace than Plugins.
      *
-     * @param string $name
-     *
+     * @param  string  $name
      * @return array $foundPlugins array containing namespace paths
      */
     public function getSeederNames($name)
@@ -187,7 +190,7 @@ class PluginSeedCommand extends Command
         $foundPlugins = [];
         foreach ($this->laravel['plugins.repository']->config('scan.paths') as $path) {
             $namespace = array_slice(explode('/', $path), -1)[0];
-            $foundPlugins[] = $namespace . '\\' . $name . '\\' . $seederPath . '\\' . $name . 'DatabaseSeeder';
+            $foundPlugins[] = $namespace.'\\'.$name.'\\'.$seederPath.'\\'.$name.'DatabaseSeeder';
         }
 
         return $foundPlugins;

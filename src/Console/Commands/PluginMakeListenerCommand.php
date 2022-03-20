@@ -1,12 +1,18 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\Console\Commands;
 
-use Fresns\PluginManager\Support\Plugin;
-use Illuminate\Support\Str;
 use Fresns\PluginManager\Support\Config\GenerateConfigReader;
+use Fresns\PluginManager\Support\Plugin;
 use Fresns\PluginManager\Support\Stub;
 use Fresns\PluginManager\Traits\PluginCommandTrait;
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -67,10 +73,10 @@ class PluginMakeListenerCommand extends GeneratorCommand
 
     protected function getEventName(Plugin $plugin): string
     {
-        $namespace = $this->laravel['plugins.repository']->config('namespace') . "\\" . $plugin->getStudlyName();
+        $namespace = $this->laravel['plugins.repository']->config('namespace').'\\'.$plugin->getStudlyName();
         $eventPath = GenerateConfigReader::read('event');
 
-        $eventName = $namespace . "\\" . $eventPath->getPath() . "\\" . $this->option('event');
+        $eventName = $namespace.'\\'.$eventPath->getPath().'\\'.$this->option('event');
 
         return str_replace('/', '\\', $eventName);
     }
@@ -82,11 +88,11 @@ class PluginMakeListenerCommand extends GeneratorCommand
 
     protected function getDestinationFilePath(): string
     {
-        $path = $this->getPlugin()->getPath() . '/';
+        $path = $this->getPlugin()->getPath().'/';
 
         $listenerPath = GenerateConfigReader::read('listener');
 
-        return $path . $listenerPath->getPath() . '/' . $this->getFileName() . '.php';
+        return $path.$listenerPath->getPath().'/'.$this->getFileName().'.php';
     }
 
     protected function getFileName(): string

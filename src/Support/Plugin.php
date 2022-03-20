@@ -1,19 +1,25 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\Support;
 
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
+use Fresns\PluginManager\Contracts\ActivatorInterface;
+use Fresns\PluginManager\Contracts\RepositoryInterface;
+use Fresns\PluginManager\ValueObjects\ValRequires;
 use Illuminate\Cache\CacheManager;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Foundation\Application;
-use Illuminate\Translation\Translator;
-use Illuminate\Support\Traits\Macroable;
 use Illuminate\Foundation\ProviderRepository;
-use Fresns\PluginManager\ValueObjects\ValRequires;
-use Fresns\PluginManager\Contracts\ActivatorInterface;
-use Fresns\PluginManager\Contracts\RepositoryInterface;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
+use Illuminate\Support\Traits\Macroable;
+use Illuminate\Translation\Translator;
 
 class Plugin
 {
@@ -41,9 +47,9 @@ class Plugin
     protected ?string $path;
 
     /**
-     * Plugin type
+     * Plugin type.
      *
-     * @var integer
+     * @var int
      */
     protected int $type = PluginConstant::PLUGIN_TYPE_EXTENSION;
 
@@ -176,7 +182,7 @@ class Plugin
     {
         // This checks if we are running on a Laravel Vapor managed instance
         // and sets the path to a writable one (services path is not on a writable storage in Vapor).
-        if (!is_null(env('VAPOR_MAINTENANCE_MODE', null))) {
+        if (! is_null(env('VAPOR_MAINTENANCE_MODE', null))) {
             return Str::replaceLast('config.php', $this->getSnakeName().'_plugin.php', $this->app->getCachedConfigPath());
         }
 
@@ -434,7 +440,7 @@ class Plugin
      */
     public function isDisabled(): bool
     {
-        return !$this->isEnabled();
+        return ! $this->isEnabled();
     }
 
     /**

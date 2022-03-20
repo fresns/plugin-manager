@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\Contracts;
 
 use Psr\Http\Message\StreamInterface;
@@ -7,7 +13,7 @@ use Psr\Http\Message\StreamInterface;
 interface ClientInterface
 {
     /**
-     * Developer Login
+     * Developer Login.
      *
      * @param  string  $account
      * @param  string  $password
@@ -17,7 +23,7 @@ interface ClientInterface
 
     /**
      * Developer Register
-     * Pending deletion function
+     * Pending deletion function.
      *
      * @param  string  $account
      * @param  string  $password
@@ -29,7 +35,7 @@ interface ClientInterface
 
     /**
      * Select the plugin version to download.
-     * Pending deletion function
+     * Pending deletion function.
      *
      * @param  int  $versionId
      * @return StreamInterface
@@ -37,7 +43,7 @@ interface ClientInterface
     public function download(int $versionId): StreamInterface;
 
     /**
-     * Split into plugin uploads and theme uploads
+     * Split into plugin uploads and theme uploads.
      *
      * @param  array  $options
      * @return array
@@ -45,8 +51,8 @@ interface ClientInterface
     public function upload(array $options): array;
 
     /**
-     * Get the plugins released by the Plugin Marketplace. 
-     * Pending deletion function
+     * Get the plugins released by the Plugin Marketplace.
+     * Pending deletion function.
      *
      * @param  int  $page
      * @return array

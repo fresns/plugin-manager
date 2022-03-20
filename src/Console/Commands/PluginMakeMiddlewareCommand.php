@@ -1,13 +1,19 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Nwidart\Modules\Commands;
 
 namespace Fresns\PluginManager\Console\Commands;
 
-use Illuminate\Support\Str;
 use Fresns\PluginManager\Support\Config\GenerateConfigReader;
 use Fresns\PluginManager\Support\Stub;
 use Fresns\PluginManager\Traits\PluginCommandTrait;
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputArgument;
 
 class PluginMakeMiddlewareCommand extends GeneratorCommand
@@ -34,7 +40,6 @@ class PluginMakeMiddlewareCommand extends GeneratorCommand
      * @var string
      */
     protected $description = 'Create a new middleware class for the specified plugin.';
-
 
     /**
      * @return string
@@ -77,11 +82,11 @@ class PluginMakeMiddlewareCommand extends GeneratorCommand
      */
     protected function getDestinationFilePath(): string
     {
-        $path = $this->getPlugin()->getPath() . '/';
+        $path = $this->getPlugin()->getPath().'/';
 
         $middlewarePath = GenerateConfigReader::read('middleware');
 
-        return $path . $middlewarePath->getPath() . '/' . $this->getFileName() . '.php';
+        return $path.$middlewarePath->getPath().'/'.$this->getFileName().'.php';
     }
 
     /**

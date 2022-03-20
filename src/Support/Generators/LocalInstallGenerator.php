@@ -1,9 +1,13 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\Support\Generators;
 
-use Illuminate\Console\Command as Console;
-use Illuminate\Filesystem\Filesystem;
 use Fresns\PluginManager\Contracts\ActivatorInterface;
 use Fresns\PluginManager\Contracts\GeneratorInterface;
 use Fresns\PluginManager\Exceptions\LocalPathNotFoundException;
@@ -11,6 +15,8 @@ use Fresns\PluginManager\Exceptions\PluginAlreadyExistException;
 use Fresns\PluginManager\Support\DecompressPlugin;
 use Fresns\PluginManager\Support\Json;
 use Fresns\PluginManager\Support\Repositories\FileRepository;
+use Illuminate\Console\Command as Console;
+use Illuminate\Filesystem\Filesystem;
 
 class LocalInstallGenerator implements GeneratorInterface
 {
@@ -113,7 +119,7 @@ class LocalInstallGenerator implements GeneratorInterface
     public function generate(): int
     {
         if ($this->filesystem->isDirectory($this->localPath)) {
-            if (!$this->filesystem->exists("{$this->localPath}/plugin.json")) {
+            if (! $this->filesystem->exists("{$this->localPath}/plugin.json")) {
                 throw new LocalPathNotFoundException("Local Path [{$this->localPath}] does not exist!");
             }
 
@@ -125,7 +131,7 @@ class LocalInstallGenerator implements GeneratorInterface
 
             $buildPluginPath = $this->pluginRepository->getPluginPath($pluginName);
 
-            if (!$this->filesystem->isDirectory($buildPluginPath)) {
+            if (! $this->filesystem->isDirectory($buildPluginPath)) {
                 $this->filesystem->makeDirectory($buildPluginPath, 0775, true);
             }
 

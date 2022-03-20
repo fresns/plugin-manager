@@ -1,13 +1,19 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\Tests\Commands;
 
-use Illuminate\Filesystem\Filesystem;
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Str;
 use Fresns\PluginManager\Contracts\ActivatorInterface;
 use Fresns\PluginManager\Contracts\RepositoryInterface;
 use Fresns\PluginManager\Tests\TestCase;
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Str;
 
 class PluginMakeCommandTest extends TestCase
 {
@@ -51,7 +57,7 @@ class PluginMakeCommandTest extends TestCase
         $code = $this->artisan('plugin:make', ['name' => ['Blog']]);
 
         foreach (config('plugins.paths.generator') as $directory) {
-            if (!($directory['generate'] ?? false)) {
+            if (! ($directory['generate'] ?? false)) {
                 continue;
             }
 
@@ -98,7 +104,6 @@ class PluginMakeCommandTest extends TestCase
         $path = base_path('plugins/Blog').'/Providers/RouteServiceProvider.php';
         $this->assertTrue($this->finder->exists($path));
 
-
         $this->repository->deletePluginDirectory('Blog');
         $this->assertDirectoryNotExists($this->repository->getPluginDirectoryPath('Blog'));
 
@@ -110,7 +115,6 @@ class PluginMakeCommandTest extends TestCase
         $code = $this->artisan('plugin:make', ['name' => ['PluginName']]);
 
         $this->assertDirectoryExists($path = $this->repository->getPluginDirectoryPath('PluginName'));
-
 
         $this->repository->deletePluginDirectory(pathinfo($path, PATHINFO_BASENAME));
         $this->assertDirectoryNotExists($path);
@@ -129,7 +133,6 @@ class PluginMakeCommandTest extends TestCase
 ';
 
         $this->assertEquals($expected, Artisan::output());
-
 
         $this->repository->deletePluginDirectory(pathinfo($path, PATHINFO_BASENAME));
         $this->assertDirectoryNotExists($path);
@@ -150,7 +153,6 @@ class PluginMakeCommandTest extends TestCase
 
         $this->assertNotEquals($notExpected, $output);
         $this->assertTrue(Str::contains($output, 'Plugin [Blog] created successfully.'));
-
 
         $this->repository->deletePluginDirectory(pathinfo($path, PATHINFO_BASENAME));
         $this->assertDirectoryNotExists($path);
@@ -192,9 +194,6 @@ class PluginMakeCommandTest extends TestCase
         $this->assertDirectoryExists($this->pluginPath.'/Emails');
         $this->assertDirectoryNotExists($this->pluginPath.'/Rules');
         $this->assertDirectoryNotExists($this->pluginPath.'/Policies');
-
-
-
 
         $this->assertDirectoryExists($path = $this->repository->getPluginDirectoryPath('Blog'));
         $this->repository->deletePluginDirectory(pathinfo($path, PATHINFO_BASENAME));
@@ -249,7 +248,6 @@ class PluginMakeCommandTest extends TestCase
         $this->assertDirectoryNotExists($this->pluginPath.'/Providers');
         $this->assertDirectoryNotExists($this->pluginPath.'/Http/Controllers');
 
-
         $this->assertDirectoryExists($path = $this->repository->getPluginDirectoryPath('Blog'));
         $this->repository->deletePluginDirectory(pathinfo($path, PATHINFO_BASENAME));
         $this->assertDirectoryNotExists($path);
@@ -263,7 +261,6 @@ class PluginMakeCommandTest extends TestCase
 
         $this->assertTrue($this->repository->isEnabled('Blog'));
 
-
         $this->assertDirectoryExists($path = $this->repository->getPluginDirectoryPath('Blog'));
         $this->repository->deletePluginDirectory(pathinfo($path, PATHINFO_BASENAME));
         $this->assertDirectoryNotExists($path);
@@ -276,7 +273,6 @@ class PluginMakeCommandTest extends TestCase
         $code = $this->artisan('plugin:make', ['name' => ['Blog'], '--disabled' => true]);
 
         $this->assertTrue($this->repository->isDisabled('Blog'));
-
 
         $this->assertDirectoryExists($path = $this->repository->getPluginDirectoryPath('Blog'));
         $this->repository->deletePluginDirectory(pathinfo($path, PATHINFO_BASENAME));

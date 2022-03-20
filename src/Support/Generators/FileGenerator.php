@@ -1,10 +1,16 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\Support\Generators;
 
-use Illuminate\Filesystem\Filesystem;
 use Fresns\PluginManager\Contracts\GeneratorInterface;
 use Fresns\PluginManager\Exceptions\FileAlreadyExistException;
+use Illuminate\Filesystem\Filesystem;
 
 class FileGenerator implements GeneratorInterface
 {
@@ -131,7 +137,7 @@ class FileGenerator implements GeneratorInterface
     public function generate(): bool
     {
         $path = $this->getPath();
-        if (!$this->filesystem->exists($path)) {
+        if (! $this->filesystem->exists($path)) {
             return $this->filesystem->put($path, $this->getContents());
         }
         if ($this->overwriteFile === true) {

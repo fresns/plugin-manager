@@ -1,13 +1,19 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\Console\Commands;
 
-use Illuminate\Console\Command;
-use Mockery\Exception;
-use Symfony\Component\Console\Input\InputArgument;
 use Fresns\PluginManager\Support\CompressPlugin;
 use Fresns\PluginManager\Traits\HasAppStoreTokens;
 use Fresns\PluginManager\Traits\PluginCommandTrait;
+use Illuminate\Console\Command;
+use Mockery\Exception;
+use Symfony\Component\Console\Input\InputArgument;
 
 class DeveloperUploadPluginCommand extends Command
 {
@@ -26,7 +32,7 @@ class DeveloperUploadPluginCommand extends Command
             $plugin = $this->argument('plugin');
             $this->info("Plugin {$plugin} starts to compress");
             $compressRes = (new CompressPlugin($this->getPlugin()))->handle();
-            if (!$compressRes) {
+            if (! $compressRes) {
                 $this->error("Plugin {$plugin} compression Failed");
 
                 return E_ERROR;

@@ -1,17 +1,14 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\Support\Repositories;
 
 use Exception;
-use Illuminate\Cache\CacheManager;
-use Illuminate\Contracts\Config\Repository as ConfigRepository;
-use Illuminate\Contracts\Filesystem\FileNotFoundException;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\Routing\UrlGenerator;
-use Illuminate\Filesystem\Filesystem;
-use Illuminate\Support\Str;
-use Illuminate\Support\Traits\Macroable;
-use Symfony\Component\Process\Process;
 use Fresns\PluginManager\Contracts\RepositoryInterface;
 use Fresns\PluginManager\Exceptions\InvalidAssetPath;
 use Fresns\PluginManager\Exceptions\PluginNotFoundException;
@@ -21,6 +18,15 @@ use Fresns\PluginManager\Support\Plugin;
 use Fresns\PluginManager\Support\Process\Installer;
 use Fresns\PluginManager\Support\Process\Updater;
 use Fresns\PluginManager\ValueObjects\ValRequires;
+use Illuminate\Cache\CacheManager;
+use Illuminate\Contracts\Config\Repository as ConfigRepository;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\UrlGenerator;
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Str;
+use Illuminate\Support\Traits\Macroable;
+use Symfony\Component\Process\Process;
 
 class FileRepository implements RepositoryInterface
 {
@@ -180,7 +186,7 @@ class FileRepository implements RepositoryInterface
      */
     public function all(): array
     {
-        if (!$this->config('cache.enabled')) {
+        if (! $this->config('cache.enabled')) {
             return $this->scan();
         }
 
@@ -205,7 +211,7 @@ class FileRepository implements RepositoryInterface
     }
 
     /**
-     * @param string $name
+     * @param  string  $name
      * @param  string|null  $type
      * @return ValRequires
      *
@@ -216,7 +222,7 @@ class FileRepository implements RepositoryInterface
         $valRequires = ValRequires::make();
 
         return collect($this->all())
-            ->filter(fn (Plugin $plugin) => is_array($name) ? !in_array($plugin->getName(), $name) : $plugin->getName() !== $name)
+            ->filter(fn (Plugin $plugin) => is_array($name) ? ! in_array($plugin->getName(), $name) : $plugin->getName() !== $name)
             ->reduce(function (ValRequires $valRequires, Plugin $plugin) use ($type) {
                 $requires = $type ? $plugin->getComposerAttr($type) : $plugin->getAllComposerRequires();
 
@@ -292,7 +298,7 @@ class FileRepository implements RepositoryInterface
     /**
      * Determine whether the given plugins exist.
      *
-     * @param string $name
+     * @param  string  $name
      * @return bool
      *
      * @throws Exception
@@ -451,7 +457,7 @@ class FileRepository implements RepositoryInterface
     /**
      * Find a specific plugin, if there return that, otherwise throw exception.
      *
-     * @param string $name
+     * @param  string  $name
      * @return Plugin
      *
      * @throws PluginNotFoundException
@@ -471,7 +477,7 @@ class FileRepository implements RepositoryInterface
     /**
      * Get all plugin as laravel collection instance.
      *
-     * @param int $status
+     * @param  int  $status
      * @return Collection
      *
      * @throws Exception
@@ -527,7 +533,7 @@ class FileRepository implements RepositoryInterface
         }
 
         $path = storage_path('app/plugins/plugins.used');
-        if (!$this->getFiles()->exists($path)) {
+        if (! $this->getFiles()->exists($path)) {
             $this->getFiles()->put($path, '');
         }
 
@@ -537,7 +543,7 @@ class FileRepository implements RepositoryInterface
     /**
      * Set plugins used for cli session.
      *
-     * @param string $name
+     * @param  string  $name
      *
      * @throws PluginNotFoundException
      */
@@ -625,7 +631,7 @@ class FileRepository implements RepositoryInterface
      */
     public function isDisabled(string $name): bool
     {
-        return !$this->isEnabled($name);
+        return ! $this->isEnabled($name);
     }
 
     /**
@@ -675,7 +681,7 @@ class FileRepository implements RepositoryInterface
     {
         $pluginPath = $this->getPluginDirectoryPath($name);
 
-        if (!is_dir($pluginPath)) {
+        if (! is_dir($pluginPath)) {
             return true;
         }
 

@@ -1,10 +1,16 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\Tests\Commands;
 
-use Illuminate\Filesystem\Filesystem;
 use Fresns\PluginManager\Contracts\RepositoryInterface;
 use Fresns\PluginManager\Tests\TestCase;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 
 class PluginMakePolicyCommandTest extends TestCase
@@ -42,7 +48,6 @@ class PluginMakePolicyCommandTest extends TestCase
         $code = $this->artisan('plugin:make-policy', ['name' => 'FooBarPolicy', 'plugin' => 'Blog']);
 
         $this->assertFileExists($filepath = $this->pluginPath.'/Policies/FooBarPolicy.php');
-
 
         $this->assertTrue(Str::contains(file_get_contents($filepath), 'namespace Plugins\Blog\Policies;'));
         $this->assertTrue(Str::contains(file_get_contents($filepath), 'class FooBarPolicy'));

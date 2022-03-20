@@ -1,61 +1,67 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\Providers;
 
-use Illuminate\Support\Str;
 use Carbon\Laravel\ServiceProvider;
-use Fresns\PluginManager\Console\Commands\PluginCommand;
-use Fresns\PluginManager\Console\Commands\PluginListCommand;
-use Fresns\PluginManager\Console\Commands\PluginMakeCommand;
-use Fresns\PluginManager\Console\Commands\PluginSeedCommand;
-use Fresns\PluginManager\Console\Commands\ThemeUnzipCommand;
-use Fresns\PluginManager\Console\Commands\PluginUnzipCommand;
-use Fresns\PluginManager\Console\Commands\ThemeInstallCommand;
-use Fresns\PluginManager\Console\Commands\ThemePublishCommand;
-use Fresns\PluginManager\Console\Commands\PluginInstallCommand;
-use Fresns\PluginManager\Console\Commands\PluginMakeDTOCommand;
-use Fresns\PluginManager\Console\Commands\PluginMakeJobCommand;
-use Fresns\PluginManager\Console\Commands\PluginMigrateCommand;
-use Fresns\PluginManager\Console\Commands\PluginPublishCommand;
-use Fresns\PluginManager\Console\Commands\ThemeActivateCommand;
+use Fresns\PluginManager\Console\Commands\AppStoreDownloadCommand;
 use Fresns\PluginManager\Console\Commands\DeveloperLoginCommand;
+use Fresns\PluginManager\Console\Commands\DeveloperUploadPluginCommand;
+use Fresns\PluginManager\Console\Commands\DeveloperUploadThemeCommand;
 use Fresns\PluginManager\Console\Commands\PluginActivateCommand;
+use Fresns\PluginManager\Console\Commands\PluginCommand;
+use Fresns\PluginManager\Console\Commands\PluginComposerInstallCommand;
+use Fresns\PluginManager\Console\Commands\PluginComposerRemoveCommand;
+use Fresns\PluginManager\Console\Commands\PluginComposerRequireCommand;
+use Fresns\PluginManager\Console\Commands\PluginDeactivateCommand;
+use Fresns\PluginManager\Console\Commands\PluginInstallCommand;
+use Fresns\PluginManager\Console\Commands\PluginListCommand;
+use Fresns\PluginManager\Console\Commands\PluginMakeCmdWordProviderCommand;
+use Fresns\PluginManager\Console\Commands\PluginMakeCommand;
+use Fresns\PluginManager\Console\Commands\PluginMakeCommandCommand;
+use Fresns\PluginManager\Console\Commands\PluginMakeConsoleProviderCommand;
+use Fresns\PluginManager\Console\Commands\PluginMakeControllerCommand;
+use Fresns\PluginManager\Console\Commands\PluginMakeDTOCommand;
+use Fresns\PluginManager\Console\Commands\PluginMakeEventCommand;
+use Fresns\PluginManager\Console\Commands\PluginMakeEventProviderCommand;
+use Fresns\PluginManager\Console\Commands\PluginMakeFactoryCommand;
+use Fresns\PluginManager\Console\Commands\PluginMakeJobCommand;
+use Fresns\PluginManager\Console\Commands\PluginMakeListenerCommand;
 use Fresns\PluginManager\Console\Commands\PluginMakeMailCommand;
+use Fresns\PluginManager\Console\Commands\PluginMakeMiddlewareCommand;
+use Fresns\PluginManager\Console\Commands\PluginMakeMigrationCommand;
+use Fresns\PluginManager\Console\Commands\PluginMakeModelCommand;
+use Fresns\PluginManager\Console\Commands\PluginMakeNotificationCommand;
+use Fresns\PluginManager\Console\Commands\PluginMakePolicyCommand;
+use Fresns\PluginManager\Console\Commands\PluginMakeProviderCommand;
+use Fresns\PluginManager\Console\Commands\PluginMakeRequestCommand;
+use Fresns\PluginManager\Console\Commands\PluginMakeResourceCommand;
 use Fresns\PluginManager\Console\Commands\PluginMakeRuleCommand;
 use Fresns\PluginManager\Console\Commands\PluginMakeSeedCommand;
 use Fresns\PluginManager\Console\Commands\PluginMakeTestCommand;
-use Fresns\PluginManager\Console\Commands\ThemeUninstallCommand;
-use Fresns\PluginManager\Console\Commands\ThemeUnpublishCommand;
-use Fresns\PluginManager\Console\Commands\PluginMakeEventCommand;
-use Fresns\PluginManager\Console\Commands\PluginMakeModelCommand;
+use Fresns\PluginManager\Console\Commands\PluginMigrateCommand;
+use Fresns\PluginManager\Console\Commands\PluginMigrateRefreshCommand;
+use Fresns\PluginManager\Console\Commands\PluginMigrateResetCommand;
+use Fresns\PluginManager\Console\Commands\PluginMigrateRollbackCommand;
+use Fresns\PluginManager\Console\Commands\PluginPublishCommand;
+use Fresns\PluginManager\Console\Commands\PluginRouteProviderCommand;
+use Fresns\PluginManager\Console\Commands\PluginSeedCommand;
 use Fresns\PluginManager\Console\Commands\PluginUninstallCommand;
 use Fresns\PluginManager\Console\Commands\PluginUnpublishCommand;
+use Fresns\PluginManager\Console\Commands\PluginUnzipCommand;
+use Fresns\PluginManager\Console\Commands\ThemeActivateCommand;
 use Fresns\PluginManager\Console\Commands\ThemeDeactivateCommand;
-use Fresns\PluginManager\Console\Commands\AppStoreDownloadCommand;
-use Fresns\PluginManager\Console\Commands\PluginDeactivateCommand;
-use Fresns\PluginManager\Console\Commands\PluginMakePolicyCommand;
-use Fresns\PluginManager\Console\Commands\PluginMakeCommandCommand;
-use Fresns\PluginManager\Console\Commands\PluginMakeFactoryCommand;
-use Fresns\PluginManager\Console\Commands\PluginMakeRequestCommand;
-use Fresns\PluginManager\Console\Commands\PluginMakeListenerCommand;
-use Fresns\PluginManager\Console\Commands\PluginMakeProviderCommand;
-use Fresns\PluginManager\Console\Commands\PluginMakeResourceCommand;
-use Fresns\PluginManager\Console\Commands\PluginMigrateResetCommand;
-use Fresns\PluginManager\Console\Commands\PluginMakeMigrationCommand;
-use Fresns\PluginManager\Console\Commands\PluginRouteProviderCommand;
-use Fresns\PluginManager\Console\Commands\DeveloperUploadThemeCommand;
-use Fresns\PluginManager\Console\Commands\PluginComposerRemoveCommand;
-use Fresns\PluginManager\Console\Commands\PluginMakeControllerCommand;
-use Fresns\PluginManager\Console\Commands\PluginMakeMiddlewareCommand;
-use Fresns\PluginManager\Console\Commands\PluginMigrateRefreshCommand;
-use Fresns\PluginManager\Console\Commands\DeveloperUploadPluginCommand;
-use Fresns\PluginManager\Console\Commands\PluginComposerInstallCommand;
-use Fresns\PluginManager\Console\Commands\PluginComposerRequireCommand;
-use Fresns\PluginManager\Console\Commands\PluginMigrateRollbackCommand;
-use Fresns\PluginManager\Console\Commands\PluginMakeNotificationCommand;
-use Fresns\PluginManager\Console\Commands\PluginMakeEventProviderCommand;
-use Fresns\PluginManager\Console\Commands\PluginMakeCmdWordProviderCommand;
-use Fresns\PluginManager\Console\Commands\PluginMakeConsoleProviderCommand;
+use Fresns\PluginManager\Console\Commands\ThemeInstallCommand;
+use Fresns\PluginManager\Console\Commands\ThemePublishCommand;
+use Fresns\PluginManager\Console\Commands\ThemeUninstallCommand;
+use Fresns\PluginManager\Console\Commands\ThemeUnpublishCommand;
+use Fresns\PluginManager\Console\Commands\ThemeUnzipCommand;
+use Illuminate\Support\Str;
 
 class ConsoleServiceProvider extends ServiceProvider
 {

@@ -1,10 +1,16 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\Listeners\PluginInstall;
 
 use Fresns\PluginManager\Listeners\PluginEventFilter;
-use Fresns\PluginManager\Support\Plugin;
 use Fresns\PluginManager\Models\Plugin as PluginModel;
+use Fresns\PluginManager\Support\Plugin;
 use Fresns\PluginManager\Support\PluginConstant;
 
 class ThemeAddToDatabase extends PluginEventFilter
@@ -15,7 +21,6 @@ class ThemeAddToDatabase extends PluginEventFilter
     {
         /** @var Plugin */
         $this->plugin = $plugin;
-
 
         // validate theme.json is valid
         $data = $this->ensureThemeJsonIsValid();
@@ -64,10 +69,9 @@ class ThemeAddToDatabase extends PluginEventFilter
     }
 
     /**
-     * This function will save the theme data to the database
-     * 
+     * This function will save the theme data to the database.
+     *
      * @param array pluginJsonData The data that was extracted from the plugin's JSON file.
-     * 
      * @return The plugin model object.
      */
     public function saveThemeToDatabase(array $pluginJsonData)

@@ -1,13 +1,19 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\Support\Composer;
 
 use Exception;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Support\Traits\Macroable;
 use Fresns\PluginManager\Contracts\RepositoryInterface;
 use Fresns\PluginManager\Support\Json;
 use Fresns\PluginManager\ValueObjects\ValRequires;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Support\Traits\Macroable;
 
 abstract class Composer
 {

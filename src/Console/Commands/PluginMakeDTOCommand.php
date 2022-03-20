@@ -51,11 +51,11 @@ class PluginMakeDTOCommand extends GeneratorCommand
 
     protected function getDestinationFilePath(): string
     {
-        $path = $this->getPlugin()->getPath() . '/';
+        $path = $this->getPlugin()->getPath().'/';
 
         $dtoPath = GenerateConfigReader::read('dto');
 
-        return $path . $dtoPath->getPath() . '/' . $this->getFileName() . '.php';
+        return $path.$dtoPath->getPath().'/'.$this->getFileName().'.php';
     }
 
     /**

@@ -1,11 +1,17 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\Listeners\PluginInstall;
 
 use Fresns\PluginManager\Listeners\PluginEventFilter;
-use Illuminate\Support\Facades\Artisan;
 use Fresns\PluginManager\Support\Plugin;
 use Fresns\PluginManager\Support\PluginConstant;
+use Illuminate\Support\Facades\Artisan;
 
 class PluginMigrate extends PluginEventFilter
 {
@@ -14,8 +20,8 @@ class PluginMigrate extends PluginEventFilter
     public function handleEvent(Plugin $plugin)
     {
         Artisan::call('plugin:migrate', [
-                'plugin' => $plugin->getName(),
-                '--force' => $plugin->getForce(),
+            'plugin' => $plugin->getName(),
+            '--force' => $plugin->getForce(),
         ]);
     }
 }

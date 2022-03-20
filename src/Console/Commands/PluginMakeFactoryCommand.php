@@ -1,11 +1,17 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\Console\Commands;
 
-use Fresns\PluginManager\Traits\PluginCommandTrait;
-use Illuminate\Support\Str;
 use Fresns\PluginManager\Support\Config\GenerateConfigReader;
 use Fresns\PluginManager\Support\Stub;
+use Fresns\PluginManager\Traits\PluginCommandTrait;
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputArgument;
 
 class PluginMakeFactoryCommand extends GeneratorCommand
@@ -46,7 +52,6 @@ class PluginMakeFactoryCommand extends GeneratorCommand
         ];
     }
 
-
     /**
      * @return string
      */
@@ -79,7 +84,7 @@ class PluginMakeFactoryCommand extends GeneratorCommand
 
         $factoryPath = GenerateConfigReader::read('factory');
 
-        return $path . $factoryPath->getPath() . '/' . $this->getFileName().'.php';
+        return $path.$factoryPath->getPath().'/'.$this->getFileName().'.php';
     }
 
     /**
@@ -89,8 +94,7 @@ class PluginMakeFactoryCommand extends GeneratorCommand
     {
         return Str::contains($fileName = $this->getStudlyName(), 'Factory')
             ? $fileName
-            : sprintf('%sFactory', $this->getStudlyName())
-            ;
+            : sprintf('%sFactory', $this->getStudlyName());
     }
 
     /**

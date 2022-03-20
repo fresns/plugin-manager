@@ -1,13 +1,19 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\Console\Commands;
 
-use Illuminate\Console\Command;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputArgument;
+use Fresns\PluginManager\Contracts\RepositoryInterface;
 use Fresns\PluginManager\Support\Migrations\Migrator;
 use Fresns\PluginManager\Traits\MigrationLoaderTrait;
-use Fresns\PluginManager\Contracts\RepositoryInterface;
+use Illuminate\Console\Command;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 
 class PluginMigrateRollbackCommand extends Command
 {
@@ -41,14 +47,14 @@ class PluginMigrateRollbackCommand extends Command
 
         $name = $this->argument('plugin');
 
-        if (!empty($name)) {
+        if (! empty($name)) {
             $this->rollback($name);
 
             return 0;
         }
 
         foreach ($this->plugin->getOrdered($this->option('direction')) as $plugin) {
-            $this->line('Running for plugin: <info>' . $plugin->getName() . '</info>');
+            $this->line('Running for plugin: <info>'.$plugin->getName().'</info>');
 
             $this->rollback($plugin);
         }
@@ -71,7 +77,7 @@ class PluginMigrateRollbackCommand extends Command
 
         $database = $this->option('database');
 
-        if (!empty($database)) {
+        if (! empty($database)) {
             $migrator->setDatabase($database);
         }
 

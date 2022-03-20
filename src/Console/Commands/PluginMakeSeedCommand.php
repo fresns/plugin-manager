@@ -1,14 +1,20 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\Console\Commands;
 
-use Illuminate\Support\Str;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputOption;
 use Fresns\PluginManager\Support\Config\GenerateConfigReader;
 use Fresns\PluginManager\Support\Stub;
 use Fresns\PluginManager\Traits\CanClearPluginsCache;
 use Fresns\PluginManager\Traits\PluginCommandTrait;
+use Illuminate\Support\Str;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 
 class PluginMakeSeedCommand extends GeneratorCommand
 {
@@ -52,7 +58,7 @@ class PluginMakeSeedCommand extends GeneratorCommand
     protected function getOptions()
     {
         return [
-            ['master', null, InputOption::VALUE_NONE,'Indicates the seeder will created is a master database seeder.',],
+            ['master', null, InputOption::VALUE_NONE, 'Indicates the seeder will created is a master database seeder.'],
         ];
     }
 

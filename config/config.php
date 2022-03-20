@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 return [
 
     'namespace' => 'Plugins',
@@ -28,8 +34,8 @@ return [
             'gitignore' => '.gitignore',
         ],
         'replacements' => [
-            'routes/web' => ['KEBAB_NAME', 'STUDLY_NAME', 'PLUGIN_NAMESPACE', 'PLUGIN', 'CONTROLLER_NAMESPACE',],
-            'routes/api' => ['KEBAB_NAME', 'STUDLY_NAME', 'PLUGIN_NAMESPACE', 'PLUGIN', 'CONTROLLER_NAMESPACE',],
+            'routes/web' => ['KEBAB_NAME', 'STUDLY_NAME', 'PLUGIN_NAMESPACE', 'PLUGIN', 'CONTROLLER_NAMESPACE'],
+            'routes/api' => ['KEBAB_NAME', 'STUDLY_NAME', 'PLUGIN_NAMESPACE', 'PLUGIN', 'CONTROLLER_NAMESPACE'],
             'json' => ['KEBAB_NAME', 'STUDLY_NAME', 'PLUGIN_NAMESPACE', 'PROVIDER_NAMESPACE'],
             'views/index' => ['KEBAB_NAME'],
             'views/master' => ['KEBAB_NAME', 'STUDLY_NAME'],

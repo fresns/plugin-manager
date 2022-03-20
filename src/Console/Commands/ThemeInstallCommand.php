@@ -1,12 +1,18 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\Console\Commands;
 
-use Illuminate\Console\Command;
 use Fresns\PluginManager\Support\Plugin;
 use Fresns\PluginManager\Support\PluginConstant;
-use Symfony\Component\Console\Input\InputOption;
+use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 
 class ThemeInstallCommand extends Command
 {
@@ -38,7 +44,6 @@ class ThemeInstallCommand extends Command
 
             // see config: event.installed
             $plugin->fireInstalledEvent();
-
 
             $themeName = $plugin->getName();
 

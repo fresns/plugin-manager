@@ -1,11 +1,17 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\Tests\Activators;
 
-use Illuminate\Filesystem\Filesystem;
 use Fresns\PluginManager\Activators\FileActivator;
 use Fresns\PluginManager\Support\Plugin;
 use Fresns\PluginManager\Tests\TestCase;
+use Illuminate\Filesystem\Filesystem;
 
 class FileActivatorTest extends TestCase
 {

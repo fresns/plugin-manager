@@ -1,13 +1,19 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\Support\Migrations;
 
+use Fresns\PluginManager\Support\Config\GenerateConfigReader;
+use Fresns\PluginManager\Support\Plugin;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use Fresns\PluginManager\Support\Config\GenerateConfigReader;
-use Fresns\PluginManager\Support\Plugin;
 
 class Migrator
 {

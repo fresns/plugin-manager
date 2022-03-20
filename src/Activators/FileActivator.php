@@ -1,14 +1,20 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\Activators;
 
+use Fresns\PluginManager\Contracts\ActivatorInterface;
+use Fresns\PluginManager\Support\Plugin;
 use Illuminate\Cache\CacheManager;
 use Illuminate\Config\Repository as Config;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Filesystem\Filesystem;
-use Fresns\PluginManager\Contracts\ActivatorInterface;
-use Fresns\PluginManager\Support\Plugin;
 
 class FileActivator implements ActivatorInterface
 {
@@ -111,7 +117,7 @@ class FileActivator implements ActivatorInterface
      */
     public function hasStatus(Plugin $plugin, bool $status): bool
     {
-        if (!isset($this->pluginsStatuses[$plugin->getName()])) {
+        if (! isset($this->pluginsStatuses[$plugin->getName()])) {
             return $status === false;
         }
 
@@ -141,7 +147,7 @@ class FileActivator implements ActivatorInterface
      */
     public function delete(Plugin $plugin): void
     {
-        if (!isset($this->pluginsStatuses[$plugin->getName()])) {
+        if (! isset($this->pluginsStatuses[$plugin->getName()])) {
             return;
         }
         unset($this->pluginsStatuses[$plugin->getName()]);
@@ -166,7 +172,7 @@ class FileActivator implements ActivatorInterface
      */
     private function readJson(): array
     {
-        if (!$this->files->exists($this->statusesFile)) {
+        if (! $this->files->exists($this->statusesFile)) {
             return [];
         }
 
@@ -183,7 +189,7 @@ class FileActivator implements ActivatorInterface
      */
     private function getPluginsStatuses(): array
     {
-        if (!$this->config->get('plugins.cache.enabled')) {
+        if (! $this->config->get('plugins.cache.enabled')) {
             return $this->readJson();
         }
 
@@ -196,7 +202,7 @@ class FileActivator implements ActivatorInterface
      * Reads a config parameter under the 'activators.file' key.
      *
      * @param  string  $key
-     * @param  null|mixed $default
+     * @param  null|mixed  $default
      * @return mixed
      */
     private function config(string $key, $default = null)

@@ -1,11 +1,17 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\Support;
 
+use Fresns\PluginManager\Exceptions\CompressPluginException;
 use SplFileInfo;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Process\Process;
-use Fresns\PluginManager\Exceptions\CompressPluginException;
 use ZipArchive;
 
 class CompressPlugin
@@ -32,7 +38,7 @@ class CompressPlugin
      */
     public function handle(): bool
     {
-        if (!$this->plugin->getFiles()->isDirectory($this->plugin->getCompressDirectoryPath())) {
+        if (! $this->plugin->getFiles()->isDirectory($this->plugin->getCompressDirectoryPath())) {
             $this->plugin->getFiles()->makeDirectory($this->plugin->getCompressDirectoryPath(), 0775, true);
         }
         if (PHP_OS == 'Darwin') {

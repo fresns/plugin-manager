@@ -1,10 +1,16 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\Tests\Commands;
 
-use Illuminate\Filesystem\Filesystem;
 use Fresns\PluginManager\Contracts\RepositoryInterface;
 use Fresns\PluginManager\Tests\TestCase;
+use Illuminate\Filesystem\Filesystem;
 
 class PluginMakeControllerCommandTest extends TestCase
 {
@@ -32,7 +38,7 @@ class PluginMakeControllerCommandTest extends TestCase
         $code = $this->artisan('plugin:make-controller', ['controller' => 'MyController', 'plugin' => 'Blog']);
         $this->assertFileExists($this->pluginPath.'/Http/Controllers/MyController.php');
 
-        $fileCount = count($this->finder->files($this->pluginPath."/Database/Seeders/"));
+        $fileCount = count($this->finder->files($this->pluginPath.'/Database/Seeders/'));
         $this->assertGreaterThan(0, $fileCount, 'Create migration file failure.');
 
         $this->assertSame(0, $code);

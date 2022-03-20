@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\Support;
 
 use ArrayAccess;
@@ -42,7 +48,7 @@ class Config
      */
     public static function load(): array
     {
-        if (!is_dir(dirname(static::path()))) {
+        if (! is_dir(dirname(static::path()))) {
             mkdir(dirname(static::path()), 0755, true);
         }
 

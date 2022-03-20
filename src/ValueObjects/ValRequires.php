@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\ValueObjects;
 
 use Illuminate\Support\Arr;
@@ -74,7 +80,7 @@ class ValRequires
      */
     public function notIn(ValRequires $valRequires): ValRequires
     {
-        return $this->filter(fn (ValRequire $require) => !in_array($require->name, Arr::pluck($valRequires->toArray(), 'name')));
+        return $this->filter(fn (ValRequire $require) => ! in_array($require->name, Arr::pluck($valRequires->toArray(), 'name')));
     }
 
     /**
@@ -127,7 +133,7 @@ class ValRequires
      */
     public function notEmpty(): bool
     {
-        return !$this->empty();
+        return ! $this->empty();
     }
 
     /**

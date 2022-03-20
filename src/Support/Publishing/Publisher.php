@@ -1,12 +1,18 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\Support\Publishing;
 
-use Illuminate\Console\Command;
-use Illuminate\Filesystem\Filesystem;
 use Fresns\PluginManager\Contracts\PublisherInterface;
 use Fresns\PluginManager\Contracts\RepositoryInterface;
 use Fresns\PluginManager\Support\Plugin;
+use Illuminate\Console\Command;
+use Illuminate\Filesystem\Filesystem;
 
 abstract class Publisher implements PublisherInterface
 {
@@ -151,17 +157,17 @@ abstract class Publisher implements PublisherInterface
      */
     public function publish(): void
     {
-        if (!$this->console instanceof Command) {
+        if (! $this->console instanceof Command) {
             $message = "The 'console' property must instance of \\Illuminate\\Console\\Command.";
 
             throw new \RuntimeException($message);
         }
 
-        if (!$this->getFilesystem()->isDirectory($sourcePath = $this->getSourcePath())) {
+        if (! $this->getFilesystem()->isDirectory($sourcePath = $this->getSourcePath())) {
             return;
         }
 
-        if (!$this->getFilesystem()->isDirectory($destinationPath = $this->getDestinationPath())) {
+        if (! $this->getFilesystem()->isDirectory($destinationPath = $this->getDestinationPath())) {
             $this->getFilesystem()->makeDirectory($destinationPath, 0775, true);
         }
 
@@ -176,13 +182,13 @@ abstract class Publisher implements PublisherInterface
 
     public function unpublish()
     {
-        if (!$this->console instanceof Command) {
+        if (! $this->console instanceof Command) {
             $message = "The 'console' property must instance of \\Illuminate\\Console\\Command.";
 
             throw new \RuntimeException($message);
         }
 
-        if (!$this->getFilesystem()->isDirectory($destinationPath = $this->getDestinationPath())) {
+        if (! $this->getFilesystem()->isDirectory($destinationPath = $this->getDestinationPath())) {
             return;
         }
 

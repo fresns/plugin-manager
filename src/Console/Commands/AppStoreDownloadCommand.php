@@ -1,14 +1,20 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\Console\Commands;
 
+use Fresns\PluginManager\Traits\HasAppStoreTokens;
+use Fresns\PluginManager\Traits\PluginCommandTrait;
 use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Fresns\PluginManager\Traits\HasAppStoreTokens;
-use Fresns\PluginManager\Traits\PluginCommandTrait;
 
 class AppStoreDownloadCommand extends Command
 {
@@ -46,7 +52,7 @@ class AppStoreDownloadCommand extends Command
 
             $sn = $this->ask(__('plugins.input_sn'));
 
-            if (!$plugin = data_get($plugins, $sn)) {
+            if (! $plugin = data_get($plugins, $sn)) {
                 throw new \InvalidArgumentException(__('plugins.sn_not_exist'));
             }
 
@@ -72,7 +78,7 @@ class AppStoreDownloadCommand extends Command
 
             $versionId = $this->ask(__('plugins.input_version_id'));
 
-            if (!in_array($versionId, Arr::pluck($plugin['versions'], 'id'))) {
+            if (! in_array($versionId, Arr::pluck($plugin['versions'], 'id'))) {
                 throw new \InvalidArgumentException(__('plugins.version_not_exist'));
             }
 

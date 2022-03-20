@@ -1,11 +1,17 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\Support\Process;
 
+use Fresns\PluginManager\Contracts\RepositoryInterface;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 use Symfony\Component\Process\Process;
-use Fresns\PluginManager\Contracts\RepositoryInterface;
 
 class Installer
 {

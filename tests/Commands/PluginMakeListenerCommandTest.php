@@ -1,10 +1,16 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\Tests\Commands;
 
-use Illuminate\Filesystem\Filesystem;
 use Fresns\PluginManager\Contracts\RepositoryInterface;
 use Fresns\PluginManager\Tests\TestCase;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 
 class PluginMakeListenerCommandTest extends TestCase
@@ -42,7 +48,6 @@ class PluginMakeListenerCommandTest extends TestCase
         $code = $this->artisan('plugin:make-listener', ['name' => 'FooBarListener', 'plugin' => 'Blog']);
 
         $this->assertFileExists($filepath = $this->pluginPath.'/Listeners/FooBarListener.php');
-
 
         $this->assertFalse(Str::contains(file_get_contents($filepath), 'use Plugins\Blog\Events\FooBarEvent;'));
         $this->assertFalse(Str::contains(file_get_contents($filepath), '@param  FooBarEvent  $event'));

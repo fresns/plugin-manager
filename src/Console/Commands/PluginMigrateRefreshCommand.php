@@ -1,11 +1,17 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\Console\Commands;
 
-use Illuminate\Console\Command;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputArgument;
 use Fresns\PluginManager\Traits\PluginCommandTrait;
+use Illuminate\Console\Command;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 
 class PluginMigrateRefreshCommand extends Command
 {
@@ -32,7 +38,7 @@ class PluginMigrateRefreshCommand extends Command
     {
         $plugin = $this->argument('plugin');
 
-        if ($plugin && !$this->getPluginName()) {
+        if ($plugin && ! $this->getPluginName()) {
             $this->error("Plugin [$plugin] does not exists.");
 
             return E_ERROR;
@@ -90,7 +96,7 @@ class PluginMigrateRefreshCommand extends Command
     {
         $plugin = $this->argument('plugin');
 
-        if (!$plugin) {
+        if (! $plugin) {
             return null;
         }
 

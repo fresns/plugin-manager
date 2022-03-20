@@ -1,11 +1,17 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\Console\Commands;
 
-use Illuminate\Console\Command;
 use Fresns\PluginManager\Exceptions\FileAlreadyExistException;
 use Fresns\PluginManager\Support\Generators\FileGenerator;
 use Fresns\PluginManager\Support\Plugin;
+use Illuminate\Console\Command;
 
 abstract class GeneratorCommand extends Command
 {
@@ -37,7 +43,7 @@ abstract class GeneratorCommand extends Command
     {
         $path = str_replace('\\', '/', $this->getDestinationFilePath());
 
-        if (!$this->laravel['files']->isDirectory($dir = dirname($path))) {
+        if (! $this->laravel['files']->isDirectory($dir = dirname($path))) {
             $this->laravel['files']->makeDirectory($dir, 0777, true);
         }
 

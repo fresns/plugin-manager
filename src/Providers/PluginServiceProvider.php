@@ -1,14 +1,20 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Fresns\PluginManager\Contracts\ActivatorInterface;
 use Fresns\PluginManager\Contracts\ClientInterface;
 use Fresns\PluginManager\Contracts\RepositoryInterface;
 use Fresns\PluginManager\Exceptions\InvalidActivatorClass;
 use Fresns\PluginManager\Support\Repositories\FileRepository;
 use Fresns\PluginManager\Support\Stub;
+use Illuminate\Support\ServiceProvider;
 
 class PluginServiceProvider extends ServiceProvider
 {

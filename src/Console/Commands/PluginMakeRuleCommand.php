@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\Console\Commands;
 
 use Fresns\PluginManager\Support\Config\GenerateConfigReader;
@@ -71,11 +77,11 @@ class PluginMakeRuleCommand extends GeneratorCommand
      */
     protected function getDestinationFilePath(): string
     {
-        $path = $this->getPlugin()->getPath() . '/';
+        $path = $this->getPlugin()->getPath().'/';
 
         $rulePath = GenerateConfigReader::read('rules');
 
-        return $path . $rulePath->getPath() . '/' . $this->getFileName() . '.php';
+        return $path.$rulePath->getPath().'/'.$this->getFileName().'.php';
     }
 
     /**

@@ -1,8 +1,13 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\Tests\Support\Repositories;
 
-use Illuminate\Filesystem\Filesystem;
 use Fresns\PluginManager\Contracts\ActivatorInterface;
 use Fresns\PluginManager\Exceptions\PluginNotFoundException;
 use Fresns\PluginManager\Support\Collection;
@@ -10,6 +15,7 @@ use Fresns\PluginManager\Support\Plugin;
 use Fresns\PluginManager\Support\Repositories\FileRepository;
 use Fresns\PluginManager\Tests\TestCase;
 use Fresns\PluginManager\ValueObjects\ValRequires;
+use Illuminate\Filesystem\Filesystem;
 
 class FileRepositoryTest extends TestCase
 {

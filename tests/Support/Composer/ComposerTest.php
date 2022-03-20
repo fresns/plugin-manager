@@ -1,12 +1,18 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\Tests\Support\Composer;
 
-use Illuminate\Filesystem\Filesystem;
 use Fresns\PluginManager\Support\Composer\Composer;
 use Fresns\PluginManager\Tests\TestCase;
 use Fresns\PluginManager\ValueObjects\ValRequire;
 use Fresns\PluginManager\ValueObjects\ValRequires;
+use Illuminate\Filesystem\Filesystem;
 
 class ComposerTest extends TestCase
 {

@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\Console\Commands;
 
 use Fresns\PluginManager\Support\Config\GenerateConfigReader;
@@ -73,7 +79,7 @@ class PluginMakeTestCommand extends GeneratorCommand
      */
     protected function getDestinationFilePath(): string
     {
-        $path = $this->getPlugin()->getPath() . '/';
+        $path = $this->getPlugin()->getPath().'/';
 
         if ($this->option('feature')) {
             $testPath = GenerateConfigReader::read('test-feature');
@@ -81,7 +87,7 @@ class PluginMakeTestCommand extends GeneratorCommand
             $testPath = GenerateConfigReader::read('test');
         }
 
-        return $path . $testPath->getPath() . '/' . $this->getFileName() . '.php';
+        return $path.$testPath->getPath().'/'.$this->getFileName().'.php';
     }
 
     /**

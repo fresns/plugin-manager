@@ -1,13 +1,19 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\Console\Commands;
 
 use Exception;
+use Fresns\PluginManager\Contracts\ActivatorInterface;
+use Fresns\PluginManager\Support\Generators\PluginGenerator;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
-use Fresns\PluginManager\Contracts\ActivatorInterface;
-use Fresns\PluginManager\Support\Generators\PluginGenerator;
 
 class PluginMakeCommand extends Command
 {
@@ -43,7 +49,7 @@ class PluginMakeCommand extends Command
                 ->setActivator($this->laravel[ActivatorInterface::class])
                 ->setConsole($this)
                 ->setForce($this->option('force'))
-                ->setActive(!$this->option('disabled'))
+                ->setActive(! $this->option('disabled'))
                 ->generate();
 
             if ($code === E_ERROR) {

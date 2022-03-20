@@ -1,17 +1,23 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Fresns\PluginManager\Support\Generators;
 
 use Exception;
-use Illuminate\Config\Repository as Config;
-use Illuminate\Console\Command as Console;
-use Illuminate\Filesystem\Filesystem;
-use Illuminate\Support\Str;
 use Fresns\PluginManager\Contracts\ActivatorInterface;
 use Fresns\PluginManager\Contracts\GeneratorInterface;
 use Fresns\PluginManager\Support\Config\GenerateConfigReader;
 use Fresns\PluginManager\Support\Repositories\FileRepository;
 use Fresns\PluginManager\Support\Stub;
+use Illuminate\Config\Repository as Config;
+use Illuminate\Console\Command as Console;
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Str;
 
 class PluginGenerator implements GeneratorInterface
 {
@@ -330,7 +336,7 @@ class PluginGenerator implements GeneratorInterface
     {
         $path = $this->pluginRepository->getPluginPath($this->getName()).'plugin.json';
 
-        if (!$this->filesystem->isDirectory($dir = dirname($path))) {
+        if (! $this->filesystem->isDirectory($dir = dirname($path))) {
             $this->filesystem->makeDirectory($dir, 0775, true);
         }
 
@@ -372,7 +378,7 @@ class PluginGenerator implements GeneratorInterface
         foreach ($this->getFiles() as $stub => $file) {
             $path = $this->pluginRepository->getPluginPath($this->getName()).$file;
 
-            if (!$this->filesystem->isDirectory($dir = dirname($path))) {
+            if (! $this->filesystem->isDirectory($dir = dirname($path))) {
                 $this->filesystem->makeDirectory($dir, 0775, true);
             }
 
@@ -417,7 +423,7 @@ class PluginGenerator implements GeneratorInterface
     {
         $replacements = $this->pluginRepository->config('stubs.replacements');
 
-        if (!isset($replacements[$stub])) {
+        if (! isset($replacements[$stub])) {
             return [];
         }
 
