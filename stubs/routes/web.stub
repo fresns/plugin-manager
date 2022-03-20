@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
 use $PLUGIN_NAMESPACE$\$STUDLY_NAME$\$CONTROLLER_NAMESPACE$ as $PLUGIN$ApiController;
 
