@@ -336,7 +336,7 @@ class PluginGenerator implements GeneratorInterface
     {
         $path = $this->pluginRepository->getPluginPath($this->getName()).'plugin.json';
 
-        if (!$this->filesystem->isDirectory($dir = dirname($path))) {
+        if (! $this->filesystem->isDirectory($dir = dirname($path))) {
             $this->filesystem->makeDirectory($dir, 0775, true);
         }
 
@@ -378,7 +378,7 @@ class PluginGenerator implements GeneratorInterface
         foreach ($this->getFiles() as $stub => $file) {
             $path = $this->pluginRepository->getPluginPath($this->getName()).$file;
 
-            if (!$this->filesystem->isDirectory($dir = dirname($path))) {
+            if (! $this->filesystem->isDirectory($dir = dirname($path))) {
                 $this->filesystem->makeDirectory($dir, 0775, true);
             }
 
@@ -423,7 +423,7 @@ class PluginGenerator implements GeneratorInterface
     {
         $replacements = $this->pluginRepository->config('stubs.replacements');
 
-        if (!isset($replacements[$stub])) {
+        if (! isset($replacements[$stub])) {
             return [];
         }
 

@@ -16,7 +16,7 @@ class ThemePublishCommand extends PluginPublishCommand
     protected $name = 'theme:publish';
 
     public function handle(): int
-    {        
+    {
         $plugin = $this->laravel['plugins.repository']->findOrFail($this->argument('plugin'));
         $this->publish($plugin);
 
@@ -26,6 +26,6 @@ class ThemePublishCommand extends PluginPublishCommand
     public function saveToDatabase(Plugin $plugin)
     {
         // write json data to database
-        (new ThemeAddToDatabase())->handle($plugin);        
+        (new ThemeAddToDatabase())->handle($plugin);
     }
 }

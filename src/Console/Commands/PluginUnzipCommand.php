@@ -48,7 +48,7 @@ class PluginUnzipCommand extends Command
                 $jsonFile = 'theme.json';
             }
 
-            if (!$this->filesystem->exists("{$this->localPath}/{$jsonFile}")) {
+            if (! $this->filesystem->exists("{$this->localPath}/{$jsonFile}")) {
                 throw new LocalPathNotFoundException("Local Path [{$this->localPath}/{$jsonFile}] does not exist!");
             }
 
@@ -60,7 +60,7 @@ class PluginUnzipCommand extends Command
 
             $buildPluginPath = $this->pluginRepository->getPluginPath($pluginName);
 
-            if (!$this->filesystem->isDirectory($buildPluginPath)) {
+            if (! $this->filesystem->isDirectory($buildPluginPath)) {
                 $this->filesystem->makeDirectory($buildPluginPath, 0775, true);
             }
 

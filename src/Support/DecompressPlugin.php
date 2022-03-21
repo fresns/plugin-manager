@@ -63,7 +63,7 @@ class DecompressPlugin
             default => 'plugin.json',
         };
 
-        if (!$this->filesystem->exists("{$this->tmpDecompressPath}/{$jsonFileName}")) {
+        if (! $this->filesystem->exists("{$this->tmpDecompressPath}/{$jsonFileName}")) {
             throw new DecompressPluginException("{$this->tmpDecompressPath}/{$jsonFileName} parsing error.");
         }
 
@@ -74,7 +74,7 @@ class DecompressPlugin
             default => base_path("plugins/$pluginName"),
         };
 
-        if (!$this->filesystem->isDirectory($decompressPath)) {
+        if (! $this->filesystem->isDirectory($decompressPath)) {
             $this->filesystem->makeDirectory($decompressPath, 0775, true);
         }
 
