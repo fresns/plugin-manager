@@ -9,10 +9,10 @@
 namespace Fresns\PluginManager\Providers;
 
 use Carbon\Laravel\ServiceProvider;
-use Fresns\PluginManager\Console\Commands\MarketDownloadCommand;
 use Fresns\PluginManager\Console\Commands\DeveloperLoginCommand;
 use Fresns\PluginManager\Console\Commands\DeveloperUploadPluginCommand;
 use Fresns\PluginManager\Console\Commands\DeveloperUploadThemeCommand;
+use Fresns\PluginManager\Console\Commands\MarketDownloadCommand;
 use Fresns\PluginManager\Console\Commands\PluginActivateCommand;
 use Fresns\PluginManager\Console\Commands\PluginCommand;
 use Fresns\PluginManager\Console\Commands\PluginComposerInstallCommand;

@@ -80,7 +80,7 @@ class ValRequires
      */
     public function notIn(ValRequires $valRequires): ValRequires
     {
-        return $this->filter(fn (ValRequire $require) => !in_array($require->name, Arr::pluck($valRequires->toArray(), 'name')));
+        return $this->filter(fn (ValRequire $require) => ! in_array($require->name, Arr::pluck($valRequires->toArray(), 'name')));
     }
 
     /**
@@ -133,7 +133,7 @@ class ValRequires
      */
     public function notEmpty(): bool
     {
-        return !$this->empty();
+        return ! $this->empty();
     }
 
     /**

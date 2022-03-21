@@ -8,8 +8,8 @@
 
 namespace Fresns\PluginManager\Listeners\PluginUninstall;
 
-use Fresns\PluginManager\Support\Plugin;
 use Fresns\PluginManager\Models\Plugin as PluginModel;
+use Fresns\PluginManager\Support\Plugin;
 
 class PluginRemoveFromDatabase
 {

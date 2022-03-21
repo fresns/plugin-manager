@@ -48,7 +48,7 @@ class Config
      */
     public static function load(): array
     {
-        if (!is_dir(dirname(static::path()))) {
+        if (! is_dir(dirname(static::path()))) {
             mkdir(dirname(static::path()), 0755, true);
         }
 

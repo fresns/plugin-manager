@@ -8,11 +8,11 @@
 
 namespace Fresns\PluginManager\Console\Commands;
 
-use Illuminate\Console\Command;
 use Fresns\PluginManager\Support\Plugin;
-use Symfony\Component\Console\Input\InputArgument;
 use Fresns\PluginManager\Support\PluginAddToDatabase;
 use Fresns\PluginManager\Support\Publishing\AssetPublisher;
+use Illuminate\Console\Command;
+use Symfony\Component\Console\Input\InputArgument;
 
 class PluginPublishCommand extends Command
 {

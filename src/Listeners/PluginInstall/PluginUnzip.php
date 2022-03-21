@@ -8,9 +8,9 @@
 
 namespace Fresns\PluginManager\Listeners\PluginInstall;
 
-use Illuminate\Support\Facades\Artisan;
 use Fresns\PluginManager\Support\Plugin;
 use Fresns\PluginManager\Support\PluginConstant;
+use Illuminate\Support\Facades\Artisan;
 
 class PluginUnzip
 {
