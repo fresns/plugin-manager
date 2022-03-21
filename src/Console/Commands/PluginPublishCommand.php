@@ -8,10 +8,11 @@
 
 namespace Fresns\PluginManager\Console\Commands;
 
-use Fresns\PluginManager\Support\Plugin;
-use Fresns\PluginManager\Support\Publishing\AssetPublisher;
 use Illuminate\Console\Command;
+use Fresns\PluginManager\Support\Plugin;
 use Symfony\Component\Console\Input\InputArgument;
+use Fresns\PluginManager\Support\PluginAddToDatabase;
+use Fresns\PluginManager\Support\Publishing\AssetPublisher;
 
 class PluginPublishCommand extends Command
 {
@@ -64,6 +65,9 @@ class PluginPublishCommand extends Command
      */
     public function publish(Plugin $plugin): void
     {
+        // write json data to database
+        (new PluginAddToDatabase())->handle($plugin);
+
         with(new AssetPublisher($plugin))
             ->setRepository($this->laravel['plugins.repository'])
             ->setConsole($this)

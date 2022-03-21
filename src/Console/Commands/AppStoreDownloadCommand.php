@@ -8,7 +8,7 @@
 
 namespace Fresns\PluginManager\Console\Commands;
 
-use Fresns\PluginManager\Traits\HasAppStoreTokens;
+use Fresns\PluginManager\Traits\HasMarketTokens;
 use Fresns\PluginManager\Traits\PluginCommandTrait;
 use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
@@ -16,12 +16,12 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
-class AppStoreDownloadCommand extends Command
+class MarketDownloadCommand extends Command
 {
     use PluginCommandTrait;
-    use HasAppStoreTokens;
+    use HasMarketTokens;
 
-    protected $name = 'app-store:download';
+    protected $name = 'market:download';
 
     protected $description = 'Download plugins or themes from the Fresns app store.';
 
@@ -52,7 +52,7 @@ class AppStoreDownloadCommand extends Command
 
             $sn = $this->ask(__('plugins.input_sn'));
 
-            if (! $plugin = data_get($plugins, $sn)) {
+            if (!$plugin = data_get($plugins, $sn)) {
                 throw new \InvalidArgumentException(__('plugins.sn_not_exist'));
             }
 
@@ -78,7 +78,7 @@ class AppStoreDownloadCommand extends Command
 
             $versionId = $this->ask(__('plugins.input_version_id'));
 
-            if (! in_array($versionId, Arr::pluck($plugin['versions'], 'id'))) {
+            if (!in_array($versionId, Arr::pluck($plugin['versions'], 'id'))) {
                 throw new \InvalidArgumentException(__('plugins.version_not_exist'));
             }
 

@@ -10,10 +10,10 @@ return [
 
     'namespace' => 'Plugins',
 
-    // Fresns App Store
+    // Fresns Market
     'app-store' => [
-        'api_base' => 'https://apps.fresns.net',
-        'default' => \Fresns\PluginManager\Support\Client\AppStore::class,
+        'api_base' => 'https://fresns.market',
+        'default' => \Fresns\PluginManager\Support\Client\Market::class,
     ],
 
     'stubs' => [
@@ -88,18 +88,13 @@ return [
     'events' => [
         'plugins.installing' => [
             \Fresns\PluginManager\Listeners\PluginInstall\PluginUnzip::class, // plugin:unzip
-            \Fresns\PluginManager\Listeners\PluginInstall\PluginPublish::class, // plugin:publish
+            \Fresns\PluginManager\Listeners\PluginInstall\PluginActivate::class, // plugin:activate, write plugin to plugin_statuses.json
+            \Fresns\PluginManager\Listeners\PluginInstall\PluginPublish::class, // plugin:publish or theme:publish, and add plugin.json or theme.json to database
             \Fresns\PluginManager\Listeners\PluginInstall\PluginComposerInstall::class, // plugin:composer-install
-            \Fresns\PluginManager\Listeners\PluginInstall\PluginActivate::class, // plugin:activate
-
-            \Fresns\PluginManager\Listeners\PluginInstall\ThemeUnzip::class, // theme:unzip
-            \Fresns\PluginManager\Listeners\PluginInstall\ThemePublish::class, // theme:publish
-            \Fresns\PluginManager\Listeners\PluginInstall\ThemeActivate::class, // theme:activate
         ],
         // After installation of the plugin
         'plugins.installed' => [
-            \Fresns\PluginManager\Listeners\PluginInstall\PluginAddToDatabase::class,
-            \Fresns\PluginManager\Listeners\PluginInstall\ThemeAddToDatabase::class,
+            \Fresns\PluginManager\Listeners\PluginInstall\PluginMigrate::class, // plugin:migrate
         ],
         // Before the plugin is activated
         'plugins.activating' => [
@@ -130,11 +125,8 @@ return [
         // Before uninstalling the plugin
         'plugins.uninstalling' => [
             \Fresns\PluginManager\Listeners\PluginUninstall\PluginComposerRemove::class, // plugin:composer-remove
-            \Fresns\PluginManager\Listeners\PluginUninstall\PluginUnpublish::class, // plugin:unpublish
+            \Fresns\PluginManager\Listeners\PluginUninstall\PluginUnpublish::class, // plugin:unpublish, theme:unpublish
             \Fresns\PluginManager\Listeners\PluginUninstall\PluginRemoveFromDatabase::class,
-
-            \Fresns\PluginManager\Listeners\PluginUninstall\ThemeUnpublish::class, // theme:unpublish
-            \Fresns\PluginManager\Listeners\PluginUninstall\ThemeRemoveFromDatabase::class,
         ],
 
         // After uninstalling the plugin

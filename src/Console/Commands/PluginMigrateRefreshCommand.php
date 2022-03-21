@@ -38,7 +38,7 @@ class PluginMigrateRefreshCommand extends Command
     {
         $plugin = $this->argument('plugin');
 
-        if ($plugin && ! $this->getPluginName()) {
+        if ($plugin && !$this->getPluginName()) {
             $this->error("Plugin [$plugin] does not exists.");
 
             return E_ERROR;
@@ -96,7 +96,7 @@ class PluginMigrateRefreshCommand extends Command
     {
         $plugin = $this->argument('plugin');
 
-        if (! $plugin) {
+        if (!$plugin) {
             return null;
         }
 

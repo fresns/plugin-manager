@@ -1,5 +1,6 @@
 {
     "unikey": "$STUDLY_NAME$",
+    "type": 4,
     "name": "Theme Name",
     "description": "Theme Description",
     "author": "Fresns",

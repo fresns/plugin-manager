@@ -8,18 +8,20 @@
 
 namespace Fresns\PluginManager\Listeners\PluginInstall;
 
-use Fresns\PluginManager\Listeners\PluginEventFilter;
+use Illuminate\Support\Facades\Artisan;
 use Fresns\PluginManager\Support\Plugin;
 use Fresns\PluginManager\Support\PluginConstant;
-use Illuminate\Support\Facades\Artisan;
 
-class PluginUnzip extends PluginEventFilter
+class PluginUnzip
 {
-    protected $type = PluginConstant::PLUGIN_TYPE_EXTENSION;
-
-    public function handleEvent(Plugin $plugin)
+    public function handle(Plugin $plugin)
     {
-        Artisan::call('plugin:unzip', [
+        $command = 'plugin:unzip';
+        if ($plugin->getType() === PluginConstant::PLUGIN_TYPE_THEME) {
+            $command = 'theme:unzip';
+        }
+
+        Artisan::call($command, [
             'path' => $plugin->getPath(),
         ]);
     }

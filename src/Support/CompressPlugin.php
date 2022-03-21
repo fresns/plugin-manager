@@ -38,7 +38,7 @@ class CompressPlugin
      */
     public function handle(): bool
     {
-        if (! $this->plugin->getFiles()->isDirectory($this->plugin->getCompressDirectoryPath())) {
+        if (!$this->plugin->getFiles()->isDirectory($this->plugin->getCompressDirectoryPath())) {
             $this->plugin->getFiles()->makeDirectory($this->plugin->getCompressDirectoryPath(), 0775, true);
         }
         if (PHP_OS == 'Darwin') {

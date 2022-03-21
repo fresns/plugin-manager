@@ -6,18 +6,13 @@
  * Released under the Apache-2.0 License.
  */
 
-namespace Fresns\PluginManager\Listeners\PluginInstall;
+namespace Fresns\PluginManager\Support;
 
-use Fresns\PluginManager\Listeners\PluginEventFilter;
 use Fresns\PluginManager\Models\Plugin as PluginModel;
-use Fresns\PluginManager\Support\Plugin;
-use Fresns\PluginManager\Support\PluginConstant;
 
-class PluginAddToDatabase extends PluginEventFilter
+class PluginAddToDatabase
 {
-    protected $type = PluginConstant::PLUGIN_TYPE_EXTENSION;
-
-    public function handleEvent(Plugin $plugin)
+    public function handle(Plugin $plugin)
     {
         $this->plugin = $plugin;
 
@@ -31,15 +26,55 @@ class PluginAddToDatabase extends PluginEventFilter
     public function refreshPlugin()
     {
         // refresh plugin model
-        $this->plugin = app('plugins.repository')->findOrFail($this->plugin->getName());
+        $this->plugin = app('plugins.repository')
+            ->findOrFail($this->plugin->getName());
 
         return $this;
     }
 
     public function getDataFromPluginJson()
     {
-        // get plugin.json data
-        return $this->plugin->json('plugin.json')->toArray();
+        $jsonFile = 'plugin.json';
+        if ($this->plugin->getType() === PluginConstant::PLUGIN_TYPE_THEME) {
+            $jsonFile = 'theme.json';
+        }
+
+        // get json data
+        return $this->plugin->json($jsonFile)->toArray();
+    }
+
+    public function getThemeDataValidateRule()
+    {
+        return [
+            'unikey' => 'required|string',
+            'name' => 'required|string',
+            'type' => 'required|integer',
+            'description' => 'nullable|string',
+            'version' => 'required|string',
+            'author' => 'nullable|string',
+            'authorLink' => 'nullable|string',
+            'functions' => 'required|boolean',
+        ];
+    }
+
+    public function getPluginDataValidateRule()
+    {
+        if ($this->plugin->getType() === PluginConstant::PLUGIN_TYPE_THEME) {
+            return $this->getThemeDataValidateRule();
+        }
+
+        return [
+            'unikey' => 'required|string',
+            'name' => 'required|string',
+            'type' => 'required|integer',
+            'description' => 'nullable|string',
+            'version' => 'required|string',
+            'author' => 'nullable|string',
+            'authorLink' => 'nullable|string',
+            'scene' => 'nullable|array',
+            'accessPath' => 'nullable|string',
+            'settingPath' => 'nullable|string',
+        ];
     }
 
     public function ensurePluginJsonIsValid()
@@ -49,18 +84,7 @@ class PluginAddToDatabase extends PluginEventFilter
         $data = $this->getDataFromPluginJson();
 
         try {
-            validator()->validate($data, [
-                'unikey' => 'required|string',
-                'name' => 'required|string',
-                'type' => 'required|integer',
-                'description' => 'nullable|string',
-                'version' => 'required|string',
-                'author' => 'nullable|string',
-                'authorLink' => 'nullable|string',
-                'scene' => 'nullable|array',
-                'accessPath' => 'nullable|string',
-                'settingPath' => 'nullable|string',
-            ]);
+            validator()->validate($data, $this->getPluginDataValidateRule());
         } catch (\Throwable $e) {
             throw new \RuntimeException($e->validator->errors()->first());
         }
@@ -82,7 +106,7 @@ class PluginAddToDatabase extends PluginEventFilter
             return $plugin->restore();
         }
 
-        return PluginModel::create([
+        return PluginModel::updateOrCreate([
             'unikey' => $pluginJsonData['unikey'],
             'type' => $pluginJsonData['type'],
             'name' => $pluginJsonData['name'],
@@ -93,7 +117,8 @@ class PluginAddToDatabase extends PluginEventFilter
             'scene' => $pluginJsonData['scene'] ?? null,
             'access_path' => $pluginJsonData['accessPath'] ?? null,
             'setting_path' => $pluginJsonData['settingPath'] ?? null,
-            'is_enable' => PluginModel::PLUGIN_TYPE_DEACTIVATE,
+            'theme_functions' => $pluginJsonData['functions'] ?? false,
+            'is_enable' => PluginModel::PLUGIN_TYPE_ACTIVATE,
         ]);
     }
 }

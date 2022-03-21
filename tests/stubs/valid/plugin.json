@@ -1,0 +1,22 @@
+{
+    "unikey": "Test",
+    "name": "test",
+    "type": 1,
+    "description": "Test demo plugin",
+    "author": "Jarvis",
+    "authorLink": "https://github.com/jarvis-tang",
+    "version": "1.0.0",
+    "scene": [
+        "tool"
+    ],
+    "accessPath": "/test",
+    "settingPath": "/test/admin",
+    "priority": 0,
+    "providers": [
+        "PluginTest\\Test\\Providers\\TestServiceProvider",
+        "PluginTest\\Test\\Providers\\TestServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

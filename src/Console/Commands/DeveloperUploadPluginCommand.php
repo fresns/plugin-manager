@@ -9,7 +9,7 @@
 namespace Fresns\PluginManager\Console\Commands;
 
 use Fresns\PluginManager\Support\CompressPlugin;
-use Fresns\PluginManager\Traits\HasAppStoreTokens;
+use Fresns\PluginManager\Traits\HasMarketTokens;
 use Fresns\PluginManager\Traits\PluginCommandTrait;
 use Illuminate\Console\Command;
 use Mockery\Exception;
@@ -18,7 +18,7 @@ use Symfony\Component\Console\Input\InputArgument;
 class DeveloperUploadPluginCommand extends Command
 {
     use PluginCommandTrait;
-    use HasAppStoreTokens;
+    use HasMarketTokens;
 
     protected $name = 'developer:upload-plugin';
 
@@ -32,7 +32,7 @@ class DeveloperUploadPluginCommand extends Command
             $plugin = $this->argument('plugin');
             $this->info("Plugin {$plugin} starts to compress");
             $compressRes = (new CompressPlugin($this->getPlugin()))->handle();
-            if (! $compressRes) {
+            if (!$compressRes) {
                 $this->error("Plugin {$plugin} compression Failed");
 
                 return E_ERROR;

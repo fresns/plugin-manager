@@ -14,7 +14,7 @@ use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\StreamInterface;
 
-class AppStore implements ClientInterface
+class Market implements ClientInterface
 {
     use HasGuzzleClient;
 

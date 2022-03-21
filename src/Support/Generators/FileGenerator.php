@@ -137,7 +137,7 @@ class FileGenerator implements GeneratorInterface
     public function generate(): bool
     {
         $path = $this->getPath();
-        if (! $this->filesystem->exists($path)) {
+        if (!$this->filesystem->exists($path)) {
             return $this->filesystem->put($path, $this->getContents());
         }
         if ($this->overwriteFile === true) {

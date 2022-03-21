@@ -134,6 +134,10 @@ class FileRepository implements RepositoryInterface
         $paths = $this->paths;
 
         $paths[] = $this->getPath();
+        if (count($paths) === 1) {
+            // Default global plus the directory where the theme is located (subsequent improvements are needed)
+            $paths[] = config('plugins.paths.themes');
+        }
 
         $paths = array_map(function ($path) {
             return Str::endsWith($path, '/*') ? $path : Str::finish($path, '/*');
@@ -186,7 +190,7 @@ class FileRepository implements RepositoryInterface
      */
     public function all(): array
     {
-        if (! $this->config('cache.enabled')) {
+        if (!$this->config('cache.enabled')) {
             return $this->scan();
         }
 
@@ -222,7 +226,7 @@ class FileRepository implements RepositoryInterface
         $valRequires = ValRequires::make();
 
         return collect($this->all())
-            ->filter(fn (Plugin $plugin) => is_array($name) ? ! in_array($plugin->getName(), $name) : $plugin->getName() !== $name)
+            ->filter(fn (Plugin $plugin) => is_array($name) ? !in_array($plugin->getName(), $name) : $plugin->getName() !== $name)
             ->reduce(function (ValRequires $valRequires, Plugin $plugin) use ($type) {
                 $requires = $type ? $plugin->getComposerAttr($type) : $plugin->getAllComposerRequires();
 
@@ -533,7 +537,7 @@ class FileRepository implements RepositoryInterface
         }
 
         $path = storage_path('app/plugins/plugins.used');
-        if (! $this->getFiles()->exists($path)) {
+        if (!$this->getFiles()->exists($path)) {
             $this->getFiles()->put($path, '');
         }
 
@@ -631,7 +635,7 @@ class FileRepository implements RepositoryInterface
      */
     public function isDisabled(string $name): bool
     {
-        return ! $this->isEnabled($name);
+        return !$this->isEnabled($name);
     }
 
     /**
@@ -681,7 +685,7 @@ class FileRepository implements RepositoryInterface
     {
         $pluginPath = $this->getPluginDirectoryPath($name);
 
-        if (! is_dir($pluginPath)) {
+        if (!is_dir($pluginPath)) {
             return true;
         }
 

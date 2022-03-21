@@ -8,18 +8,20 @@
 
 namespace Fresns\PluginManager\Listeners\PluginUninstall;
 
-use Fresns\PluginManager\Listeners\PluginEventFilter;
 use Fresns\PluginManager\Support\Plugin;
 use Fresns\PluginManager\Support\PluginConstant;
 use Illuminate\Support\Facades\Artisan;
 
-class PluginUnpublish extends PluginEventFilter
+class PluginUnpublish
 {
-    protected $type = PluginConstant::PLUGIN_TYPE_EXTENSION;
-
-    public function handleEvent(Plugin $plugin)
+    public function handle(Plugin $plugin)
     {
-        Artisan::call('plugin:unpublish', [
+        $command = 'plugin:unpublish';
+        if ($plugin->getType() === PluginConstant::PLUGIN_TYPE_THEME) {
+            $command = 'theme:unpublish';
+        }
+
+        Artisan::call($command, [
             'plugin' => $plugin->getName(),
         ]);
     }

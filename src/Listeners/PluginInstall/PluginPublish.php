@@ -8,18 +8,20 @@
 
 namespace Fresns\PluginManager\Listeners\PluginInstall;
 
-use Fresns\PluginManager\Listeners\PluginEventFilter;
 use Fresns\PluginManager\Support\Plugin;
 use Fresns\PluginManager\Support\PluginConstant;
 use Illuminate\Support\Facades\Artisan;
 
-class PluginPublish extends PluginEventFilter
+class PluginPublish
 {
-    protected $type = PluginConstant::PLUGIN_TYPE_EXTENSION;
-
-    public function handleEvent(Plugin $plugin)
+    public function handle(Plugin $plugin)
     {
-        Artisan::call('plugin:publish', [
+        $command = 'plugin:publish';
+        if ($plugin->getType() === PluginConstant::PLUGIN_TYPE_THEME) {
+            $command = 'theme:publish';
+        }
+
+        Artisan::call($command, [
             'plugin' => $plugin->getName(),
         ]);
     }

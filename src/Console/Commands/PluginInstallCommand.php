@@ -9,6 +9,7 @@
 namespace Fresns\PluginManager\Console\Commands;
 
 use Fresns\PluginManager\Support\Plugin;
+use Fresns\PluginManager\Support\PluginConstant;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
@@ -30,7 +31,7 @@ class PluginInstallCommand extends Command
     public function handle(): int
     {
         try {
-            $plugin = new Plugin($this->getLaravel(), $this->argument('plugin'), $this->argument('path'));
+            $plugin = new Plugin($this->getLaravel(), $this->argument('plugin'), $this->argument('path'), $this->option('type'));
 
             // force flag and disable flag need pass to oather event listener.
             $plugin->setForce($this->option('force'));
@@ -64,6 +65,7 @@ class PluginInstallCommand extends Command
     protected function getOptions(): array
     {
         return [
+            ['type', null, InputOption::VALUE_OPTIONAL, 'This plugin type.', PluginConstant::PLUGIN_TYPE_EXTENSION],
             ['disabled', 'd', InputOption::VALUE_NONE, 'Do not enable the plugin at creation.'],
             ['force', null, InputOption::VALUE_NONE, 'Force the operation to run when the plugin already exists.'],
         ];

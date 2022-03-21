@@ -9,7 +9,7 @@
 namespace Fresns\PluginManager\Providers;
 
 use Carbon\Laravel\ServiceProvider;
-use Fresns\PluginManager\Console\Commands\AppStoreDownloadCommand;
+use Fresns\PluginManager\Console\Commands\MarketDownloadCommand;
 use Fresns\PluginManager\Console\Commands\DeveloperLoginCommand;
 use Fresns\PluginManager\Console\Commands\DeveloperUploadPluginCommand;
 use Fresns\PluginManager\Console\Commands\DeveloperUploadThemeCommand;
@@ -138,8 +138,8 @@ class ConsoleServiceProvider extends ServiceProvider
         DeveloperUploadPluginCommand::class,
         DeveloperUploadThemeCommand::class,
 
-        // Fresns app store commands
-        AppStoreDownloadCommand::class,
+        // Fresns market commands
+        MarketDownloadCommand::class,
     ];
 
     /**

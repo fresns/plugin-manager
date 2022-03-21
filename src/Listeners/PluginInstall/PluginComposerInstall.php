@@ -8,16 +8,12 @@
 
 namespace Fresns\PluginManager\Listeners\PluginInstall;
 
-use Fresns\PluginManager\Listeners\PluginEventFilter;
-use Fresns\PluginManager\Support\Plugin;
-use Fresns\PluginManager\Support\PluginConstant;
 use Illuminate\Support\Facades\Artisan;
+use Fresns\PluginManager\Support\Plugin;
 
-class PluginComposerInstall extends PluginEventFilter
+class PluginComposerInstall
 {
-    protected $type = PluginConstant::PLUGIN_TYPE_EXTENSION;
-
-    public function handleEvent(Plugin $plugin)
+    public function handle(Plugin $plugin)
     {
         Artisan::call('plugin:composer-install');
     }

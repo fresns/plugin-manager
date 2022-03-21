@@ -8,7 +8,7 @@
 
 namespace Fresns\PluginManager\Console\Commands;
 
-use Fresns\PluginManager\Traits\HasAppStoreTokens;
+use Fresns\PluginManager\Traits\HasMarketTokens;
 use Fresns\PluginManager\Traits\PluginCommandTrait;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -16,7 +16,7 @@ use Symfony\Component\Console\Input\InputArgument;
 class DeveloperUploadThemeCommand extends Command
 {
     use PluginCommandTrait;
-    use HasAppStoreTokens;
+    use HasMarketTokens;
 
     protected $name = 'developer:upload-theme';
 
