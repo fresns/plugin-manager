@@ -1,6 +1,5 @@
 {
     "unikey": "$STUDLY_NAME$",
-    "alias": "$KEBAB_NAME$",
     "type": 1,
     "name": "Plugin Name",
     "description": "Plugin Description",
