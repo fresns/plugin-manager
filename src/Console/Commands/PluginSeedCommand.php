@@ -74,7 +74,7 @@ class PluginSeedCommand extends Command
     public function getPluginRepository(): RepositoryInterface
     {
         $plugins = $this->laravel['plugins.repository'];
-        if (! $plugins instanceof RepositoryInterface) {
+        if (!$plugins instanceof RepositoryInterface) {
             throw new \RuntimeException('plugin repository not found!');
         }
 

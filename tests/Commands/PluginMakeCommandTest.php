@@ -57,7 +57,7 @@ class PluginMakeCommandTest extends TestCase
         $code = $this->artisan('plugin:make', ['name' => ['Blog']]);
 
         foreach (config('plugins.paths.generator') as $directory) {
-            if (! ($directory['generate'] ?? false)) {
+            if (!($directory['generate'] ?? false)) {
                 continue;
             }
 

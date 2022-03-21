@@ -9,12 +9,17 @@
 namespace Fresns\PluginManager\Listeners\PluginInstall;
 
 use Fresns\PluginManager\Support\Plugin;
+use Fresns\PluginManager\Support\PluginConstant;
 use Illuminate\Support\Facades\Artisan;
 
 class PluginMigrate
 {
     public function handle(Plugin $plugin)
     {
+        if ($plugin->getType() === PluginConstant::PLUGIN_TYPE_THEME) {
+            return;
+        }
+
         Artisan::call('plugin:migrate', [
             'plugin' => $plugin->getName(),
             '--force' => $plugin->getForce(),

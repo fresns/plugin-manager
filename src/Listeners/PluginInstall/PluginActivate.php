@@ -9,18 +9,12 @@
 namespace Fresns\PluginManager\Listeners\PluginInstall;
 
 use Fresns\PluginManager\Support\Plugin;
-use Fresns\PluginManager\Support\PluginConstant;
 use Illuminate\Support\Facades\Artisan;
 
 class PluginActivate
 {
     public function handle(Plugin $plugin)
     {
-        $command = 'plugin:activate';
-        if ($plugin->getType() === PluginConstant::PLUGIN_TYPE_THEME) {
-            $command = 'theme:activate';
-        }
-
-        Artisan::call($command, ['plugin' => $plugin->getName()]);
+        Artisan::call('plugin:activate', ['plugin' => $plugin->getName()]);
     }
 }

@@ -10,31 +10,15 @@ namespace Fresns\PluginManager\Support;
 
 use Fresns\PluginManager\Models\Plugin as PluginModel;
 
-class PluginAddToDatabase
+class ThemeAddToDatabase extends PluginAddToDatabase
 {
-    public function handle(Plugin $plugin)
-    {
-        $this->plugin = $plugin;
-
-        // validate plugin.json is valid
-        $data = $this->ensurePluginJsonIsValid();
-
-        // save plugin.json to database: plugins
-        $this->savePluginToDatabase($data);
-    }
-
-    public function refreshPlugin()
-    {
-        // refresh plugin model
-        $this->plugin = app('plugins.repository')->findOrFail($this->plugin->getName());
-
-        return $this;
-    }
-
     public function getDataFromPluginJson()
     {
         // get json data
-        return $this->plugin->json('plugin.json')->toArray();
+        $data = $this->plugin->json('theme.json')->toArray();
+        $data['type'] = PluginConstant::PLUGIN_TYPE_THEME;
+
+        return $data;
     }
 
     public function getPluginDataValidateRule()
@@ -47,25 +31,8 @@ class PluginAddToDatabase
             'version' => 'required|string',
             'author' => 'nullable|string',
             'authorLink' => 'nullable|string',
-            'scene' => 'nullable|array',
-            'accessPath' => 'nullable|string',
-            'settingPath' => 'nullable|string',
+            'functions' => 'required|boolean',
         ];
-    }
-
-    public function ensurePluginJsonIsValid()
-    {
-        $this->refreshPlugin();
-
-        $data = $this->getDataFromPluginJson();
-
-        try {
-            validator()->validate($data, $this->getPluginDataValidateRule());
-        } catch (\Throwable $e) {
-            throw new \RuntimeException($e->validator->errors()->first());
-        }
-
-        return $data;
     }
 
     /**

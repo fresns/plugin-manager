@@ -54,8 +54,6 @@ use Fresns\PluginManager\Console\Commands\PluginSeedCommand;
 use Fresns\PluginManager\Console\Commands\PluginUninstallCommand;
 use Fresns\PluginManager\Console\Commands\PluginUnpublishCommand;
 use Fresns\PluginManager\Console\Commands\PluginUnzipCommand;
-use Fresns\PluginManager\Console\Commands\ThemeActivateCommand;
-use Fresns\PluginManager\Console\Commands\ThemeDeactivateCommand;
 use Fresns\PluginManager\Console\Commands\ThemeInstallCommand;
 use Fresns\PluginManager\Console\Commands\ThemePublishCommand;
 use Fresns\PluginManager\Console\Commands\ThemeUninstallCommand;
@@ -130,8 +128,6 @@ class ConsoleServiceProvider extends ServiceProvider
         PluginActivateCommand::class,
         PluginDeactivateCommand::class,
         ThemeInstallCommand::class,
-        ThemeActivateCommand::class,
-        ThemeDeactivateCommand::class,
 
         // Developer commands
         DeveloperLoginCommand::class,

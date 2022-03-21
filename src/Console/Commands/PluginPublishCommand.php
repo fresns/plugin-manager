@@ -58,6 +58,12 @@ class PluginPublishCommand extends Command
         }
     }
 
+    public function saveToDatabase(Plugin $plugin)
+    {
+        // write json data to database
+        (new PluginAddToDatabase())->handle($plugin);
+    }
+
     /**
      * Publish assets from the specified plugin.
      *
@@ -65,8 +71,7 @@ class PluginPublishCommand extends Command
      */
     public function publish(Plugin $plugin): void
     {
-        // write json data to database
-        (new PluginAddToDatabase())->handle($plugin);
+        $this->saveToDatabase($plugin);
 
         with(new AssetPublisher($plugin))
             ->setRepository($this->laravel['plugins.repository'])

@@ -117,7 +117,7 @@ class FileActivator implements ActivatorInterface
      */
     public function hasStatus(Plugin $plugin, bool $status): bool
     {
-        if (! isset($this->pluginsStatuses[$plugin->getName()])) {
+        if (!isset($this->pluginsStatuses[$plugin->getName()])) {
             return $status === false;
         }
 
@@ -147,7 +147,7 @@ class FileActivator implements ActivatorInterface
      */
     public function delete(Plugin $plugin): void
     {
-        if (! isset($this->pluginsStatuses[$plugin->getName()])) {
+        if (!isset($this->pluginsStatuses[$plugin->getName()])) {
             return;
         }
         unset($this->pluginsStatuses[$plugin->getName()]);
@@ -172,7 +172,7 @@ class FileActivator implements ActivatorInterface
      */
     private function readJson(): array
     {
-        if (! $this->files->exists($this->statusesFile)) {
+        if (!$this->files->exists($this->statusesFile)) {
             return [];
         }
 
@@ -189,7 +189,7 @@ class FileActivator implements ActivatorInterface
      */
     private function getPluginsStatuses(): array
     {
-        if (! $this->config->get('plugins.cache.enabled')) {
+        if (!$this->config->get('plugins.cache.enabled')) {
             return $this->readJson();
         }
 

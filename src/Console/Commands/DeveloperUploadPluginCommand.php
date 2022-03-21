@@ -32,7 +32,7 @@ class DeveloperUploadPluginCommand extends Command
             $plugin = $this->argument('plugin');
             $this->info("Plugin {$plugin} starts to compress");
             $compressRes = (new CompressPlugin($this->getPlugin()))->handle();
-            if (! $compressRes) {
+            if (!$compressRes) {
                 $this->error("Plugin {$plugin} compression Failed");
 
                 return E_ERROR;

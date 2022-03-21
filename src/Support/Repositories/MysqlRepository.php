@@ -71,7 +71,7 @@ class MysqlRepository
      */
     public function all(): Collection
     {
-        if (! $this->config('cache.enabled')) {
+        if (!$this->config('cache.enabled')) {
             return $this->scan();
         }
 

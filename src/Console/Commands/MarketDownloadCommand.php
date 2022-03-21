@@ -52,7 +52,7 @@ class MarketDownloadCommand extends Command
 
             $sn = $this->ask(__('plugins.input_sn'));
 
-            if (! $plugin = data_get($plugins, $sn)) {
+            if (!$plugin = data_get($plugins, $sn)) {
                 throw new \InvalidArgumentException(__('plugins.sn_not_exist'));
             }
 
@@ -78,7 +78,7 @@ class MarketDownloadCommand extends Command
 
             $versionId = $this->ask(__('plugins.input_version_id'));
 
-            if (! in_array($versionId, Arr::pluck($plugin['versions'], 'id'))) {
+            if (!in_array($versionId, Arr::pluck($plugin['versions'], 'id'))) {
                 throw new \InvalidArgumentException(__('plugins.version_not_exist'));
             }
 

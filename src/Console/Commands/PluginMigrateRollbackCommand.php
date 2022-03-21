@@ -47,7 +47,7 @@ class PluginMigrateRollbackCommand extends Command
 
         $name = $this->argument('plugin');
 
-        if (! empty($name)) {
+        if (!empty($name)) {
             $this->rollback($name);
 
             return 0;
@@ -77,7 +77,7 @@ class PluginMigrateRollbackCommand extends Command
 
         $database = $this->option('database');
 
-        if (! empty($database)) {
+        if (!empty($database)) {
             $migrator->setDatabase($database);
         }
 

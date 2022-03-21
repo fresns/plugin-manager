@@ -119,7 +119,7 @@ class LocalInstallGenerator implements GeneratorInterface
     public function generate(): int
     {
         if ($this->filesystem->isDirectory($this->localPath)) {
-            if (! $this->filesystem->exists("{$this->localPath}/plugin.json")) {
+            if (!$this->filesystem->exists("{$this->localPath}/plugin.json")) {
                 throw new LocalPathNotFoundException("Local Path [{$this->localPath}] does not exist!");
             }
 
@@ -131,7 +131,7 @@ class LocalInstallGenerator implements GeneratorInterface
 
             $buildPluginPath = $this->pluginRepository->getPluginPath($pluginName);
 
-            if (! $this->filesystem->isDirectory($buildPluginPath)) {
+            if (!$this->filesystem->isDirectory($buildPluginPath)) {
                 $this->filesystem->makeDirectory($buildPluginPath, 0775, true);
             }
 

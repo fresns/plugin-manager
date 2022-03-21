@@ -97,11 +97,11 @@ class TestComposer extends Composer
 {
     public function beforeRun(): void
     {
-        // TODO: Implement beforeRun() method.
+        // TImplement beforeRun() method.
     }
 
     public function afterRun(): void
     {
-        // TODO: Implement afterRun() method.
+        // TImplement afterRun() method.
     }
 }

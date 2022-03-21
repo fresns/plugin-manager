@@ -78,7 +78,6 @@
         },
         "hooks": {
             "pre-commit": [
-                "composer style:fix"
             ],
             "pre-push": [
             ]
