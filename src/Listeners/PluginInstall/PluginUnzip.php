@@ -10,7 +10,6 @@ namespace Fresns\PluginManager\Listeners\PluginInstall;
 
 use Fresns\PluginManager\Support\Plugin;
 use Fresns\PluginManager\Support\PluginConstant;
-use Illuminate\Support\Facades\Artisan;
 
 class PluginUnzip
 {
@@ -21,7 +20,7 @@ class PluginUnzip
             $command = 'theme:unzip';
         }
 
-        Artisan::call($command, [
+        \Artisan::call($command, [
             'path' => $plugin->getPath(),
         ]);
     }

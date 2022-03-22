@@ -9,12 +9,11 @@
 namespace Fresns\PluginManager\Listeners\PluginInstall;
 
 use Fresns\PluginManager\Support\Plugin;
-use Illuminate\Support\Facades\Artisan;
 
 class PluginActivate
 {
     public function handle(Plugin $plugin)
     {
-        Artisan::call('plugin:activate', ['plugin' => $plugin->getName()]);
+        \Artisan::call('plugin:activate', ['plugin' => $plugin->getName()]);
     }
 }

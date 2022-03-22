@@ -9,6 +9,7 @@
 namespace Fresns\PluginManager\Support\Publishing;
 
 use Fresns\PluginManager\Support\Config\GenerateConfigReader;
+use Fresns\PluginManager\Support\PluginConstant;
 
 class AssetPublisher extends Publisher
 {
@@ -36,8 +37,11 @@ class AssetPublisher extends Publisher
      */
     public function getSourcePath(): string
     {
-        return $this->getPlugin()->getExtraPath(
-            GenerateConfigReader::read('assets')->getPath()
-        );
+        $path = GenerateConfigReader::read('assets')->getPath();
+        if ($this->getPlugin()->getType() === PluginConstant::PLUGIN_TYPE_THEME) {
+            $path = 'assets';
+        }
+
+        return $this->getPlugin()->getExtraPath($path);
     }
 }

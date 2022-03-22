@@ -58,7 +58,10 @@ class PluginUnzipCommand extends Command
                 throw new PluginAlreadyExistException("Plugin [{$pluginName}] already exists!");
             }
 
-            $buildPluginPath = $this->pluginRepository->getPluginPath($pluginName);
+            $buildPluginPath = base_path("plugins/$pluginName");
+            if ($this->option('type') === PluginConstant::PLUGIN_TYPE_THEME) {
+                $buildPluginPath = resource_path("themes/$pluginName");
+            }
 
             if (! $this->filesystem->isDirectory($buildPluginPath)) {
                 $this->filesystem->makeDirectory($buildPluginPath, 0775, true);

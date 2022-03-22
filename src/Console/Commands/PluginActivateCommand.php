@@ -33,9 +33,6 @@ class PluginActivateCommand extends Command
      */
     public function handle(): int
     {
-        /**
-         * check if user entred an argument.
-         */
         if ($this->argument('plugin') === null) {
             $this->activateAll();
 

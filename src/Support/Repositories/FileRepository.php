@@ -15,6 +15,7 @@ use Fresns\PluginManager\Exceptions\PluginNotFoundException;
 use Fresns\PluginManager\Support\Collection;
 use Fresns\PluginManager\Support\Json;
 use Fresns\PluginManager\Support\Plugin;
+use Fresns\PluginManager\Support\PluginConstant;
 use Fresns\PluginManager\Support\Process\Installer;
 use Fresns\PluginManager\Support\Process\Updater;
 use Fresns\PluginManager\ValueObjects\ValRequires;
@@ -380,7 +381,11 @@ class FileRepository implements RepositoryInterface
      */
     public function getPath(): string
     {
-        return $this->path ?: $this->config('paths.plugins', base_path('plugins'));
+        if ($this->path) {
+            return $this->path;
+        }
+
+        return $this->config('paths.plugins', base_path('plugins'));
     }
 
     /**

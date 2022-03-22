@@ -96,10 +96,10 @@ class Plugin
      * @param  string  $name
      * @param  string  $path
      */
-    public function __construct(Application $app, string $name, ?string $path = '', int $type = PluginConstant::PLUGIN_TYPE_EXTENSION)
+    public function __construct(Application $app, string $name, ?string $path = '', ?int $type = PluginConstant::PLUGIN_TYPE_EXTENSION)
     {
         $this->name = $name;
-        $this->type = $type;
+        $this->type = $type ?? PluginConstant::PLUGIN_TYPE_THEME;
         $this->path = $path;
 
         $this->app = $app;
