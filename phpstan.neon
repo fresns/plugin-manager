@@ -1,7 +1,0 @@
-parameters:
-    level: 3
-    paths:
-        - src
-    inferPrivatePropertyTypeFromConstructor: true
-    ignoreErrors:
-        - '#Unsafe usage of new static#'

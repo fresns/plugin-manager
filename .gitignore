@@ -1,14 +1,5 @@
 vendor/
-node_modules/
-npm-debug.log
-yarn-error.log
-storage/*.key
-Homestead.yaml
-Homestead.json
-/.vagrant
 .idea/
-.phpunit.result.cache
-.env
+.vscode/
 .DS_Store
 composer.lock
-cghooks.lock
