@@ -15,7 +15,8 @@
         "require-dev": {}
     },
     "providers": [
-        "$PLUGIN_NAMESPACE$\\$STUDLY_NAME$\\$PROVIDER_NAMESPACE$\\$STUDLY_NAME$ServiceProvider"
+        "$PLUGIN_NAMESPACE$\\$STUDLY_NAME$\\$PROVIDER_NAMESPACE$\\$STUDLY_NAME$ServiceProvider",
+        "$PLUGIN_NAMESPACE$\\$STUDLY_NAME$\\$PROVIDER_NAMESPACE$\\RouteServiceProvider"
     ],
     "aliases": {},
     "requires": []

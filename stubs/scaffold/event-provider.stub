@@ -22,6 +22,15 @@ class $CLASS$ extends ServiceProvider
             // When the user uninstalls, if the data needs to be deleted, the listener is configured here. 
         ],
     ];
+    
+    /**
+     * The subscribers to register.
+     *
+     * @var array
+     */
+    protected $subscribe = [
+        //
+    ];
 
     /**
      * Register any events for your application.
