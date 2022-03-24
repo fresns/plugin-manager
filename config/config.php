@@ -88,7 +88,7 @@ return [
     'events' => [
         'plugins.installing' => [
             \Fresns\PluginManager\Listeners\PluginInstall\PluginUnzip::class, // plugin:unzip
-            \Fresns\PluginManager\Listeners\PluginInstall\PluginActivate::class, // plugin:activate, write plugin to plugin_statuses.json
+            \Fresns\PluginManager\Listeners\PluginInstall\PluginActivate::class, // plugin:activate, write plugin to fresns.json
             \Fresns\PluginManager\Listeners\PluginInstall\PluginPublish::class, // plugin:publish or theme:publish, and add plugin.json or theme.json to database
             \Fresns\PluginManager\Listeners\PluginInstall\PluginComposerInstall::class, // plugin:composer-install
         ],
@@ -152,7 +152,7 @@ return [
     'activators' => [
         'file' => [
             'class' => \Fresns\PluginManager\Activators\FileActivator::class,
-            'statuses-file' => base_path('plugin_statuses.json'),
+            'statuses-file' => base_path('fresns.json'),
             'cache-key' => 'activator.installed',
             // 604800 seconds，7 day, 1 week.
             'cache-lifetime' => 604800,
