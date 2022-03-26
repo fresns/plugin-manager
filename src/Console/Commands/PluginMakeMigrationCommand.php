@@ -34,7 +34,7 @@ class PluginMakeMigrationCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $description = 'Create a new migration for the specified plugin.';
+    protected $description = 'Generate a migration for specified plugin.';
 
     /**
      * Get the console command arguments.

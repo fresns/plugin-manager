@@ -20,7 +20,7 @@ class PluginUninstallCommand extends Command
 
     protected $name = 'plugin:uninstall';
 
-    protected $description = 'Uninstall a plugin from the application';
+    protected $description = 'Uninstall the plugin and select whether you want to clean the data of the plugin.';
 
     public function handle(): int
     {

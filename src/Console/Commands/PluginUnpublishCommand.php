@@ -27,7 +27,7 @@ class PluginUnpublishCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Unublish a plugin\'s assets of the application';
+    protected $description = 'Uninstall the static resources for the specified plugin.';
 
     /**
      * Execute the console command.

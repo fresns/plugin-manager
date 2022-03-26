@@ -28,7 +28,7 @@ class PluginPublishCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Publish a plugin\'s assets to the application';
+    protected $description = 'Write the plugin config info to the database and distribute static resources.';
 
     /**
      * Execute the console command.

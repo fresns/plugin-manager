@@ -37,7 +37,7 @@ class PluginMakeRuleCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $description = 'Create a new validation rule for the specified plugin.';
+    protected $description = 'Generate the given validation rule class for the specified plugin.';
 
     /**
      * Get the console command arguments.

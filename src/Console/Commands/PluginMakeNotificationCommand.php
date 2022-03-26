@@ -32,7 +32,7 @@ class PluginMakeNotificationCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $description = 'Create a new notification class for the specified plugin.';
+    protected $description = 'Generate the given notification class name for the specified plugin.';
 
     public function getDefaultNamespace(): string
     {

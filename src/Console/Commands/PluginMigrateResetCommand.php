@@ -31,7 +31,7 @@ class PluginMigrateResetCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Reset the plugins migrations.';
+    protected $description = 'Reset the migration for the given plugin, or without a specified plugin reset all plugins migrations.';
 
     /**
      * @var RepositoryInterface

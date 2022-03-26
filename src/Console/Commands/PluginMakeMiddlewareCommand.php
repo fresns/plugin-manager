@@ -39,7 +39,7 @@ class PluginMakeMiddlewareCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $description = 'Create a new middleware class for the specified plugin.';
+    protected $description = 'Generate the given middleware name for the specified plugin.';
 
     /**
      * @return string

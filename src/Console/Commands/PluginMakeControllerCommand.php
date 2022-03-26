@@ -37,7 +37,7 @@ class PluginMakeControllerCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $description = 'Create a new restful controller for the specified plugin.';
+    protected $description = 'Generate a controller for the specified plugin.';
 
     /**
      * Get controller name.

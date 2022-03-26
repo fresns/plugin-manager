@@ -35,7 +35,7 @@ class PluginMakeSeedCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $description = 'Create a new seeder for the specified plugin.';
+    protected $description = 'Generate the given seed name for the specified plugin.';
 
     /**
      * Get the console command arguments.

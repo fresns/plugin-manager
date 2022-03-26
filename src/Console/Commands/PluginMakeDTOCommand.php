@@ -22,7 +22,7 @@ class PluginMakeDTOCommand extends GeneratorCommand
 
     protected $name = 'plugin:make-dto';
 
-    protected $description = 'Create a new DTO for the specified plugin.';
+    protected $description = 'Generate a DTO(data transfer object) for specified plugin.';
 
     protected function getArguments(): array
     {

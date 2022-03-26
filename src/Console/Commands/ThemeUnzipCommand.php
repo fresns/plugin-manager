@@ -14,6 +14,8 @@ class ThemeUnzipCommand extends PluginUnzipCommand
 {
     protected $name = 'theme:unzip';
 
+    protected $description = 'Unzip the theme files into the /resources/themes/ directory.';
+
     public function handle(): int
     {
         return $this->call('plugin:unzip', [

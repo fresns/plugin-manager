@@ -23,7 +23,7 @@ class PluginMakeTestCommand extends GeneratorCommand
 
     protected $name = 'plugin:make-test';
 
-    protected $description = 'Create a new test class for the specified plugin.';
+    protected $description = 'Generate the given test class for the specified plugin.';
 
     public function getDefaultNamespace(): string
     {

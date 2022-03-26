@@ -34,7 +34,7 @@ class PluginSeedCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Run database seeder from the specified plugin or from all plugins.';
+    protected $description = 'Seed the given plugin, or without an argument, seed all plugins.';
 
     /**
      * Execute the console command.

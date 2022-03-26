@@ -32,7 +32,7 @@ class PluginRouteProviderCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $description = 'Create a new route service provider for the specified plugin.';
+    protected $description = 'Generate a route service provider for specified plugin.';
 
     /**
      * The command arguments.

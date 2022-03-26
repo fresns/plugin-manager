@@ -31,7 +31,7 @@ class PluginComposerRemoveCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Remove the plugin composer package.';
+    protected $description = 'Remove the composer package to specified plugin config file.';
 
     public function handle(): void
     {

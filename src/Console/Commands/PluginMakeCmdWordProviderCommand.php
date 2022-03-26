@@ -25,7 +25,7 @@ class PluginMakeCmdWordProviderCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Create a new service provider class for the cmd-word.';
+    protected $description = 'Generate a cmd word service provider for specified plugin.';
 
     /**
      * Execute the console command.

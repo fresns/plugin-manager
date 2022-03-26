@@ -38,7 +38,7 @@ class PluginMakeProviderCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $description = 'Create a new service provider class for the specified plugin.';
+    protected $description = 'Generate the given service provider name for the specified plugin.';
 
     public function getDefaultNamespace(): string
     {

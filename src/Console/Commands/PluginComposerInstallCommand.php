@@ -25,7 +25,7 @@ class PluginComposerInstallCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Install all plugins composer package.';
+    protected $description = 'Composer install the given plugin, or without an argument, composer install all plugins.';
 
     public function handle(): void
     {

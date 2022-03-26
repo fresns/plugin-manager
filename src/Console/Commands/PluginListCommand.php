@@ -26,7 +26,7 @@ class PluginListCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Show list of all plugins.';
+    protected $description = 'List all available plugins.';
 
     /**
      * Execute the console command.

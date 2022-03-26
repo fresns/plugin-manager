@@ -29,7 +29,7 @@ class PluginMakeCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Create a new plugin.';
+    protected $description = 'Generate a new plugin.';
 
     /**
      * Execute the console command.

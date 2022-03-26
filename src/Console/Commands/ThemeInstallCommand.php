@@ -14,6 +14,8 @@ class ThemeInstallCommand extends PluginInstallCommand
 {
     protected $name = 'theme:install';
 
+    protected $description = 'Install the theme for the specified file directory or zip file.';
+
     public function handle(): int
     {
         return $this->call('plugin:install', [

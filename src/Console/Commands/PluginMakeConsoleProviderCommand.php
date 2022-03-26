@@ -25,7 +25,7 @@ class PluginMakeConsoleProviderCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Create a new service provider class for the console.';
+    protected $description = 'Generate a console service provider for specified plugin.';
 
     /**
      * Execute the console command.

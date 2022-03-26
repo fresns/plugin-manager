@@ -29,7 +29,7 @@ class PluginMigrateRefreshCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Rollback & re-migrate the plugins migrations.';
+    protected $description = 'Refresh the migration for the given plugin, or without a specified plugin refresh all plugins migrations.';
 
     /**
      * Execute the console command.

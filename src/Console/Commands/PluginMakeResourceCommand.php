@@ -28,7 +28,7 @@ class PluginMakeResourceCommand extends GeneratorCommand
 
     protected $name = 'plugin:make-resource';
 
-    protected $description = 'Create a new resource class for the specified plugin.';
+    protected $description = 'Generate the given resource class for the specified plugin.';
 
     protected function getArguments(): array
     {

@@ -38,7 +38,7 @@ class PluginMakeCommandCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $description = 'Create a new Artisan command for the specified plugin.';
+    protected $description = 'Generate the given console command for the specified plugin.';
 
     public function getDefaultNamespace(): string
     {

@@ -38,7 +38,7 @@ class PluginMakeModelCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $description = 'Create a new model for the specified plugin.';
+    protected $description = 'Generate the given model for the specified plugin.';
 
     public function handle(): int
     {

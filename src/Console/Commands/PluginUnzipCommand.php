@@ -31,7 +31,7 @@ class PluginUnzipCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Unzip the plugin files into the /plugins/ directory, the final directory will be /plugins/{unikey}/.';
+    protected $description = 'Unzip the plugin files into the /plugins/ directory.';
 
     /**
      * Execute the console command.

@@ -12,6 +12,8 @@ class ThemeUnpublishCommand extends PluginUnpublishCommand
 {
     protected $name = 'theme:unpublish';
 
+    protected $description = 'Uninstall the static resources for the specified theme.';
+
     public function handle(): int
     {
         return $this->call('plugin:unpublish', [

@@ -32,7 +32,7 @@ class PluginMakeEventCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $description = 'Create a new event class for the specified plugin';
+    protected $description = 'Generate the given event for the specified plugin.';
 
     /**
      * Get the console command arguments.

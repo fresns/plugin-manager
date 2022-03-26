@@ -15,6 +15,8 @@ class ThemePublishCommand extends PluginPublishCommand
 {
     protected $name = 'theme:publish';
 
+    protected $description = 'Write the theme config info to the database and distribute static resources.';
+
     public function handle(): int
     {
         $plugin = $this->laravel['plugins.repository']->findOrFail($this->argument('plugin'));

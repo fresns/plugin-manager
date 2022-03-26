@@ -37,7 +37,7 @@ class PluginMakeFactoryCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $description = 'Create a new model factory for the specified plugin.';
+    protected $description = 'Generate the given database factory for the specified plugin.';
 
     /**
      * Get the console command arguments.

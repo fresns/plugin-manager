@@ -34,7 +34,7 @@ class PluginMakeListenerCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $description = 'Create a new event listener class for the specified plugin';
+    protected $description = 'Generate the given listener for the specified plugin.';
 
     protected function getArguments(): array
     {

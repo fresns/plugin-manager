@@ -25,7 +25,7 @@ class PluginMakeEventProviderCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Create a new service provider class for the events.';
+    protected $description = 'Generate a event provider for specified plugin.';
 
     /**
      * Execute the console command.

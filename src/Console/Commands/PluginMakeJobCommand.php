@@ -33,7 +33,7 @@ class PluginMakeJobCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $description = 'Create a new job class for the specified plugin.';
+    protected $description = 'Generate the given job for the specified plugin.';
 
     public function getDefaultNamespace(): string
     {

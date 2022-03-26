@@ -12,6 +12,8 @@ class ThemeUninstallCommand extends PluginUninstallCommand
 {
     protected $name = 'theme:uninstall';
 
+    protected $description = 'Uninstall the theme and select whether you want to clean the data of the theme.';
+
     public function handle(): int
     {
         return $this->call('plugin:uninstall', [

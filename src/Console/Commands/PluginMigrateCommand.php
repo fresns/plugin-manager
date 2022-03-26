@@ -24,7 +24,7 @@ class PluginMigrateCommand extends Command
     /**
      * @var string
      */
-    protected $description = 'Migrate the migrations from the specified plugin or from all plugins.';
+    protected $description = 'Migrate the given plugin, or without a plugin an argument, migrate all plugins.';
 
     /**
      * Execute the console command.

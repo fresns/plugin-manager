@@ -31,7 +31,7 @@ class PluginComposerRequireCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Install the plugin composer package.';
+    protected $description = 'Add the composer package to specified plugin config file.';
 
     public function handle(): void
     {

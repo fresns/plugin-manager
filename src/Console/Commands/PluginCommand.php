@@ -21,7 +21,7 @@ class PluginCommand extends Command
      *
      * @var string
      */
-    protected $description = 'List all plugin commands.';
+    protected $description = 'List all available commands.';
 
     /**
      * @var string

@@ -117,17 +117,19 @@ class ConsoleServiceProvider extends ServiceProvider
         PluginMigrateRefreshCommand::class,
         PluginMigrateResetCommand::class,
         PluginSeedCommand::class,
+        PluginInstallCommand::class,
         PluginUninstallCommand::class,
+
+        // Management commands
+        PluginActivateCommand::class,
+        PluginDeactivateCommand::class,
+
+        // Theme commands
         ThemeUnzipCommand::class,
         ThemePublishCommand::class,
         ThemeUnpublishCommand::class,
-        ThemeUninstallCommand::class,
-
-        // Management commands
-        PluginInstallCommand::class,
-        PluginActivateCommand::class,
-        PluginDeactivateCommand::class,
         ThemeInstallCommand::class,
+        ThemeUninstallCommand::class,
 
         // Developer commands
         DeveloperLoginCommand::class,

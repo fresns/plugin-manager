@@ -32,7 +32,7 @@ class PluginMakePolicyCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $description = 'Create a new policy class for the specified plugin.';
+    protected $description = 'Generate the given policy class for the specified plugin.';
 
     public function getDefaultNamespace(): string
     {

@@ -30,7 +30,7 @@ class PluginMakeMailCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $description = 'Create a new email class for the specified plugin';
+    protected $description = 'Generate the given mail class for the specified plugin.';
 
     protected string $argumentName = 'name';
 

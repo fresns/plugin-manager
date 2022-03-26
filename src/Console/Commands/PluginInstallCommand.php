@@ -23,7 +23,7 @@ class PluginInstallCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Install the plugin through the file directory.';
+    protected $description = 'Install the plugin for the specified file directory or zip file.';
 
     /**
      * @return int

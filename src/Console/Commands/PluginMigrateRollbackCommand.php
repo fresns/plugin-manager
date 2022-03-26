@@ -31,7 +31,7 @@ class PluginMigrateRollbackCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Rollback the plugins migrations.';
+    protected $description = 'Rollback the given plugin, or without an argument, rollback all plugins.';
 
     /**
      * @var RepositoryInterface
