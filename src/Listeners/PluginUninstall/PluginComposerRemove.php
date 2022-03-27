@@ -20,7 +20,6 @@ class PluginComposerRemove
             'packages' => $this->getAllPackageNames($plugin),
         ]);
 
-        
         Artisan::call('plugin:composer-install');
     }
 
