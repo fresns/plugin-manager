@@ -3,3 +3,4 @@ vendor/
 .vscode/
 .DS_Store
 composer.lock
+cghooks.lock
