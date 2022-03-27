@@ -93,7 +93,6 @@ class PluginAddToDatabase
             'scene' => $pluginJsonData['scene'] ?? null,
             'access_path' => $pluginJsonData['accessPath'] ?? null,
             'setting_path' => $pluginJsonData['settingPath'] ?? null,
-            'theme_functions' => $pluginJsonData['functions'] ?? false,
             'is_enable' => PluginModel::PLUGIN_TYPE_ACTIVATE,
         ]);
     }

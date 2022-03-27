@@ -51,15 +51,12 @@ class ThemeAddToDatabase extends PluginAddToDatabase
 
         return PluginModel::updateOrCreate([
             'unikey' => $pluginJsonData['unikey'],
-            'type' => $pluginJsonData['type'],
+            'type' => 4,
             'name' => $pluginJsonData['name'],
             'description' => $pluginJsonData['description'] ?? '',
             'version' => $pluginJsonData['version'] ?? '',
             'author' => $pluginJsonData['author'] ?? '',
             'author_link' => $pluginJsonData['authorLink'] ?? null,
-            'scene' => $pluginJsonData['scene'] ?? null,
-            'access_path' => $pluginJsonData['accessPath'] ?? null,
-            'setting_path' => $pluginJsonData['settingPath'] ?? null,
             'theme_functions' => $pluginJsonData['functions'] ?? false,
             'is_enable' => PluginModel::PLUGIN_TYPE_ACTIVATE,
         ]);
