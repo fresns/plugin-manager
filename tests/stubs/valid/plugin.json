@@ -10,7 +10,7 @@
         "tool"
     ],
     "accessPath": "/test",
-    "settingPath": "/test/admin",
+    "settingsPath": "/test/admin",
     "priority": 0,
     "providers": [
         "PluginTest\\Test\\Providers\\TestServiceProvider",

@@ -49,7 +49,7 @@ class PluginAddToDatabase
             'authorLink' => 'nullable|string',
             'scene' => 'nullable|array',
             'accessPath' => 'nullable|string',
-            'settingPath' => 'nullable|string',
+            'settingsPath' => 'nullable|string',
         ];
     }
 
@@ -92,7 +92,7 @@ class PluginAddToDatabase
             'author_link' => $pluginJsonData['authorLink'] ?? null,
             'scene' => $pluginJsonData['scene'] ?? null,
             'access_path' => $pluginJsonData['accessPath'] ?? null,
-            'setting_path' => $pluginJsonData['settingPath'] ?? null,
+            'settings_path' => $pluginJsonData['settingsPath'] ?? null,
             'is_enable' => PluginModel::PLUGIN_TYPE_ACTIVATE,
         ]);
     }

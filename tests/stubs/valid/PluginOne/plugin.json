@@ -33,7 +33,7 @@
         "expandUser"
     ],
     "accessPath": "/test",
-    "settingPath": "/test/admin",
+    "settingsPath": "/test/admin",
     "priority": 0,
     "composer": {
         "require": {},

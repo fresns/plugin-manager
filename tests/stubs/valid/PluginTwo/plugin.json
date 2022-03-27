@@ -8,7 +8,7 @@
     "version": "0.1",
     "scene": [],
     "accessPath": null,
-    "settingPath": null,
+    "settingsPath": null,
     "priority": 0,
     "composer": {
         "require": {},
