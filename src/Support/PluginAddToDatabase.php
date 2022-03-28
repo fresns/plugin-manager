@@ -84,6 +84,8 @@ class PluginAddToDatabase
 
         return PluginModel::updateOrCreate([
             'unikey' => $pluginJsonData['unikey'],
+        ], [
+            'unikey' => $pluginJsonData['unikey'],
             'type' => $pluginJsonData['type'],
             'name' => $pluginJsonData['name'],
             'description' => $pluginJsonData['description'] ?? '',

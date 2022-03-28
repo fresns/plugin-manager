@@ -160,7 +160,10 @@ class FileActivator implements ActivatorInterface
      */
     private function writeJson(): void
     {
-        $this->files->put($this->statusesFile, json_encode($this->pluginsStatuses, JSON_PRETTY_PRINT));
+        $data = json_decode($this->files->get($this->statusesFile), true);
+        $data['plugins'] = $this->pluginsStatuses;
+
+        $this->files->put($this->statusesFile, json_encode($data, JSON_PRETTY_PRINT));
     }
 
     /**
@@ -176,7 +179,9 @@ class FileActivator implements ActivatorInterface
             return [];
         }
 
-        return json_decode($this->files->get($this->statusesFile), true);
+        $data = json_decode($this->files->get($this->statusesFile), true);
+
+        return $data['plugins'] ?? [];
     }
 
     /**

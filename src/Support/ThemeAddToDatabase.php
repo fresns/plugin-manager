@@ -51,6 +51,8 @@ class ThemeAddToDatabase extends PluginAddToDatabase
 
         return PluginModel::updateOrCreate([
             'unikey' => $pluginJsonData['unikey'],
+        ], [
+            'unikey' => $pluginJsonData['unikey'],
             'type' => 4,
             'name' => $pluginJsonData['name'],
             'description' => $pluginJsonData['description'] ?? '',
