@@ -31,15 +31,5 @@ class Plugin extends Model
     public static function boot()
     {
         parent::boot();
-
-        static::creating(function (Plugin $model) {
-            // Calculate the md5 value of the version number
-            $model->version_md5 = static::calcMd5Version($model->version);
-        });
-    }
-
-    public static function calcMd5Version(string $version)
-    {
-        return md5($version);
     }
 }
