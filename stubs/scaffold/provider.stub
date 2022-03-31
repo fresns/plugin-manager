@@ -46,10 +46,10 @@ class $CLASS$ extends ServiceProvider
     protected function registerConfig()
     {
         $this->publishes([
-            plugin_path($this->pluginName, '$PATH_CONFIG$/config.php') => config_path($this->pluginNameKebab . '.php'),
+            plugin_path($this->pluginName, '$PATH_CONFIG$/config.php') => config_path('$KEBAB_NAME$.php'),
         ], 'config');
         $this->mergeConfigFrom(
-            plugin_path($this->pluginName, '$PATH_CONFIG$/config.php'), $this->pluginNameKebab
+            plugin_path($this->pluginName, '$PATH_CONFIG$/config.php'), $this->pluginName
         );
     }
 
@@ -60,15 +60,15 @@ class $CLASS$ extends ServiceProvider
      */
     public function registerViews()
     {
-        $viewPath = resource_path('views/plugins/' . $this->pluginNameKebab);
+        $viewPath = resource_path('views/plugins/' . '$KEBAB_NAME$');
 
         $sourcePath = plugin_path($this->pluginName, '$PATH_VIEWS$');
 
         $this->publishes([
             $sourcePath => $viewPath
-        ], ['views', $this->pluginNameKebab . '-plugin-views']);
+        ], ['views', '$KEBAB_NAME$-plugin-views']);
 
-        $this->loadViewsFrom(array_merge($this->getPublishableViewPaths(), [$sourcePath]), $this->pluginNameKebab);
+        $this->loadViewsFrom(array_merge($this->getPublishableViewPaths(), [$sourcePath]), '$PLUGIN$');
     }
 
     /**
@@ -78,12 +78,12 @@ class $CLASS$ extends ServiceProvider
      */
     public function registerTranslations()
     {
-        $langPath = resource_path('lang/plugins/' . $this->pluginNameKebab);
+        $langPath = resource_path('lang/plugins/' . '$KEBAB_NAME$');
 
         if (is_dir($langPath)) {
-            $this->loadTranslationsFrom($langPath, $this->pluginNameKebab);
+            $this->loadTranslationsFrom($langPath, '$PLUGIN$');
         } else {
-            $this->loadTranslationsFrom(plugin_path($this->pluginName, '$PATH_LANG$'), $this->pluginNameKebab);
+            $this->loadTranslationsFrom(plugin_path($this->pluginName, '$PATH_LANG$'), '$PLUGIN$');
         }
     }
 
@@ -101,8 +101,8 @@ class $CLASS$ extends ServiceProvider
     {
         $paths = [];
         foreach (config('view.paths') as $path) {
-            if (is_dir($path . '/plugins/' . $this->pluginNameKebab)) {
-                $paths[] = $path . '/plugins/' . $this->pluginNameKebab;
+            if (is_dir($path . '/plugins/' . '$KEBAB_NAME$')) {
+                $paths[] = $path . '/plugins/$KEBAB_NAME$';
             }
         }
         return $paths;

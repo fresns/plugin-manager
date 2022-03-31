@@ -14,7 +14,7 @@ class $CLASS$ extends Controller
      */
     public function index()
     {
-        return view('$KEBAB_NAME$::index');
+        return view('$STUDLY_NAME$::index');
     }
 
     /**
@@ -23,7 +23,7 @@ class $CLASS$ extends Controller
      */
     public function create()
     {
-        return view('$KEBAB_NAME$::create');
+        return view('$STUDLY_NAME$::create');
     }
 
     /**
@@ -43,7 +43,7 @@ class $CLASS$ extends Controller
      */
     public function show($id)
     {
-        return view('$KEBAB_NAME$::show');
+        return view('$STUDLY_NAME$::show');
     }
 
     /**
@@ -53,7 +53,7 @@ class $CLASS$ extends Controller
      */
     public function edit($id)
     {
-        return view('$KEBAB_NAME$::edit');
+        return view('$STUDLY_NAME$::edit');
     }
 
     /**
