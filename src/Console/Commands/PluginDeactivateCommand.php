@@ -45,13 +45,9 @@ class PluginDeactivateCommand extends Command
         /** @var Plugin $plugin */
         $plugin = $this->laravel['plugins.repository']->findOrFail($this->argument('plugin'));
 
-        if ($plugin->isEnabled()) {
-            $plugin->deactivate();
+        $plugin->deactivate();
 
-            $this->info("Plugin [{$plugin}] deactivated successful.");
-        } else {
-            $this->comment("Plugin [{$plugin}] has already deactivated.");
-        }
+        $this->info("Plugin [{$plugin}] deactivated successful.");
 
         return 0;
     }
@@ -66,13 +62,9 @@ class PluginDeactivateCommand extends Command
         $plugins = $this->laravel['plugins.repository']->all();
         /** @var Plugin $plugin */
         foreach ($plugins as $plugin) {
-            if ($plugin->isEnabled()) {
-                $plugin->deactivate();
+            $plugin->deactivate();
 
-                $this->info("Plugin [{$plugin}] deactivated successful.");
-            } else {
-                $this->comment("Plugin [{$plugin}] has already deactivated.");
-            }
+            $this->info("Plugin [{$plugin}] deactivated successful.");
         }
     }
 

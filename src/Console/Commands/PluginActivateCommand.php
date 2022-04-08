@@ -42,13 +42,9 @@ class PluginActivateCommand extends Command
         /** @var Plugin $plugin */
         $plugin = $this->laravel['plugins.repository']->findOrFail($this->argument('plugin'));
 
-        if ($plugin->isDisabled()) {
-            $plugin->activate();
+        $plugin->activate();
 
-            $this->info("Plugin [{$plugin}] activate successful.");
-        } else {
-            $this->comment("Plugin [{$plugin}] has already activate.");
-        }
+        $this->info("Plugin [{$plugin}] activate successful.");
 
         return 0;
     }
@@ -62,12 +58,8 @@ class PluginActivateCommand extends Command
         $plugins = $this->laravel['plugins.repository']->all();
 
         foreach ($plugins as $plugin) {
-            if ($plugin->isDisabled()) {
-                $plugin->activate();
-                $this->info("Plugin [{$plugin}]  activate successful.");
-            } else {
-                $this->comment("Plugin [{$plugin}] has already activate.");
-            }
+            $plugin->activate();
+            $this->info("Plugin [{$plugin}]  activate successful.");
         }
     }
 
