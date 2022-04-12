@@ -10,12 +10,6 @@ return [
 
     'namespace' => 'Plugins',
 
-    // Fresns Market
-    'app-store' => [
-        'api_base' => 'https://fresns.market',
-        'default' => \Fresns\PluginManager\Support\Client\Market::class,
-    ],
-
     'stubs' => [
         // Customize the path location of the stub release file, which is determined by stubs.path when it is turned on.
         // See also: Fresns\PluginManager\Providers\PluginServiceProvider:66

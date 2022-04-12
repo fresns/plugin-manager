@@ -9,7 +9,6 @@
 namespace Fresns\PluginManager\Providers;
 
 use Fresns\PluginManager\Contracts\ActivatorInterface;
-use Fresns\PluginManager\Contracts\ClientInterface;
 use Fresns\PluginManager\Contracts\RepositoryInterface;
 use Fresns\PluginManager\Exceptions\InvalidActivatorClass;
 use Fresns\PluginManager\Support\Repositories\FileRepository;
@@ -91,17 +90,8 @@ class PluginServiceProvider extends ServiceProvider
 
             return new $class($app);
         });
-        $this->app->singleton(ClientInterface::class, function ($app) {
-            $class = $app['config']->get('plugins.market.default');
-            if ($class === null) {
-                throw InvalidActivatorClass::missingConfig();
-            }
-
-            return new $class();
-        });
         $this->app->alias(RepositoryInterface::class, 'plugins.repository');
         $this->app->alias(ActivatorInterface::class, 'plugins.activator');
-        $this->app->alias(ClientInterface::class, 'plugins.client');
     }
 
     /**
