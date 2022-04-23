@@ -82,13 +82,12 @@ return [
     'events' => [
         'plugins.installing' => [
             \Fresns\PluginManager\Listeners\PluginInstall\PluginUnzip::class, // plugin:unzip
-            \Fresns\PluginManager\Listeners\PluginInstall\PluginActivate::class, // plugin:activate, write plugin to fresns.json
-            \Fresns\PluginManager\Listeners\PluginInstall\PluginPublish::class, // plugin:publish or theme:publish, and add plugin.json or theme.json to database
             \Fresns\PluginManager\Listeners\PluginInstall\PluginComposerInstall::class, // plugin:composer-install
         ],
         // After installation of the plugin
         'plugins.installed' => [
             \Fresns\PluginManager\Listeners\PluginInstall\PluginMigrate::class, // plugin:migrate
+            \Fresns\PluginManager\Listeners\PluginInstall\PluginPublish::class, // plugin:publish or theme:publish, and add plugin.json or theme.json to database
         ],
         // Before the plugin is activated
         'plugins.activating' => [
