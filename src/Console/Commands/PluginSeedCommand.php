@@ -195,7 +195,7 @@ class PluginSeedCommand extends Command
 
             $namespace = array_slice(explode('/', $plugin->getPath()), -1)[0];
 
-            $foundPlugins[] = '\\Plugins\\' . $namespace.'\\'.$seederPath.'\\'.$name.'DatabaseSeeder';
+            $foundPlugins[] = '\\Plugins\\'.$namespace.'\\'.$seederPath.'\\'.$name.'DatabaseSeeder';
         }
 
         return $foundPlugins;
