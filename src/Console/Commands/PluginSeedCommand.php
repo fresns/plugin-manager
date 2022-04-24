@@ -188,9 +188,14 @@ class PluginSeedCommand extends Command
         $seederPath = str_replace('/', '\\', $seederPath->getPath());
 
         $foundPlugins = [];
-        foreach ($this->laravel['plugins.repository']->config('scan.paths') as $path) {
-            $namespace = array_slice(explode('/', $path), -1)[0];
-            $foundPlugins[] = $namespace.'\\'.$name.'\\'.$seederPath.'\\'.$name.'DatabaseSeeder';
+        foreach ($this->laravel['plugins.repository']->allEnabled() as $plugin) {
+            if ($plugin->getName() !== $name) {
+                continue;
+            }
+
+            $namespace = array_slice(explode('/', $plugin->getPath()), -1)[0];
+
+            $foundPlugins[] = '\\Plugins\\' . $namespace.'\\'.$seederPath.'\\'.$name.'DatabaseSeeder';
         }
 
         return $foundPlugins;
