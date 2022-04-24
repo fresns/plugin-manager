@@ -153,5 +153,4 @@ return [
     ],
 
     'activator' => 'file',
-
 ];
