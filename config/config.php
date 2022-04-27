@@ -81,7 +81,6 @@ return [
     // Event Listening
     'events' => [
         'plugins.installing' => [
-            \Fresns\PluginManager\Listeners\PluginInstall\PluginUnzip::class, // plugin:unzip
             \Fresns\PluginManager\Listeners\PluginInstall\PluginComposerInstall::class, // plugin:composer-install
         ],
         // After installation of the plugin

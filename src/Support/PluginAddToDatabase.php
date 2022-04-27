@@ -95,6 +95,7 @@ class PluginAddToDatabase
             'scene' => $pluginJsonData['scene'] ?? null,
             'access_path' => $pluginJsonData['accessPath'] ?? null,
             'settings_path' => $pluginJsonData['settingsPath'] ?? null,
+            'is_upgrade' => 0,
             'is_enable' => PluginModel::PLUGIN_TYPE_DEACTIVATE,
         ]);
     }

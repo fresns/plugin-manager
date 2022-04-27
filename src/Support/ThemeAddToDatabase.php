@@ -60,6 +60,7 @@ class ThemeAddToDatabase extends PluginAddToDatabase
             'author' => $pluginJsonData['author'] ?? '',
             'author_link' => $pluginJsonData['authorLink'] ?? null,
             'theme_functions' => $pluginJsonData['functions'] ?? false,
+            'is_upgrade' => 0,
             'is_enable' => PluginModel::PLUGIN_TYPE_DEACTIVATE,
         ]);
     }
