@@ -30,8 +30,17 @@ class PluginInstallCommand extends Command
      */
     public function handle(): int
     {
+        /** @var \Illuminate\Filesystem\Filesystem $fileSystem */
+        $this->fileSystem = app('files');
+
         try {
-            $plugin = new Plugin($this->getLaravel(), $this->argument('plugin'), $this->argument('path'), $this->option('type'));
+            $this->unzipPlugin();
+            
+            $pluginName = $this->argument('plugin') ?? cache()->pull(PluginUnzipCommand::CACHE_INSTALL_PLUGIN_NAME);
+            
+            $plugin = new Plugin($this->getLaravel(), $pluginName, $this->argument('path'), $this->option('type'));
+
+            $oldStatus = $this->getStatus($plugin);
 
             // force flag and disable flag need pass to oather event listener.
             $plugin->setForce($this->option('force'));
@@ -45,6 +54,13 @@ class PluginInstallCommand extends Command
             // see config: event.installed
             $plugin->fireInstalledEvent();
 
+            if ($oldStatus) {
+                $plugin->activate();
+            } else {
+                $plugin->deactivate();
+            }
+
+            $this->info("{$plugin->getName()} install successful");
             return 0;
             // return $code;
         } catch (\Exception $exception) {
@@ -54,11 +70,28 @@ class PluginInstallCommand extends Command
         }
     }
 
+    public function unzipPlugin()
+    {
+        $command = 'plugin:unzip';
+        if ($this->option('type') === \Fresns\PluginManager\Support\PluginConstant::PLUGIN_TYPE_THEME) {
+            $command = 'theme:unzip';
+        }
+
+        \Artisan::call($command, [
+            'path' => $this->argument('path'),
+        ]);
+    }
+
+    public function getStatus($plugin)
+    {
+        return $plugin->isEnabled();
+    }
+
     protected function getArguments(): array
     {
         return [
             ['path', InputArgument::REQUIRED, 'Local path.'],
-            ['plugin', InputArgument::REQUIRED, 'Plugin name.'],
+            ['plugin', InputArgument::OPTIONAL, 'Plugin name.'],
         ];
     }
 

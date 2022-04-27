@@ -19,6 +19,8 @@ use Symfony\Component\Console\Input\InputOption;
 
 class PluginUnzipCommand extends Command
 {
+    const CACHE_INSTALL_PLUGIN_NAME = 'install-plugin-name';
+    
     /**
      * The console command name.
      *
@@ -40,19 +42,31 @@ class PluginUnzipCommand extends Command
     {
         $this->filesystem = app('files');
         $this->pluginRepository = app('plugins.repository');
-        $this->localPath = $this->argument('path');
+        $this->localPath = rtrim($this->argument('path'), '/');
 
         if ($this->filesystem->isDirectory($this->localPath)) {
-            $jsonFile = 'plugin.json';
-            if ($this->option('type') === PluginConstant::PLUGIN_TYPE_THEME) {
-                $jsonFile = 'theme.json';
+            $jsonFileName = match ($this->option('type')) {
+                PluginConstant::PLUGIN_TYPE_THEME => 'theme.json',
+                default => 'plugin.json',
+            };
+
+            $jsonFilePath = "{$this->localPath}/{$jsonFileName}";
+
+            $files = $this->filesystem->glob("{$this->localPath}/{$jsonFileName}");
+            if (count($files) === 0) {
+                // Deeper level scanning
+                $files = $this->filesystem->glob("{$this->localPath}/**/{$jsonFileName}");
+
+                if (count($files) === 0) {
+                    throw new LocalPathNotFoundException("Local Path [{$this->localPath}/{$jsonFileName}] does not exist!");
+                }
             }
 
-            if (! $this->filesystem->exists("{$this->localPath}/{$jsonFile}")) {
-                throw new LocalPathNotFoundException("Local Path [{$this->localPath}/{$jsonFile}] does not exist!");
-            }
+            $jsonFilePath = head($files);
 
-            $pluginName = Json::make("{$this->localPath}/{$jsonFile}")->get('unikey');
+            $pluginName = Json::make($jsonFilePath)->get('unikey');
+
+            static::backupExistsPlugin($pluginName);
 
             if ($this->pluginRepository->has($pluginName)) {
                 throw new PluginAlreadyExistException("Plugin [{$pluginName}] already exists!");
@@ -68,8 +82,9 @@ class PluginUnzipCommand extends Command
             }
 
             $this->filesystem->copyDirectory(
-                $this->localPath,
-                $buildPluginPath
+                pathinfo($jsonFilePath, PATHINFO_DIRNAME),
+                $buildPluginPath,
+                true,
             );
         } elseif ($this->filesystem->isFile($this->localPath) && $this->filesystem->extension($this->localPath) === 'zip') {
             $pluginName = (new DecompressPlugin($this->localPath, $this->option('type')))->handle();
@@ -78,9 +93,42 @@ class PluginUnzipCommand extends Command
             throw new \RuntimeException("Local Path [{$this->localPath}] does not support to unzip!");
         }
 
+        // Put the name of the plugin being installed into the cache for 5 minutes validity.
+        // Make sure that the name of the plugin is known elsewhere during installation.
+        cache([static::CACHE_INSTALL_PLUGIN_NAME => $pluginName], now()->addMinutes(5));
+
         $this->info("Plugin $pluginName unzip success.");
 
         return 0;
+    }
+
+    public static function backupExistsPlugin(string $pluginName)
+    {
+        $path = base_path("plugins/{$pluginName}");
+        $targetPath = storage_path("plugins/{$pluginName}");
+
+        if (!is_dir($path)) {
+            return;
+        }
+
+        static::ensureBackupDirExists();
+
+        $dirs = app('files')->glob($targetPath.'*');
+
+        $currentBackupCount = count($dirs);
+
+        $targetPath .= $currentBackupCount+1;
+
+        app('files')->moveDirectory($path, $targetPath);
+    }
+
+    public static function ensureBackupDirExists()
+    {
+        $path = storage_path('plugins');
+
+        if (!app('files')->isDirectory($path)) {
+            app('files')->makeDirectory($path, 0755, true);
+        }
     }
 
     /**

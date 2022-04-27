@@ -8,6 +8,7 @@
 
 namespace Fresns\PluginManager\Support;
 
+use Fresns\PluginManager\Console\Commands\PluginUnzipCommand;
 use Fresns\PluginManager\Contracts\RepositoryInterface;
 use Fresns\PluginManager\Exceptions\DecompressPluginException;
 use Illuminate\Filesystem\Filesystem;
@@ -24,6 +25,8 @@ class DecompressPlugin
     protected string $tmpDecompressPath;
 
     protected Filesystem $filesystem;
+
+    protected $jsonFilePath = null;
 
     public function __construct(string $compressPath, int $type = PluginConstant::PLUGIN_TYPE_EXTENSION)
     {
@@ -51,7 +54,11 @@ class DecompressPlugin
 
         $decompressPath = $this->getDecompressPath();
 
-        $this->filesystem->moveDirectory($this->tmpDecompressPath, $decompressPath, true);
+        $this->filesystem->moveDirectory(
+            pathinfo($this->jsonFilePath, PATHINFO_DIRNAME), 
+            $decompressPath, 
+            true
+        );
 
         return basename($decompressPath);
     }
@@ -63,11 +70,23 @@ class DecompressPlugin
             default => 'plugin.json',
         };
 
-        if (! $this->filesystem->exists("{$this->tmpDecompressPath}/{$jsonFileName}")) {
-            throw new DecompressPluginException("{$this->tmpDecompressPath}/{$jsonFileName} parsing error.");
+
+        $files = $this->filesystem->glob("{$this->tmpDecompressPath}/{$jsonFileName}");
+        if (count($files) === 0) {
+            // Deeper level scanning
+            $files = $this->filesystem->glob("{$this->tmpDecompressPath}/**/{$jsonFileName}");
+
+            if (count($files) === 0) {
+                throw new DecompressPluginException("{$this->tmpDecompressPath}/{$jsonFileName} parsing error.");
+            }
         }
 
-        $pluginName = Json::make("{$this->tmpDecompressPath}/{$jsonFileName}")->get('unikey');
+        $this->jsonFilePath = head($files);
+
+        $pluginName = Json::make($this->jsonFilePath)->get('unikey');
+
+        // Back up existing plugins
+        PluginUnzipCommand::backupExistsPlugin($pluginName);
 
         $decompressPath = match ($this->type) {
             PluginConstant::PLUGIN_TYPE_THEME => resource_path("themes/$pluginName"),

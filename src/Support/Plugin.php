@@ -203,6 +203,11 @@ class Plugin
         }
     }
 
+    public function setName(string $name)
+    {
+        $this->name = $name;
+    }
+
     /**
      * Get name.
      *
