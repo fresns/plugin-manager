@@ -20,7 +20,7 @@ use Symfony\Component\Console\Input\InputOption;
 class PluginUnzipCommand extends Command
 {
     const CACHE_INSTALL_PLUGIN_NAME = 'install-plugin-name';
-    
+
     /**
      * The console command name.
      *
@@ -107,7 +107,7 @@ class PluginUnzipCommand extends Command
         $path = base_path("plugins/{$pluginName}");
         $targetPath = storage_path("plugins/{$pluginName}");
 
-        if (!is_dir($path)) {
+        if (! is_dir($path)) {
             return;
         }
 
@@ -117,7 +117,7 @@ class PluginUnzipCommand extends Command
 
         $currentBackupCount = count($dirs);
 
-        $targetPath .= $currentBackupCount+1;
+        $targetPath .= $currentBackupCount + 1;
 
         app('files')->moveDirectory($path, $targetPath);
     }
@@ -126,7 +126,7 @@ class PluginUnzipCommand extends Command
     {
         $path = storage_path('plugins');
 
-        if (!app('files')->isDirectory($path)) {
+        if (! app('files')->isDirectory($path)) {
             app('files')->makeDirectory($path, 0755, true);
         }
     }

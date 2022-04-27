@@ -55,8 +55,8 @@ class DecompressPlugin
         $decompressPath = $this->getDecompressPath();
 
         $this->filesystem->moveDirectory(
-            pathinfo($this->jsonFilePath, PATHINFO_DIRNAME), 
-            $decompressPath, 
+            pathinfo($this->jsonFilePath, PATHINFO_DIRNAME),
+            $decompressPath,
             true
         );
 
@@ -69,7 +69,6 @@ class DecompressPlugin
             PluginConstant::PLUGIN_TYPE_THEME => 'theme.json',
             default => 'plugin.json',
         };
-
 
         $files = $this->filesystem->glob("{$this->tmpDecompressPath}/{$jsonFileName}");
         if (count($files) === 0) {

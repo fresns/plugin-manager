@@ -35,9 +35,9 @@ class PluginInstallCommand extends Command
 
         try {
             $this->unzipPlugin();
-            
+
             $pluginName = $this->argument('plugin') ?? cache()->pull(PluginUnzipCommand::CACHE_INSTALL_PLUGIN_NAME);
-            
+
             $plugin = new Plugin($this->getLaravel(), $pluginName, $this->argument('path'), $this->option('type'));
 
             $oldStatus = $this->getStatus($plugin);
@@ -61,6 +61,7 @@ class PluginInstallCommand extends Command
             }
 
             $this->info("{$plugin->getName()} install successful");
+
             return 0;
             // return $code;
         } catch (\Exception $exception) {
