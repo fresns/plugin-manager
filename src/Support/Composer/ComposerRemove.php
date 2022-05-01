@@ -68,7 +68,7 @@ class ComposerRemove extends Composer
         $failedRequires = $this->getRemoveRequires()->in($this->getExistRequires())->unique();
 
         if ($failedRequires->notEmpty()) {
-            info('composer remove fail: ' . $failedRequires);
+            info('composer remove fail: '.$failedRequires);
             throw new ComposerException("Package {$failedRequires} remove failed");
         }
     }
