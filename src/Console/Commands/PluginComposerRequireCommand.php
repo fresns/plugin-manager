@@ -58,6 +58,9 @@ class PluginComposerRequireCommand extends Command
             $pluginJson->set('composer', $composer)->save();
             $this->info("Package {$vrs}generated successfully.");
         } catch (\Exception $exception) {
+            info('composer-require error', [
+                'message' => $exception->getMessage(),
+            ]);
             $this->error($exception->getMessage());
         }
     }

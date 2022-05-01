@@ -33,6 +33,9 @@ class PluginComposerInstallCommand extends Command
             ComposerInstall::make()->run();
             $this->info('Composer install complete.');
         } catch (\Exception $exception) {
+            info('composer-install error', [
+                'message' => $exception->getMessage(),
+            ]);
             $this->error($exception->getMessage());
         }
     }

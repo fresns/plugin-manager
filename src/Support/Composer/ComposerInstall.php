@@ -23,6 +23,7 @@ class ComposerInstall extends Composer
         $failedRequires = $this->filterExistRequires($this->getRequires()->merge($this->getDevRequires()));
 
         if ($failedRequires->notEmpty()) {
+            info('composer install fail: ' . $failedRequires);
             throw new ComposerException("Package {$failedRequires} installation failed");
         }
     }

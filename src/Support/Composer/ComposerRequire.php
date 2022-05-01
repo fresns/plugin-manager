@@ -70,6 +70,7 @@ class ComposerRequire extends Composer
         $failedRequires = $this->filterExistRequires($this->getRequires()->merge($this->getDevRequires()));
 
         if ($failedRequires->notEmpty()) {
+            info('composer require fail: ' . $failedRequires);
             throw new ComposerException("Package {$failedRequires}require failed");
         }
     }

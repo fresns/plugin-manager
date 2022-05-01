@@ -65,6 +65,9 @@ class PluginInstallCommand extends Command
             return 0;
             // return $code;
         } catch (\Exception $exception) {
+            info('plugin:install fail', [
+                'message' => $exception->getMessage(),
+            ]);
             $this->error($exception->getMessage());
 
             return E_ERROR;

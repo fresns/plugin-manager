@@ -55,6 +55,9 @@ class PluginComposerRemoveCommand extends Command
             $pluginJson->set('composer', $composer)->save();
             $this->info("Package {$vrs}remove complete.");
         } catch (\Exception $exception) {
+            info('composer-remove error', [
+                'message' => $exception->getMessage(),
+            ]);
             $this->error($exception->getMessage());
         }
     }
