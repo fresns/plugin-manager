@@ -1,0 +1,29 @@
+{
+    "name": "$VENDOR$/$KEBAB_NAME$",
+    "description": "$STUDLY_NAME$ plugin made by fresns",
+    "license": "MIT",
+    "authors": $AUTHORS$,
+    "autoload": {
+        "psr-4": {
+            "$PLUGIN_NAMESPACE$\\$STUDLY_NAME$\\": "app",
+            "$PLUGIN_NAMESPACE$\\$STUDLY_NAME$\\Database\\Factories\\": "database/factories/",
+            "$PLUGIN_NAMESPACE$\\$STUDLY_NAME$\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "$PLUGIN_NAMESPACE$\\$STUDLY_NAME$\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": ">= 8.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "$PLUGIN_NAMESPACE$\\$STUDLY_NAME$\\Providers\\$STUDLY_NAME$ServiceProvider"
+            ],
+            "aliases": {}
+        }
+    }
+}

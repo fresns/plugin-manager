@@ -1,14 +1,14 @@
-<p align="center"><a href="https://fresns.org" target="_blank"><img src="https://raw.githubusercontent.com/fresns/docs/main/images/Fresns-Logo(orange).png" width="300"></a></p>
+<p align="center"><a href="https://fresns.cn" target="_blank"><img src="https://cdn.fresns.cn/images/logo.png" width="300"></a></p>
 
 <p align="center">
 <img src="https://img.shields.io/badge/PHP-%5E8.0-green" alt="PHP">
-<img src="https://img.shields.io/badge/Laravel-%5E8.0%7C%5E9.0-orange" alt="Laravel">
+<img src="https://img.shields.io/badge/Laravel-%5E9.0-orange" alt="Laravel">
 <img src="https://img.shields.io/badge/License-Apache--2.0-blue" alt="License">
 </p>
 
 ## About Plugin Manager
 
-`fresns/plugin-manager` is a Laravel package which created to manage your large Laravel app using modules. Module is like a Laravel package, it has some views, controllers or models. This package is supported and tested in Laravel 9.
+`fresns/plugin-manager` is a Laravel package which created to manage your large Laravel app using modules. Plugin is like a Laravel application, it has some views, controllers or models. This package is supported and tested in Laravel 9.
 
 ## Install
 
@@ -26,9 +26,34 @@ Optionally, publish the package's configuration file by running:
 php artisan vendor:publish --provider="Fresns\PluginManager\Providers\PluginServiceProvider"
 ```
 
+Main application `composer.json` add configuration:
+
+```json
+{
+    "extra": {
+        "merge-plugin": {
+            "include": [
+                "extensions/plugins/*/composer.json"
+            ],
+            "recurse": true,
+            "replace": false,
+            "ignore-duplicates": false,
+            "merge-dev": true,
+            "merge-extra": true,
+            "merge-extra-deep": true
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "wikimedia/composer-merge-plugin": true
+        }
+    }
+}
+```
+
 ## Dev Docs
 
-[https://fresns.org/extensions/plugin/](https://fresns.org/extensions/plugin/)
+[https://fresns.cn/extensions/plugin/](https://fresns.cn/extensions/plugin/)
 
 ## Contributing
 

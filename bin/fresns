@@ -1,0 +1,38 @@
+#!/usr/bin/env sh
+
+#
+# Fresns (https://fresns.org)
+# Copyright (C) 2021-Present Jarvis Tang
+# Released under the Apache-2.0 License.
+#
+
+workDir=$PWD
+rootDir=$workDir
+
+while [ ! -f "$rootDir/vendor/autoload.php" ];do
+    rootDir=${rootDir%/*}
+
+    if [ -z $rootDir ];then
+        echo "Can't find laravel project in current path"
+        echo "You should run 'plugin' under a laravel project"
+        exit -1
+    fi
+done
+
+if [ ! -f "$rootDir/vendor/autoload.php" ];then
+    echo "You should run composer install first"
+    exit -1
+fi
+
+COMMAND=$1
+case $COMMAND in
+    *)
+        if [[ $PATH == *$rootDir/vendor/bin* ]]; then
+            plugin "$@"
+        else
+            echo 'Please input this content in your terminal:'
+            echo 
+            echo export PATH=$rootDir/vendor/bin:'$PATH'
+        fi
+    ;;
+esac

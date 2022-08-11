@@ -8,120 +8,100 @@
 
 namespace Fresns\PluginManager\Providers;
 
-use Fresns\PluginManager\Contracts\ActivatorInterface;
-use Fresns\PluginManager\Contracts\RepositoryInterface;
-use Fresns\PluginManager\Exceptions\InvalidActivatorClass;
-use Fresns\PluginManager\Support\Repositories\FileRepository;
-use Fresns\PluginManager\Support\Stub;
 use Illuminate\Support\ServiceProvider;
+use Fresns\PluginManager\Plugin;
+use Fresns\PluginManager\Support\Json;
+use Illuminate\Support\Arr;
 
 class PluginServiceProvider extends ServiceProvider
 {
-    /**
-     * Booting the package.
-     */
     public function boot()
     {
-        $this->registerPlugins();
-        $this->registerPublishing();
+        $this->autoload();
     }
 
-    /**
-     * Register the service provider.
-     */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/../../config/config.php', 'plugins');
-        $this->setPsr4();
-        $this->registerServices();
-        $this->setupStubPath();
-        $this->registerProviders();
+        $this->mergeConfigFrom(__DIR__ . '/../../config/plugins.php', 'plugins');
+        $this->publishes([
+            __DIR__ . '/../../config/plugins.php' => config_path('plugins.php'),
+        ], 'laravel-plugin-config');
+
+        $this->addMergePluginConfig();
+
+        $this->registerCommands([
+            __DIR__ . '/../Commands/*',
+        ]);
     }
 
-    /**
-     * Register all plugins.
-     */
-    protected function registerPlugins(): void
+    public function registerCommands($paths)
     {
-        $this->app->register(BootstrapServiceProvider::class);
+        $allCommand = [];
+
+        foreach ($paths as $path) {
+            $commandPaths = glob($path);
+
+            foreach ($commandPaths as $command) {
+                $commandPath = realpath($command);
+                if (!is_file($commandPath)) {
+                    continue;
+                }
+
+                $commandClass = "Fresns\\PluginManager\\Commands\\" . pathinfo($commandPath, PATHINFO_FILENAME);
+
+                if (class_exists($commandClass)) {
+                    $allCommand[] = $commandClass;
+                }
+            }
+        }
+
+        $this->commands($allCommand);
     }
 
-    protected function setPsr4(): void
+    protected function autoload()
     {
-        if (file_exists(base_path('/vendor/autoload.php'))) {
-            $loader = require base_path('/vendor/autoload.php');
-            $namespace = $this->app['config']->get('plugins.namespace');
-            $path = $this->app['config']->get('plugins.paths.plugins');
-            $loader->setPsr4("{$namespace}\\", ["{$path}/"]);
+        $this->addFiles();
+
+        $plugin = new Plugin();
+
+        collect($plugin->all())->map(function ($pluginName) {
+            $plugin = new Plugin($pluginName);
+
+            $plugin->registerProviders();
+            $plugin->registerAliases();
+        });
+    }
+
+    protected function addFiles()
+    {
+        $files = $this->app['config']->get('plugins.autoload_files');
+
+        foreach ($files as $file) {
+            if (file_exists($file)) {
+                require_once $file;
+            }
         }
     }
 
-    /**
-     * Setup stub path.
-     */
-    public function setupStubPath(): void
+    protected function addMergePluginConfig()
     {
-        $path = $this->app['config']->get('plugin.stubs.path') ?? __DIR__.'/../../stubs';
-        Stub::setBasePath($path);
+        $composerPath = base_path('composer.json');
+        $composer = Json::make($composerPath)->get();
 
-        $this->app->booted(function ($app) {
-            /** @var RepositoryInterface $pluginRepository */
-            $pluginRepository = $app[RepositoryInterface::class];
-            if ($pluginRepository->config('stubs.enabled') === true) {
-                Stub::setBasePath($pluginRepository->config('stubs.path'));
-            }
-        });
-    }
+        $userMergePluginConfig = Arr::get($composer, 'extra.merge-plugin', []);
 
-    protected function registerServices(): void
-    {
-        $this->app->singleton(RepositoryInterface::class, function ($app) {
-            $path = $app['config']->get('plugins.paths.plugins');
+        $defaultMergePlugin = config('plugins.merge_plugin_config');
+        $mergePluginConfig = array_merge($defaultMergePlugin, $userMergePluginConfig);
 
-            return new FileRepository($app, $path);
-        });
-        $this->app->singleton(ActivatorInterface::class, function ($app) {
-            $activator = $app['config']->get('plugins.activator');
-            $class = $app['config']->get('plugins.activators.'.$activator)['class'];
+        Arr::set($composer, 'extra.merge-plugin', $mergePluginConfig);
 
-            if ($class === null) {
-                throw InvalidActivatorClass::missingConfig();
-            }
+        try {
+            $content = Json::make()->encode($composer);
 
-            return new $class($app);
-        });
-        $this->app->alias(RepositoryInterface::class, 'plugins.repository');
-        $this->app->alias(ActivatorInterface::class, 'plugins.activator');
-    }
-
-    /**
-     * Register providers.
-     */
-    protected function registerProviders(): void
-    {
-        $this->app->register(ConsoleServiceProvider::class);
-        $this->app->register(ContractsServiceProvider::class);
-        $this->app->register(EventServiceProvider::class);
-    }
-
-    /**
-     * Get the services provided by the provider.
-     *
-     * @return array
-     */
-    public function provides()
-    {
-        return [RepositoryInterface::class, 'plugins.repository'];
-    }
-
-    private function registerPublishing(): void
-    {
-        if ($this->app->runningInConsole()) {
-            $this->publishes([
-                __DIR__.'/../../config/config.php' => config_path('plugins.php'),
-            ], 'laravel-plugin-config');
-
-            $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
+            file_put_contents($composerPath, $content);
+        } catch (\Throwable $e) {
+            $message = str_replace(['file_put_contents(' . base_path() . '/', ')'], '', $e->getMessage());
+            throw new \RuntimeException('cannot set merge-plugin to ' . $message);
         }
     }
 }
