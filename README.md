@@ -53,7 +53,7 @@ Main application `composer.json` add configuration:
 
 ## Dev Docs
 
-[https://fresns.cn/extensions/plugin/](https://fresns.cn/extensions/plugin/)
+[https://fresns.org/extensions/plugin/](https://fresns.org/extensions/plugin/)
 
 ## Contributing
 
