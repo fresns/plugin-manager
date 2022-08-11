@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Illuminate\Database\Console\Seeds;
 
 use Illuminate\Console\GeneratorCommand;
@@ -94,6 +100,6 @@ class SeederMakeCommand extends GeneratorCommand
      */
     protected function getNamespace($name)
     {
-        return rtrim($this->laravel->getNamespace(), '\\') . '\\Database\\Seeders';;
+        return rtrim($this->laravel->getNamespace(), '\\').'\\Database\\Seeders';
     }
 }

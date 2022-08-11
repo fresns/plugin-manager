@@ -28,4 +28,3 @@ class MakeSqlLogProviderCommand extends GeneratorCommand
         return $rootNamespace."\Providers";
     }
 }
-

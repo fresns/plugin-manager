@@ -53,7 +53,7 @@ class NameParser
     /**
      * The constructor.
      *
-     * @param string $name
+     * @param  string  $name
      */
     public function __construct($name)
     {
@@ -156,7 +156,6 @@ class NameParser
      * Determine whether the given type is same with the current schema action or type.
      *
      * @param $type
-     *
      * @return bool
      */
     public function is($type)

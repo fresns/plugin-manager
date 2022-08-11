@@ -23,4 +23,3 @@ class MakeCmdWordProviderCommand extends GeneratorCommand
         return 'cmd-word-provider';
     }
 }
-

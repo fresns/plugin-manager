@@ -34,7 +34,7 @@ class Json
             $content = @file_get_contents($this->filepath);
         }
 
-        if (!$content) {
+        if (! $content) {
             $content = '';
         }
 
@@ -62,7 +62,7 @@ class Json
 
     public function get(mixed $key = null, $default = null)
     {
-        if (!Arr::has($this->data, $key)) {
+        if (! Arr::has($this->data, $key)) {
             return $this->data;
         }
 

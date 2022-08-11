@@ -47,6 +47,7 @@ class FileManager
     public function activate(string $plugin)
     {
         $this->status[$plugin] = true;
+
         return $this->write();
     }
 
@@ -68,7 +69,7 @@ class FileManager
 
     public function isDeactivate(string $plugin)
     {
-        return !$this->isActivate($plugin);
+        return ! $this->isActivate($plugin);
     }
 
     public function write(): bool
@@ -84,7 +85,8 @@ class FileManager
 
             return (bool) file_put_contents($this->file, $content);
         } catch (\Throwable $e) {
-            info("Failed to update plugin status: %s" . $e->getMessage());
+            info('Failed to update plugin status: %s'.$e->getMessage());
+
             return false;
         }
     }

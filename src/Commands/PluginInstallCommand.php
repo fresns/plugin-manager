@@ -29,8 +29,9 @@ class PluginInstallCommand extends Command
             ]);
 
             $unikey = Cache::pull('install:plugin_unikey');
-            if (!$unikey) {
+            if (! $unikey) {
                 info('Failed to unzip, couldn\'t get the plugin unikey');
+
                 return 0;
             }
             $plugin = new Plugin($unikey);

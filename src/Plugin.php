@@ -8,11 +8,11 @@
 
 namespace Fresns\PluginManager;
 
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\File;
+use Fresns\PluginManager\Manager\FileManager;
 use Fresns\PluginManager\Support\Json;
 use Illuminate\Foundation\AliasLoader;
-use Fresns\PluginManager\Manager\FileManager;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class Plugin
 {
@@ -32,7 +32,7 @@ class Plugin
 
     public function config(string $key, $default = null)
     {
-        return config('plugins.' . $key, $default);
+        return config('plugins.'.$key, $default);
     }
 
     public function setPluginName(?string $packageName = null)
@@ -68,7 +68,7 @@ class Plugin
     public function getClassNamespace()
     {
         $namespace = $this->config('namespace');
-        $namespace .= '\\' . $this->getStudlyName();
+        $namespace .= '\\'.$this->getStudlyName();
         $namespace = str_replace('/', '\\', $namespace);
 
         return trim($namespace, '\\');
@@ -110,7 +110,7 @@ class Plugin
 
     public function getAssetsPath(): ?string
     {
-        if (!$this->exists()) {
+        if (! $this->exists()) {
             return null;
         }
 
@@ -122,7 +122,7 @@ class Plugin
 
     public function getAssetsSourcePath(): ?string
     {
-        if (!$this->exists()) {
+        if (! $this->exists()) {
             return null;
         }
 
@@ -147,7 +147,7 @@ class Plugin
 
     public function activate(): bool
     {
-        if (!$this->exists()) {
+        if (! $this->exists()) {
             return false;
         }
 
@@ -156,7 +156,7 @@ class Plugin
 
     public function deactivate(): bool
     {
-        if (!$this->exists()) {
+        if (! $this->exists()) {
             return false;
         }
 
@@ -165,7 +165,7 @@ class Plugin
 
     public function isActivate(): bool
     {
-        if (!$this->exists()) {
+        if (! $this->exists()) {
             return false;
         }
 
@@ -174,12 +174,12 @@ class Plugin
 
     public function isDeactivate(): bool
     {
-        return !$this->isActivate();
+        return ! $this->isActivate();
     }
 
     public function exists(): bool
     {
-        if (!$pluginName = $this->getStudlyName()) {
+        if (! $pluginName = $this->getStudlyName()) {
             return false;
         }
 
@@ -199,11 +199,11 @@ class Plugin
         foreach ($pluginJsons as $pluginJson) {
             $pluginName = basename(dirname($pluginJson));
 
-            if (!$this->isValidPlugin($pluginName)) {
+            if (! $this->isValidPlugin($pluginName)) {
                 continue;
             }
 
-            if (!$this->isAvailablePlugin($pluginName)) {
+            if (! $this->isAvailablePlugin($pluginName)) {
                 continue;
             }
 
@@ -215,17 +215,17 @@ class Plugin
 
     public function isValidPlugin(?string $pluginName = null)
     {
-        if (!$pluginName) {
+        if (! $pluginName) {
             $pluginName = $this->getStudlyName();
         }
 
-        if (!$pluginName) {
+        if (! $pluginName) {
             return false;
         }
 
         $path = $this->config('paths.plugins');
 
-        $pluginJsonPath = sprintf("%s/%s/plugin.json", $path, $pluginName);
+        $pluginJsonPath = sprintf('%s/%s/plugin.json', $path, $pluginName);
 
         $pluginJson = Json::make($pluginJsonPath);
 
@@ -234,11 +234,11 @@ class Plugin
 
     public function isAvailablePlugin(?string $pluginName = null)
     {
-        if (!$pluginName) {
+        if (! $pluginName) {
             $pluginName = $this->getStudlyName();
         }
 
-        if (!$pluginName) {
+        if (! $pluginName) {
             return false;
         }
 
@@ -247,6 +247,7 @@ class Plugin
             $plugin->registerProviders();
         } catch (\Throwable $e) {
             \info("{$pluginName} registration failed, not a valid plugin");
+
             return false;
         }
 
@@ -285,17 +286,17 @@ class Plugin
     {
         // This checks if we are running on a Laravel Vapor managed instance
         // and sets the path to a writable one (services path is not on a writable storage in Vapor).
-        if (!is_null(env('VAPOR_MAINTENANCE_MODE', null))) {
-            return Str::replaceLast('config.php', $this->getSnakeName() . '_plugin.php', app()->getCachedConfigPath());
+        if (! is_null(env('VAPOR_MAINTENANCE_MODE', null))) {
+            return Str::replaceLast('config.php', $this->getSnakeName().'_plugin.php', app()->getCachedConfigPath());
         }
 
-        return Str::replaceLast('services.php', $this->getSnakeName() . '_plugin.php', app()->getCachedServicesPath());
+        return Str::replaceLast('services.php', $this->getSnakeName().'_plugin.php', app()->getCachedServicesPath());
     }
 
     public function manualAddNamespace()
     {
         $unikey = $this->getStudlyName();
-        if (!$unikey) {
+        if (! $unikey) {
             return;
         }
 
@@ -332,7 +333,7 @@ class Plugin
 
     public function replaceDir(?string $path)
     {
-        if (!$path) {
+        if (! $path) {
             return null;
         }
 

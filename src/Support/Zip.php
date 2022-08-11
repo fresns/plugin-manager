@@ -22,7 +22,7 @@ class Zip
 
     public function pack(string $sourcePath, ?string $filename = null, ?string $targetPath = null): ?string
     {
-        if (!File::exists($sourcePath)) {
+        if (! File::exists($sourcePath)) {
             throw new \RuntimeException("Directory to be decompressed does not exist {$sourcePath}");
         }
 
@@ -32,14 +32,14 @@ class Zip
 
         File::ensureDirectoryExists($targetPath);
 
-        $zipFilename = str_contains($filename, '.zip') ? $filename : $filename . '.zip';
+        $zipFilename = str_contains($filename, '.zip') ? $filename : $filename.'.zip';
         $zipFilepath = "{$targetPath}/{$zipFilename}";
 
         while (File::exists($zipFilepath)) {
             $basename = File::name($zipFilepath);
             $zipCount = count(File::glob("{$targetPath}/{$basename}*.zip"));
 
-            $zipFilename = $basename . ($zipCount) . '.zip';
+            $zipFilename = $basename.($zipCount).'.zip';
             $zipFilepath = "{$targetPath}/{$zipFilename}";
         }
 
@@ -75,10 +75,10 @@ class Zip
         // Make sure the unzip destination directory exists
         $targetPath = $targetPath ?? storage_path('app/extensions/.tmp');
         if (empty($targetPath)) {
-            throw new \RuntimeException("targetPath cannot be empty.");
+            throw new \RuntimeException('targetPath cannot be empty.');
         }
 
-        if (!is_dir($targetPath)) {
+        if (! is_dir($targetPath)) {
             File::ensureDirectoryExists($targetPath);
         }
 
@@ -114,19 +114,19 @@ class Zip
     {
         $targetPath = $targetPath ?? storage_path('app/extensions/.tmp');
 
-        $pattern = sprintf("%s/*", rtrim($targetPath, DIRECTORY_SEPARATOR));
+        $pattern = sprintf('%s/*', rtrim($targetPath, DIRECTORY_SEPARATOR));
         $files = File::glob($pattern);
 
         if (count($files) > 1) {
             return $targetPath;
         }
 
-        $tmpDir = $targetPath . '-subdir';
+        $tmpDir = $targetPath.'-subdir';
         File::ensureDirectoryExists($tmpDir);
 
         $firstEntryname = File::name(current($files));
 
-        File::copyDirectory($targetPath . "/{$firstEntryname}", $tmpDir);
+        File::copyDirectory($targetPath."/{$firstEntryname}", $tmpDir);
         File::cleanDirectory($targetPath);
         File::copyDirectory($tmpDir, $targetPath);
         File::deleteDirectory($tmpDir);

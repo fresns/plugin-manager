@@ -23,4 +23,3 @@ class MakeEventProviderCommand extends GeneratorCommand
         return 'event-provider';
     }
 }
-

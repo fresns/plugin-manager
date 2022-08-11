@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Illuminate\Database\Console\Factories;
 
 use Illuminate\Console\GeneratorCommand;
@@ -75,7 +81,7 @@ class FactoryMakeCommand extends GeneratorCommand
         }
 
         $replace = [
-            '{{ factoryNamespace }}' => rtrim($this->laravel->getNamespace(), '\\') . '\\' . $namespace,
+            '{{ factoryNamespace }}' => rtrim($this->laravel->getNamespace(), '\\').'\\'.$namespace,
             'NamespacedDummyModel' => $namespaceModel,
             '{{ namespacedModel }}' => $namespaceModel,
             '{{namespacedModel}}' => $namespaceModel,

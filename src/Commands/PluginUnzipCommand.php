@@ -27,20 +27,22 @@ class PluginUnzipCommand extends Command
         $tmpDirPath = $this->zip->unpack($this->argument('path'));
 
         $pluginJsonPath = "{$tmpDirPath}/plugin.json";
-        if (!file_exists($tmpDirPath)) {
-            \info("Plugin file does not exist: " . $pluginJsonPath);
+        if (! file_exists($tmpDirPath)) {
+            \info('Plugin file does not exist: '.$pluginJsonPath);
+
             return 0;
         }
 
         $plugin = Json::make($pluginJsonPath);
 
         $pluginUnikey = $plugin->get('unikey');
-        if (!$pluginUnikey) {
-            \info("Failed to get plugin unikey: " . $pluginUnikey);
+        if (! $pluginUnikey) {
+            \info('Failed to get plugin unikey: '.$pluginUnikey);
+
             return 0;
         }
 
-        $pluginDir = sprintf("%s/%s",
+        $pluginDir = sprintf('%s/%s',
             config('plugins.paths.plugins'),
             $pluginUnikey
         );

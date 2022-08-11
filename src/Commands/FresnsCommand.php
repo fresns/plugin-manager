@@ -29,7 +29,7 @@ class FresnsCommand extends Command
     public function activate(string $vendorBinPath)
     {
         $command = sprintf('export %s', "PATH=$vendorBinPath:".'$PATH');
-        if (! str_contains(getenv("PATH"), $vendorBinPath)) {
+        if (! str_contains(getenv('PATH'), $vendorBinPath)) {
             $this->warn('Add Project vendorBinPath');
             $this->line('');
             $this->warn('Please input this command on your terminal:');
@@ -41,7 +41,7 @@ class FresnsCommand extends Command
         } else {
             $this->warn('Already Add Project vendorBinPath: ');
             $this->line($vendorBinPath);
-            
+
             $this->line('');
             $this->info('Now you can run command:');
             $this->line('fresns');

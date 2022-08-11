@@ -8,11 +8,11 @@
 
 namespace Fresns\PluginManager\Commands;
 
-use Illuminate\Support\Str;
-use Illuminate\Console\Command;
 use Fresns\PluginManager\Plugin;
 use Fresns\PluginManager\Support\Config\GenerateConfigReader;
+use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class NewCommand extends Command
 {
@@ -42,6 +42,7 @@ class NewCommand extends Command
      * Execute the console command.
      *
      * @return mixed
+     *
      * @throws Exception
      */
     public function handle()
@@ -53,8 +54,9 @@ class NewCommand extends Command
 
         // clear directory or exit when plugin exists.
         if (File::exists($this->plugin->getPluginPath())) {
-            if (!$this->option('force')) {
+            if (! $this->option('force')) {
                 $this->error("Plugin {$this->plugin->getUnikey()} exists");
+
                 return 0;
             }
 
@@ -92,7 +94,7 @@ class NewCommand extends Command
                 continue;
             }
 
-            $path = config('plugins.paths.plugins') . '/' . $this->argument('name') . '/' . $folder->getPath();
+            $path = config('plugins.paths.plugins').'/'.$this->argument('name').'/'.$folder->getPath();
 
             $this->filesystem->makeDirectory($path, 0755, true);
             if (config('plugins.stubs.gitkeep')) {
@@ -104,11 +106,11 @@ class NewCommand extends Command
     /**
      * Generate git keep to the specified path.
      *
-     * @param string $path
+     * @param  string  $path
      */
     public function generateGitKeep($path)
     {
-        $this->filesystem->put($path . '/.gitkeep', '');
+        $this->filesystem->put($path.'/.gitkeep', '');
     }
 
     /**
@@ -129,14 +131,14 @@ class NewCommand extends Command
         foreach ($this->getFiles() as $stub => $file) {
             $pluginName = $this->argument('name');
 
-            $path = config('plugins.paths.plugins') . '/' . $pluginName . '/' . $file;
+            $path = config('plugins.paths.plugins').'/'.$pluginName.'/'.$file;
 
             if ($keys = $this->getReplaceKeys($path)) {
                 $file = $this->getReplacedContent($file, $keys);
                 $path = $this->getReplacedContent($path, $keys);
             }
 
-            if (!$this->filesystem->isDirectory($dir = dirname($path))) {
+            if (! $this->filesystem->isDirectory($dir = dirname($path))) {
                 $this->filesystem->makeDirectory($dir, 0775, true);
             }
 

@@ -23,4 +23,3 @@ class MakeScheduleProviderCommand extends GeneratorCommand
         return 'schedule-provider';
     }
 }
-

@@ -8,8 +8,8 @@
 
 namespace Fresns\PluginManager\Commands;
 
-use Illuminate\Console\Command;
 use Fresns\PluginManager\Plugin;
+use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 
 class PluginListCommand extends Command
@@ -22,11 +22,11 @@ class PluginListCommand extends Command
     {
         $pluginDir = config('plugins.paths.plugins');
 
-        $pluginDirs = File::glob(sprintf("%s/*", rtrim($pluginDir, '/')));
+        $pluginDirs = File::glob(sprintf('%s/*', rtrim($pluginDir, '/')));
 
         $rows = [];
         foreach ($pluginDirs as $pluginDir) {
-            if (!is_dir($pluginDir)) {
+            if (! is_dir($pluginDir)) {
                 continue;
             }
 
@@ -52,7 +52,7 @@ class PluginListCommand extends Command
 
     public function replaceDir(?string $path)
     {
-        if (!$path) {
+        if (! $path) {
             return null;
         }
 

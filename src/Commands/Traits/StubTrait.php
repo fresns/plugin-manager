@@ -8,10 +8,10 @@
 
 namespace Fresns\PluginManager\Commands\Traits;
 
-use Illuminate\Support\Str;
-use Fresns\PluginManager\Support\Stub;
 use Fresns\PluginManager\Support\Config\GenerateConfigReader;
 use Fresns\PluginManager\Support\Json;
+use Fresns\PluginManager\Support\Stub;
+use Illuminate\Support\Str;
 
 trait StubTrait
 {
@@ -51,17 +51,17 @@ trait StubTrait
     }
 
     /**
-     * implement from \Illuminate\Console\GeneratorCommand
+     * implement from \Illuminate\Console\GeneratorCommand.
      *
      * @return string
-     * 
+     *
      * @see \Illuminate\Console\GeneratorCommand
      */
     protected function getStub(): string
     {
         $stubName = $this->getStubName();
-        if (!$stubName) {
-            throw new \RuntimeException("Please provider stub name in getStubName method");
+        if (! $stubName) {
+            throw new \RuntimeException('Please provider stub name in getStubName method');
         }
 
         $baseStubPath = base_path("stubs/{$stubName}.stub");
@@ -69,7 +69,7 @@ trait StubTrait
             return $baseStubPath;
         }
 
-        $stubPath = dirname(__DIR__) . "/stubs/{$stubName}.stub";
+        $stubPath = dirname(__DIR__)."/stubs/{$stubName}.stub";
         if (file_exists($stubPath)) {
             return $stubPath;
         }
@@ -91,19 +91,18 @@ trait StubTrait
      * Get the contents of the specified stub file by given stub name.
      *
      * @param $stub
-     *
      * @return string
      */
     protected function getStubContents($stubPath)
     {
-        $method = sprintf("get%sStubPath", Str::studly(strtolower($stubPath)));
+        $method = sprintf('get%sStubPath', Str::studly(strtolower($stubPath)));
 
         // custom stubPath
         if (method_exists($this, $method)) {
             $stubFilePath = $this->$method();
         } else {
             // run in command: fresns new Xxx
-            $stubFilePath = dirname(__DIR__) . "/stubs/{$stubPath}.stub";
+            $stubFilePath = dirname(__DIR__)."/stubs/{$stubPath}.stub";
 
             if (file_exists($stubFilePath)) {
                 $stubFilePath = $stubFilePath;
@@ -140,16 +139,16 @@ trait StubTrait
     public function getReplacesByKeys(array $keys)
     {
         $replaces = [];
-        foreach ($keys as $key) {            
+        foreach ($keys as $key) {
             $currentReplacement = str_replace('$', '', $key);
 
             $currentReplacementLower = Str::of($currentReplacement)->lower()->toString();
-            $method = sprintf("get%sReplacement", Str::studly($currentReplacementLower));
+            $method = sprintf('get%sReplacement', Str::studly($currentReplacementLower));
 
             if (method_exists($this, $method)) {
                 $replaces[$currentReplacement] = $this->$method();
             } else {
-                \info($currentReplacement . " does match any replace content");
+                \info($currentReplacement.' does match any replace content');
                 // keep origin content
                 $replaces[$currentReplacement] = $key;
             }
@@ -160,7 +159,7 @@ trait StubTrait
 
     public function getReplacedContent(string $content, array $keys = [])
     {
-        if (!$keys) {
+        if (! $keys) {
             $keys = $this->getReplaceKeys($content);
         }
 
@@ -173,12 +172,11 @@ trait StubTrait
      * Get array replacement for the specified stub.
      *
      * @param $stub
-     *
      * @return array
      */
     protected function getReplacement($stubPath)
     {
-        if (!file_exists($stubPath)) {
+        if (! file_exists($stubPath)) {
             throw new \RuntimeException("stubPath $stubPath not exists");
         }
 
@@ -197,7 +195,7 @@ trait StubTrait
     }
 
     /**
-     * Get namespace for plugin service provider
+     * Get namespace for plugin service provider.
      *
      * @return string
      */

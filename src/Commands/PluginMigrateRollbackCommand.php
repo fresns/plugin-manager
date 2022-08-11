@@ -27,7 +27,7 @@ class PluginMigrateRollbackCommand extends Command
     {
         $plugin = new Plugin($this->argument('name'));
 
-        if (!$plugin->isValidPlugin()) {
+        if (! $plugin->isValidPlugin()) {
             return 0;
         }
 
@@ -45,7 +45,7 @@ class PluginMigrateRollbackCommand extends Command
 
                 $this->info("Migrate Rollback: {$plugin->getUnikey()}");
             } else {
-                $this->info("Migrate Rollback: Nothing need to rollback");
+                $this->info('Migrate Rollback: Nothing need to rollback');
             }
         } catch (\Throwable $e) {
             $this->warn("Migrate Rollback {$plugin->getUnikey()} fail\n");

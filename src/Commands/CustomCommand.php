@@ -22,14 +22,15 @@ class CustomCommand extends Command
 
         if (file_exists($to)) {
             $this->error('config/plugins.php is already existed');
+
             return 0;
         }
 
-        $from = dirname(__DIR__, 2) . '/config/plugins.php';
+        $from = dirname(__DIR__, 2).'/config/plugins.php';
 
         copy($from, $to);
 
-        $this->line('<info>Config file copied to </info> <comment>[' . $to . ']</comment>');
+        $this->line('<info>Config file copied to </info> <comment>['.$to.']</comment>');
 
         return 0;
     }

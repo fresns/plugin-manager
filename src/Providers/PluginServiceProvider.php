@@ -8,10 +8,10 @@
 
 namespace Fresns\PluginManager\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Fresns\PluginManager\Plugin;
 use Fresns\PluginManager\Support\Json;
 use Illuminate\Support\Arr;
+use Illuminate\Support\ServiceProvider;
 
 class PluginServiceProvider extends ServiceProvider
 {
@@ -22,15 +22,15 @@ class PluginServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../../config/plugins.php', 'plugins');
+        $this->mergeConfigFrom(__DIR__.'/../../config/plugins.php', 'plugins');
         $this->publishes([
-            __DIR__ . '/../../config/plugins.php' => config_path('plugins.php'),
+            __DIR__.'/../../config/plugins.php' => config_path('plugins.php'),
         ], 'laravel-plugin-config');
 
         $this->addMergePluginConfig();
 
         $this->registerCommands([
-            __DIR__ . '/../Commands/*',
+            __DIR__.'/../Commands/*',
         ]);
     }
 
@@ -43,11 +43,11 @@ class PluginServiceProvider extends ServiceProvider
 
             foreach ($commandPaths as $command) {
                 $commandPath = realpath($command);
-                if (!is_file($commandPath)) {
+                if (! is_file($commandPath)) {
                     continue;
                 }
 
-                $commandClass = "Fresns\\PluginManager\\Commands\\" . pathinfo($commandPath, PATHINFO_FILENAME);
+                $commandClass = 'Fresns\\PluginManager\\Commands\\'.pathinfo($commandPath, PATHINFO_FILENAME);
 
                 if (class_exists($commandClass)) {
                     $allCommand[] = $commandClass;
@@ -100,8 +100,8 @@ class PluginServiceProvider extends ServiceProvider
 
             file_put_contents($composerPath, $content);
         } catch (\Throwable $e) {
-            $message = str_replace(['file_put_contents(' . base_path() . '/', ')'], '', $e->getMessage());
-            throw new \RuntimeException('cannot set merge-plugin to ' . $message);
+            $message = str_replace(['file_put_contents('.base_path().'/', ')'], '', $e->getMessage());
+            throw new \RuntimeException('cannot set merge-plugin to '.$message);
         }
     }
 }

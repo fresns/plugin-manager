@@ -1,12 +1,11 @@
 <?php
 
-/**
- * DON'T CHANGE ANYTHING EXCEPT FOLLOWING
- *
- * 1. namespace
- * 2. composer.*
- *
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
  */
+
 return [
     'namespace' => $pluginsNamespace = 'Plugins',
 
@@ -48,13 +47,13 @@ return [
                 'name'  => 'Jarvis Tang',
                 'email' => 'jarvis.okay@gmail.com',
                 'homepage' => 'https://github.com/jarvis-tang',
-                "role" => "Creator",
+                'role' => 'Creator',
             ],
             [
                 'name'  => 'mouyong',
                 'email' => 'my24251325@gmail.com',
                 'homepage' => 'https://github.com/mouyong',
-                "role" => "Developer",
+                'role' => 'Developer',
             ],
         ],
     ],
@@ -96,7 +95,7 @@ return [
     ],
 
     'stubs' => [
-        'path'         => dirname(__DIR__) . '/src/Commands/stubs',
+        'path'         => dirname(__DIR__).'/src/Commands/stubs',
         'files'        => [
             'routes/web'            => 'routes/web.php',
             'routes/api'            => 'routes/api.php',
@@ -115,7 +114,7 @@ return [
             'package.json'          => 'package.json',
             'installer'             => 'app/Support/Installer.php',
             'init_plugin_config'    => 'database/migrations/init_$SNAKE_NAME$_config.php',
-            'readme'                => 'README.md'
+            'readme'                => 'README.md',
         ],
         'gitkeep'      => true,
     ],

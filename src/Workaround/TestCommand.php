@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace NunoMaduro\Collision\Adapters\Laravel\Commands;
 
 use Dotenv\Exception\InvalidPathException;
@@ -68,8 +74,8 @@ class TestCommand extends Command
             throw new RequirementsException('Running Collision ^5.0 artisan test command requires at least Laravel ^8.0.');
         }
 
-        if ($this->option('parallel') && !$this->isParallelDependenciesInstalled()) {
-            if (!$this->confirm('Running tests in parallel requires "brianium/paratest". Do you wish to install it as a dev dependency?')) {
+        if ($this->option('parallel') && ! $this->isParallelDependenciesInstalled()) {
+            if (! $this->confirm('Running tests in parallel requires "brianium/paratest". Do you wish to install it as a dev dependency?')) {
                 return 1;
             }
 
@@ -94,9 +100,9 @@ class TestCommand extends Command
         ))->setTimeout(null);
 
         try {
-            $process->setTty(!$this->option('without-tty'));
+            $process->setTty(! $this->option('without-tty'));
         } catch (RuntimeException $e) {
-            $this->output->writeln('Warning: ' . $e->getMessage());
+            $this->output->writeln('Warning: '.$e->getMessage());
         }
 
         try {
@@ -135,8 +141,7 @@ class TestCommand extends Command
     /**
      * Get the array of arguments for running PHPUnit.
      *
-     * @param array $options
-     *
+     * @param  array  $options
      * @return array
      */
     protected function phpunitArguments($options)
@@ -144,10 +149,10 @@ class TestCommand extends Command
         $options = array_merge(['--printer=NunoMaduro\\Collision\\Adapters\\Phpunit\\Printer'], $options);
 
         $options = array_values(array_filter($options, function ($option) {
-            return !Str::startsWith($option, '--env=');
+            return ! Str::startsWith($option, '--env=');
         }));
 
-        if (!file_exists($file = base_path('phpunit.xml'))) {
+        if (! file_exists($file = base_path('phpunit.xml'))) {
             $file = base_path('phpunit.xml.dist');
         }
 
@@ -157,20 +162,19 @@ class TestCommand extends Command
     /**
      * Get the array of arguments for running Paratest.
      *
-     * @param array $options
-     *
+     * @param  array  $options
      * @return array
      */
     protected function paratestArguments($options)
     {
         $options = array_values(array_filter($options, function ($option) {
-            return !Str::startsWith($option, '--env=')
-                && !Str::startsWith($option, '-p')
-                && !Str::startsWith($option, '--parallel')
-                && !Str::startsWith($option, '--recreate-databases');
+            return ! Str::startsWith($option, '--env=')
+                && ! Str::startsWith($option, '-p')
+                && ! Str::startsWith($option, '--parallel')
+                && ! Str::startsWith($option, '--recreate-databases');
         }));
 
-        if (!file_exists($file = base_path('phpunit.xml'))) {
+        if (! file_exists($file = base_path('phpunit.xml'))) {
             $file = base_path('phpunit.xml.dist');
         }
 
@@ -210,7 +214,7 @@ class TestCommand extends Command
      */
     protected function clearEnv()
     {
-        if (!$this->option('env')) {
+        if (! $this->option('env')) {
             $vars = self::getEnvironmentVariables(
                 // @phpstan-ignore-next-line
                 $this->laravel->environmentPath(),
@@ -227,9 +231,8 @@ class TestCommand extends Command
     }
 
     /**
-     * @param string $path
-     * @param string $file
-     *
+     * @param  string  $path
+     * @param  string  $file
      * @return array
      */
     protected static function getEnvironmentVariables($path, $file)
@@ -270,7 +273,7 @@ class TestCommand extends Command
      */
     protected function installParallelDependencies()
     {
-        $command = $this->findComposer() . ' require brianium/paratest --dev';
+        $command = $this->findComposer().' require brianium/paratest --dev';
 
         $process = Process::fromShellCommandline($command, null, null, null, null);
 
@@ -278,7 +281,7 @@ class TestCommand extends Command
             try {
                 $process->setTty(true);
             } catch (RuntimeException $e) {
-                $this->output->writeln('Warning: ' . $e->getMessage());
+                $this->output->writeln('Warning: '.$e->getMessage());
             }
         }
 
@@ -300,10 +303,10 @@ class TestCommand extends Command
      */
     protected function findComposer()
     {
-        $composerPath = getcwd() . '/composer.phar';
+        $composerPath = getcwd().'/composer.phar';
 
         if (file_exists($composerPath)) {
-            return '"' . PHP_BINARY . '" ' . $composerPath;
+            return '"'.PHP_BINARY.'" '.$composerPath;
         }
 
         return 'composer';

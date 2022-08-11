@@ -22,7 +22,7 @@ class PluginPublishCommand extends Command
     {
         $plugin = new Plugin($this->argument('name'));
 
-        if (!$plugin->isValidPlugin()) {
+        if (! $plugin->isValidPlugin()) {
             return 0;
         }
 

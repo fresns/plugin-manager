@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace Illuminate\Foundation\Console;
 
 use Illuminate\Console\GeneratorCommand;
@@ -92,7 +98,7 @@ class TestMakeCommand extends GeneratorCommand
      */
     protected function rootNamespace()
     {
-        return rtrim($this->laravel->getNamespace(), '\\') . '\\Tests';
+        return rtrim($this->laravel->getNamespace(), '\\').'\\Tests';
     }
 
     /**
