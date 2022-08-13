@@ -101,7 +101,7 @@ return [
             'routes/api'            => 'routes/api.php',
             'views/index'           => 'resources/views/index.blade.php',
             'views/master'          => 'resources/views/layouts/master.blade.php',
-            'scaffold/config'       => 'config/config.php',
+            'scaffold/config'       => 'config/$KEBAB_NAME$.php',
             'scaffold/provider'     => 'app/Providers/$STUDLY_NAME$ServiceProvider.php',
             'seeder'                => 'database/seeders/DatabaseSeeder.php',
             'route-provider'        => 'app/Providers/RouteServiceProvider.php',

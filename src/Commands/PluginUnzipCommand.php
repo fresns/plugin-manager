@@ -29,7 +29,7 @@ class PluginUnzipCommand extends Command
         $pluginJsonPath = "{$tmpDirPath}/plugin.json";
         if (! file_exists($tmpDirPath)) {
             \info('Plugin file does not exist: '.$pluginJsonPath);
-
+            $this->error("install plugin error ".$message);
             return 0;
         }
 
@@ -37,8 +37,8 @@ class PluginUnzipCommand extends Command
 
         $pluginUnikey = $plugin->get('unikey');
         if (! $pluginUnikey) {
-            \info('Failed to get plugin unikey: '.$pluginUnikey);
-
+            \info('Failed to get plugin unikey: '.var_export($pluginUnikey, true));
+            $this->error("install plugin error, plugin.json is invalid plugin json");
             return 0;
         }
 
@@ -69,7 +69,7 @@ class PluginUnzipCommand extends Command
 
         $currentBackupCount = count($dirs);
 
-        $targetPath = sprintf('%s/%s%s', $backupDir, $pluginUnikey, $currentBackupCount + 1);
+        $targetPath = sprintf('%s/%s-%s-%s', $backupDir, $pluginUnikey, $currentBackupCount + 1, date('YmdHis'));
 
         File::copyDirectory($pluginDir, $targetPath);
         File::cleanDirectory($pluginDir);
