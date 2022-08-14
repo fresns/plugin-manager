@@ -11,8 +11,8 @@ namespace Fresns\PluginManager\Commands\Traits;
 use Fresns\PluginManager\Support\Config\GenerateConfigReader;
 use Fresns\PluginManager\Support\Json;
 use Fresns\PluginManager\Support\Stub;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 trait StubTrait
 {
