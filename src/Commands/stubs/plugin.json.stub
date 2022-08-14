@@ -5,7 +5,7 @@
     "description": "$STUDLY_NAME$ plugin made by fresns",
     "author": "Fresns",
     "authorLink": "https://fresns.org",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "scene": [],
     "accessPath": "",
     "settingPath": null

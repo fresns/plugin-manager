@@ -22,7 +22,7 @@ return [
 
     'merge_plugin_config' => [
         'include' => [
-            base_path('extensions/plugins/*/composer.json'),
+            ltrim(str_replace(base_path(), '', base_path('extensions/plugins/*/composer.json')), '/'),
         ],
         'recurse' => true,
         'replace' => false,
@@ -106,14 +106,14 @@ return [
             'seeder'                => 'database/seeders/DatabaseSeeder.php',
             'route-provider'        => 'app/Providers/RouteServiceProvider.php',
             'command-provider'      => 'app/Providers/CommandServiceProvider.php',
-            'composer.json'         => 'composer.json',
-            'plugin.json'           => 'plugin.json',
             'assets/js/app'         => 'resources/assets/js/app.js',
             'assets/sass/app'       => 'resources/assets/sass/app.scss',
             'webpack'               => 'webpack.mix.js',
             'package.json'          => 'package.json',
             'installer'             => 'app/Support/Installer.php',
             'init_plugin_config'    => 'database/migrations/init_$SNAKE_NAME$_config.php',
+            'composer.json'         => 'composer.json',
+            'plugin.json'           => 'plugin.json',
             'readme'                => 'README.md',
         ],
         'gitkeep'      => true,

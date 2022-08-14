@@ -114,6 +114,21 @@ class NewCommand extends Command
     }
 
     /**
+     * Remove git keep from the specified path.
+     *
+     * @param  string  $path
+     */
+    public function removeParentDirGitKeep(string $path)
+    {
+        if (config('themes.stubs.gitkeep')) {
+            $dirName = dirname($path);
+            if (count($this->filesystem->glob("$dirName/*")) >= 1) {
+                $this->filesystem->delete("$dirName/.gitkeep");
+            }
+        }
+    }
+
+    /**
      * Get the list of files will created.
      *
      * @return array
@@ -140,9 +155,12 @@ class NewCommand extends Command
 
             if (! $this->filesystem->isDirectory($dir = dirname($path))) {
                 $this->filesystem->makeDirectory($dir, 0775, true);
+                $this->removeParentDirGitKeep($dir);
             }
 
             $this->filesystem->put($path, $this->getStubContents($stub));
+            $this->removeParentDirGitKeep($dir);
+
             $this->info("Created : {$path}");
         }
     }

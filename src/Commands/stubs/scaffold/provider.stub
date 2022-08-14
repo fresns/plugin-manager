@@ -44,7 +44,7 @@ class $STUDLY_NAME$ServiceProvider extends BaseServiceProvider
     protected function registerConfig()
     {
         $this->mergeConfigFrom(
-            dirname(__DIR__, 2) . '/config/config.php', '$KEBAB_NAME$'
+            dirname(__DIR__, 2) . '/config/$KEBAB_NAME$.php', '$KEBAB_NAME$'
         );
     }
 

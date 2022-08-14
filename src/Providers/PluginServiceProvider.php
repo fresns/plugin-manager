@@ -91,7 +91,14 @@ class PluginServiceProvider extends ServiceProvider
         $userMergePluginConfig = Arr::get($composer, 'extra.merge-plugin', []);
 
         $defaultMergePlugin = config('plugins.merge_plugin_config');
+
         $mergePluginConfig = array_merge($defaultMergePlugin, $userMergePluginConfig);
+
+        // merge include
+        $diffInclude = array_diff($defaultMergePlugin['include'], $userMergePluginConfig['include']);
+        $mergePluginConfigInclude = array_merge($diffInclude, $userMergePluginConfig['include']);
+
+        $mergePluginConfig['include'] = $mergePluginConfigInclude;
 
         Arr::set($composer, 'extra.merge-plugin', $mergePluginConfig);
 

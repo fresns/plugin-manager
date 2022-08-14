@@ -16,18 +16,18 @@ use Illuminate\Support\Str;
 
 class Plugin
 {
-    protected $packageName;
+    protected $pluginName;
 
     /**
      * @var FileManager
      */
     protected $manager;
 
-    public function __construct(?string $packageName = null)
+    public function __construct(?string $pluginName = null)
     {
         $this->manager = new FileManager();
 
-        $this->setPluginName($packageName);
+        $this->setPluginName($pluginName);
     }
 
     public function config(string $key, $default = null)
@@ -35,9 +35,9 @@ class Plugin
         return config('plugins.'.$key, $default);
     }
 
-    public function setPluginName(?string $packageName = null)
+    public function setPluginName(?string $pluginName = null)
     {
-        $this->packageName = $packageName;
+        $this->pluginName = $pluginName;
     }
 
     public function getUnikey()
@@ -47,22 +47,22 @@ class Plugin
 
     public function getLowerName(): string
     {
-        return strtolower($this->packageName);
+        return Str::lower($this->pluginName);
     }
 
     public function getStudlyName()
     {
-        return Str::studly($this->packageName);
+        return Str::studly($this->pluginName);
     }
 
     public function getKebabName()
     {
-        return Str::kebab($this->packageName);
+        return Str::kebab($this->pluginName);
     }
 
     public function getSnakeName()
     {
-        return Str::snake($this->packageName);
+        return Str::snake($this->pluginName);
     }
 
     public function getClassNamespace()
@@ -243,6 +243,7 @@ class Plugin
         }
 
         try {
+            // Verify that the program is loaded correctly by loading the program
             $plugin = new Plugin($pluginName);
             $plugin->registerProviders();
         } catch (\Throwable $e) {

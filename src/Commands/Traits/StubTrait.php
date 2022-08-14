@@ -12,6 +12,7 @@ use Fresns\PluginManager\Support\Config\GenerateConfigReader;
 use Fresns\PluginManager\Support\Json;
 use Fresns\PluginManager\Support\Stub;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
 
 trait StubTrait
 {
@@ -113,9 +114,13 @@ trait StubTrait
             }
         }
 
-        $stubFile = new Stub($stubFilePath, $this->getReplacement($stubFilePath));
-
-        $content = $stubFile->render();
+        $mimeType = File::mimeType($stubFilePath);
+        if (str_contains($mimeType, 'application/')) {
+            $stubFile = new Stub($stubFilePath, $this->getReplacement($stubFilePath));
+            $content = $stubFile->render();
+        } else {
+            $content = File::get($stubFilePath);
+        }
 
         // format json style
         if (str_contains($stubPath, 'json')) {
