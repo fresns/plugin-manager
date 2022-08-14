@@ -9,17 +9,17 @@
 workDir=$PWD
 rootDir=$workDir
 
-while [ ! -f "$rootDir/vendor/autoload.php" ];do
+while [ ! -f "$rootDir/vendor/autoload.php" ]; do
     rootDir=${rootDir%/*}
 
-    if [ -z $rootDir ];then
+    if [ -z $rootDir ]; then
         echo "Can't find laravel project in current path"
         echo "You should run 'plugin' under a laravel project"
         exit -1
     fi
 done
 
-if [ ! -f "$rootDir/vendor/autoload.php" ];then
+if [ ! -f "$rootDir/vendor/autoload.php" ]; then
     echo "You should run composer install first"
     exit -1
 fi
@@ -31,7 +31,7 @@ case $COMMAND in
             plugin "$@"
         else
             echo 'Please input this content in your terminal:'
-            echo 
+            echo
             echo export PATH=$rootDir/vendor/bin:'$PATH'
         fi
     ;;
