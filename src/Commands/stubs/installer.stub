@@ -10,7 +10,14 @@ namespace $NAMESPACE$\Support;
 
 class Installer
 {
-    protected $config = [];
+    protected $config = [
+        // [
+        //     'item_tag' => '$SNAKE_NAME$',
+        //     'item_key' => 'access_key',
+        //     'item_type' => 'string',
+        //     'item_value' => null,
+        // ],
+    ];
 
     public function process(callable $callable)
     {

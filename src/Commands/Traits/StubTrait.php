@@ -115,7 +115,10 @@ trait StubTrait
         }
 
         $mimeType = File::mimeType($stubFilePath);
-        if (str_contains($mimeType, 'application/')) {
+        if (
+            str_contains($mimeType, 'application/')
+            || str_contains($mimeType, 'text/')
+        ) {
             $stubFile = new Stub($stubFilePath, $this->getReplacement($stubFilePath));
             $content = $stubFile->render();
         } else {
