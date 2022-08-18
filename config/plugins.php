@@ -114,7 +114,7 @@ return [
             'init_plugin_config'    => 'database/migrations/init_$SNAKE_NAME$_config.php',
             'composer.json'         => 'composer.json',
             'plugin.json'           => 'plugin.json',
-	        'gitignore'             => '.gitignore',
+            'gitignore'             => '.gitignore',
             'readme'                => 'README.md',
         ],
         'gitkeep'      => true,

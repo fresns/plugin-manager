@@ -247,7 +247,7 @@ class Plugin
             $plugin = new Plugin($pluginName);
             $plugin->registerProviders();
         } catch (\Throwable $e) {
-            \info("{$pluginName} registration failed, not a valid plugin: " . $e->getMessage());
+            \info("{$pluginName} registration failed, not a valid plugin: ".$e->getMessage());
 
             return false;
         }
