@@ -22,4 +22,9 @@ class MakeCmdWordProviderCommand extends GeneratorCommand
     {
         return 'cmd-word-provider';
     }
+
+    protected function getDefaultNamespace($rootNamespace)
+    {
+        return $rootNamespace."\Providers";
+    }
 }

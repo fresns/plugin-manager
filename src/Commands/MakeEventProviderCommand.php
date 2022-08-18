@@ -22,4 +22,9 @@ class MakeEventProviderCommand extends GeneratorCommand
     {
         return 'event-provider';
     }
+
+    protected function getDefaultNamespace($rootNamespace)
+    {
+        return $rootNamespace."\Providers";
+    }
 }

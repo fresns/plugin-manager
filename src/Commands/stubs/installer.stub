@@ -29,24 +29,16 @@ class Installer
     // plugin install
     public function install()
     {
-        try {
-            $this->process(function ($configItem) {
-                // add config
-            });
-        } catch (\Throwable $e) {
-            \info('add config fail: ' . $e->getMessage());
-        }
+        $this->process(function ($configItem) {
+            // add config
+        });
     }
 
     /// plugin uninstall
     public function uninstall()
     {
-        try {
-            $this->process(function ($configItem) {
-                // remove config
-            });
-        } catch (\Throwable $e) {
-            \info('remove config fail: ' . $e->getMessage());
-        }
+        $this->process(function ($configItem) {
+            // remove config
+        });
     }
 }

@@ -95,8 +95,8 @@ class PluginServiceProvider extends ServiceProvider
         $mergePluginConfig = array_merge($defaultMergePlugin, $userMergePluginConfig);
 
         // merge include
-        $diffInclude = array_diff($defaultMergePlugin['include'], $userMergePluginConfig['include']);
-        $mergePluginConfigInclude = array_merge($diffInclude, $userMergePluginConfig['include']);
+        $diffInclude = array_diff($defaultMergePlugin['include'] ?? [], $userMergePluginConfig['include'] ?? []);
+        $mergePluginConfigInclude = array_merge($diffInclude, $userMergePluginConfig['include'] ?? []);
 
         $mergePluginConfig['include'] = $mergePluginConfigInclude;
 

@@ -214,6 +214,7 @@ trait StubTrait
         }
 
         $namespace = $this->plugin->getClassNamespace();
+        $namespace = $this->getDefaultNamespace($namespace);
 
         return str_replace('\\\\', '\\', $namespace);
     }

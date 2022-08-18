@@ -22,4 +22,9 @@ class MakeScheduleProviderCommand extends GeneratorCommand
     {
         return 'schedule-provider';
     }
+
+    protected function getDefaultNamespace($rootNamespace)
+    {
+        return $rootNamespace."\Providers";
+    }
 }
