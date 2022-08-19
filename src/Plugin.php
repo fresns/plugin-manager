@@ -48,7 +48,7 @@ class Plugin
     public function getType(): ?int
     {
         $type = Json::make($this->getComposerJsonPath())->get('type');
-        if (!$type) {
+        if (! $type) {
             throw new \RuntimeException("Unknown plugin type {$type}");
         }
 
