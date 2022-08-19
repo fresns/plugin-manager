@@ -45,6 +45,16 @@ class Plugin
         return $this->getStudlyName();
     }
 
+    public function getType(): ?int
+    {
+        $type = Json::make($this->getComposerJsonPath())->get('type');
+        if (!$type) {
+            throw new \RuntimeException("Unknown plugin type {$type}");
+        }
+
+        return $type;
+    }
+
     public function getLowerName(): string
     {
         return Str::lower($this->pluginName);

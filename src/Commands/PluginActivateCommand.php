@@ -45,11 +45,24 @@ class PluginActivateCommand extends Command
     {
         $plugin = new Plugin($pluginName);
 
+        $unikey = $plugin->getStudlyName();
+        $type = $plugin->getType();
+
+        event('plugin:activating', [
+            'unikey' => $unikey,
+            'type' => $type,
+        ]);
+
         if ($result = $plugin->activate()) {
             $this->info(sprintf('Plugin %s activate successfully', $pluginName));
         } else {
             $this->info(sprintf('Plugin %s activate failure', $pluginName));
         }
+
+        event('plugin:activated', [
+            'unikey' => $unikey,
+            'type' => $type,
+        ]);
 
         return $result;
     }

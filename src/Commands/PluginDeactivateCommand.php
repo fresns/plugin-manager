@@ -45,11 +45,24 @@ class PluginDeactivateCommand extends Command
     {
         $plugin = new Plugin($pluginName);
 
+        $unikey = $plugin->getStudlyName();
+        $type = $plugin->getType();
+
+        event('plugin:deactivating', [
+            'unikey' => $unikey,
+            'type' => $type,
+        ]);
+
         if ($result = $plugin->deactivate()) {
             $this->info(sprintf('Plugin %s deactivate successfully', $pluginName));
         } else {
             $this->info(sprintf('Plugin %s deactivate successfully', $pluginName));
         }
+
+        event('plugin:deactivated', [
+            'unikey' => $unikey,
+            'type' => $type,
+        ]);
 
         return $result;
     }

@@ -22,6 +22,14 @@ class PluginUninstallCommand extends Command
     {
         try {
             $unikey = $this->argument('name');
+            $plugin = new Plugin($unikey);
+            $type = $plugin->getType();
+
+            event('plugin:uninstalling', [
+                'unikey' => $unikey,
+                'type' => $type,
+            ]);
+
             $this->call('plugin:deactivate', [
                 'name' => $unikey,
             ]);
@@ -34,12 +42,16 @@ class PluginUninstallCommand extends Command
                 'name' => $unikey,
             ]);
 
-            $plugin = new Plugin($unikey);
             File::delete($plugin->getCachedServicesPath());
             File::deleteDirectory($plugin->getPluginPath());
 
             // Triggers top-level computation of composer.json hash values and installation of extension packages
             @exec('composer update');
+
+            event('plugin:uninstalled', [
+                'unikey' => $unikey,
+                'type' => $type,
+            ]);
 
             $this->info("Uninstalled: {$unikey}");
         } catch (\Throwable $e) {

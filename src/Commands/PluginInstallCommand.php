@@ -29,7 +29,7 @@ class PluginInstallCommand extends Command
             ]);
 
             $unikey = Cache::pull('install:plugin_unikey');
-            if (! $unikey) {
+            if (!$unikey) {
                 info('Failed to unzip, couldn\'t get the plugin unikey');
 
                 return 0;
@@ -37,8 +37,15 @@ class PluginInstallCommand extends Command
             $plugin = new Plugin($unikey);
             $plugin->manualAddNamespace();
 
+            $type = $plugin->getType();
+
+            event('plugin:installing', [
+                'unikey' => $unikey,
+                'type' => $type,
+            ]);
+
             $this->call('plugin:publish', [
-                'name' => $plugin->getStudlyName(),
+                'name' => $unikey,
             ]);
 
             // Triggers top-level computation of composer.json hash values and installation of extension packages
@@ -48,20 +55,25 @@ class PluginInstallCommand extends Command
             }
 
             $this->call('plugin:deactivate', [
-                'name' => $plugin->getStudlyName(),
+                'name' => $unikey,
             ]);
 
             $this->call('plugin:migrate', [
-                'name' => $plugin->getStudlyName(),
+                'name' => $unikey,
             ]);
 
             if ($this->option('seed')) {
                 $this->call('plugin:seed', [
-                    'name' => $plugin->getStudlyName(),
+                    'name' => $unikey,
                 ]);
             }
 
-            $this->info("Installed: {$plugin->getStudlyName()}");
+            event('plugin:installed', [
+                'unikey' => $unikey,
+                'type' => $type,
+            ]);
+
+            $this->info("Installed: {$unikey}");
         } catch (\Throwable $e) {
             $this->error("Install fail: {$e->getMessage()}");
         }
