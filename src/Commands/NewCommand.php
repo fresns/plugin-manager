@@ -8,11 +8,12 @@
 
 namespace Fresns\PluginManager\Commands;
 
-use Fresns\PluginManager\Plugin;
-use Fresns\PluginManager\Support\Config\GenerateConfigReader;
-use Illuminate\Console\Command;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use Illuminate\Console\Command;
+use Fresns\PluginManager\Plugin;
+use Illuminate\Support\Facades\File;
+use Fresns\PluginManager\Support\Process;
+use Fresns\PluginManager\Support\Config\GenerateConfigReader;
 
 class NewCommand extends Command
 {
@@ -67,7 +68,7 @@ class NewCommand extends Command
         $this->generateFiles();
 
         // composer dump-autoload
-        @exec('composer dump-autoload');
+        Process::run('composer dump-autoload', $this->output);
 
         $this->info("Package [{$this->pluginName}] created successfully");
     }

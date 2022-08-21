@@ -46,12 +46,10 @@ class PluginActivateCommand extends Command
         $plugin = new Plugin($pluginName);
 
         $unikey = $plugin->getStudlyName();
-        $type = $plugin->getType();
 
-        event('plugin:activating', [
+        event('plugin:activating', [[
             'unikey' => $unikey,
-            'type' => $type,
-        ]);
+        ]]);
 
         if ($result = $plugin->activate()) {
             $this->info(sprintf('Plugin %s activate successfully', $pluginName));
@@ -59,10 +57,9 @@ class PluginActivateCommand extends Command
             $this->info(sprintf('Plugin %s activate failure', $pluginName));
         }
 
-        event('plugin:activated', [
+        event('plugin:activated', [[
             'unikey' => $unikey,
-            'type' => $type,
-        ]);
+        ]]);
 
         return $result;
     }

@@ -8,13 +8,15 @@
 
 namespace Fresns\PluginManager\Commands;
 
-use Fresns\PluginManager\Plugin;
 use Illuminate\Console\Command;
+use Fresns\PluginManager\Plugin;
 use Illuminate\Support\Facades\File;
+use Fresns\PluginManager\Support\Process;
 
 class PluginUninstallCommand extends Command
 {
-    protected $signature = 'plugin:uninstall {name}';
+    protected $signature = 'plugin:uninstall {name}
+        {--cleardata : Trigger clear plugin data}';
 
     protected $description = 'Install the plugin from the specified path';
 
@@ -23,20 +25,24 @@ class PluginUninstallCommand extends Command
         try {
             $unikey = $this->argument('name');
             $plugin = new Plugin($unikey);
-            $type = $plugin->getType();
 
-            event('plugin:uninstalling', [
+            event('plugin:uninstalling', [[
                 'unikey' => $unikey,
-                'type' => $type,
-            ]);
+            ]]);
 
             $this->call('plugin:deactivate', [
                 'name' => $unikey,
             ]);
 
-            $this->call('plugin:migrate-rollback', [
-                'name' => $unikey,
-            ]);
+            if ($this->option('cleardata')) {
+                event('plugins.cleandata', [[
+                    'unikey' => $unikey,
+                ]]);
+
+                $this->call('plugin:migrate-rollback', [
+                    'name' => $unikey,
+                ]);
+            }
 
             $this->call('plugin:unpublish', [
                 'name' => $unikey,
@@ -46,12 +52,14 @@ class PluginUninstallCommand extends Command
             File::deleteDirectory($plugin->getPluginPath());
 
             // Triggers top-level computation of composer.json hash values and installation of extension packages
-            @exec('composer update');
+            Process::run('composer update', $this->output);
 
-            event('plugin:uninstalled', [
+
+            $plugin->uninstall();
+
+            event('plugin:uninstalled', [[
                 'unikey' => $unikey,
-                'type' => $type,
-            ]);
+            ]]);
 
             $this->info("Uninstalled: {$unikey}");
         } catch (\Throwable $e) {

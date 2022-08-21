@@ -54,7 +54,7 @@ class PluginUnzipCommand extends Command
         }
 
         File::copyDirectory($tmpDirPath, $pluginDir);
-        File::cleanDirectory($tmpDirPath);
+        File::deleteDirectory($tmpDirPath);
 
         Cache::put('install:plugin_unikey', $pluginUnikey, now()->addMinutes(5));
 
@@ -71,7 +71,7 @@ class PluginUnzipCommand extends Command
 
         $currentBackupCount = count($dirs);
 
-        $targetPath = sprintf('%s/%s-%s-%s', $backupDir, $pluginUnikey, $currentBackupCount + 1, date('YmdHis'));
+        $targetPath = sprintf('%s/%s-%s-%s', $backupDir, $pluginUnikey, date('YmdHis'), $currentBackupCount + 1);
 
         File::copyDirectory($pluginDir, $targetPath);
         File::cleanDirectory($pluginDir);

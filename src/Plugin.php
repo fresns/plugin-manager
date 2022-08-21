@@ -45,16 +45,6 @@ class Plugin
         return $this->getStudlyName();
     }
 
-    public function getType(): ?int
-    {
-        $type = Json::make($this->getComposerJsonPath())->get('type');
-        if (! $type) {
-            throw new \RuntimeException("Unknown plugin type {$type}");
-        }
-
-        return $type;
-    }
-
     public function getLowerName(): string
     {
         return Str::lower($this->pluginName);
@@ -155,6 +145,11 @@ class Plugin
         return "{$path}/plugin.json";
     }
 
+    public function install()
+    {
+        return $this->manager->install($this->getStudlyName());
+    }
+
     public function activate(): bool
     {
         if (! $this->exists()) {
@@ -171,6 +166,11 @@ class Plugin
         }
 
         return $this->manager->deactivate($this->getStudlyName());
+    }
+
+    public function uninstall()
+    {
+        return $this->manager->uninstall($this->getStudlyName());
     }
 
     public function isActivate(): bool

@@ -41,17 +41,21 @@ LOGO;
 
         $this->comment('');
         $this->comment('Available commands:');
+
+        $this->comment('');
+        $this->comment('plugin');
         $this->listAdminCommands();
     }
 
     protected function listAdminCommands(): void
     {
         $commands = collect(Artisan::all())->mapWithKeys(function ($command, $key) {
-            if (Str::startsWith($key, 'fresns')
-            || Str::startsWith($key, 'new')
-            || Str::startsWith($key, 'custom')
-            || Str::startsWith($key, 'make')
-            || Str::startsWith($key, 'plugin')
+            if (
+                Str::startsWith($key, 'fresns')
+                || Str::startsWith($key, 'new')
+                || Str::startsWith($key, 'custom')
+                || Str::startsWith($key, 'make')
+                || Str::startsWith($key, 'plugin')
             ) {
                 return [$key => $command];
             }

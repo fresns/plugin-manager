@@ -44,14 +44,11 @@ class PluginDeactivateCommand extends Command
     public function deactivate(?string $pluginName = null)
     {
         $plugin = new Plugin($pluginName);
-
         $unikey = $plugin->getStudlyName();
-        $type = $plugin->getType();
 
-        event('plugin:deactivating', [
+        event('plugin:deactivating', [[
             'unikey' => $unikey,
-            'type' => $type,
-        ]);
+        ]]);
 
         if ($result = $plugin->deactivate()) {
             $this->info(sprintf('Plugin %s deactivate successfully', $pluginName));
@@ -59,10 +56,9 @@ class PluginDeactivateCommand extends Command
             $this->info(sprintf('Plugin %s deactivate successfully', $pluginName));
         }
 
-        event('plugin:deactivated', [
+        event('plugin:deactivated', [[
             'unikey' => $unikey,
-            'type' => $type,
-        ]);
+        ]]);
 
         return $result;
     }

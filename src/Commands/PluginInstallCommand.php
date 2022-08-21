@@ -11,6 +11,7 @@ namespace Fresns\PluginManager\Commands;
 use Fresns\PluginManager\Plugin;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
+use Fresns\PluginManager\Support\Process;
 
 class PluginInstallCommand extends Command
 {
@@ -37,21 +38,20 @@ class PluginInstallCommand extends Command
             $plugin = new Plugin($unikey);
             $plugin->manualAddNamespace();
 
-            $type = $plugin->getType();
-
-            event('plugin:installing', [
+            event('plugin:installing', [[
                 'unikey' => $unikey,
-                'type' => $type,
-            ]);
+            ]]);
 
             $this->call('plugin:publish', [
                 'name' => $unikey,
             ]);
 
             // Triggers top-level computation of composer.json hash values and installation of extension packages
-            $isOk = @exec('composer update');
-            if ($isOk === false) {
-                throw new \RuntimeException('Failed to install packages');
+            // @see https://getcomposer.org/doc/03-cli.md#process-exit-codes
+            $process = Process::run('composer update', $this->output);
+            if (!$process->isSuccessful()) {
+                $this->error('Failed to install packages, calc composer.json hash value fail');
+                return 0;
             }
 
             $this->call('plugin:deactivate', [
@@ -68,10 +68,11 @@ class PluginInstallCommand extends Command
                 ]);
             }
 
-            event('plugin:installed', [
+            $plugin->install();
+
+            event('plugin:installed', [[
                 'unikey' => $unikey,
-                'type' => $type,
-            ]);
+            ]]);
 
             $this->info("Installed: {$unikey}");
         } catch (\Throwable $e) {
