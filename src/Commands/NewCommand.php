@@ -8,12 +8,12 @@
 
 namespace Fresns\PluginManager\Commands;
 
-use Illuminate\Support\Str;
-use Illuminate\Console\Command;
 use Fresns\PluginManager\Plugin;
-use Illuminate\Support\Facades\File;
-use Fresns\PluginManager\Support\Process;
 use Fresns\PluginManager\Support\Config\GenerateConfigReader;
+use Fresns\PluginManager\Support\Process;
+use Illuminate\Console\Command;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class NewCommand extends Command
 {

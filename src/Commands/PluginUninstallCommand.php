@@ -8,10 +8,10 @@
 
 namespace Fresns\PluginManager\Commands;
 
-use Illuminate\Console\Command;
 use Fresns\PluginManager\Plugin;
-use Illuminate\Support\Facades\File;
 use Fresns\PluginManager\Support\Process;
+use Illuminate\Console\Command;
+use Illuminate\Support\Facades\File;
 
 class PluginUninstallCommand extends Command
 {
@@ -53,7 +53,6 @@ class PluginUninstallCommand extends Command
 
             // Triggers top-level computation of composer.json hash values and installation of extension packages
             Process::run('composer update', $this->output);
-
 
             $plugin->uninstall();
 

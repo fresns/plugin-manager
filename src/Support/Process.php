@@ -8,15 +8,15 @@
 
 namespace Fresns\PluginManager\Support;
 
-use Symfony\Component\Process\Process as SymfonyProcess;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Process\Process as SymfonyProcess;
 
 class Process
 {
     public static function run(string $cmd, mixed $output = null, ?string $cwd = null): SymfonyProcess
     {
         $cwd = $cwd ?? base_path();
-        
+
         $process = SymfonyProcess::fromShellCommandline($cmd, $cwd);
 
         $process->setTimeout(900);
