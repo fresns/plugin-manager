@@ -121,7 +121,7 @@ class NewCommand extends Command
      */
     public function removeParentDirGitKeep(string $path)
     {
-        if (config('themes.stubs.gitkeep')) {
+        if (config('plugins.stubs.gitkeep')) {
             $dirName = dirname($path);
             if (count($this->filesystem->glob("$dirName/*")) >= 1) {
                 $this->filesystem->delete("$dirName/.gitkeep");
