@@ -2,6 +2,7 @@
 
 namespace $NAMESPACE$\Providers;
 
+use Fresns\PluginManager\Models\Plugin;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as BaseServiceProvider;
 
@@ -26,9 +27,20 @@ class RouteServiceProvider extends BaseServiceProvider
      */
     public function map()
     {
-        $this->mapApiRoutes();
+        try {
+            $pluginHost = Plugin::findByUnikey('Market')?->plugin_host;
+            $host = str_replace(['http://', 'https://'], '', rtrim($pluginHost, '/'));
+        } catch (\Throwable $e) {
+            $host = null;
+        }
 
-        $this->mapWebRoutes();
+        Route::group([
+            'domain' => $host,
+        ], function () {
+            $this->mapApiRoutes();
+
+            $this->mapWebRoutes();
+        });
     }
 
     /**

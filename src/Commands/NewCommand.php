@@ -160,7 +160,7 @@ class NewCommand extends Command
             }
 
             $this->filesystem->put($path, $this->getStubContents($stub));
-            $this->removeParentDirGitKeep($dir);
+            $this->removeParentDirGitKeep($path);
 
             $this->info("Created : {$path}");
         }

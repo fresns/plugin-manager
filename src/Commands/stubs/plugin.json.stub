@@ -1,7 +1,7 @@
 {
     "unikey": "$STUDLY_NAME$",
     "type": 1,
-    "name": "$STUDLY_NAME$ display name",
+    "name": "$STUDLY_NAME$",
     "description": "$STUDLY_NAME$ plugin made by fresns",
     "author": "Fresns",
     "authorLink": "https://fresns.org",
