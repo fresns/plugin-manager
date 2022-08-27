@@ -318,6 +318,7 @@ class Plugin
             $namespaces = config('plugins.namespaces', []);
 
             foreach ($namespaces as $namespace => $paths) {
+                $appPaths = array_map(function ($path) use ($unikey) {
                     return "{$path}/{$unikey}/app";
                 }, $paths);
                 $loader->addPsr4("{$namespace}\\{$unikey}\\", $appPaths, true);
