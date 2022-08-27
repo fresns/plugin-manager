@@ -318,11 +318,24 @@ class Plugin
             $namespaces = config('plugins.namespaces', []);
 
             foreach ($namespaces as $namespace => $paths) {
-                $paths = array_map(function ($path) use ($unikey) {
                     return "{$path}/{$unikey}/app";
                 }, $paths);
+                $loader->addPsr4("{$namespace}\\{$unikey}\\", $appPaths, true);
 
-                $loader->addPsr4("{$namespace}\\{$unikey}\\", $paths, true);
+                $factoryPaths = array_map(function ($path) use ($unikey) {
+                    return "{$path}/{$unikey}/database/factories";
+                }, $paths);
+                $loader->addPsr4("{$namespace}\\{$unikey}\\Database\\Factories\\", $factoryPaths, true);
+
+                $seederPaths = array_map(function ($path) use ($unikey) {
+                    return "{$path}/{$unikey}/database/seeders";
+                }, $paths);
+                $loader->addPsr4("{$namespace}\\{$unikey}\\Database\\Seeders\\", $seederPaths, true);
+
+                $testPaths = array_map(function ($path) use ($unikey) {
+                    return "{$path}/{$unikey}/tests";
+                }, $paths);
+                $loader->addPsr4("{$namespace}\\{$unikey}\\Tests\\", $testPaths, true);
             }
         }
     }

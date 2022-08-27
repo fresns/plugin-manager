@@ -25,6 +25,11 @@ class PluginInstallCommand extends Command
     {
         try {
             $path = $this->argument('path');
+            if (str_contains($path, config('plugins.paths.plugins'))) {
+                $this->error('Failed to install packages from plugin directory');
+                return 0;
+            }
+
             $this->call('plugin:unzip', [
                 'path' => $path,
             ]);
