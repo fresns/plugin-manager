@@ -11,8 +11,8 @@ namespace Fresns\PluginManager\Commands;
 use Fresns\PluginManager\Plugin;
 use Fresns\PluginManager\Support\Json;
 use Fresns\PluginManager\Support\Process;
-use Illuminate\Support\Arr;
 use Illuminate\Console\Command;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 
 class PluginInstallCommand extends Command
