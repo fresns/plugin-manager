@@ -9,7 +9,9 @@
 namespace Fresns\PluginManager\Commands;
 
 use Fresns\PluginManager\Plugin;
+use Fresns\PluginManager\Support\Json;
 use Fresns\PluginManager\Support\Process;
+use Illuminate\Support\Arr;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
 
@@ -52,13 +54,19 @@ class PluginInstallCommand extends Command
                 'name' => $unikey,
             ]);
 
+            $composerJson = Json::make($plugin->getComposerJsonPath())->get();
+            $require = Arr::get($composerJson, 'require', []);
+            $requireDev = Arr::get($composerJson, 'require-dev', []);
+
             // Triggers top-level computation of composer.json hash values and installation of extension packages
             // @see https://getcomposer.org/doc/03-cli.md#process-exit-codes
-            $process = Process::run('composer update', $this->output);
-            if (! $process->isSuccessful()) {
-                $this->error('Failed to install packages, calc composer.json hash value fail');
+            if (count($require) || count($requireDev)) {
+                $process = Process::run('composer update', $this->output);
+                if (! $process->isSuccessful()) {
+                    $this->error('Failed to install packages, calc composer.json hash value fail');
 
-                return 0;
+                    return 0;
+                }
             }
 
             $this->call('plugin:deactivate', [

@@ -9,7 +9,9 @@
 namespace Fresns\PluginManager\Commands;
 
 use Fresns\PluginManager\Plugin;
+use Fresns\PluginManager\Support\Json;
 use Fresns\PluginManager\Support\Process;
+use Illuminate\Support\Arr;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 
@@ -25,6 +27,10 @@ class PluginUninstallCommand extends Command
         try {
             $unikey = $this->argument('name');
             $plugin = new Plugin($unikey);
+
+            $composerJson = Json::make($plugin->getComposerJsonPath())->get();
+            $require = Arr::get($composerJson, 'require', []);
+            $requireDev = Arr::get($composerJson, 'require-dev', []);
 
             event('plugin:uninstalling', [[
                 'unikey' => $unikey,
@@ -52,7 +58,9 @@ class PluginUninstallCommand extends Command
             File::deleteDirectory($plugin->getPluginPath());
 
             // Triggers top-level computation of composer.json hash values and installation of extension packages
-            Process::run('composer update', $this->output);
+            if (count($require) || count($requireDev)) {
+                Process::run('composer update', $this->output);
+            }
 
             $plugin->uninstall();
 
