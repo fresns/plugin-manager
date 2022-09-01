@@ -27,7 +27,7 @@ class PluginInstallCommand extends Command
     {
         try {
             $path = $this->argument('path');
-            if (!str_contains($path, config('plugins.paths.plugins'))) {
+            if (! str_contains($path, config('plugins.paths.plugins'))) {
                 $this->call('plugin:unzip', [
                     'path' => $path,
                 ]);
@@ -44,8 +44,9 @@ class PluginInstallCommand extends Command
             }
 
             $plugin = new Plugin($unikey);
-            if (!$plugin->isValidPlugin()) {
-                $this->error("plugin is not an avaliable plugin");
+            if (! $plugin->isValidPlugin()) {
+                $this->error('plugin is not an avaliable plugin');
+
                 return 0;
             }
 
