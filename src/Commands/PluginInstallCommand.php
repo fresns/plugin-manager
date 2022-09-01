@@ -27,23 +27,28 @@ class PluginInstallCommand extends Command
     {
         try {
             $path = $this->argument('path');
-            if (str_contains($path, config('plugins.paths.plugins'))) {
-                $this->error('Failed to install packages from plugin directory');
+            if (!str_contains($path, config('plugins.paths.plugins'))) {
+                $this->call('plugin:unzip', [
+                    'path' => $path,
+                ]);
 
-                return 0;
+                $unikey = Cache::pull('install:plugin_unikey');
+            } else {
+                $unikey = dirname($path);
             }
 
-            $this->call('plugin:unzip', [
-                'path' => $path,
-            ]);
-
-            $unikey = Cache::pull('install:plugin_unikey');
             if (! $unikey) {
                 info('Failed to unzip, couldn\'t get the plugin unikey');
 
                 return 0;
             }
+
             $plugin = new Plugin($unikey);
+            if (!$plugin->isValidPlugin()) {
+                $this->error("plugin is not an avaliable plugin");
+                return 0;
+            }
+
             $plugin->manualAddNamespace();
 
             event('plugin:installing', [[
