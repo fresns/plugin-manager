@@ -16,7 +16,7 @@ class MakeSqlLogProviderCommand extends GeneratorCommand
 
     protected $signature = 'make:sql-log-provider {name=SqlLogServiceProvider}';
 
-    protected $description = 'Generate a schedule service provider for specified plugin';
+    protected $description = 'Generate a sql log service provider for specified plugin and need your manual reigster it.';
 
     protected function getStubName(): string
     {
