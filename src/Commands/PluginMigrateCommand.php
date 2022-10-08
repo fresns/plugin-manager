@@ -45,7 +45,7 @@ class PluginMigrateCommand extends Command
     {
         $plugin = new Plugin($pluginName);
 
-        if (!$plugin->isValidPlugin()) {
+        if (! $plugin->isValidPlugin()) {
             return 0;
         }
 
