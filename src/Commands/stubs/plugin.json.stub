@@ -8,5 +8,9 @@
     "version": "1.0.0",
     "scene": [],
     "accessPath": "",
-    "settingPath": null
+    "settingPath": null,
+    "providers": [
+        "$PLUGIN_NAMESPACE$\\$STUDLY_NAME$\\Providers\\$STUDLY_NAME$ServiceProvider"
+    ],
+    "aliases": {}
 }

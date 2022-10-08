@@ -17,13 +17,5 @@
     },
     "require": {
         "php": ">= 8.0"
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "$PLUGIN_NAMESPACE$\\$STUDLY_NAME$\\Providers\\$STUDLY_NAME$ServiceProvider"
-            ],
-            "aliases": {}
-        }
     }
 }

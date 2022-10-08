@@ -277,7 +277,7 @@ class Plugin
 
     public function registerProviders()
     {
-        $providers = Json::make($this->getComposerJsonPath())->get('extra.laravel.providers', []);
+        $providers = Json::make($this->getPluginJsonPath())->get('providers', []);
 
         (new \Illuminate\Foundation\ProviderRepository(app(), app('files'), $this->getCachedServicesPath()))
             ->load($providers);
@@ -285,7 +285,7 @@ class Plugin
 
     public function registerAliases(): void
     {
-        $aliases = Json::make($this->getComposerJsonPath())->get('extra.laravel.aliases', []);
+        $aliases = Json::make($this->getPluginJsonPath())->get('aliases', []);
 
         $loader = AliasLoader::getInstance();
         foreach ($aliases as $aliasName => $aliasClass) {

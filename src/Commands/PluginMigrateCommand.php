@@ -13,7 +13,7 @@ use Illuminate\Console\Command;
 
 class PluginMigrateCommand extends Command
 {
-    protected $signature = 'plugin:migrate {name}
+    protected $signature = 'plugin:migrate {name?}
         {--database=}
         {--force=}
         {--realpath=}
@@ -28,9 +28,24 @@ class PluginMigrateCommand extends Command
 
     public function handle()
     {
-        $plugin = new Plugin($this->argument('name'));
+        if ($pluginName = $this->argument('name')) {
+            $this->migrate($pluginName);
+        } else {
+            $plugin = new Plugin();
 
-        if (! $plugin->isValidPlugin()) {
+            collect($plugin->all())->map(function ($pluginName) {
+                $this->migrate($pluginName);
+            });
+        }
+
+        return 0;
+    }
+
+    public function migrate(string $pluginName)
+    {
+        $plugin = new Plugin($pluginName);
+
+        if (!$plugin->isValidPlugin()) {
             return 0;
         }
 
@@ -58,7 +73,5 @@ class PluginMigrateCommand extends Command
             $this->warn("Migrated {$plugin->getUnikey()} fail\n");
             $this->error($e->getMessage());
         }
-
-        return 0;
     }
 }

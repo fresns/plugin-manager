@@ -65,10 +65,14 @@ class PluginServiceProvider extends ServiceProvider
         $plugin = new Plugin();
 
         collect($plugin->all())->map(function ($pluginName) {
-            $plugin = new Plugin($pluginName);
+            try {
+                $plugin = new Plugin($pluginName);
 
-            $plugin->registerProviders();
-            $plugin->registerAliases();
+                $plugin->registerProviders();
+                $plugin->registerAliases();
+            } catch (\Throwable $e) {
+                info("Plugin namespace failed to load UniKey: {$pluginName}, reason: ".$e->getMessage());
+            }
         });
     }
 
