@@ -256,7 +256,7 @@ class Plugin
             // Verify that the program is loaded correctly by loading the program
             $plugin = new Plugin($pluginName);
 
-            $serviceProvider = sprintf("%s\\Providers\\%sServiceProvider",$plugin->getClassNamespace(), $pluginName);
+            $serviceProvider = sprintf('%s\\Providers\\%sServiceProvider', $plugin->getClassNamespace(), $pluginName);
 
             return class_exists($serviceProvider);
         } catch (\Throwable $e) {

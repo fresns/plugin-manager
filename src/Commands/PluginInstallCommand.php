@@ -45,7 +45,7 @@ class PluginInstallCommand extends Command
 
             $plugin = new Plugin($unikey);
             if (! $plugin->isValidPlugin()) {
-                $this->error("plugin is invalid, unikey: ". $unikey);
+                $this->error('plugin is invalid, unikey: '.$unikey);
 
                 return 0;
             }
