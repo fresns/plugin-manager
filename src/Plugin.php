@@ -255,7 +255,10 @@ class Plugin
         try {
             // Verify that the program is loaded correctly by loading the program
             $plugin = new Plugin($pluginName);
-            $plugin->registerProviders();
+
+            $serviceProvider = sprintf("%s\\Providers\\%sServiceProvider",$plugin->getClassNamespace(), $pluginName);
+
+            return class_exists($serviceProvider);
         } catch (\Throwable $e) {
             \info("{$pluginName} registration failed, not a valid plugin: ".$e->getMessage());
 

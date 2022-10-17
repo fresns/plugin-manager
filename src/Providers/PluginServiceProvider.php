@@ -68,8 +68,10 @@ class PluginServiceProvider extends ServiceProvider
             try {
                 $plugin = new Plugin($pluginName);
 
-                $plugin->registerProviders();
-                $plugin->registerAliases();
+                if ($plugin->isAvailablePlugin()) {
+                    $plugin->registerProviders();
+                    $plugin->registerAliases();
+                }
             } catch (\Throwable $e) {
                 info("Plugin namespace failed to load UniKey: {$pluginName}, reason: ".$e->getMessage());
             }
@@ -115,11 +117,10 @@ class PluginServiceProvider extends ServiceProvider
                 fwrite($fp, $content);
                 flock($fp, LOCK_UN);
             }
+            fclose($fp);
         } catch (\Throwable $e) {
             $message = str_replace(['file_put_contents('.base_path().'/', ')'], '', $e->getMessage());
             throw new \RuntimeException('cannot set merge-plugin to '.$message);
-        } finally {
-            fclose($fp);
         }
     }
 }

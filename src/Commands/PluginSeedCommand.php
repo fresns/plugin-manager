@@ -32,11 +32,13 @@ class PluginSeedCommand extends Command
         try {
             $class = $plugin->getSeederNamespace().$this->option('class');
 
-            $this->call('db:seed', [
-                'class' => $class,
-                '--database' => $this->option('database'),
-                '--force' => $this->option('force'),
-            ]);
+            if (class_exists($class)) {
+                $this->call('db:seed', [
+                    'class' => $class,
+                    '--database' => $this->option('database'),
+                    '--force' => $this->option('force'),
+                ]);
+            }
 
             $this->info("Seed: {$plugin->getUnikey()}");
         } catch (\Throwable $e) {

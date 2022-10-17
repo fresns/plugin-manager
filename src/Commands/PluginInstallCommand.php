@@ -34,7 +34,7 @@ class PluginInstallCommand extends Command
 
                 $unikey = Cache::pull('install:plugin_unikey');
             } else {
-                $unikey = dirname($path);
+                $unikey = basename($path);
             }
 
             if (! $unikey) {
@@ -45,7 +45,7 @@ class PluginInstallCommand extends Command
 
             $plugin = new Plugin($unikey);
             if (! $plugin->isValidPlugin()) {
-                $this->error('plugin is invalid');
+                $this->error("plugin is invalid, unikey: ". $unikey);
 
                 return 0;
             }
@@ -81,11 +81,13 @@ class PluginInstallCommand extends Command
 
             $this->call('plugin:migrate', [
                 'name' => $unikey,
+                '--force' => true,
             ]);
 
             if ($this->option('seed')) {
                 $this->call('plugin:seed', [
                     'name' => $unikey,
+                    '--force' => true,
                 ]);
             }
 
