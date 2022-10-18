@@ -104,6 +104,7 @@ class PluginServiceProvider extends ServiceProvider
 
         if (empty($defaultMergePlugin)) {
             info('Failed to get plugins.merge_plugin_config, please publish the plugins configuration file');
+
             return;
         }
 
