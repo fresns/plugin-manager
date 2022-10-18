@@ -255,6 +255,7 @@ class Plugin
         try {
             // Verify that the program is loaded correctly by loading the program
             $plugin = new Plugin($pluginName);
+            $plugin->manualAddNamespace();
 
             $serviceProvider = sprintf('%s\\Providers\\%sServiceProvider', $plugin->getClassNamespace(), $pluginName);
 

@@ -51,7 +51,7 @@ LOGO;
     {
         $commands = collect(Artisan::all())->mapWithKeys(function ($command, $key) {
             if (
-                Str::startsWith($key, 'fresns')
+                Str::endsWith($key, 'fresns')
                 || Str::startsWith($key, 'new')
                 || Str::startsWith($key, 'custom')
                 || Str::startsWith($key, 'make')
