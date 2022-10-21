@@ -31,7 +31,7 @@ class PluginInstallCommand extends Command
                 $exitCode = $this->call('plugin:unzip', [
                     'path' => $path,
                 ]);
-                
+
                 if ($exitCode != 0) {
                     return $exitCode;
                 }
@@ -120,6 +120,7 @@ class PluginInstallCommand extends Command
             $this->info("Installed: {$unikey}");
         } catch (\Throwable $e) {
             $this->error("Install fail: {$e->getMessage()}");
+
             return -1;
         }
 
