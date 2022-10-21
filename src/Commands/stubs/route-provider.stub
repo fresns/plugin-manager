@@ -2,7 +2,7 @@
 
 namespace $NAMESPACE$\Providers;
 
-use Fresns\PluginManager\Models\Plugin;
+use Fresns\MarketManager\Models\Plugin;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as BaseServiceProvider;
 
@@ -27,11 +27,15 @@ class RouteServiceProvider extends BaseServiceProvider
      */
     public function map()
     {
+        $host = null;
+
         try {
-            $pluginHost = Plugin::findByUnikey('Market')?->plugin_host;
-            $host = str_replace(['http://', 'https://'], '', rtrim($pluginHost, '/'));
+            if (class_exists(Plugin::class)) {
+                $pluginHost = Plugin::findByUnikey('Market')?->plugin_host;
+                $host = str_replace(['http://', 'https://'], '', rtrim($pluginHost, '/'));
+            }
         } catch (\Throwable $e) {
-            $host = null;
+            info("get plugin host failed: " . $e->getMessage());
         }
 
         Route::group([

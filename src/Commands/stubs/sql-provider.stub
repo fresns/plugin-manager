@@ -44,7 +44,7 @@ class SqlLogServiceProvider extends ServiceProvider
             return;
         }
 
-        $this->app['config']->set('logging.channels.sql', config('logging.channels.daily'));
+        $this->app['config']->set('logging.channels.sql', config('logging.channels.daily', 2));
         $this->app['config']->set('logging.channels.sql.path', storage_path('logs/sql.log'));
 
         DB::listen(function (QueryExecuted $query) {
