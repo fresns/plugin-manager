@@ -28,9 +28,13 @@ class PluginInstallCommand extends Command
         try {
             $path = $this->argument('path');
             if (! str_contains($path, config('plugins.paths.plugins'))) {
-                $this->call('plugin:unzip', [
+                $exitCode = $this->call('plugin:unzip', [
                     'path' => $path,
                 ]);
+                
+                if ($exitCode != 0) {
+                    return $exitCode;
+                }
 
                 $unikey = Cache::pull('install:plugin_unikey');
             } else {
@@ -40,14 +44,14 @@ class PluginInstallCommand extends Command
             if (! $unikey) {
                 info('Failed to unzip, couldn\'t get the plugin unikey');
 
-                return 0;
+                return -1;
             }
 
             $plugin = new Plugin($unikey);
             if (! $plugin->isValidPlugin()) {
                 $this->error('plugin is invalid, unikey: '.$unikey);
 
-                return 0;
+                return -1;
             }
 
             $plugin->manualAddNamespace();
@@ -56,9 +60,13 @@ class PluginInstallCommand extends Command
                 'unikey' => $unikey,
             ]]);
 
-            $this->call('plugin:publish', [
+            $exitCode = $this->call('plugin:publish', [
                 'name' => $unikey,
             ]);
+
+            if ($exitCode != 0) {
+                return $exitCode;
+            }
 
             $composerJson = Json::make($plugin->getComposerJsonPath())->get();
             $require = Arr::get($composerJson, 'require', []);
@@ -71,24 +79,36 @@ class PluginInstallCommand extends Command
                 if (! $process->isSuccessful()) {
                     $this->error('Failed to install packages, calc composer.json hash value fail');
 
-                    return 0;
+                    return -1;
                 }
             }
 
-            $this->call('plugin:deactivate', [
+            $exitCode = $this->call('plugin:deactivate', [
                 'name' => $unikey,
             ]);
 
-            $this->call('plugin:migrate', [
+            if ($exitCode != 0) {
+                return $exitCode;
+            }
+
+            $exitCode = $this->call('plugin:migrate', [
                 'name' => $unikey,
                 '--force' => true,
             ]);
 
+            if ($exitCode != 0) {
+                return $exitCode;
+            }
+
             if ($this->option('seed')) {
-                $this->call('plugin:seed', [
+                $exitCode = $this->call('plugin:seed', [
                     'name' => $unikey,
                     '--force' => true,
                 ]);
+
+                if ($exitCode != 0) {
+                    return $exitCode;
+                }
             }
 
             $plugin->install();
@@ -100,6 +120,7 @@ class PluginInstallCommand extends Command
             $this->info("Installed: {$unikey}");
         } catch (\Throwable $e) {
             $this->error("Install fail: {$e->getMessage()}");
+            return -1;
         }
 
         return 0;
