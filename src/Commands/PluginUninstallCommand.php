@@ -59,7 +59,12 @@ class PluginUninstallCommand extends Command
 
             // Triggers top-level computation of composer.json hash values and installation of extension packages
             if (count($require) || count($requireDev)) {
-                Process::run('composer update', $this->output);
+                $process = Process::run('composer update', $this->output);
+                if (! $process->isSuccessful()) {
+                    $this->error('Failed to uninstall packages, calc composer.json hash value fail');
+
+                    return -1;
+                }
             }
 
             $plugin->uninstall();
