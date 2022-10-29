@@ -34,7 +34,7 @@ class PluginInstallCommand extends Command
 
                 $unikey = Cache::pull('install:plugin_unikey');
             } else {
-                $unikey = dirname($path);
+                $unikey = basename($path);
             }
 
             if (! $unikey) {
