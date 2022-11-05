@@ -36,7 +36,7 @@ class PluginSeedCommand extends Command
                 $this->call('db:seed', [
                     'class' => $class,
                     '--database' => $this->option('database'),
-                    '--force' => $this->option('force'),
+                    '--force' => $this->option('force') ?? true,
                 ]);
             }
 

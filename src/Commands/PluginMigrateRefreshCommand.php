@@ -35,7 +35,7 @@ class PluginMigrateRefreshCommand extends Command
         try {
             $this->call('migrate:refresh', [
                 '--database' => $this->option('database'),
-                '--force' => $this->option('force') ?? false,
+                '--force' => $this->option('force') ?? true,
                 '--path' => $plugin->getMigratePath(),
                 '--realpath' => $this->option('realpath') ?? true,
                 '--step' => $this->option('step'),
@@ -45,7 +45,7 @@ class PluginMigrateRefreshCommand extends Command
                 $this->call('plugin:seed', [
                     '--class' => $this->option('seeder'),
                     '--database' => $this->option('database'),
-                    '--force' => $this->option('force'),
+                    '--force' => $this->option('force') ?? true,
                 ]);
             }
 

@@ -36,7 +36,7 @@ class PluginMigrateRollbackCommand extends Command
             if (glob("$path/*")) {
                 $this->call('migrate:rollback', [
                     '--database' => $this->option('database'),
-                    '--force' => $this->option('force') ?? false,
+                    '--force' => $this->option('force') ?? true,
                     '--path' => $plugin->getMigratePath(),
                     '--realpath' => $this->option('realpath') ?? true,
                     '--step' => $this->option('step'),

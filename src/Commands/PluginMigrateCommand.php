@@ -52,7 +52,7 @@ class PluginMigrateCommand extends Command
         try {
             $this->call('migrate', [
                 '--database' => $this->option('database'),
-                '--force' => $this->option('force') ?? false,
+                '--force' => $this->option('force') ?? true,
                 '--path' => $plugin->getMigratePath(),
                 '--realpath' => $this->option('realpath') ?? true,
                 '--schema-path' => $this->option('schema-path'),
@@ -64,7 +64,7 @@ class PluginMigrateCommand extends Command
                 $this->call('plugin:seed', [
                     '--class' => $this->option('seeder'),
                     '--database' => $this->option('database'),
-                    '--force' => $this->option('force') ?? false,
+                    '--force' => $this->option('force') ?? true,
                 ]);
             }
 

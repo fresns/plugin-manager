@@ -33,7 +33,7 @@ class PluginMigrateResetCommand extends Command
         try {
             $this->call('migrate:reset', [
                 '--database' => $this->option('database'),
-                '--force' => $this->option('force') ?? false,
+                '--force' => $this->option('force') ?? true,
                 '--path' => $plugin->getMigratePath(),
                 '--realpath' => $this->option('realpath') ?? true,
                 '--pretend' => $this->option('pretend') ?? false,
