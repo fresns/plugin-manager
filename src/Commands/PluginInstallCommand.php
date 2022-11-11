@@ -27,7 +27,8 @@ class PluginInstallCommand extends Command
     {
         try {
             $path = $this->argument('path');
-            if (! str_contains($path, config('plugins.paths.plugins'))) {
+            $extensionPath = str_replace(base_path().'/', '', config('plugins.paths.plugins'));
+            if (! str_contains($path, $extensionPath)) {
                 $this->call('plugin:unzip', [
                     'path' => $path,
                 ]);
