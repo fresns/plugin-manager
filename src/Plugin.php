@@ -279,6 +279,19 @@ class Plugin
         return array_diff($this->all(), $this->allActivate());
     }
 
+    public function registerFiles()
+    {
+        $path = $this->getPluginPath();
+
+        $files = Json::make($this->getPluginJsonPath())->get('autoloadFiles', []);
+        foreach ($files as $file) {
+            $filepath = "$path/$file";
+            if (file_exists($filepath)) {
+                include_once $filepath;
+            }
+        }
+    }
+
     public function registerProviders()
     {
         $providers = Json::make($this->getPluginJsonPath())->get('providers', []);

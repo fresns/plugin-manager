@@ -69,6 +69,7 @@ class PluginServiceProvider extends ServiceProvider
                 $plugin = new Plugin($pluginName);
 
                 if ($plugin->isAvailablePlugin() && $plugin->isActivate()) {
+                    $plugin->registerFiles();
                     $plugin->registerProviders();
                     $plugin->registerAliases();
                 }

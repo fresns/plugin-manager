@@ -12,5 +12,6 @@
     "providers": [
         "$PLUGIN_NAMESPACE$\\$STUDLY_NAME$\\Providers\\$STUDLY_NAME$ServiceProvider"
     ],
+    "autoloadFiles": [],
     "aliases": {}
 }
