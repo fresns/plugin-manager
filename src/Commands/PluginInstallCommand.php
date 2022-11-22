@@ -29,9 +29,13 @@ class PluginInstallCommand extends Command
             $path = $this->argument('path');
             $extensionPath = str_replace(base_path().'/', '', config('plugins.paths.plugins'));
             if (! str_contains($path, $extensionPath)) {
-                $this->call('plugin:unzip', [
+                $exitCode = $this->call('plugin:unzip', [
                     'path' => $path,
                 ]);
+
+                if ($exitCode != 0) {
+                    return $exitCode;
+                }
 
                 $unikey = Cache::pull('install:plugin_unikey');
             } else {
@@ -41,14 +45,14 @@ class PluginInstallCommand extends Command
             if (! $unikey) {
                 info('Failed to unzip, couldn\'t get the plugin unikey');
 
-                return 0;
+                return -1;
             }
 
             $plugin = new Plugin($unikey);
             if (! $plugin->isValidPlugin()) {
                 $this->error('plugin is invalid');
 
-                return 0;
+                return -1;
             }
 
             $plugin->manualAddNamespace();
