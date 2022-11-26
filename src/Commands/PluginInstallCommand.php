@@ -10,7 +10,6 @@ namespace Fresns\PluginManager\Commands;
 
 use Fresns\PluginManager\Plugin;
 use Fresns\PluginManager\Support\Json;
-use Fresns\PluginManager\Support\Process;
 use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
@@ -45,14 +44,14 @@ class PluginInstallCommand extends Command
             if (! $unikey) {
                 info('Failed to unzip, couldn\'t get the plugin unikey');
 
-                return -1;
+                return Command::FAILURE;
             }
 
             $plugin = new Plugin($unikey);
             if (! $plugin->isValidPlugin()) {
                 $this->error('plugin is invalid');
 
-                return -1;
+                return Command::FAILURE;
             }
 
             $plugin->manualAddNamespace();
@@ -68,11 +67,11 @@ class PluginInstallCommand extends Command
             // Triggers top-level computation of composer.json hash values and installation of extension packages
             // @see https://getcomposer.org/doc/03-cli.md#process-exit-codes
             if (count($require) || count($requireDev)) {
-                $process = Process::run('composer update', $this->output);
-                if (! $process->isSuccessful()) {
-                    $this->error('Failed to install packages, calc composer.json hash value fail');
+                $exitCode = $this->call('plugin:composer-update');
+                if ($exitCode) {
+                    $this->error("Failed to update plugin dependency");
 
-                    return -1;
+                    return Command::FAILURE;
                 }
             }
 

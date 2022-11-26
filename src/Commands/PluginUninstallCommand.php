@@ -10,7 +10,6 @@ namespace Fresns\PluginManager\Commands;
 
 use Fresns\PluginManager\Plugin;
 use Fresns\PluginManager\Support\Json;
-use Fresns\PluginManager\Support\Process;
 use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
@@ -59,11 +58,11 @@ class PluginUninstallCommand extends Command
 
             // Triggers top-level computation of composer.json hash values and installation of extension packages
             if (count($require) || count($requireDev)) {
-                $process = Process::run('composer update', $this->output);
-                if (! $process->isSuccessful()) {
-                    $this->error('Failed to uninstall packages, calc composer.json hash value fail');
+                $exitCode = $this->call('plugin:composer-update');
+                if ($exitCode) {
+                    $this->error("Failed to update plugin dependency");
 
-                    return -1;
+                    return Command::FAILURE;
                 }
             }
 
