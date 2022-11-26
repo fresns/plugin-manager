@@ -8,8 +8,8 @@
 
 namespace Fresns\PluginManager\Commands;
 
-use Illuminate\Console\Command;
 use Fresns\PluginManager\Support\Process;
+use Illuminate\Console\Command;
 
 class PluginComposerUpdateCommand extends Command
 {
@@ -20,7 +20,7 @@ class PluginComposerUpdateCommand extends Command
     public function handle()
     {
         $process = Process::run('composer update', $this->output);
-        if (!$process->isSuccessful()) {
+        if (! $process->isSuccessful()) {
             $this->error('Failed to install packages, calc composer.json hash value fail');
 
             return Command::FAILURE;
