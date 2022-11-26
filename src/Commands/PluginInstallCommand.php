@@ -69,7 +69,7 @@ class PluginInstallCommand extends Command
             if (count($require) || count($requireDev)) {
                 $exitCode = $this->call('plugin:composer-update');
                 if ($exitCode) {
-                    $this->error("Failed to update plugin dependency");
+                    $this->error('Failed to update plugin dependency');
 
                     return Command::FAILURE;
                 }
