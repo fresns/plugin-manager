@@ -61,7 +61,7 @@ class SeedCommand extends Command
     public function handle()
     {
         if (! $this->confirmToProceed()) {
-            return 1;
+            return Command::FAILURE;
         }
 
         $previousConnection = $this->resolver->getDefaultConnection();
