@@ -104,6 +104,6 @@ class PluginInstallCommand extends Command
             $this->error("Install fail: {$e->getMessage()}");
         }
 
-        return 0;
+        return Command::SUCCESS;
     }
 }

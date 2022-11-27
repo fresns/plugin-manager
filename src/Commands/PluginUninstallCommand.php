@@ -77,6 +77,6 @@ class PluginUninstallCommand extends Command
             $this->error("Uninstall fail: {$e->getMessage()}");
         }
 
-        return 0;
+        return Command::SUCCESS;
     }
 }

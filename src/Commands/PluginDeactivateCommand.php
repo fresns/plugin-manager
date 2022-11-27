@@ -29,7 +29,7 @@ class PluginDeactivateCommand extends Command
 
         $this->info('Plugin deactivate successfully');
 
-        return 0;
+        return Command::SUCCESS;
     }
 
     public function deactivateAll()

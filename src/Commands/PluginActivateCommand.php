@@ -29,7 +29,7 @@ class PluginActivateCommand extends Command
 
         $this->info('Plugin activate successfully');
 
-        return 0;
+        return Command::SUCCESS;
     }
 
     public function activateAll()

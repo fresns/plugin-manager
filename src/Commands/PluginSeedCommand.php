@@ -26,7 +26,7 @@ class PluginSeedCommand extends Command
         $plugin = new Plugin($this->argument('name'));
 
         if (! $plugin->isValidPlugin()) {
-            return 0;
+            return Command::SUCCESS;
         }
 
         try {
@@ -46,6 +46,6 @@ class PluginSeedCommand extends Command
             $this->error($e->getMessage());
         }
 
-        return 0;
+        return Command::SUCCESS;
     }
 }

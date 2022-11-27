@@ -29,7 +29,7 @@ class PluginMigrateRefreshCommand extends Command
         $plugin = new Plugin($this->argument('name'));
 
         if (! $plugin->isValidPlugin()) {
-            return 0;
+            return Command::SUCCESS;
         }
 
         try {
@@ -55,6 +55,6 @@ class PluginMigrateRefreshCommand extends Command
             $this->error($e->getMessage());
         }
 
-        return 0;
+        return Command::SUCCESS;
     }
 }

@@ -78,7 +78,7 @@ class SeedCommand extends Command
 
         $this->info('Database seeding completed successfully.');
 
-        return 0;
+        return Command::SUCCESS;
     }
 
     /**

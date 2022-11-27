@@ -38,7 +38,7 @@ class PluginMigrateCommand extends Command
             });
         }
 
-        return 0;
+        return Command::SUCCESS;
     }
 
     public function migrate(string $pluginName)
@@ -46,7 +46,7 @@ class PluginMigrateCommand extends Command
         $plugin = new Plugin($pluginName);
 
         if (! $plugin->isValidPlugin()) {
-            return 0;
+            return Command::SUCCESS;
         }
 
         try {

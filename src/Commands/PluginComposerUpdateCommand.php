@@ -26,6 +26,6 @@ class PluginComposerUpdateCommand extends Command
             return Command::FAILURE;
         }
 
-        return 0;
+        return Command::SUCCESS;
     }
 }

@@ -23,7 +23,7 @@ class PluginPublishCommand extends Command
         $plugin = new Plugin($this->argument('name'));
 
         if (! $plugin->isValidPlugin()) {
-            return 0;
+            return Command::SUCCESS;
         }
 
         File::cleanDirectory($plugin->getAssetsPath());
@@ -31,6 +31,6 @@ class PluginPublishCommand extends Command
 
         $this->info("Published: {$plugin->getUnikey()}");
 
-        return 0;
+        return Command::SUCCESS;
     }
 }

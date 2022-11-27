@@ -31,7 +31,7 @@ class PluginUnzipCommand extends Command
             \info($message = 'Plugin file does not exist: '.$pluginJsonPath);
             $this->error('install plugin error '.$message);
 
-            return 0;
+            return Command::SUCCESS;
         }
 
         $plugin = Json::make($pluginJsonPath);
@@ -41,7 +41,7 @@ class PluginUnzipCommand extends Command
             \info('Failed to get plugin unikey: '.var_export($pluginUnikey, true));
             $this->error('install plugin error, plugin.json is invalid plugin json');
 
-            return 0;
+            return Command::SUCCESS;
         }
 
         $pluginDir = sprintf('%s/%s',
@@ -58,7 +58,7 @@ class PluginUnzipCommand extends Command
 
         Cache::put('install:plugin_unikey', $pluginUnikey, now()->addMinutes(5));
 
-        return 0;
+        return Command::SUCCESS;
     }
 
     public function backup(string $pluginDir, string $pluginUnikey)

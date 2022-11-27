@@ -58,7 +58,7 @@ class NewCommand extends Command
             if (! $this->option('force')) {
                 $this->error("Plugin {$this->plugin->getUnikey()} exists");
 
-                return 0;
+                return Command::SUCCESS;
             }
 
             File::deleteDirectory($this->plugin->getPluginPath());

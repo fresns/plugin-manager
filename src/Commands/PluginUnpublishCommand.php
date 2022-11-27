@@ -23,13 +23,13 @@ class PluginUnpublishCommand extends Command
         $plugin = new Plugin($this->argument('name'));
 
         if (! $plugin->isValidPlugin()) {
-            return 0;
+            return Command::SUCCESS;
         }
 
         File::deleteDirectory($plugin->getAssetsPath());
 
         $this->info("Unpublished: {$plugin->getUnikey()}");
 
-        return 0;
+        return Command::SUCCESS;
     }
 }

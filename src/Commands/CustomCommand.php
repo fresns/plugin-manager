@@ -23,7 +23,7 @@ class CustomCommand extends Command
         if (file_exists($to)) {
             $this->error('config/plugins.php is already existed');
 
-            return 0;
+            return Command::SUCCESS;
         }
 
         $from = dirname(__DIR__, 2).'/config/plugins.php';
@@ -32,6 +32,6 @@ class CustomCommand extends Command
 
         $this->line('<info>Config file copied to </info> <comment>['.$to.']</comment>');
 
-        return 0;
+        return Command::SUCCESS;
     }
 }

@@ -47,7 +47,7 @@ class PluginListCommand extends Command
             'Assets Path',
         ], $rows);
 
-        return 0;
+        return Command::SUCCESS;
     }
 
     public function replaceDir(?string $path)
