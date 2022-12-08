@@ -10,7 +10,8 @@
     "accessPath": "",
     "settingPath": null,
     "providers": [
-        "$PLUGIN_NAMESPACE$\\$STUDLY_NAME$\\Providers\\$STUDLY_NAME$ServiceProvider"
+        "$PLUGIN_NAMESPACE$\\$STUDLY_NAME$\\Providers\\$STUDLY_NAME$ServiceProvider",
+        "$PLUGIN_NAMESPACE$\\$STUDLY_NAME$\\Providers\\ExceptionServiceProvider"
     ],
     "autoloadFiles": [],
     "aliases": {}

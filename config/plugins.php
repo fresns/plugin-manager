@@ -106,6 +106,7 @@ return [
             'seeder'                => 'database/seeders/DatabaseSeeder.php',
             'route-provider'        => 'app/Providers/RouteServiceProvider.php',
             'command-provider'      => 'app/Providers/CommandServiceProvider.php',
+            'exception-provider'    => 'app/Providers/ExceptionServiceProvider.php',
             'assets/js/app'         => 'resources/assets/js/app.js',
             'assets/sass/app'       => 'resources/assets/sass/app.scss',
             'webpack'               => 'webpack.mix.js',

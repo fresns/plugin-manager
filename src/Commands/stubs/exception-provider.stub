@@ -1,0 +1,50 @@
+<?php
+
+namespace $NAMESPACE$;
+
+use App\Exceptions\Handler;
+use Illuminate\Support\Str;
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Console\Scheduling\Schedule;
+
+class ExceptionServiceProvider extends ServiceProvider
+{
+    /**
+     * Register any services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        $this->app->resolving(Handler::class, function ($handler) {
+            $handler->reportable([$this, 'reportable']);
+            $handler->renderable([$this, 'renderable']);
+        });
+    }
+
+    /**
+     * Register a reportable callback.
+     *
+     * @param  callable  $reportUsing
+     * @return \Illuminate\Foundation\Exceptions\ReportableHandler
+     */
+    public function reportable()
+    {
+        return function (Throwable $e) {
+            //
+        };
+    }
+
+    /**
+     * Register a renderable callback.
+     *
+     * @param  callable  $renderUsing
+     * @return $this
+     */
+    public function reportable()
+    {
+        return function (\Throwable $e) {
+            //
+        };
+    }
+}
