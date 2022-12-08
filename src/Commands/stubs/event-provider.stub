@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * Fresns (https://fresns.org)
+ * Copyright (C) 2021-Present Jarvis Tang
+ * Released under the Apache-2.0 License.
+ */
+
 namespace $NAMESPACE$;
 
 use Illuminate\Auth\Events\Registered;
@@ -19,10 +25,10 @@ class $CLASS$ extends ServiceProvider
         //     SendEmailVerificationNotification::class,
         // ],
         "plugins.clean_data" => [
-            // When the user uninstalls, if the data needs to be deleted, the listener is configured here. 
+            // When the user uninstalls, if the data needs to be deleted, the listener is configured here.
         ],
     ];
-    
+
     /**
      * The subscribers to register.
      *
