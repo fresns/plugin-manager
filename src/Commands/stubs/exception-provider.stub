@@ -47,7 +47,7 @@ class ExceptionServiceProvider extends ServiceProvider
      * @param  callable  $renderUsing
      * @return $this
      */
-    public function reportable()
+    public function renderable()
     {
         return function (\Throwable $e) {
             //
