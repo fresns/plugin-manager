@@ -74,8 +74,8 @@ class PluginServiceProvider extends ServiceProvider
                     $plugin->registerAliases();
                 }
             } catch (\Throwable $e) {
-                info($message = sprintf("Plugin namespace failed to load UniKey: %s, reason: %s, file: %s, line: %s", 
-                    $pluginName, 
+                info($message = sprintf('Plugin namespace failed to load UniKey: %s, reason: %s, file: %s, line: %s',
+                    $pluginName,
                     $e->getMessage(),
                     str_replace(base_path().'/', '', $e->getFile()),
                     $e->getLine(),
@@ -101,7 +101,7 @@ class PluginServiceProvider extends ServiceProvider
     {
         $composerPath = base_path('composer.json');
         $composer = Json::make($composerPath)->get();
-        if (!$composer) {
+        if (! $composer) {
             info('Failed to get base_path("composer.json") content');
 
             return;
