@@ -285,8 +285,12 @@ class Plugin
 
         $files = Json::make($this->getPluginJsonPath())->get('autoloadFiles', []);
         foreach ($files as $file) {
+            if (!is_string($file)) {
+                continue;
+            }
+
             $filepath = "$path/$file";
-            if (file_exists($filepath)) {
+            if (is_file($filepath)) {
                 include_once $filepath;
             }
         }
