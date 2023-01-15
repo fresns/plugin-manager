@@ -30,6 +30,7 @@ class PluginUnzipCommand extends Command
         if (! file_exists($tmpDirPath)) {
             \info($message = 'Plugin file does not exist: '.$pluginJsonPath);
             $this->error('install plugin error '.$message);
+
             return Command::FAILURE;
         }
 
@@ -39,6 +40,7 @@ class PluginUnzipCommand extends Command
         if (! $pluginUnikey) {
             \info('Failed to get plugin unikey: '.var_export($pluginUnikey, true));
             $this->error('install plugin error, plugin.json is invalid plugin json');
+
             return Command::FAILURE;
         }
 

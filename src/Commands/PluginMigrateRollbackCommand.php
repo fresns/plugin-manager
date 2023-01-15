@@ -43,7 +43,7 @@ class PluginMigrateRollbackCommand extends Command
                 ]);
 
                 $this->info("Migrate Rollback: {$plugin->getUnikey()}");
-                $this->info("Migrate Rollback Path: " . str_replace(base_path().'/', '', $path));
+                $this->info('Migrate Rollback Path: '.str_replace(base_path().'/', '', $path));
 
                 if ($exitCode != 0) {
                     return $exitCode;
@@ -54,6 +54,7 @@ class PluginMigrateRollbackCommand extends Command
         } catch (\Throwable $e) {
             $this->warn("Migrate Rollback {$plugin->getUnikey()} fail\n");
             $this->error($e->getMessage());
+
             return Command::FAILURE;
         }
 
