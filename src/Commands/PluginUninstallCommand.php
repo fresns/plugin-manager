@@ -75,6 +75,7 @@ class PluginUninstallCommand extends Command
             $this->info("Uninstalled: {$unikey}");
         } catch (\Throwable $e) {
             $this->error("Uninstall fail: {$e->getMessage()}");
+            return Command::FAILURE;
         }
 
         return Command::SUCCESS;

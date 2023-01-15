@@ -24,6 +24,8 @@ class FresnsCommand extends Command
         if (method_exists($this, $action)) {
             $this->{$action}($vendorBinPath);
         }
+
+        return Command::SUCCESS;
     }
 
     public function activate(string $vendorBinPath)

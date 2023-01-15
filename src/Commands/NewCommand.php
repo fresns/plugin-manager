@@ -58,7 +58,7 @@ class NewCommand extends Command
             if (! $this->option('force')) {
                 $this->error("Plugin {$this->plugin->getUnikey()} exists");
 
-                return Command::SUCCESS;
+                return Command::FAILURE;
             }
 
             File::deleteDirectory($this->plugin->getPluginPath());
@@ -71,6 +71,8 @@ class NewCommand extends Command
         Process::run('composer dump-autoload', $this->output);
 
         $this->info("Package [{$this->pluginName}] created successfully");
+
+        return Command::SUCCESS;
     }
 
     /**

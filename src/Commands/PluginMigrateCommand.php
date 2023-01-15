@@ -29,7 +29,7 @@ class PluginMigrateCommand extends Command
     public function handle()
     {
         if ($pluginName = $this->argument('name')) {
-            $this->migrate($pluginName);
+            return $this->migrate($pluginName);
         } else {
             $plugin = new Plugin();
 
@@ -46,7 +46,7 @@ class PluginMigrateCommand extends Command
         $plugin = new Plugin($pluginName);
 
         if (! $plugin->isValidPlugin()) {
-            return Command::SUCCESS;
+            return Command::FAILURE;
         }
 
         try {

@@ -23,7 +23,7 @@ class PluginPublishCommand extends Command
         $plugin = new Plugin($this->argument('name'));
 
         if (! $plugin->isValidPlugin()) {
-            return Command::SUCCESS;
+            return Command::FAILURE;
         }
 
         File::cleanDirectory($plugin->getAssetsPath());

@@ -102,6 +102,8 @@ class PluginInstallCommand extends Command
             $this->info("Installed: {$unikey}");
         } catch (\Throwable $e) {
             $this->error("Install fail: {$e->getMessage()}");
+
+            return Command::FAILURE;
         }
 
         return Command::SUCCESS;

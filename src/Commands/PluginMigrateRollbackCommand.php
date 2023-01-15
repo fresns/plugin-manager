@@ -28,28 +28,33 @@ class PluginMigrateRollbackCommand extends Command
         $plugin = new Plugin($this->argument('name'));
 
         if (! $plugin->isValidPlugin()) {
-            return Command::SUCCESS;
+            return Command::FAILURE;
         }
 
         try {
             $path = $plugin->getMigratePath();
             if (glob("$path/*")) {
-                $this->call('migrate:rollback', [
+                $exitCode = $this->call('migrate:reset', [
                     '--database' => $this->option('database'),
                     '--force' => $this->option('force') ?? true,
                     '--path' => $plugin->getMigratePath(),
                     '--realpath' => $this->option('realpath') ?? true,
-                    '--step' => $this->option('step'),
                     '--pretend' => $this->option('pretend') ?? false,
                 ]);
 
                 $this->info("Migrate Rollback: {$plugin->getUnikey()}");
+                $this->info("Migrate Rollback Path: " . str_replace(base_path().'/', '', $path));
+
+                if ($exitCode != 0) {
+                    return $exitCode;
+                }
             } else {
                 $this->info('Migrate Rollback: Nothing need to rollback');
             }
         } catch (\Throwable $e) {
             $this->warn("Migrate Rollback {$plugin->getUnikey()} fail\n");
             $this->error($e->getMessage());
+            return Command::FAILURE;
         }
 
         return Command::SUCCESS;

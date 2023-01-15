@@ -23,7 +23,7 @@ class CustomCommand extends Command
         if (file_exists($to)) {
             $this->error('config/plugins.php is already existed');
 
-            return Command::SUCCESS;
+            return Command::FAILURE;
         }
 
         $from = dirname(__DIR__, 2).'/config/plugins.php';

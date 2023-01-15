@@ -20,7 +20,7 @@ class PluginMakeCommand extends Command
 
     public function handle()
     {
-        $this->call('new', [
+        return $this->call('new', [
             'name' => $this->argument('name'),
             '--force' => $this->option('force'),
         ]);

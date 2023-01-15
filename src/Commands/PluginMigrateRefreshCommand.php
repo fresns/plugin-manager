@@ -29,7 +29,7 @@ class PluginMigrateRefreshCommand extends Command
         $plugin = new Plugin($this->argument('name'));
 
         if (! $plugin->isValidPlugin()) {
-            return Command::SUCCESS;
+            return Command::FAILURE;
         }
 
         try {
