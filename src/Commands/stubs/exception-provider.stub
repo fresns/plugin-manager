@@ -6,12 +6,10 @@
  * Released under the Apache-2.0 License.
  */
 
-namespace $NAMESPACE$;
+namespace $NAMESPACE$\Providers;
 
-use App\Exceptions\Handler;
-use Illuminate\Support\Str;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Console\Scheduling\Schedule;
+use Illuminate\Contracts\Debug\ExceptionHandler;
 
 class ExceptionServiceProvider extends ServiceProvider
 {
@@ -22,10 +20,15 @@ class ExceptionServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->app->resolving(Handler::class, function ($handler) {
-            $handler->reportable([$this, 'reportable']);
-            $handler->renderable([$this, 'renderable']);
-        });
+        $handler = resolve(ExceptionHandler::class);
+
+        if (method_exists($handler, 'reportable')) {
+            $handler->reportable($this->reportable());
+        }
+
+        if (method_exists($handler, 'renderable')) {
+            $handler->renderable($this->renderable());
+        }
     }
 
     /**
@@ -36,7 +39,7 @@ class ExceptionServiceProvider extends ServiceProvider
      */
     public function reportable()
     {
-        return function (Throwable $e) {
+        return function (\Throwable $e) {
             //
         };
     }
