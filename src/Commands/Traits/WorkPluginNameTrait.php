@@ -13,7 +13,7 @@ trait WorkPluginNameTrait
     public function getPluginName()
     {
         $pluginName = $this->argument('name');
-        if (!$pluginName) {
+        if (! $pluginName) {
             $pluginName = basename(getcwd());
         }
 
