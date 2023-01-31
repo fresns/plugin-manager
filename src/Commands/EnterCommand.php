@@ -19,20 +19,22 @@ class EnterCommand extends Command
     public function handle()
     {
         $pluginRootPath = config('plugins.paths.plugins');
-        if (!$pluginRootPath) {
+        if (! $pluginRootPath) {
             $this->error('Plugin directory not retrieved');
+
             return Command::FAILURE;
         }
 
         $unikey = $this->argument('unikey');
 
         $pluginPath = "{$pluginRootPath}/{$unikey}";
-        if (!file_exists($pluginPath)) {
+        if (! file_exists($pluginPath)) {
             $this->error("Plugin directory {$unikey} does not exist");
+
             return Command::FAILURE;
         }
 
-        if (getenv("PWD") != $pluginPath) {
+        if (getenv('PWD') != $pluginPath) {
             $this->warn("Go to the plugin {$unikey} directory");
             $this->line('');
             $this->warn('Please input this command on your terminal:');

@@ -19,8 +19,8 @@ class BackCommand extends Command
     public function handle()
     {
         $basePath = base_path();
-        if (getenv("PWD") != base_path()) {
-            $this->warn("Back to the root directory");
+        if (getenv('PWD') != base_path()) {
+            $this->warn('Back to the root directory');
             $this->line('');
             $this->warn('Please input this command on your terminal:');
 
@@ -28,11 +28,11 @@ class BackCommand extends Command
             $this->line($command);
             $this->line('');
         } else {
-            $this->info("Currently in the root directory");
+            $this->info('Currently in the root directory');
             $this->line($basePath);
 
             $this->line('');
-            $this->info("Now you can run command:");
+            $this->info('Now you can run command:');
             $this->line('fresns or php artisan');
         }
 
