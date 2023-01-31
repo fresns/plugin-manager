@@ -13,13 +13,17 @@ use Illuminate\Console\Command;
 
 class PluginDeactivateCommand extends Command
 {
+    use Traits\WorkPluginNameTrait;
+
     protected $signature = 'plugin:deactivate {name?}';
 
     protected $description = 'Deactivate plugin';
 
     public function handle()
     {
-        if ($pluginName = $this->argument('name')) {
+        $pluginName = $this->getPluginName();
+
+        if ($pluginName) {
             $this->deactivate($pluginName);
         }
         // Deactivate all plugins

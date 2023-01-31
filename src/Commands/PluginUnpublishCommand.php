@@ -14,13 +14,15 @@ use Illuminate\Support\Facades\File;
 
 class PluginUnpublishCommand extends Command
 {
-    protected $signature = 'plugin:unpublish {name}';
+    use Traits\WorkPluginNameTrait;
+
+    protected $signature = 'plugin:unpublish {name?}';
 
     protected $description = 'Distribute static resources of the plugin';
 
     public function handle()
     {
-        $plugin = new Plugin($this->argument('name'));
+        $plugin = new Plugin($this->getPluginName());
 
         if (! $plugin->isValidPlugin()) {
             return Command::FAILURE;

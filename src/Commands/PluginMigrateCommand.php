@@ -13,6 +13,8 @@ use Illuminate\Console\Command;
 
 class PluginMigrateCommand extends Command
 {
+    use Traits\WorkPluginNameTrait;
+
     protected $signature = 'plugin:migrate {name?}
         {--database=}
         {--force=}
@@ -28,7 +30,9 @@ class PluginMigrateCommand extends Command
 
     public function handle()
     {
-        if ($pluginName = $this->argument('name')) {
+        $pluginName = $this->getPluginName();
+
+        if ($pluginName) {
             return $this->migrate($pluginName);
         } else {
             $plugin = new Plugin();

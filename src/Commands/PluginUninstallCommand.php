@@ -16,7 +16,9 @@ use Illuminate\Support\Facades\File;
 
 class PluginUninstallCommand extends Command
 {
-    protected $signature = 'plugin:uninstall {name}
+    use Traits\WorkPluginNameTrait;
+
+    protected $signature = 'plugin:uninstall {name?}
         {--cleardata : Trigger clear plugin data}';
 
     protected $description = 'Install the plugin from the specified path';
@@ -24,8 +26,7 @@ class PluginUninstallCommand extends Command
     public function handle()
     {
         try {
-            $unikey = $this->argument('name');
-            $plugin = new Plugin($unikey);
+            $plugin = new Plugin($this->getPluginName());
 
             $composerJson = Json::make($plugin->getComposerJsonPath())->get();
             $require = Arr::get($composerJson, 'require', []);

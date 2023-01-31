@@ -13,7 +13,9 @@ use Illuminate\Console\Command;
 
 class PluginMigrateResetCommand extends Command
 {
-    protected $signature = 'plugin:migrate-reset {name}
+    use Traits\WorkPluginNameTrait;
+
+    protected $signature = 'plugin:migrate-reset {name?}
         {--database=}
         {--force=}
         {--realpath=}
@@ -24,7 +26,7 @@ class PluginMigrateResetCommand extends Command
 
     public function handle()
     {
-        $plugin = new Plugin($this->argument('name'));
+        $plugin = new Plugin($this->getPluginName());
 
         if (! $plugin->isValidPlugin()) {
             return Command::FAILURE;

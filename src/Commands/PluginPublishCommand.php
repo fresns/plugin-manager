@@ -14,13 +14,15 @@ use Illuminate\Support\Facades\File;
 
 class PluginPublishCommand extends Command
 {
-    protected $signature = 'plugin:publish {name}';
+    use Traits\WorkPluginNameTrait;
+
+    protected $signature = 'plugin:publish {name?}';
 
     protected $description = 'Distribute static resources of the plugin';
 
     public function handle()
     {
-        $plugin = new Plugin($this->argument('name'));
+        $plugin = new Plugin($this->getPluginName());
 
         if (! $plugin->isValidPlugin()) {
             return Command::FAILURE;

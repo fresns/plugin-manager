@@ -13,13 +13,17 @@ use Illuminate\Console\Command;
 
 class PluginActivateCommand extends Command
 {
+    use Traits\WorkPluginNameTrait;
+
     protected $signature = 'plugin:activate {name?}';
 
     protected $description = 'Activate Plugin';
 
     public function handle()
     {
-        if ($pluginName = $this->argument('name')) {
+        $pluginName = $this->getPluginName();
+
+        if ($pluginName) {
             $this->activate($pluginName);
         }
         // Activate all plugins
