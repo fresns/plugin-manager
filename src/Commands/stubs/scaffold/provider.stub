@@ -37,9 +37,9 @@ class $STUDLY_NAME$ServiceProvider extends BaseServiceProvider
      */
     public function register()
     {
-        if ($this->app->runningInConsole()) {
+        // if ($this->app->runningInConsole()) {
             $this->app->register(CommandServiceProvider::class);
-        }
+        // }
     }
 
     /**

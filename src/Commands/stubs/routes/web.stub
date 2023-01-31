@@ -23,3 +23,8 @@ use $PLUGIN_NAMESPACE$\$STUDLY_NAME$\Http\Controllers as WebController;
 // Route::prefix('$KEBAB_NAME$')->group(function() {
 //     Route::get('/', [WebController\$STUDLY_NAME$Controller::class, 'index']);
 // });
+
+// without VerifyCsrfToken
+// Route::prefix('$KEBAB_NAME$')->group(function() {
+//     Route::get('/', [WebController\$STUDLY_NAME$Controller::class, 'index']);
+// })->withoutMiddleware(\App\Http\Middleware\VerifyCsrfToken::class);
