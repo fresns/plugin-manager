@@ -8,7 +8,7 @@
     "version": "1.0.0",
     "scene": [],
     "accessPath": "",
-    "settingPath": null,
+    "settingsPath": null,
     "providers": [
         "$PLUGIN_NAMESPACE$\\$STUDLY_NAME$\\Providers\\$STUDLY_NAME$ServiceProvider",
         "$PLUGIN_NAMESPACE$\\$STUDLY_NAME$\\Providers\\ExceptionServiceProvider"
