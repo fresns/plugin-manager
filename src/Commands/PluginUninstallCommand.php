@@ -26,32 +26,33 @@ class PluginUninstallCommand extends Command
     public function handle()
     {
         try {
-            $plugin = new Plugin($this->getPluginName());
+            $pluginName = $this->getPluginName();
+            $plugin = new Plugin();
 
             $composerJson = Json::make($plugin->getComposerJsonPath())->get();
             $require = Arr::get($composerJson, 'require', []);
             $requireDev = Arr::get($composerJson, 'require-dev', []);
 
             event('plugin:uninstalling', [[
-                'unikey' => $unikey,
+                'unikey' => $pluginName,
             ]]);
 
             $this->call('plugin:deactivate', [
-                'name' => $unikey,
+                'name' => $pluginName,
             ]);
 
             if ($this->option('cleardata')) {
                 event('plugins.cleandata', [[
-                    'unikey' => $unikey,
+                    'unikey' => $pluginName,
                 ]]);
 
                 $this->call('plugin:migrate-rollback', [
-                    'name' => $unikey,
+                    'name' => $pluginName,
                 ]);
             }
 
             $this->call('plugin:unpublish', [
-                'name' => $unikey,
+                'name' => $pluginName,
             ]);
 
             File::delete($plugin->getCachedServicesPath());
@@ -70,10 +71,10 @@ class PluginUninstallCommand extends Command
             $plugin->uninstall();
 
             event('plugin:uninstalled', [[
-                'unikey' => $unikey,
+                'unikey' => $pluginName,
             ]]);
 
-            $this->info("Uninstalled: {$unikey}");
+            $this->info("Uninstalled: {$pluginName}");
         } catch (\Throwable $e) {
             $this->error("Uninstall fail: {$e->getMessage()}");
 

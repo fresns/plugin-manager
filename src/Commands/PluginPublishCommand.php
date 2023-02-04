@@ -22,7 +22,8 @@ class PluginPublishCommand extends Command
 
     public function handle()
     {
-        $plugin = new Plugin($this->getPluginName());
+        $pluginName = $this->getPluginName();
+        $plugin = new Plugin($pluginName);
 
         if (! $plugin->isValidPlugin()) {
             return Command::FAILURE;
