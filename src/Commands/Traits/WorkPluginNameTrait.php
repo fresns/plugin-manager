@@ -19,4 +19,12 @@ trait WorkPluginNameTrait
 
         return $pluginName;
     }
+
+    public function validatePluginRootPath($plugin)
+    {
+        $pluginRootPath = config('plugins.paths.plugins');
+        $currentPluginRootPath = rtrim($plugin->getPluginPath(), '/');
+
+        return $pluginRootPath == $currentPluginRootPath;
+    }
 }

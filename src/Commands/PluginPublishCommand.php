@@ -25,6 +25,11 @@ class PluginPublishCommand extends Command
         $pluginName = $this->getPluginName();
         $plugin = new Plugin($pluginName);
 
+        if ($this->validatePluginRootPath($plugin)) {
+            $this->error('Failed to operate plugins root path');
+            return Command::FAILURE;
+        }
+
         if (! $plugin->isValidPlugin()) {
             return Command::FAILURE;
         }

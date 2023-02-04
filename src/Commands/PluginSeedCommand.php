@@ -26,7 +26,7 @@ class PluginSeedCommand extends Command
     public function handle()
     {
         $pluginName = $this->getPluginName();
-        $plugin = new Plugin($pluginName = $this->getPluginName());
+        $plugin = new Plugin($pluginName);
 
         if (! $plugin->isValidPlugin()) {
             return Command::FAILURE;

@@ -27,7 +27,12 @@ class PluginUninstallCommand extends Command
     {
         try {
             $pluginName = $this->getPluginName();
-            $plugin = new Plugin();
+            $plugin = new Plugin($pluginName);
+
+            if ($this->validatePluginRootPath($plugin)) {
+                $this->error('Failed to operate plugins root path');
+                return Command::FAILURE;
+            }
 
             $composerJson = Json::make($plugin->getComposerJsonPath())->get();
             $require = Arr::get($composerJson, 'require', []);
