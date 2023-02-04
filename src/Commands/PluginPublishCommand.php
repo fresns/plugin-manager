@@ -27,6 +27,7 @@ class PluginPublishCommand extends Command
 
         if ($this->validatePluginRootPath($plugin)) {
             $this->error('Failed to operate plugins root path');
+
             return Command::FAILURE;
         }
 
