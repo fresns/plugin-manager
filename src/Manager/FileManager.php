@@ -16,6 +16,8 @@ class FileManager
 
     protected $status = [];
 
+    protected $pluginsJson;
+
     public function __construct()
     {
         $this->file = config('plugins.manager.default.file');

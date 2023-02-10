@@ -14,7 +14,10 @@ trait WorkPluginNameTrait
     {
         $pluginName = $this->argument('name');
         if (! $pluginName) {
-            $pluginName = basename(getcwd());
+            $pluginRootPath = config('plugins.paths.plugins');
+            if (str_contains(getcwd(), $pluginRootPath)) {
+                $pluginName = basename(getcwd());
+            }
         }
 
         return $pluginName;
