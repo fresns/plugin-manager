@@ -124,7 +124,7 @@ class Zip
         $tmpDir = $targetPath.'-subdir';
         File::ensureDirectoryExists($tmpDir);
 
-        $firstEntryname = File::name(current($files));
+        $firstEntryname = basename(current($files));
 
         File::copyDirectory($targetPath."/{$firstEntryname}", $tmpDir);
         File::cleanDirectory($targetPath);
