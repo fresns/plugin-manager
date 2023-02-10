@@ -82,6 +82,9 @@ $app = require_once $rootDir . '/bootstrap/app.php';
 $asPlugin = $workDir !== $rootDir;
 $input = new Symfony\Component\Console\Input\ArgvInput;
 $grabCommand = $input->getFirstArgument();
+if (is_null($grabCommand)) {
+    $grabCommand = '';
+}
 
 if (!\Illuminate\Support\Str::startsWith($grabCommand, $usableCommands)) {
     $asPlugin = false;
