@@ -30,7 +30,7 @@
     ],
     "require": {
         "php": "^8.0.2",
-        "laravel/framework": "^9.0",
+        "laravel/framework": "^9.0|^10.0",
         "wikimedia/composer-merge-plugin": "dev-master",
         "nelexa/zip": "^4.0"
     },
