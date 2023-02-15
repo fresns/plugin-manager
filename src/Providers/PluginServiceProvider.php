@@ -129,6 +129,20 @@ class PluginServiceProvider extends ServiceProvider
 
         $mergePluginConfig['include'] = $mergePluginConfigInclude;
 
+        // windows system
+        $mergePluginConfig = config('plugins.merge_plugin_config', []);
+        if (str_contains(strtolower(PHP_OS_FAMILY), 'win')) {
+            $includes = $mergePluginConfig['include'] ?? [];
+
+            $newIncludes = [];
+            foreach ($includes as $includeComposerJson) {
+                $newIncludeComposerJson = str_replace('/', '\\\\', $includeComposerJson);
+                $newIncludes[] = $newIncludeComposerJson;
+            }
+
+            $mergePluginConfig['include'] = $newIncludes;
+        }
+
         Arr::set($composer, 'extra.merge-plugin', $mergePluginConfig);
 
         try {
