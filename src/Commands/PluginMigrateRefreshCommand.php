@@ -35,6 +35,10 @@ class PluginMigrateRefreshCommand extends Command
             return Command::FAILURE;
         }
 
+        if ($plugin->isDeactivate()) {
+            return Command::FAILURE;
+        }
+
         try {
             $this->call('migrate:refresh', [
                 '--database' => $this->option('database'),

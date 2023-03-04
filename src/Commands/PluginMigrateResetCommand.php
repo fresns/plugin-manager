@@ -33,6 +33,10 @@ class PluginMigrateResetCommand extends Command
             return Command::FAILURE;
         }
 
+        if ($plugin->isDeactivate()) {
+            return Command::FAILURE;
+        }
+
         try {
             $this->call('migrate:reset', [
                 '--database' => $this->option('database'),

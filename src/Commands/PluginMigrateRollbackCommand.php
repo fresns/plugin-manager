@@ -34,6 +34,10 @@ class PluginMigrateRollbackCommand extends Command
             return Command::FAILURE;
         }
 
+        if ($plugin->isDeactivate()) {
+            return Command::FAILURE;
+        }
+
         try {
             $path = $plugin->getMigratePath();
             if (glob("$path/*")) {
