@@ -129,7 +129,7 @@ class PluginServiceProvider extends ServiceProvider
 
         $mergePluginConfig['include'] = $mergePluginConfigInclude;
 
-        // windows system
+        // compatible with Windows system.
         $mergePluginConfig = config('plugins.merge_plugin_config', []);
         if (str_contains(strtolower(PHP_OS_FAMILY), 'win')) {
             $includes = $mergePluginConfig['include'] ?? [];
