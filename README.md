@@ -2,7 +2,7 @@
 
 <p align="center">
 <img src="https://img.shields.io/badge/PHP-%5E8.0-green" alt="PHP">
-<img src="https://img.shields.io/badge/Laravel-%5E9.0-orange" alt="Laravel">
+<img src="https://img.shields.io/badge/Laravel-%5E9.0%7C%5E10.0-orange" alt="Laravel">
 <img src="https://img.shields.io/badge/License-Apache--2.0-blue" alt="License">
 </p>
 
