@@ -38,18 +38,22 @@ class PluginMigrateCommand extends Command
             $plugin = new Plugin();
 
             collect($plugin->all())->map(function ($pluginName) {
-                $this->migrate($pluginName);
+                $this->migrate($pluginName, true);
             });
         }
 
         return Command::SUCCESS;
     }
 
-    public function migrate(string $pluginName)
+    public function migrate(string $pluginName, $isAll = false)
     {
         $plugin = new Plugin($pluginName);
 
-        if (! $plugin->isValidPlugin()) {
+        if (!$plugin->isValidPlugin()) {
+            return Command::FAILURE;
+        }
+
+        if ($plugin->isDeactivate() && $isAll) {
             return Command::FAILURE;
         }
 
