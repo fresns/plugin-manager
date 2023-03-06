@@ -17,8 +17,7 @@ return [
     ],
 
     'autoload_files' => [
-        // base_path('demo.php'),
-        base_path('vendor/fresns/plugin-manager/src/helpers.php'),
+        base_path('vendor/fresns/plugin-manager/src/Helpers.php'),
     ],
 
     'merge_plugin_config' => [
