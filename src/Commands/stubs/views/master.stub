@@ -34,12 +34,12 @@
                 }
             });
 
-            // Animate requests globally
+            // 全局触发请求动画
             $(document).ajaxStart(function() {
                 topbar.show();
             });
 
-            // Animate the end of requests globally
+            // 全局触发结束请求动画
             $(document).ajaxComplete(function() {
                 topbar.hide()
             });
