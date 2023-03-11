@@ -44,7 +44,7 @@ class PluginInstallCommand extends Command
                 $path = $pluginDirectory;
             }
 
-            if (!$path || !file_exists($path)) {
+            if (! $path || ! file_exists($path)) {
                 $this->error('Failed to unzip, couldn\'t find the plugin path');
 
                 return Command::FAILURE;
