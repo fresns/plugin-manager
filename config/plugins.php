@@ -99,8 +99,12 @@ return [
         'files'        => [
             'routes/web'            => 'routes/web.php',
             'routes/api'            => 'routes/api.php',
+            'views/layouts/master'  => 'resources/views/layouts/master.blade.php',
+            'views/commons/head'    => 'resources/views/commons/head.blade.php',
+            'views/commons/toast'   => 'resources/views/commons/toast.blade.php',
             'views/index'           => 'resources/views/index.blade.php',
-            'views/master'          => 'resources/views/layouts/master.blade.php',
+            'views/setting'         => 'resources/views/setting.blade.php',
+            'controller.web'        => 'app/Http/Controllers/$STUDLY_NAME$Controller.php',
             'scaffold/config'       => 'config/$KEBAB_NAME$.php',
             'scaffold/provider'     => 'app/Providers/$STUDLY_NAME$ServiceProvider.php',
             'seeder'                => 'database/seeders/DatabaseSeeder.php',
