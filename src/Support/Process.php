@@ -33,7 +33,7 @@ class Process
             $output = $output ?? null;
         }
 
-        $envs =  [
+        $envs = [
             'PATH' => rtrim(`echo \$PATH`),
         ] + $env;
 
