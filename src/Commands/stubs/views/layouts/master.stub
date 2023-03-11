@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="{{ \App::getLocale() }}">
+<head>
+    @include('$STUDLY_NAME$::commons.head', [
+        'title' => '$STUDLY_NAME$',
+    ])
+
+    {{-- Laravel Mix - CSS File --}}
+    {{-- <link rel="stylesheet" href="{{ mix('css/$KEBAB_NAME$.css') }}"> --}}
+</head>
+
+<body>
+    <div class="position-relative">
+        @yield('content')
+
+        @include('$STUDLY_NAME$::commons.toast')
+    </div>
+
+    @yield('bodyjs')
+
+    {{-- Laravel Mix - JS File --}}
+    {{-- <script src="{{ mix('js/$KEBAB_NAME$.js') }}"></script> --}}
+</body>
+</html>
+

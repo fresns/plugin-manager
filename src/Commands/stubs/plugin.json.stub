@@ -7,8 +7,8 @@
     "authorLink": "https://fresns.org",
     "version": "1.0.0",
     "scene": [],
-    "accessPath": "",
-    "settingsPath": null,
+    "accessPath": "/$KEBAB_NAME$",
+    "settingsPath": "/$KEBAB_NAME$/setting",
     "providers": [
         "$PLUGIN_NAMESPACE$\\$STUDLY_NAME$\\Providers\\$STUDLY_NAME$ServiceProvider",
         "$PLUGIN_NAMESPACE$\\$STUDLY_NAME$\\Providers\\ExceptionServiceProvider"
