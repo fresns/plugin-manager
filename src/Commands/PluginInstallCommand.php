@@ -18,6 +18,7 @@ class PluginInstallCommand extends Command
 {
     protected $signature = 'plugin:install {path}
         {--seed}
+        {--is_dir}
         ';
 
     protected $description = 'Install the plugin from the specified path';
@@ -26,6 +27,29 @@ class PluginInstallCommand extends Command
     {
         try {
             $path = $this->argument('path');
+
+            if ($this->option('is_dir')) {
+                $pluginDirectory = $path;
+
+                if (strpos($pluginDirectory, '/') == false) {
+                    $pluginDirectory = "extensions/plugins/{$pluginDirectory}";
+                }
+
+                if (str_starts_with($pluginDirectory, '/')) {
+                    $pluginDirectory = realpath($pluginDirectory);
+                } else {
+                    $pluginDirectory = realpath(base_path($pluginDirectory));
+                }
+
+                $path = $pluginDirectory;
+            }
+
+            if (!$path || !file_exists($path)) {
+                $this->error('Failed to unzip, couldn\'t find the plugin path');
+
+                return Command::FAILURE;
+            }
+
             $extensionPath = str_replace(base_path().'/', '', config('plugins.paths.plugins'));
             if (! str_contains($path, $extensionPath)) {
                 $exitCode = $this->call('plugin:unzip', [
