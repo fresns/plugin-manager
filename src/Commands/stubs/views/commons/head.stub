@@ -88,7 +88,7 @@
                 },
                 error: function(error) {
                     console.error(error);
-                    $('.toast').find('.toast-body').html(error.responseJSON.message || error.responseJSON.err_msg || '未知错误');
+                    $('.toast').find('.toast-body').html(error.responseJSON.message || error.responseJSON.err_msg || 'Unknown error');
                     $('.toast').toast('show');
                     $('form button[type="submit"] span').remove();
                     $('form button[type="submit"]').prop('disabled', false);
