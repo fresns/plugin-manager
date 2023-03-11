@@ -13,7 +13,7 @@ use Symfony\Component\Process\Process as SymfonyProcess;
 
 class Process
 {
-    public static function run(string $cmd, mixed $output = null, ?string $cwd = null): SymfonyProcess
+    public static function run(string $cmd, mixed $output = null, ?string $cwd = null, array $env = []): SymfonyProcess
     {
         $cwd = $cwd ?? base_path();
 
@@ -33,15 +33,19 @@ class Process
             $output = $output ?? null;
         }
 
+        $envs =  [
+            'PATH' => rtrim(`echo \$PATH`),
+        ] + $env;
+
         if ($output) {
-            $output->write("\n");
             $process->run(
                 function ($type, $line) use ($output) {
                     $output->write($line);
-                }
+                },
+                $envs,
             );
         } else {
-            $process->run();
+            $process->run(null, $envs);
         }
 
         return $process;
