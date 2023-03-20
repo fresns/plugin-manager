@@ -89,11 +89,11 @@ class TestCommand extends Command
         $parallel = $this->option('parallel');
 
         $process = (new Process(array_merge(
-                // Binary ...
-                $this->binary(),
-                // Arguments ...
-                $parallel ? $this->paratestArguments($options) : $this->phpunitArguments($options)
-            ),
+            // Binary ...
+            $this->binary(),
+            // Arguments ...
+            $parallel ? $this->paratestArguments($options) : $this->phpunitArguments($options)
+        ),
             null,
             // Envs ...
             $parallel ? $this->paratestEnvironmentVariables() : $this->phpunitEnvironmentVariables(),

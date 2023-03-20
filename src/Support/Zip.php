@@ -39,7 +39,7 @@ class Zip
             $basename = File::name($zipFilepath);
             $zipCount = count(File::glob("{$targetPath}/{$basename}*.zip"));
 
-            $zipFilename = $basename.($zipCount).'.zip';
+            $zipFilename = $basename.$zipCount.'.zip';
             $zipFilepath = "{$targetPath}/{$zipFilename}";
         }
 
