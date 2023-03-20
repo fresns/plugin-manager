@@ -109,7 +109,7 @@ class PluginServiceProvider extends ServiceProvider
 
         $userMergePluginConfig = Arr::get($composer, 'extra.merge-plugin', []);
 
-        $defaultMergePlugin = config('plugins.merge_plugin_config');
+        $defaultMergePlugin = config('plugins.merge_plugin_config', []);
         if (empty($defaultMergePlugin)) {
             $config = require config_path('plugins.php');
             $defaultMergePlugin = $config['merge_plugin_config'];
