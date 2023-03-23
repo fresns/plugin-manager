@@ -2,7 +2,7 @@
 
 /*
  * Fresns (https://fresns.org)
- * Copyright (C) 2021-Present Jarvis Tang
+ * Copyright (C) 2021-Present Jevan Tang
  * Released under the Apache-2.0 License.
  */
 
@@ -32,7 +32,7 @@ class PluginComposerUpdateCommand extends Command
 
             echo "PATH:" `echo \$PATH`
             echo ""
-           
+
             echo "php:" `which php` "\n version" `php -v`
             echo "composer:" `which composer` "\n version" `composer --version`
             echo "git:" `which git` "\n version" `git --version`

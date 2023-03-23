@@ -2,7 +2,7 @@
 
 /*
  * Fresns (https://fresns.org)
- * Copyright (C) 2021-Present Jarvis Tang
+ * Copyright (C) 2021-Present Jevan Tang
  * Released under the Apache-2.0 License.
  */
 
@@ -44,9 +44,9 @@ return [
         'vendor' => 'fresns',
         'author' => [
             [
-                'name'  => 'Jarvis Tang',
-                'email' => 'jarvis.okay@gmail.com',
-                'homepage' => 'https://github.com/jarvis-tang',
+                'name'  => 'Jevan Tang',
+                'email' => 'jevan@fresns.org',
+                'homepage' => 'https://github.com/jevantang',
                 'role' => 'Creator',
             ],
             [

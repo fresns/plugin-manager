@@ -2,7 +2,7 @@
 
 /*
  * Fresns (https://fresns.org)
- * Copyright (C) 2021-Present Jarvis Tang
+ * Copyright (C) 2021-Present Jevan Tang
  * Released under the Apache-2.0 License.
  */
 
@@ -27,12 +27,12 @@ class PluginCommand extends Command
      * @var string
      */
     public static $logo = <<<LOGO
-    ____  __            _          __  ___                                 
+    ____  __            _          __  ___
    / __ \/ /_  ______ _(_)___     /  |/  /___ _____  ____ _____ ____  _____
   / /_/ / / / / / __ `/ / __ \   / /|_/ / __ `/ __ \/ __ `/ __ `/ _ \/ ___/
- / ____/ / /_/ / /_/ / / / / /  / /  / / /_/ / / / / /_/ / /_/ /  __/ /    
-/_/   /_/\__,_/\__, /_/_/ /_/  /_/  /_/\__,_/_/ /_/\__,_/\__, /\___/_/     
-              /____/                                    /____/             
+ / ____/ / /_/ / /_/ / / / / /  / /  / / /_/ / / / / /_/ / /_/ /  __/ /
+/_/   /_/\__,_/\__, /_/_/ /_/  /_/  /_/\__,_/_/ /_/\__,_/\__, /\___/_/
+              /____/                                    /____/
 LOGO;
 
     public function handle(): void
