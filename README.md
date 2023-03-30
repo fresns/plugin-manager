@@ -3,7 +3,7 @@
 <p align="center">
 <img src="https://img.shields.io/badge/PHP-%5E8.0-blueviolet" alt="PHP">
 <img src="https://img.shields.io/badge/Laravel-9.0%7C%5E10.0-orange" alt="Laravel">
-<img src="https://img.shields.io/badge/License-Apache--2.0-brightgreen" alt="License">
+<img src="https://img.shields.io/badge/License-Apache--2.0-green" alt="License">
 </p>
 
 ## About Plugin Manager
