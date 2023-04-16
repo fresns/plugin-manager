@@ -55,7 +55,7 @@ Main application `composer.json` add configuration:
 }
 ```
 
-## Dev Docs
+## Development Docs
 
 [https://pm.fresns.org](https://pm.fresns.org/)
 
