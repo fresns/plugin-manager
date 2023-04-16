@@ -12,6 +12,8 @@ Enhance Laravel Apps: Organized & Scalable
 
 `fresns/plugin-manager` is a convenient Laravel extension package designed for modular management of your large-scale Laravel applications. Each plugin acts as an independent Laravel application or microservice, allowing you to define your own views, controllers and models.
 
+Plugin Manager Docs: [https://pm.fresns.org](https://pm.fresns.org/)
+
 ## Install
 
 To install through Composer, by run the following command:
