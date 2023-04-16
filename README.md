@@ -1,8 +1,8 @@
-<p align="center"><a href="https://fresns.org" target="_blank"><img src="https://raw.githubusercontent.com/fresns/docs/main/images/Fresns-Logo(orange).png" width="300"></a></p>
+<p align="center"><a href="https://pm.fresns.org" target="_blank"><img src="https://files.fresns.org/wiki/icons/pm.png" width="150"></a></p>
 
 <p align="center">
 <img src="https://img.shields.io/badge/PHP-%5E8.0-blueviolet" alt="PHP">
-<img src="https://img.shields.io/badge/Laravel-9.0%7C%5E10.0-orange" alt="Laravel">
+<img src="https://img.shields.io/badge/Laravel-9.x%7C10.x-orange" alt="Laravel">
 <img src="https://img.shields.io/badge/License-Apache--2.0-green" alt="License">
 </p>
 
@@ -53,7 +53,7 @@ Main application `composer.json` add configuration:
 
 ## Dev Docs
 
-[https://fresns.org/extensions/plugin/](https://fresns.org/extensions/plugin/)
+[https://plugin-manager.fresns.org](https://plugin-manager.fresns.org/)
 
 ## Contributing
 
