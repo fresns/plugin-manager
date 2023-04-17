@@ -1,14 +1,14 @@
 {
     "name": "fresns/plugin-manager",
     "type": "library",
-    "description": "Plugin Management In Laravel",
-    "keywords": ["fresns", "laravel-plugins", "laravel-extensions"],
+    "description": "Enhance Laravel Apps: Organized & Scalable",
+    "keywords": ["laravel", "laravel-package", "laravel-modules", "laravel-application", "laravel-plugin", "laravel-apps", "laravel-extensions"],
     "license": "Apache-2.0",
-    "homepage": "https://fresns.org",
+    "homepage": "https://pm.fresns.org",
     "support": {
         "issues": "https://github.com/fresns/plugin-manager/issues",
         "source": "https://github.com/fresns/plugin-manager",
-        "docs": "https://fresns.org/extensions/plugin/"
+        "docs": "https://pm.fresns.org"
     },
     "authors": [
         {
