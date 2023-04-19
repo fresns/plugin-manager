@@ -31,7 +31,9 @@ laravel/            // 主程序
 └── fresns.json         // 插件启用停用状态
 ```
 
-2、主程序 composer.json 添加配置
+2、主程序 composer.json 配置
+
+> 插件管理器会自动添加
 
 ```json
 {
@@ -39,6 +41,7 @@ laravel/            // 主程序
         "merge-plugin": {
             "include": [
                 "extensions/plugins/*/composer.json"
+                // The windows system is: \\extensions\\plugins\\*\\composer.json
             ],
             "recurse": true,
             "replace": false,

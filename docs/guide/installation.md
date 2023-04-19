@@ -31,7 +31,9 @@ laravel/            // Main Program
 └── fresns.json         // Plugin activate and deactivate status
 ```
 
-2. Main program `composer.json` Add configuration
+2. Main program `composer.json` configuration
+
+> The Plugin Manager will automatically add
 
 ```json
 {
@@ -39,6 +41,7 @@ laravel/            // Main Program
         "merge-plugin": {
             "include": [
                 "extensions/plugins/*/composer.json"
+                // The windows system is: \\extensions\\plugins\\*\\composer.json
             ],
             "recurse": true,
             "replace": false,

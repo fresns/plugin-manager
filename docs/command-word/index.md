@@ -9,3 +9,11 @@ Laravel Command Word Manager is a practical Laravel extension package designed t
 ```bash
 composer require fresns/cmd-word-manager
 ```
+
+## View
+
+View all registered plugins and the plugin registration command word.
+
+```php
+\FresnsCmdWord::all();
+```

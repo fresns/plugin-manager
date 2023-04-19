@@ -1,6 +1,6 @@
 # 创建新插件
 
-Generate a new plugin.
+创建一个名为 `DemoPlugin` 的插件
 
 ```php
 fresns plugin:make DemoPlugin

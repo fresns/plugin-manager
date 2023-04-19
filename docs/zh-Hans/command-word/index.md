@@ -9,3 +9,11 @@ Laravel 命令字管理器是一个实用的 Laravel 扩展包，旨在帮助插
 ```bash
 composer require fresns/cmd-word-manager
 ```
+
+## 查看
+
+查看所有注册的插件，以及插件注册的命令字。
+
+```php
+\FresnsCmdWord::all();
+```
