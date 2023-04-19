@@ -15,23 +15,15 @@ composer require fresns/plugin-manager
 
 ## 配置
 
-1、发布插件管理器配置文件
+### 插件管理器配置文件
+
+- 发布指令
 
 ```bash
 php artisan vendor:publish --provider="Fresns\PluginManager\Providers\PluginServiceProvider"
 ```
 
-```php
-laravel/            // 主程序
-├── config/             // 配置文件目录
-│   └── plugins.php         // 插件配置文件
-├── extensions/         // 扩展目录
-│   ├── plugins/            // 插件目录
-│   └── backups/            // 备份目录
-└── fresns.json         // 插件启用停用状态
-```
-
-2、主程序 composer.json 配置
+### 主程序 composer.json 配置
 
 > 插件管理器会自动添加
 
@@ -57,4 +49,16 @@ laravel/            // 主程序
         }
     }
 }
+```
+
+### 目录结构
+
+```php
+laravel/            // 主程序
+├── config/             // 配置文件目录
+│   └── plugins.php         // 插件配置文件
+├── extensions/         // 扩展目录
+│   ├── plugins/            // 插件目录
+│   └── backups/            // 备份目录
+└── fresns.json         // 插件启用停用状态
 ```

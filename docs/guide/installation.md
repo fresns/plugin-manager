@@ -15,23 +15,15 @@ composer require fresns/plugin-manager
 
 ## Configuration
 
-1. Publish plugin manager config file
+### Plugin Manager config file
+
+- Publish command
 
 ```bash
 php artisan vendor:publish --provider="Fresns\PluginManager\Providers\PluginServiceProvider"
 ```
 
-```php
-laravel/            // Main Program
-├── config/             // Configuration file directory
-│   └── plugins.php         // Plugin config file
-├── extensions/         // Extensions directory
-│   ├── plugins/            // Plugin directory
-│   └── backups/            // Backup directory
-└── fresns.json         // Plugin activate and deactivate status
-```
-
-2. Main program `composer.json` configuration
+### Main program `composer.json` configuration
 
 > The Plugin Manager will automatically add
 
@@ -57,4 +49,16 @@ laravel/            // Main Program
         }
     }
 }
+```
+
+### Directory Structure
+
+```php
+laravel/            // Main Program
+├── config/             // Configuration file directory
+│   └── plugins.php         // Plugin config file
+├── extensions/         // Extensions directory
+│   ├── plugins/            // Plugin directory
+│   └── backups/            // Backup directory
+└── fresns.json         // Plugin activate and deactivate status
 ```
