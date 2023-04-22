@@ -80,8 +80,6 @@ class PluginServiceProvider extends ServiceProvider
                     str_replace(base_path().'/', '', $e->getFile()),
                     $e->getLine(),
                 ));
-
-                throw new \RuntimeException($message);
             }
         });
     }
