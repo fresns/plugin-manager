@@ -30,31 +30,6 @@ Optionally, publish the package's configuration file by running:
 php artisan vendor:publish --provider="Fresns\PluginManager\Providers\PluginServiceProvider"
 ```
 
-Main application `composer.json` add configuration:
-
-```json
-{
-    "extra": {
-        "merge-plugin": {
-            "include": [
-                "extensions/plugins/*/composer.json"
-            ],
-            "recurse": true,
-            "replace": false,
-            "ignore-duplicates": false,
-            "merge-dev": true,
-            "merge-extra": true,
-            "merge-extra-deep": true
-        }
-    },
-    "config": {
-        "allow-plugins": {
-            "wikimedia/composer-merge-plugin": true
-        }
-    }
-}
-```
-
 ## Development Docs
 
 [https://pm.fresns.org](https://pm.fresns.org/)
