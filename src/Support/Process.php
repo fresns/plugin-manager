@@ -35,6 +35,7 @@ class Process
 
         $envs = [
             'PATH' => rtrim(`echo \$PATH`),
+            'COMPOSER_ALLOW_SUPERUSER' => 1,
         ] + $env;
 
         if ($output) {
