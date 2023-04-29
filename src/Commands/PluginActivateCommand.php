@@ -58,7 +58,7 @@ class PluginActivateCommand extends Command
         if ($result = $plugin->activate()) {
             $this->info(sprintf('Plugin %s activate successfully', $pluginName));
         } else {
-            $this->info(sprintf('Plugin %s activate failure', $pluginName));
+            $this->error(sprintf('Plugin %s activate failure', $pluginName));
         }
 
         event('plugin:activated', [[

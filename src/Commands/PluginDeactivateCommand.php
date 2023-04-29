@@ -57,7 +57,7 @@ class PluginDeactivateCommand extends Command
         if ($result = $plugin->deactivate()) {
             $this->info(sprintf('Plugin %s deactivate successfully', $pluginName));
         } else {
-            $this->info(sprintf('Plugin %s deactivate successfully', $pluginName));
+            $this->error(sprintf('Plugin %s deactivate failure', $pluginName));
         }
 
         event('plugin:deactivated', [[
