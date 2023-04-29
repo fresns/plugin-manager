@@ -14,7 +14,7 @@ class MakeCmdWordProviderCommand extends GeneratorCommand
 {
     use Traits\StubTrait;
 
-    protected $signature = 'make:cmd-word-provider {name=CmdWordServiceProvider}';
+    protected $signature = 'make:cmd-word-provider {unikey=CmdWordServiceProvider}';
 
     protected $description = 'Generate a cmd word service provider for specified plugin';
 

@@ -15,10 +15,8 @@ class ExceptionServiceProvider extends ServiceProvider
 {
     /**
      * Register any services.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $handler = resolve(ExceptionHandler::class);
 

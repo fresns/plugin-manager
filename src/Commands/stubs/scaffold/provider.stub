@@ -14,10 +14,8 @@ class $STUDLY_NAME$ServiceProvider extends BaseServiceProvider
 {
     /**
      * Boot the application events.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->registerTranslations();
         $this->registerConfig();
@@ -32,10 +30,8 @@ class $STUDLY_NAME$ServiceProvider extends BaseServiceProvider
 
     /**
      * Register the service provider.
-     *
-     * @return void
      */
-    public function register()
+    public function register(): void
     {
         // if ($this->app->runningInConsole()) {
             $this->app->register(CommandServiceProvider::class);
@@ -44,10 +40,8 @@ class $STUDLY_NAME$ServiceProvider extends BaseServiceProvider
 
     /**
      * Register config.
-     *
-     * @return void
      */
-    protected function registerConfig()
+    protected function registerConfig(): void
     {
         $this->mergeConfigFrom(
             dirname(__DIR__, 2) . '/config/$KEBAB_NAME$.php', '$KEBAB_NAME$'
@@ -56,30 +50,24 @@ class $STUDLY_NAME$ServiceProvider extends BaseServiceProvider
 
     /**
      * Register views.
-     *
-     * @return void
      */
-    public function registerViews()
+    public function registerViews(): void
     {
         $this->loadViewsFrom(dirname(__DIR__, 2) . '/resources/views', '$STUDLY_NAME$');
     }
 
     /**
      * Register translations.
-     *
-     * @return void
      */
-    public function registerTranslations()
+    public function registerTranslations(): void
     {
         $this->loadTranslationsFrom(dirname(__DIR__, 2) . '/resources/lang', '$STUDLY_NAME$');
     }
 
     /**
      * Get the services provided by the provider.
-     *
-     * @return array
      */
-    public function provides()
+    public function provides(): array
     {
         return [];
     }

@@ -13,9 +13,9 @@ use Illuminate\Console\Command;
 
 class PluginSeedCommand extends Command
 {
-    use Traits\WorkPluginNameTrait;
+    use Traits\WorkPluginUnikeyTrait;
 
-    protected $signature = 'plugin:seed {name?}
+    protected $signature = 'plugin:seed {unikey?}
         {--class=DatabaseSeeder}
         {--database=}
         {--force=}
@@ -25,8 +25,8 @@ class PluginSeedCommand extends Command
 
     public function handle()
     {
-        $pluginName = $this->getPluginName();
-        $plugin = new Plugin($pluginName);
+        $pluginUnikey = $this->getPluginUnikey();
+        $plugin = new Plugin($pluginUnikey);
 
         if (! $plugin->isValidPlugin()) {
             return Command::FAILURE;

@@ -18,10 +18,8 @@ class CommandServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap services.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $commandsDirectory = dirname(__DIR__) . '/Console/Commands';
         if (File::exists($commandsDirectory)) {
@@ -33,10 +31,8 @@ class CommandServiceProvider extends ServiceProvider
      * Register all of the commands in the given directory.
      *
      * @param array|string $paths
-     *
-     * @return void
      */
-    protected function load($paths)
+    protected function load($paths): void
     {
         $paths = array_unique(Arr::wrap($paths));
 

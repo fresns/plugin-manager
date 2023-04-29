@@ -19,7 +19,7 @@ class NewCommand extends Command
 {
     use Traits\StubTrait;
 
-    protected $signature = 'new {name}
+    protected $signature = 'new {unikey}
         {--force}
         ';
 
@@ -37,7 +37,7 @@ class NewCommand extends Command
     /**
      * @var string
      */
-    protected $pluginName;
+    protected $pluginUnikey;
 
     /**
      * Execute the console command.
@@ -49,9 +49,9 @@ class NewCommand extends Command
     public function handle()
     {
         $this->filesystem = $this->laravel['files'];
-        $this->pluginName = Str::afterLast($this->argument('name'), '/');
+        $this->pluginUnikey = Str::afterLast($this->argument('unikey'), '/');
 
-        $this->plugin = new Plugin($this->pluginName);
+        $this->plugin = new Plugin($this->pluginUnikey);
 
         // clear directory or exit when plugin exists.
         if (File::exists($this->plugin->getPluginPath())) {
@@ -70,7 +70,7 @@ class NewCommand extends Command
         // composer dump-autoload
         Process::run('composer dump-autoload', $this->output);
 
-        $this->info("Package [{$this->pluginName}] created successfully");
+        $this->info("Package [{$this->pluginUnikey}] created successfully");
 
         return Command::SUCCESS;
     }
@@ -97,7 +97,7 @@ class NewCommand extends Command
                 continue;
             }
 
-            $path = config('plugins.paths.plugins').'/'.$this->argument('name').'/'.$folder->getPath();
+            $path = config('plugins.paths.plugins').'/'.$this->argument('unikey').'/'.$folder->getPath();
 
             $this->filesystem->makeDirectory($path, 0755, true);
             if (config('plugins.stubs.gitkeep')) {
@@ -147,9 +147,9 @@ class NewCommand extends Command
     public function generateFiles()
     {
         foreach ($this->getFiles() as $stub => $file) {
-            $pluginName = $this->argument('name');
+            $pluginUnikey = $this->argument('unikey');
 
-            $path = config('plugins.paths.plugins').'/'.$pluginName.'/'.$file;
+            $path = config('plugins.paths.plugins').'/'.$pluginUnikey.'/'.$file;
 
             if ($keys = $this->getReplaceKeys($path)) {
                 $file = $this->getReplacedContent($file, $keys);

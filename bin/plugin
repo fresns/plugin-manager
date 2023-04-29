@@ -92,8 +92,8 @@ if (!\Illuminate\Support\Str::startsWith($grabCommand, $usableCommands)) {
 
 // change path for plugin
 if ($asPlugin) {
-    $pluginName = substr($workDir, strrpos($workDir, DIRECTORY_SEPARATOR) + 1);
-    echo "Work Plugin: " . $pluginName . PHP_EOL;
+    $pluginUnikey = substr($workDir, strrpos($workDir, DIRECTORY_SEPARATOR) + 1);
+    echo "Work Plugin: " . $pluginUnikey . PHP_EOL;
 
     $composer = json_decode(file_get_contents($workDir . DIRECTORY_SEPARATOR . 'composer.json'), true);
 
@@ -102,7 +102,7 @@ if ($asPlugin) {
     } else {
         $classNamespace = array_keys($composer['autoload']['psr-4'])[0];
         $classNamespace = \Illuminate\Support\Str::before($classNamespace, '\\');
-        $classNamespace .= '\\' . \Illuminate\Support\Str::studly($pluginName);
+        $classNamespace .= '\\' . \Illuminate\Support\Str::studly($pluginUnikey);
     }
 
     unset($composer);
@@ -140,8 +140,8 @@ $kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
 $status = $kernel->handle($input, new Symfony\Component\Console\Output\ConsoleOutput);
 
 // make:controller workaround for plugin
-if ($asPlugin && $grabCommand === 'make:controller' && $input->getArgument('name')) {
-    $fileName = $workDir . '/app/Http/Controllers/' . str_replace('\\', DIRECTORY_SEPARATOR, $input->getArgument('name')) . '.php';
+if ($asPlugin && $grabCommand === 'make:controller' && $input->getArgument('unikey')) {
+    $fileName = $workDir . '/app/Http/Controllers/' . str_replace('\\', DIRECTORY_SEPARATOR, $input->getArgument('unikey')) . '.php';
     $content = file_get_contents($fileName);
 
     if (strpos($content, 'use App\Http\Controllers\Controller;') === false) {

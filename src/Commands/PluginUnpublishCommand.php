@@ -14,16 +14,16 @@ use Illuminate\Support\Facades\File;
 
 class PluginUnpublishCommand extends Command
 {
-    use Traits\WorkPluginNameTrait;
+    use Traits\WorkPluginUnikeyTrait;
 
-    protected $signature = 'plugin:unpublish {name?}';
+    protected $signature = 'plugin:unpublish {unikey?}';
 
     protected $description = 'Distribute static resources of the plugin';
 
     public function handle()
     {
-        $pluginName = $this->getPluginName();
-        $plugin = new Plugin($pluginName);
+        $pluginUnikey = $this->getPluginUnikey();
+        $plugin = new Plugin($pluginUnikey);
 
         if (! $plugin->isValidPlugin()) {
             return Command::FAILURE;

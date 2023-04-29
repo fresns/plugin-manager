@@ -14,7 +14,7 @@ class MakeSqlLogProviderCommand extends GeneratorCommand
 {
     use Traits\StubTrait;
 
-    protected $signature = 'make:sql-log-provider {name=SqlLogServiceProvider}';
+    protected $signature = 'make:sql-log-provider {unikey=SqlLogServiceProvider}';
 
     protected $description = 'Generate a sql log service provider for specified plugin and need your manual reigster it.';
 

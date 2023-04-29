@@ -64,9 +64,9 @@ class PluginServiceProvider extends ServiceProvider
 
         $plugin = new Plugin();
 
-        collect($plugin->all())->map(function ($pluginName) {
+        collect($plugin->all())->map(function ($pluginUnikey) {
             try {
-                $plugin = new Plugin($pluginName);
+                $plugin = new Plugin($pluginUnikey);
 
                 if ($plugin->isAvailablePlugin() && $plugin->isActivate()) {
                     $plugin->registerFiles();
@@ -75,7 +75,7 @@ class PluginServiceProvider extends ServiceProvider
                 }
             } catch (\Throwable $e) {
                 info($message = sprintf('Plugin namespace failed to load UniKey: %s, reason: %s, file: %s, line: %s',
-                    $pluginName,
+                    $pluginUnikey,
                     $e->getMessage(),
                     str_replace(base_path().'/', '', $e->getFile()),
                     $e->getLine(),

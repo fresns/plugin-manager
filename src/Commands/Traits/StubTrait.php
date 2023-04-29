@@ -19,12 +19,12 @@ trait StubTrait
     protected $runningAsRootDir = false;
     protected $buildClassName = null;
 
-    protected function buildClass($name)
+    protected function buildClass($unikey)
     {
         $this->runningAsRootDir = false;
-        if (str_starts_with($name, 'App')) {
+        if (str_starts_with($unikey, 'App')) {
             $this->runningAsRootDir = true;
-            $this->buildClassName = $name;
+            $this->buildClassName = $unikey;
         }
 
         $content = $this->getStubContents($this->getStub());
@@ -32,9 +32,9 @@ trait StubTrait
         return $content;
     }
 
-    protected function getPath($name)
+    protected function getPath($unikey)
     {
-        $path = parent::getPath($name);
+        $path = parent::getPath($unikey);
 
         $this->type = $path;
 
@@ -62,7 +62,7 @@ trait StubTrait
     {
         $stubName = $this->getStubName();
         if (! $stubName) {
-            throw new \RuntimeException('Please provider stub name in getStubName method');
+            throw new \RuntimeException('Please provider stub unikey in getStubName method');
         }
 
         $baseStubPath = base_path("stubs/{$stubName}.stub");
@@ -85,7 +85,7 @@ trait StubTrait
      */
     public function getClass()
     {
-        return class_basename($this->argument('name'));
+        return class_basename($this->argument('unikey'));
     }
 
     /**
@@ -225,7 +225,7 @@ trait StubTrait
     }
 
     /**
-     * Get the plugin name in lower case.
+     * Get the plugin unikey in lower case.
      *
      * @return string
      */
@@ -235,7 +235,7 @@ trait StubTrait
     }
 
     /**
-     * Get the plugin name in studly case.
+     * Get the plugin unikey in studly case.
      *
      * @return string
      */
@@ -245,7 +245,7 @@ trait StubTrait
     }
 
     /**
-     * Get the plugin name in studly case.
+     * Get the plugin unikey in studly case.
      *
      * @return string
      */
@@ -255,7 +255,7 @@ trait StubTrait
     }
 
     /**
-     * Get the plugin name in kebab case.
+     * Get the plugin unikey in kebab case.
      *
      * @return string
      */
@@ -289,26 +289,26 @@ trait StubTrait
         return str_replace('\\', '\\\\', GenerateConfigReader::read('provider')->getNamespace());
     }
 
-    public function __get($name)
+    public function __get($unikey)
     {
-        if ($name === 'plugin') {
-            // get Plugin Name from Namespace: Plugin\DemoTest => DemoTest
+        if ($unikey === 'plugin') {
+            // get Plugin Unikey from Namespace: Plugin\DemoTest => DemoTest
             $namespace = str_replace('\\', '/', app()->getNamespace());
             $namespace = rtrim($namespace, '/');
-            $pluginName = basename($namespace);
+            $pluginUnikey = basename($namespace);
 
             // when running in rootDir
-            if ($pluginName == 'App') {
-                $pluginName = null;
+            if ($pluginUnikey == 'App') {
+                $pluginUnikey = null;
             }
 
             if (empty($this->plugin)) {
-                $this->plugin = new \Fresns\PluginManager\Plugin($pluginName);
+                $this->plugin = new \Fresns\PluginManager\Plugin($pluginUnikey);
             }
 
             return $this->plugin;
         }
 
-        throw new \RuntimeException("unknown property $name");
+        throw new \RuntimeException("unknown property $unikey");
     }
 }

@@ -30,9 +30,9 @@ class PluginListCommand extends Command
                 continue;
             }
 
-            $pluginName = basename($pluginDir);
+            $pluginUnikey = basename($pluginDir);
 
-            $plugin = new Plugin($pluginName);
+            $plugin = new Plugin($pluginUnikey);
 
             $rows[] = $plugin->getPluginInfo();
         }

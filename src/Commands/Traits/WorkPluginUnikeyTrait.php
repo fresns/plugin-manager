@@ -8,19 +8,19 @@
 
 namespace Fresns\PluginManager\Commands\Traits;
 
-trait WorkPluginNameTrait
+trait WorkPluginUnikeyTrait
 {
-    public function getPluginName()
+    public function getPluginUnikey()
     {
-        $pluginName = $this->argument('name');
-        if (! $pluginName) {
+        $pluginUnikey = $this->argument('unikey');
+        if (! $pluginUnikey) {
             $pluginRootPath = config('plugins.paths.plugins');
             if (str_contains(getcwd(), $pluginRootPath)) {
-                $pluginName = basename(getcwd());
+                $pluginUnikey = basename(getcwd());
             }
         }
 
-        return $pluginName;
+        return $pluginUnikey;
     }
 
     public function validatePluginRootPath($plugin)

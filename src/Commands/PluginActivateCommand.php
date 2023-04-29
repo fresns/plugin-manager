@@ -13,18 +13,18 @@ use Illuminate\Console\Command;
 
 class PluginActivateCommand extends Command
 {
-    use Traits\WorkPluginNameTrait;
+    use Traits\WorkPluginUnikeyTrait;
 
-    protected $signature = 'plugin:activate {name?}';
+    protected $signature = 'plugin:activate {unikey?}';
 
     protected $description = 'Activate Plugin';
 
     public function handle()
     {
-        $pluginName = $this->getPluginName();
+        $pluginUnikey = $this->getPluginUnikey();
 
-        if ($pluginName) {
-            $this->activate($pluginName);
+        if ($pluginUnikey) {
+            $this->activate($pluginUnikey);
         }
         // Activate all plugins
         else {
@@ -40,14 +40,14 @@ class PluginActivateCommand extends Command
     {
         $plugin = new Plugin();
 
-        collect($plugin->all())->map(function ($pluginName) {
-            $this->activate($pluginName);
+        collect($plugin->all())->map(function ($pluginUnikey) {
+            $this->activate($pluginUnikey);
         });
     }
 
-    public function activate(?string $pluginName = null)
+    public function activate(?string $pluginUnikey = null)
     {
-        $plugin = new Plugin($pluginName);
+        $plugin = new Plugin($pluginUnikey);
 
         $unikey = $plugin->getStudlyName();
 
@@ -56,9 +56,9 @@ class PluginActivateCommand extends Command
         ]]);
 
         if ($result = $plugin->activate()) {
-            $this->info(sprintf('Plugin %s activate successfully', $pluginName));
+            $this->info(sprintf('Plugin %s activate successfully', $pluginUnikey));
         } else {
-            $this->error(sprintf('Plugin %s activate failure', $pluginName));
+            $this->error(sprintf('Plugin %s activate failure', $pluginUnikey));
         }
 
         event('plugin:activated', [[

@@ -13,9 +13,9 @@ use Illuminate\Console\Command;
 
 class PluginMigrateRollbackCommand extends Command
 {
-    use Traits\WorkPluginNameTrait;
+    use Traits\WorkPluginUnikeyTrait;
 
-    protected $signature = 'plugin:migrate-rollback {name?}
+    protected $signature = 'plugin:migrate-rollback {unikey?}
         {--database=}
         {--force=}
         {--realpath=}
@@ -27,8 +27,8 @@ class PluginMigrateRollbackCommand extends Command
 
     public function handle()
     {
-        $pluginName = $this->getPluginName();
-        $plugin = new Plugin($pluginName);
+        $pluginUnikey = $this->getPluginUnikey();
+        $plugin = new Plugin($pluginUnikey);
 
         if (! $plugin->isValidPlugin()) {
             return Command::FAILURE;

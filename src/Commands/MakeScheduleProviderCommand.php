@@ -14,7 +14,7 @@ class MakeScheduleProviderCommand extends GeneratorCommand
 {
     use Traits\StubTrait;
 
-    protected $signature = 'make:schedule-provider {name=ScheduleServiceProvider}';
+    protected $signature = 'make:schedule-provider {unikey=ScheduleServiceProvider}';
 
     protected $description = 'Generate a schedule service provider for specified plugin';
 

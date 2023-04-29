@@ -16,10 +16,8 @@ class ScheduleServiceProvider extends ServiceProvider
 {
     /**
      * Register any services.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->app->resolving(Schedule::class, function ($schedule) {
             $this->schedule($schedule);

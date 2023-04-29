@@ -100,23 +100,23 @@ class PluginInstallCommand extends Command
             }
 
             $this->call('plugin:deactivate', [
-                'name' => $unikey,
+                'unikey' => $unikey,
             ]);
 
             $this->call('plugin:migrate', [
-                'name' => $unikey,
+                'unikey' => $unikey,
             ]);
 
             if ($this->option('seed')) {
                 $this->call('plugin:seed', [
-                    'name' => $unikey,
+                    'unikey' => $unikey,
                 ]);
             }
 
             $plugin->install();
 
             $this->call('plugin:publish', [
-                'name' => $unikey,
+                'unikey' => $unikey,
             ]);
 
             event('plugin:installed', [[

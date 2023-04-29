@@ -14,16 +14,16 @@ use Illuminate\Support\Facades\File;
 
 class PluginPublishCommand extends Command
 {
-    use Traits\WorkPluginNameTrait;
+    use Traits\WorkPluginUnikeyTrait;
 
-    protected $signature = 'plugin:publish {name?}';
+    protected $signature = 'plugin:publish {unikey?}';
 
     protected $description = 'Distribute static resources of the plugin';
 
     public function handle()
     {
-        $pluginName = $this->getPluginName();
-        $plugin = new Plugin($pluginName);
+        $pluginUnikey = $this->getPluginUnikey();
+        $plugin = new Plugin($pluginUnikey);
 
         if ($this->validatePluginRootPath($plugin)) {
             $this->error('Failed to operate plugins root path');

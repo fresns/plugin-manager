@@ -49,12 +49,6 @@ return [
                 'homepage' => 'https://github.com/jevantang',
                 'role' => 'Creator',
             ],
-            [
-                'name'  => 'mouyong',
-                'email' => 'my24251325@gmail.com',
-                'homepage' => 'https://github.com/mouyong',
-                'role' => 'Developer',
-            ],
         ],
     ],
 

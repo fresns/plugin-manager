@@ -16,18 +16,18 @@ use Illuminate\Support\Str;
 
 class Plugin
 {
-    protected $pluginName;
+    protected $pluginUnikey;
 
     /**
      * @var FileManager
      */
     protected $manager;
 
-    public function __construct(?string $pluginName = null)
+    public function __construct(?string $pluginUnikey = null)
     {
         $this->manager = new FileManager();
 
-        $this->setPluginName($pluginName);
+        $this->setPluginUnikey($pluginUnikey);
     }
 
     public function config(string $key, $default = null)
@@ -35,9 +35,9 @@ class Plugin
         return config('plugins.'.$key, $default);
     }
 
-    public function setPluginName(?string $pluginName = null)
+    public function setPluginUnikey(?string $pluginUnikey = null)
     {
-        $this->pluginName = $pluginName;
+        $this->pluginUnikey = $pluginUnikey;
     }
 
     public function getUnikey()
@@ -47,22 +47,22 @@ class Plugin
 
     public function getLowerName(): string
     {
-        return Str::lower($this->pluginName);
+        return Str::lower($this->pluginUnikey);
     }
 
     public function getStudlyName()
     {
-        return Str::studly($this->pluginName);
+        return Str::studly($this->pluginUnikey);
     }
 
     public function getKebabName()
     {
-        return Str::kebab($this->pluginName);
+        return Str::kebab($this->pluginUnikey);
     }
 
     public function getSnakeName()
     {
-        return Str::snake($this->pluginName);
+        return Str::snake($this->pluginUnikey);
     }
 
     public function getClassNamespace()
@@ -82,9 +82,9 @@ class Plugin
     public function getPluginPath(): ?string
     {
         $path = $this->config('paths.plugins');
-        $pluginName = $this->getStudlyName();
+        $pluginUnikey = $this->getStudlyName();
 
-        return "{$path}/{$pluginName}";
+        return "{$path}/{$pluginUnikey}";
     }
 
     public function getFactoryPath()
@@ -115,9 +115,9 @@ class Plugin
         }
 
         $path = $this->config('paths.assets');
-        $pluginName = $this->getStudlyName();
+        $pluginUnikey = $this->getStudlyName();
 
-        return "{$path}/{$pluginName}";
+        return "{$path}/{$pluginUnikey}";
     }
 
     public function getAssetsSourcePath(): ?string
@@ -189,11 +189,11 @@ class Plugin
 
     public function exists(): bool
     {
-        if (! $pluginName = $this->getStudlyName()) {
+        if (! $pluginUnikey = $this->getStudlyName()) {
             return false;
         }
 
-        if (in_array($pluginName, $this->all())) {
+        if (in_array($pluginUnikey, $this->all())) {
             return true;
         }
 
@@ -207,61 +207,61 @@ class Plugin
 
         $plugins = [];
         foreach ($pluginJsons as $pluginJson) {
-            $pluginName = basename(dirname($pluginJson));
+            $pluginUnikey = basename(dirname($pluginJson));
 
-            if (! $this->isValidPlugin($pluginName)) {
+            if (! $this->isValidPlugin($pluginUnikey)) {
                 continue;
             }
 
-            if (! $this->isAvailablePlugin($pluginName)) {
+            if (! $this->isAvailablePlugin($pluginUnikey)) {
                 continue;
             }
 
-            $plugins[] = $pluginName;
+            $plugins[] = $pluginUnikey;
         }
 
         return $plugins;
     }
 
-    public function isValidPlugin(?string $pluginName = null)
+    public function isValidPlugin(?string $pluginUnikey = null)
     {
-        if (! $pluginName) {
-            $pluginName = $this->getStudlyName();
+        if (! $pluginUnikey) {
+            $pluginUnikey = $this->getStudlyName();
         }
 
-        if (! $pluginName) {
+        if (! $pluginUnikey) {
             return false;
         }
 
         $path = $this->config('paths.plugins');
 
-        $pluginJsonPath = sprintf('%s/%s/plugin.json', $path, $pluginName);
+        $pluginJsonPath = sprintf('%s/%s/plugin.json', $path, $pluginUnikey);
 
         $pluginJson = Json::make($pluginJsonPath);
 
-        return $pluginName == $pluginJson->get('unikey');
+        return $pluginUnikey == $pluginJson->get('unikey');
     }
 
-    public function isAvailablePlugin(?string $pluginName = null)
+    public function isAvailablePlugin(?string $pluginUnikey = null)
     {
-        if (! $pluginName) {
-            $pluginName = $this->getStudlyName();
+        if (! $pluginUnikey) {
+            $pluginUnikey = $this->getStudlyName();
         }
 
-        if (! $pluginName) {
+        if (! $pluginUnikey) {
             return false;
         }
 
         try {
             // Verify that the program is loaded correctly by loading the program
-            $plugin = new Plugin($pluginName);
+            $plugin = new Plugin($pluginUnikey);
             $plugin->manualAddNamespace();
 
-            $serviceProvider = sprintf('%s\\Providers\\%sServiceProvider', $plugin->getClassNamespace(), $pluginName);
+            $serviceProvider = sprintf('%s\\Providers\\%sServiceProvider', $plugin->getClassNamespace(), $pluginUnikey);
 
             return class_exists($serviceProvider);
         } catch (\Throwable $e) {
-            \info("{$pluginName} registration failed, not a valid plugin: ".$e->getMessage());
+            \info("{$pluginUnikey} registration failed, not a valid plugin: ".$e->getMessage());
 
             return false;
         }

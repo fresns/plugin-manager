@@ -14,7 +14,7 @@ class MakeEventProviderCommand extends GeneratorCommand
 {
     use Traits\StubTrait;
 
-    protected $signature = 'make:event-provider {name=EventServiceProvider}';
+    protected $signature = 'make:event-provider {unikey=EventServiceProvider}';
 
     protected $description = 'Generate an event service provider for specified plugin';
 

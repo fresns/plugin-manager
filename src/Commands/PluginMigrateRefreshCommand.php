@@ -13,9 +13,9 @@ use Illuminate\Console\Command;
 
 class PluginMigrateRefreshCommand extends Command
 {
-    use Traits\WorkPluginNameTrait;
+    use Traits\WorkPluginUnikeyTrait;
 
-    protected $signature = 'plugin:migrate-refresh {name?}
+    protected $signature = 'plugin:migrate-refresh {unikey?}
         {--database=}
         {--force=}
         {--realpath=}
@@ -28,8 +28,8 @@ class PluginMigrateRefreshCommand extends Command
 
     public function handle()
     {
-        $pluginName = $this->getPluginName();
-        $plugin = new Plugin($pluginName);
+        $pluginUnikey = $this->getPluginUnikey();
+        $plugin = new Plugin($pluginUnikey);
 
         if (! $plugin->isValidPlugin()) {
             return Command::FAILURE;

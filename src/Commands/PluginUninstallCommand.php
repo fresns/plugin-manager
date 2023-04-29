@@ -16,18 +16,18 @@ use Illuminate\Support\Facades\File;
 
 class PluginUninstallCommand extends Command
 {
-    use Traits\WorkPluginNameTrait;
+    use Traits\WorkPluginUnikeyTrait;
 
-    protected $signature = 'plugin:uninstall {name?}
-        {--cleardata : Trigger clear plugin data}';
+    protected $signature = 'plugin:uninstall {unikey?}
+        {--cleardata=}';
 
     protected $description = 'Install the plugin from the specified path';
 
     public function handle()
     {
         try {
-            $pluginName = $this->getPluginName();
-            $plugin = new Plugin($pluginName);
+            $pluginUnikey = $this->getPluginUnikey();
+            $plugin = new Plugin($pluginUnikey);
 
             if ($this->validatePluginRootPath($plugin)) {
                 $this->error('Failed to operate plugins root path');
@@ -40,25 +40,25 @@ class PluginUninstallCommand extends Command
             $requireDev = Arr::get($composerJson, 'require-dev', []);
 
             event('plugin:uninstalling', [[
-                'unikey' => $pluginName,
+                'unikey' => $pluginUnikey,
             ]]);
 
             $this->call('plugin:deactivate', [
-                'name' => $pluginName,
+                'unikey' => $pluginUnikey,
             ]);
 
             if ($this->option('cleardata')) {
-                event('plugins.cleandata', [[
-                    'unikey' => $pluginName,
+                event('plugins.cleardata', [[
+                    'unikey' => $pluginUnikey,
                 ]]);
 
                 $this->call('plugin:migrate-rollback', [
-                    'name' => $pluginName,
+                    'unikey' => $pluginUnikey,
                 ]);
             }
 
             $this->call('plugin:unpublish', [
-                'name' => $pluginName,
+                'unikey' => $pluginUnikey,
             ]);
 
             File::delete($plugin->getCachedServicesPath());
@@ -77,10 +77,10 @@ class PluginUninstallCommand extends Command
             $plugin->uninstall();
 
             event('plugin:uninstalled', [[
-                'unikey' => $pluginName,
+                'unikey' => $pluginUnikey,
             ]]);
 
-            $this->info("Uninstalled: {$pluginName}");
+            $this->info("Uninstalled: {$pluginUnikey}");
         } catch (\Throwable $e) {
             $this->error("Uninstall fail: {$e->getMessage()}");
 

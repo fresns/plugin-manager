@@ -13,9 +13,9 @@ use Illuminate\Console\Command;
 
 class PluginMigrateCommand extends Command
 {
-    use Traits\WorkPluginNameTrait;
+    use Traits\WorkPluginUnikeyTrait;
 
-    protected $signature = 'plugin:migrate {name?}
+    protected $signature = 'plugin:migrate {unikey?}
         {--database=}
         {--force=}
         {--realpath=}
@@ -30,24 +30,24 @@ class PluginMigrateCommand extends Command
 
     public function handle()
     {
-        $pluginName = $this->getPluginName();
+        $pluginUnikey = $this->getPluginUnikey();
 
-        if ($pluginName) {
-            return $this->migrate($pluginName);
+        if ($pluginUnikey) {
+            return $this->migrate($pluginUnikey);
         } else {
             $plugin = new Plugin();
 
-            collect($plugin->all())->map(function ($pluginName) {
-                $this->migrate($pluginName, true);
+            collect($plugin->all())->map(function ($pluginUnikey) {
+                $this->migrate($pluginUnikey, true);
             });
         }
 
         return Command::SUCCESS;
     }
 
-    public function migrate(string $pluginName, $isAll = false)
+    public function migrate(string $pluginUnikey, $isAll = false)
     {
-        $plugin = new Plugin($pluginName);
+        $plugin = new Plugin($pluginUnikey);
 
         if (! $plugin->isValidPlugin()) {
             return Command::FAILURE;

@@ -13,18 +13,18 @@ use Illuminate\Console\Command;
 
 class PluginDeactivateCommand extends Command
 {
-    use Traits\WorkPluginNameTrait;
+    use Traits\WorkPluginUnikeyTrait;
 
-    protected $signature = 'plugin:deactivate {name?}';
+    protected $signature = 'plugin:deactivate {unikey?}';
 
     protected $description = 'Deactivate plugin';
 
     public function handle()
     {
-        $pluginName = $this->getPluginName();
+        $pluginUnikey = $this->getPluginUnikey();
 
-        if ($pluginName) {
-            $this->deactivate($pluginName);
+        if ($pluginUnikey) {
+            $this->deactivate($pluginUnikey);
         }
         // Deactivate all plugins
         else {
@@ -40,14 +40,14 @@ class PluginDeactivateCommand extends Command
     {
         $plugin = new Plugin();
 
-        collect($plugin->all())->map(function ($pluginName) {
-            $this->deactivate($pluginName);
+        collect($plugin->all())->map(function ($pluginUnikey) {
+            $this->deactivate($pluginUnikey);
         });
     }
 
-    public function deactivate(?string $pluginName = null)
+    public function deactivate(?string $pluginUnikey = null)
     {
-        $plugin = new Plugin($pluginName);
+        $plugin = new Plugin($pluginUnikey);
         $unikey = $plugin->getStudlyName();
 
         event('plugin:deactivating', [[
@@ -55,9 +55,9 @@ class PluginDeactivateCommand extends Command
         ]]);
 
         if ($result = $plugin->deactivate()) {
-            $this->info(sprintf('Plugin %s deactivate successfully', $pluginName));
+            $this->info(sprintf('Plugin %s deactivate successfully', $pluginUnikey));
         } else {
-            $this->error(sprintf('Plugin %s deactivate failure', $pluginName));
+            $this->error(sprintf('Plugin %s deactivate failure', $pluginUnikey));
         }
 
         event('plugin:deactivated', [[
