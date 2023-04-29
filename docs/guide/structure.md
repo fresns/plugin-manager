@@ -63,6 +63,52 @@ laravel/            // Main Program
 }
 ```
 
+# Plugin Listeners
+
+```php
+protected $listen = [
+    // plugin installing
+    'plugin:installing' => [
+        //
+    ],
+
+    // plugin installed
+    'plugin:installed' => [
+        // 
+    ],
+
+    // plugin activating
+    'plugin:activating' => [
+        //
+    ],
+
+    // plugin activated
+    'plugin:activated' => [
+        //
+    ],
+
+    // plugin deactivating
+    'plugin:deactivating' => [
+        //
+    ],
+
+    // plugin deactivated
+    'plugin:deactivated' => [
+        //
+    ],
+
+    // plugin uninstalling
+    'plugin:uninstalling' => [
+        //
+    ],
+
+    // plugin uninstalled
+    'plugin:uninstalled' => [
+        //
+    ],
+];
+```
+
 ## Assets file publish
 
 Assets are distributed to the public directory when the plugin is installed and released.
