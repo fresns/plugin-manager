@@ -39,7 +39,7 @@ use Plugins\DemoPlugin\Services\SendEmail;
 class CmdWordServiceProvider extends ServiceProvider implements \Fresns\CmdWordManager\Contracts\CmdWordProviderContract
 {
     <...>
-    protected $fsKeyName = 'DemoPlugin';
+    protected $fskey = 'DemoPlugin';
 
     protected $cmdWordsMap = [
         ['word' => 'sendCode', 'provider' => [SendCode::class, 'handleSendCode']],
