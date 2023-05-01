@@ -14,7 +14,7 @@ class $CLASS$ extends ServiceProvider implements \Fresns\CmdWordManager\Contract
 {
     use \Fresns\CmdWordManager\Traits\CmdWordProviderTrait;
 
-    protected $fskeyName = '$STUDLY_NAME$';
+    protected $fsKeyName = '$STUDLY_NAME$';
 
     /**
      *
