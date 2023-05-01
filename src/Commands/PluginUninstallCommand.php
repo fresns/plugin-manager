@@ -16,9 +16,9 @@ use Illuminate\Support\Facades\File;
 
 class PluginUninstallCommand extends Command
 {
-    use Traits\WorkPluginUnikeyTrait;
+    use Traits\WorkPluginFskeyTrait;
 
-    protected $signature = 'plugin:uninstall {unikey?}
+    protected $signature = 'plugin:uninstall {fskey?}
         {--cleardata=}';
 
     protected $description = 'Install the plugin from the specified path';
@@ -26,8 +26,8 @@ class PluginUninstallCommand extends Command
     public function handle()
     {
         try {
-            $pluginUnikey = $this->getPluginUnikey();
-            $plugin = new Plugin($pluginUnikey);
+            $pluginFskey = $this->getPluginFskey();
+            $plugin = new Plugin($pluginFskey);
 
             if ($this->validatePluginRootPath($plugin)) {
                 $this->error('Failed to operate plugins root path');
@@ -40,25 +40,23 @@ class PluginUninstallCommand extends Command
             $requireDev = Arr::get($composerJson, 'require-dev', []);
 
             event('plugin:uninstalling', [[
-                'unikey' => $pluginUnikey,
+                'fskey' => $pluginFskey,
             ]]);
 
             $this->call('plugin:deactivate', [
-                'unikey' => $pluginUnikey,
+                'fskey' => $pluginFskey,
             ]);
 
             if ($this->option('cleardata')) {
-                event('plugins.cleardata', [[
-                    'unikey' => $pluginUnikey,
-                ]]);
-
                 $this->call('plugin:migrate-rollback', [
-                    'unikey' => $pluginUnikey,
+                    'fskey' => $pluginFskey,
                 ]);
+
+                $this->info("Clear Data: {$pluginFskey}");
             }
 
             $this->call('plugin:unpublish', [
-                'unikey' => $pluginUnikey,
+                'fskey' => $pluginFskey,
             ]);
 
             File::delete($plugin->getCachedServicesPath());
@@ -77,10 +75,10 @@ class PluginUninstallCommand extends Command
             $plugin->uninstall();
 
             event('plugin:uninstalled', [[
-                'unikey' => $pluginUnikey,
+                'fskey' => $pluginFskey,
             ]]);
 
-            $this->info("Uninstalled: {$pluginUnikey}");
+            $this->info("Uninstalled: {$pluginFskey}");
         } catch (\Throwable $e) {
             $this->error("Uninstall fail: {$e->getMessage()}");
 

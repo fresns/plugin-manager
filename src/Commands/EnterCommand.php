@@ -12,7 +12,7 @@ use Illuminate\Console\Command;
 
 class EnterCommand extends Command
 {
-    protected $signature = 'enter {unikey}';
+    protected $signature = 'enter {fskey}';
 
     protected $description = 'Go to plugin directory';
 
@@ -25,17 +25,17 @@ class EnterCommand extends Command
             return Command::FAILURE;
         }
 
-        $unikey = $this->argument('unikey');
+        $fskey = $this->argument('fskey');
 
-        $pluginPath = "{$pluginRootPath}/{$unikey}";
+        $pluginPath = "{$pluginRootPath}/{$fskey}";
         if (! file_exists($pluginPath)) {
-            $this->error("Plugin directory {$unikey} does not exist");
+            $this->error("Plugin directory {$fskey} does not exist");
 
             return Command::FAILURE;
         }
 
         if (getenv('PWD') != $pluginPath) {
-            $this->warn("Go to the plugin {$unikey} directory");
+            $this->warn("Go to the plugin {$fskey} directory");
             $this->line('');
             $this->warn('Please input this command on your terminal:');
 
@@ -43,11 +43,11 @@ class EnterCommand extends Command
             $this->line($command);
             $this->line('');
         } else {
-            $this->info("Currently in the plugin {$unikey} directory");
+            $this->info("Currently in the plugin {$fskey} directory");
             $this->line($pluginPath);
 
             $this->line('');
-            $this->info("Now you can run command in your plugin: {$unikey}");
+            $this->info("Now you can run command in your plugin: {$fskey}");
             $this->line('fresns');
         }
 

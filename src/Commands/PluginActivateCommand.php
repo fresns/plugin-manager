@@ -13,18 +13,18 @@ use Illuminate\Console\Command;
 
 class PluginActivateCommand extends Command
 {
-    use Traits\WorkPluginUnikeyTrait;
+    use Traits\WorkPluginFskeyTrait;
 
-    protected $signature = 'plugin:activate {unikey?}';
+    protected $signature = 'plugin:activate {fskey?}';
 
     protected $description = 'Activate Plugin';
 
     public function handle()
     {
-        $pluginUnikey = $this->getPluginUnikey();
+        $pluginFskey = $this->getPluginFskey();
 
-        if ($pluginUnikey) {
-            $this->activate($pluginUnikey);
+        if ($pluginFskey) {
+            $this->activate($pluginFskey);
         }
         // Activate all plugins
         else {
@@ -40,29 +40,29 @@ class PluginActivateCommand extends Command
     {
         $plugin = new Plugin();
 
-        collect($plugin->all())->map(function ($pluginUnikey) {
-            $this->activate($pluginUnikey);
+        collect($plugin->all())->map(function ($pluginFskey) {
+            $this->activate($pluginFskey);
         });
     }
 
-    public function activate(?string $pluginUnikey = null)
+    public function activate(?string $pluginFskey = null)
     {
-        $plugin = new Plugin($pluginUnikey);
+        $plugin = new Plugin($pluginFskey);
 
-        $unikey = $plugin->getStudlyName();
+        $fskey = $plugin->getStudlyName();
 
         event('plugin:activating', [[
-            'unikey' => $unikey,
+            'fskey' => $fskey,
         ]]);
 
         if ($result = $plugin->activate()) {
-            $this->info(sprintf('Plugin %s activate successfully', $pluginUnikey));
+            $this->info(sprintf('Plugin %s activate successfully', $pluginFskey));
         } else {
-            $this->error(sprintf('Plugin %s activate failure', $pluginUnikey));
+            $this->error(sprintf('Plugin %s activate failure', $pluginFskey));
         }
 
         event('plugin:activated', [[
-            'unikey' => $unikey,
+            'fskey' => $fskey,
         ]]);
 
         return $result;

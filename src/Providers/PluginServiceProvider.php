@@ -64,9 +64,9 @@ class PluginServiceProvider extends ServiceProvider
 
         $plugin = new Plugin();
 
-        collect($plugin->all())->map(function ($pluginUnikey) {
+        collect($plugin->all())->map(function ($pluginFskey) {
             try {
-                $plugin = new Plugin($pluginUnikey);
+                $plugin = new Plugin($pluginFskey);
 
                 if ($plugin->isAvailablePlugin() && $plugin->isActivate()) {
                     $plugin->registerFiles();
@@ -74,8 +74,8 @@ class PluginServiceProvider extends ServiceProvider
                     $plugin->registerAliases();
                 }
             } catch (\Throwable $e) {
-                info($message = sprintf('Plugin namespace failed to load UniKey: %s, reason: %s, file: %s, line: %s',
-                    $pluginUnikey,
+                info($message = sprintf('Plugin namespace failed to load Fskey: %s, reason: %s, file: %s, line: %s',
+                    $pluginFskey,
                     $e->getMessage(),
                     str_replace(base_path().'/', '', $e->getFile()),
                     $e->getLine(),

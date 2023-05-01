@@ -30,15 +30,15 @@ class PluginListCommand extends Command
                 continue;
             }
 
-            $pluginUnikey = basename($pluginDir);
+            $pluginFskey = basename($pluginDir);
 
-            $plugin = new Plugin($pluginUnikey);
+            $plugin = new Plugin($pluginFskey);
 
             $rows[] = $plugin->getPluginInfo();
         }
 
         $this->table([
-            'Plugin Name',
+            'Plugin Fskey',
             'Validation',
             'Available',
             'Plugin Status',

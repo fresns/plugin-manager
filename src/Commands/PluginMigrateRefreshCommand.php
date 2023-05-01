@@ -13,9 +13,9 @@ use Illuminate\Console\Command;
 
 class PluginMigrateRefreshCommand extends Command
 {
-    use Traits\WorkPluginUnikeyTrait;
+    use Traits\WorkPluginFskeyTrait;
 
-    protected $signature = 'plugin:migrate-refresh {unikey?}
+    protected $signature = 'plugin:migrate-refresh {fskey?}
         {--database=}
         {--force=}
         {--realpath=}
@@ -28,8 +28,8 @@ class PluginMigrateRefreshCommand extends Command
 
     public function handle()
     {
-        $pluginUnikey = $this->getPluginUnikey();
-        $plugin = new Plugin($pluginUnikey);
+        $pluginFskey = $this->getPluginFskey();
+        $plugin = new Plugin($pluginFskey);
 
         if (! $plugin->isValidPlugin()) {
             return Command::FAILURE;
@@ -56,9 +56,9 @@ class PluginMigrateRefreshCommand extends Command
                 ]);
             }
 
-            $this->info("Migrate Refresh: {$plugin->getUnikey()}");
+            $this->info("Migrate Refresh: {$plugin->getFskey()}");
         } catch (\Throwable $e) {
-            $this->warn("Migrate Refresh {$plugin->getUnikey()} fail\n");
+            $this->warn("Migrate Refresh {$plugin->getFskey()} fail\n");
             $this->error($e->getMessage());
         }
 

@@ -44,8 +44,8 @@ fresns make:event-provider          // 生成插件事件服务提供者
 ### fresns 模式
 
 ```php
-fresns plugin:unzip                 // 解压插件包到插件目录 /extensions/plugins/{unikey}/
-fresns plugin:publish               // 发布插件（分发静态资源） /public/assets/plugins/{unikey}/
+fresns plugin:unzip                 // 解压插件包到插件目录 /extensions/plugins/{fskey}/
+fresns plugin:publish               // 发布插件（分发静态资源） /public/assets/plugins/{fskey}/
 fresns plugin:unpublish             // 撤销发布（删除静态资源）
 fresns plugin:composer-update       // 更新插件 Composer 依赖包
 fresns plugin:migrate               // 执行插件 Migrate
@@ -60,8 +60,8 @@ fresns plugin:uninstall             // 卸载插件
 ### artisan 模式
 
 ```php
-php artisan plugin:unzip            // 解压插件包到插件目录 /extensions/plugins/{unikey}/
-php artisan plugin:publish          // 发布插件（分发静态资源） /public/assets/plugins/{unikey}/
+php artisan plugin:unzip            // 解压插件包到插件目录 /extensions/plugins/{fskey}/
+php artisan plugin:publish          // 发布插件（分发静态资源） /public/assets/plugins/{fskey}/
 php artisan plugin:unpublish        // 撤销发布（删除静态资源）
 php artisan plugin:composer-update  // 更新插件 Composer 依赖包
 php artisan plugin:migrate          // 执行插件 Migrate

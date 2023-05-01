@@ -27,7 +27,7 @@ laravel/            // Main Program
 
 ```json
 {
-    "unikey": "DemoPlugin",
+    "fskey": "DemoPlugin",
     "name": "Demo Plugin",
     "description": "Plugin description",
     "developer": "Jevan Tang",
@@ -115,4 +115,4 @@ Assets are distributed to the public directory when the plugin is installed and 
 
 | Plugin Folder | Publish to the site resource directory |
 | --- | --- |
-| /extensions/plugins/`{unikey}`/Resources/assets/ | /public/assets/plugins/`{unikey}`/ |
+| /extensions/plugins/`{fskey}`/Resources/assets/ | /public/assets/plugins/`{fskey}`/ |

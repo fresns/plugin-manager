@@ -36,9 +36,9 @@ class PluginUnzipCommand extends Command
 
         $plugin = Json::make($pluginJsonPath);
 
-        $pluginUnikey = $plugin->get('unikey');
-        if (! $pluginUnikey) {
-            \info('Failed to get plugin unikey: '.var_export($pluginUnikey, true));
+        $pluginFskey = $plugin->get('fskey');
+        if (! $pluginFskey) {
+            \info('Failed to get plugin fskey: '.var_export($pluginFskey, true));
             $this->error('install plugin error, plugin.json is invalid plugin json');
 
             return Command::FAILURE;
@@ -46,32 +46,32 @@ class PluginUnzipCommand extends Command
 
         $pluginDir = sprintf('%s/%s',
             config('plugins.paths.plugins'),
-            $pluginUnikey
+            $pluginFskey
         );
 
         if (file_exists($pluginDir)) {
-            $this->backup($pluginDir, $pluginUnikey);
+            $this->backup($pluginDir, $pluginFskey);
         }
 
         File::copyDirectory($tmpDirPath, $pluginDir);
         File::deleteDirectory($tmpDirPath);
 
-        Cache::put('install:plugin_unikey', $pluginUnikey, now()->addMinutes(5));
+        Cache::put('install:plugin_fskey', $pluginFskey, now()->addMinutes(5));
 
         return Command::SUCCESS;
     }
 
-    public function backup(string $pluginDir, string $pluginUnikey)
+    public function backup(string $pluginDir, string $pluginFskey)
     {
         $backupDir = config('plugins.paths.backups');
 
         File::ensureDirectoryExists($backupDir);
 
-        $dirs = File::glob("$backupDir/$pluginUnikey*");
+        $dirs = File::glob("$backupDir/$pluginFskey*");
 
         $currentBackupCount = count($dirs);
 
-        $targetPath = sprintf('%s/%s-%s-%s', $backupDir, $pluginUnikey, date('YmdHis'), $currentBackupCount + 1);
+        $targetPath = sprintf('%s/%s-%s-%s', $backupDir, $pluginFskey, date('YmdHis'), $currentBackupCount + 1);
 
         File::copyDirectory($pluginDir, $targetPath);
         File::cleanDirectory($pluginDir);

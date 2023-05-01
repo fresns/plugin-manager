@@ -2,7 +2,7 @@
 
 ## 解压插件包
 
-Unzip the plugin files into the `/plugins/` directory, the final directory will be `/plugins/{unikey}/`.
+Unzip the plugin files into the `/plugins/` directory, the final directory will be `/plugins/{fskey}/`.
 
 ```php
 fresns plugin:unzip /www/wwwroot/fresns/storage/plugins/123e4567-e89b-12d3-a456-426614174000.zip
@@ -165,4 +165,4 @@ php artisan plugin:uninstall DemoPlugin --cleandata=false
 - `/plugins/DemoPlugin/` Physically deletion the folder.
 - `/public/assets/plugins/DemoPlugin/` Physically deletion the folder.
 - Remove the plugin composer dependency package (skip if the main application or another plugin is in use)
-- Logically deletion the value of the record where the `unikey` column of the `plugins` table is `DemoPlugin`.
+- Logically deletion the value of the record where the `fskey` column of the `plugins` table is `DemoPlugin`.

@@ -13,9 +13,9 @@ use Illuminate\Console\Command;
 
 class PluginMigrateCommand extends Command
 {
-    use Traits\WorkPluginUnikeyTrait;
+    use Traits\WorkPluginFskeyTrait;
 
-    protected $signature = 'plugin:migrate {unikey?}
+    protected $signature = 'plugin:migrate {fskey?}
         {--database=}
         {--force=}
         {--realpath=}
@@ -30,24 +30,24 @@ class PluginMigrateCommand extends Command
 
     public function handle()
     {
-        $pluginUnikey = $this->getPluginUnikey();
+        $pluginFskey = $this->getPluginFskey();
 
-        if ($pluginUnikey) {
-            return $this->migrate($pluginUnikey);
+        if ($pluginFskey) {
+            return $this->migrate($pluginFskey);
         } else {
             $plugin = new Plugin();
 
-            collect($plugin->all())->map(function ($pluginUnikey) {
-                $this->migrate($pluginUnikey, true);
+            collect($plugin->all())->map(function ($pluginFskey) {
+                $this->migrate($pluginFskey, true);
             });
         }
 
         return Command::SUCCESS;
     }
 
-    public function migrate(string $pluginUnikey, $isAll = false)
+    public function migrate(string $pluginFskey, $isAll = false)
     {
-        $plugin = new Plugin($pluginUnikey);
+        $plugin = new Plugin($pluginFskey);
 
         if (! $plugin->isValidPlugin()) {
             return Command::FAILURE;
@@ -76,9 +76,9 @@ class PluginMigrateCommand extends Command
                 ]);
             }
 
-            $this->info("Migrated: {$plugin->getUnikey()}");
+            $this->info("Migrated: {$plugin->getFskey()}");
         } catch (\Throwable $e) {
-            $this->warn("Migrated {$plugin->getUnikey()} fail\n");
+            $this->warn("Migrated {$plugin->getFskey()} fail\n");
             $this->error($e->getMessage());
         }
     }

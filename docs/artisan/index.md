@@ -44,8 +44,8 @@ fresns make:event-provider          // Generate Plugin Event Provider
 ### fresns mode
 
 ```php
-fresns plugin:unzip                 // Unzip the plugin package to the plugin directory: /extensions/plugins/{unikey}/
-fresns plugin:publish               // Publish Plugin (static resources): /public/assets/plugins/{unikey}/
+fresns plugin:unzip                 // Unzip the plugin package to the plugin directory: /extensions/plugins/{fskey}/
+fresns plugin:publish               // Publish Plugin (static resources): /public/assets/plugins/{fskey}/
 fresns plugin:unpublish             // Unpublish (remove static resources)
 fresns plugin:composer-update       // Update Plugin Composer Package
 fresns plugin:migrate               // Run Plugin Migrate
@@ -60,8 +60,8 @@ fresns plugin:uninstall             // Uninstall Plugin
 ### artisan mode
 
 ```php
-php artisan plugin:unzip            // Unzip the plugin package to the plugin directory: /extensions/plugins/{unikey}/
-php artisan plugin:publish          // Publish Plugin (static resources): /public/assets/plugins/{unikey}/
+php artisan plugin:unzip            // Unzip the plugin package to the plugin directory: /extensions/plugins/{fskey}/
+php artisan plugin:publish          // Publish Plugin (static resources): /public/assets/plugins/{fskey}/
 php artisan plugin:unpublish        // Unpublish (remove static resources)
 php artisan plugin:composer-update  // Update Plugin Composer Package
 php artisan plugin:migrate          // Run Plugin Migrate

@@ -1,6 +1,5 @@
 {
-    "unikey": "$STUDLY_NAME$",
-    "type": 1,
+    "fskey": "$STUDLY_NAME$",
     "name": "$STUDLY_NAME$",
     "description": "$STUDLY_NAME$ plugin made by fresns",
     "author": "Fresns",

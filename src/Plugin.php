@@ -16,18 +16,18 @@ use Illuminate\Support\Str;
 
 class Plugin
 {
-    protected $pluginUnikey;
+    protected $pluginFskey;
 
     /**
      * @var FileManager
      */
     protected $manager;
 
-    public function __construct(?string $pluginUnikey = null)
+    public function __construct(?string $pluginFskey = null)
     {
         $this->manager = new FileManager();
 
-        $this->setPluginUnikey($pluginUnikey);
+        $this->setPluginFskey($pluginFskey);
     }
 
     public function config(string $key, $default = null)
@@ -35,34 +35,34 @@ class Plugin
         return config('plugins.'.$key, $default);
     }
 
-    public function setPluginUnikey(?string $pluginUnikey = null)
+    public function setPluginFskey(?string $pluginFskey = null)
     {
-        $this->pluginUnikey = $pluginUnikey;
+        $this->pluginFskey = $pluginFskey;
     }
 
-    public function getUnikey()
+    public function getFskey()
     {
         return $this->getStudlyName();
     }
 
     public function getLowerName(): string
     {
-        return Str::lower($this->pluginUnikey);
+        return Str::lower($this->pluginFskey);
     }
 
     public function getStudlyName()
     {
-        return Str::studly($this->pluginUnikey);
+        return Str::studly($this->pluginFskey);
     }
 
     public function getKebabName()
     {
-        return Str::kebab($this->pluginUnikey);
+        return Str::kebab($this->pluginFskey);
     }
 
     public function getSnakeName()
     {
-        return Str::snake($this->pluginUnikey);
+        return Str::snake($this->pluginFskey);
     }
 
     public function getClassNamespace()
@@ -82,9 +82,9 @@ class Plugin
     public function getPluginPath(): ?string
     {
         $path = $this->config('paths.plugins');
-        $pluginUnikey = $this->getStudlyName();
+        $pluginFskey = $this->getStudlyName();
 
-        return "{$path}/{$pluginUnikey}";
+        return "{$path}/{$pluginFskey}";
     }
 
     public function getFactoryPath()
@@ -115,9 +115,9 @@ class Plugin
         }
 
         $path = $this->config('paths.assets');
-        $pluginUnikey = $this->getStudlyName();
+        $pluginFskey = $this->getStudlyName();
 
-        return "{$path}/{$pluginUnikey}";
+        return "{$path}/{$pluginFskey}";
     }
 
     public function getAssetsSourcePath(): ?string
@@ -189,11 +189,11 @@ class Plugin
 
     public function exists(): bool
     {
-        if (! $pluginUnikey = $this->getStudlyName()) {
+        if (! $pluginFskey = $this->getStudlyName()) {
             return false;
         }
 
-        if (in_array($pluginUnikey, $this->all())) {
+        if (in_array($pluginFskey, $this->all())) {
             return true;
         }
 
@@ -207,61 +207,61 @@ class Plugin
 
         $plugins = [];
         foreach ($pluginJsons as $pluginJson) {
-            $pluginUnikey = basename(dirname($pluginJson));
+            $pluginFskey = basename(dirname($pluginJson));
 
-            if (! $this->isValidPlugin($pluginUnikey)) {
+            if (! $this->isValidPlugin($pluginFskey)) {
                 continue;
             }
 
-            if (! $this->isAvailablePlugin($pluginUnikey)) {
+            if (! $this->isAvailablePlugin($pluginFskey)) {
                 continue;
             }
 
-            $plugins[] = $pluginUnikey;
+            $plugins[] = $pluginFskey;
         }
 
         return $plugins;
     }
 
-    public function isValidPlugin(?string $pluginUnikey = null)
+    public function isValidPlugin(?string $pluginFskey = null)
     {
-        if (! $pluginUnikey) {
-            $pluginUnikey = $this->getStudlyName();
+        if (! $pluginFskey) {
+            $pluginFskey = $this->getStudlyName();
         }
 
-        if (! $pluginUnikey) {
+        if (! $pluginFskey) {
             return false;
         }
 
         $path = $this->config('paths.plugins');
 
-        $pluginJsonPath = sprintf('%s/%s/plugin.json', $path, $pluginUnikey);
+        $pluginJsonPath = sprintf('%s/%s/plugin.json', $path, $pluginFskey);
 
         $pluginJson = Json::make($pluginJsonPath);
 
-        return $pluginUnikey == $pluginJson->get('unikey');
+        return $pluginFskey == $pluginJson->get('fskey');
     }
 
-    public function isAvailablePlugin(?string $pluginUnikey = null)
+    public function isAvailablePlugin(?string $pluginFskey = null)
     {
-        if (! $pluginUnikey) {
-            $pluginUnikey = $this->getStudlyName();
+        if (! $pluginFskey) {
+            $pluginFskey = $this->getStudlyName();
         }
 
-        if (! $pluginUnikey) {
+        if (! $pluginFskey) {
             return false;
         }
 
         try {
             // Verify that the program is loaded correctly by loading the program
-            $plugin = new Plugin($pluginUnikey);
+            $plugin = new Plugin($pluginFskey);
             $plugin->manualAddNamespace();
 
-            $serviceProvider = sprintf('%s\\Providers\\%sServiceProvider', $plugin->getClassNamespace(), $pluginUnikey);
+            $serviceProvider = sprintf('%s\\Providers\\%sServiceProvider', $plugin->getClassNamespace(), $pluginFskey);
 
             return class_exists($serviceProvider);
         } catch (\Throwable $e) {
-            \info("{$pluginUnikey} registration failed, not a valid plugin: ".$e->getMessage());
+            \info("{$pluginFskey} registration failed, not a valid plugin: ".$e->getMessage());
 
             return false;
         }
@@ -327,8 +327,8 @@ class Plugin
 
     public function manualAddNamespace()
     {
-        $unikey = $this->getStudlyName();
-        if (! $unikey) {
+        $fskey = $this->getStudlyName();
+        if (! $fskey) {
             return;
         }
 
@@ -339,34 +339,34 @@ class Plugin
             $namespaces = config('plugins.namespaces', []);
 
             foreach ($namespaces as $namespace => $paths) {
-                $appPaths = array_map(function ($path) use ($unikey) {
-                    return "{$path}/{$unikey}/app";
+                $appPaths = array_map(function ($path) use ($fskey) {
+                    return "{$path}/{$fskey}/app";
                 }, $paths);
-                $loader->addPsr4("{$namespace}\\{$unikey}\\", $appPaths, true);
+                $loader->addPsr4("{$namespace}\\{$fskey}\\", $appPaths, true);
 
-                $factoryPaths = array_map(function ($path) use ($unikey) {
-                    return "{$path}/{$unikey}/database/factories";
+                $factoryPaths = array_map(function ($path) use ($fskey) {
+                    return "{$path}/{$fskey}/database/factories";
                 }, $paths);
-                $loader->addPsr4("{$namespace}\\{$unikey}\\Database\\Factories\\", $factoryPaths, true);
+                $loader->addPsr4("{$namespace}\\{$fskey}\\Database\\Factories\\", $factoryPaths, true);
 
-                $seederPaths = array_map(function ($path) use ($unikey) {
-                    return "{$path}/{$unikey}/database/seeders";
+                $seederPaths = array_map(function ($path) use ($fskey) {
+                    return "{$path}/{$fskey}/database/seeders";
                 }, $paths);
-                $loader->addPsr4("{$namespace}\\{$unikey}\\Database\\Seeders\\", $seederPaths, true);
+                $loader->addPsr4("{$namespace}\\{$fskey}\\Database\\Seeders\\", $seederPaths, true);
 
-                $testPaths = array_map(function ($path) use ($unikey) {
-                    return "{$path}/{$unikey}/tests";
+                $testPaths = array_map(function ($path) use ($fskey) {
+                    return "{$path}/{$fskey}/tests";
                 }, $paths);
-                $loader->addPsr4("{$namespace}\\{$unikey}\\Tests\\", $testPaths, true);
+                $loader->addPsr4("{$namespace}\\{$fskey}\\Tests\\", $testPaths, true);
             }
         }
     }
 
     public function getPluginInfo()
     {
-        // Validation: Does the directory name and unikey match correctly
+        // Validation: Does the directory name and fskey match correctly
         // Available: Whether the service provider is registered successfully
-        $item['Plugin Name'] = "<info>{$this->getStudlyName()}</info>";
+        $item['Plugin Fskey'] = "<info>{$this->getStudlyName()}</info>";
         $item['Validation'] = $this->isValidPlugin() ? '<info>true</info>' : '<fg=red>false</fg=red>';
         $item['Available'] = $this->isAvailablePlugin() ? '<info>Available</info>' : '<fg=red>Unavailable</fg=red>';
         $item['Plugin Status'] = $this->isActivate() ? '<info>Activate</info>' : '<fg=red>Deactivate</fg=red>';

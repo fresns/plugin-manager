@@ -1,6 +1,6 @@
 # Generate a new plugin.
 
-Create a plugin with Unikey as `DemoPlugin`
+Create a plugin with fskey as `DemoPlugin`
 
 ```php
 fresns plugin:make DemoPlugin

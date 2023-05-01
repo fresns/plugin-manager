@@ -25,7 +25,7 @@
                             <option>🚫 Deactivate</option>
 
                             @foreach($plugins['other_$SNAKE_NAME$_service'] ?? [] as $plugin)
-                            <option @if($configs['other_$SNAKE_NAME$_service'] == $plugin['unikey']) selected @endif value="{{ $plugin['unikey'] }}">{{ $plugin['name'] }}</option>
+                            <option @if($configs['other_$SNAKE_NAME$_service'] == $plugin['fskey']) selected @endif value="{{ $plugin['fskey'] }}">{{ $plugin['name'] }}</option>
                             @endforeach
                         </select>
                     </div>

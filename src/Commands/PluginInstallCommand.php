@@ -60,18 +60,18 @@ class PluginInstallCommand extends Command
                     return $exitCode;
                 }
 
-                $unikey = Cache::pull('install:plugin_unikey');
+                $fskey = Cache::pull('install:plugin_fskey');
             } else {
-                $unikey = basename($path);
+                $fskey = basename($path);
             }
 
-            if (! $unikey) {
-                info('Failed to unzip, couldn\'t get the plugin unikey');
+            if (! $fskey) {
+                info('Failed to unzip, couldn\'t get the plugin fskey');
 
                 return Command::FAILURE;
             }
 
-            $plugin = new Plugin($unikey);
+            $plugin = new Plugin($fskey);
             if (! $plugin->isValidPlugin()) {
                 $this->error('plugin is invalid');
 
@@ -81,7 +81,7 @@ class PluginInstallCommand extends Command
             $plugin->manualAddNamespace();
 
             event('plugin:installing', [[
-                'unikey' => $unikey,
+                'fskey' => $fskey,
             ]]);
 
             $composerJson = Json::make($plugin->getComposerJsonPath())->get();
@@ -100,30 +100,30 @@ class PluginInstallCommand extends Command
             }
 
             $this->call('plugin:deactivate', [
-                'unikey' => $unikey,
+                'fskey' => $fskey,
             ]);
 
             $this->call('plugin:migrate', [
-                'unikey' => $unikey,
+                'fskey' => $fskey,
             ]);
 
             if ($this->option('seed')) {
                 $this->call('plugin:seed', [
-                    'unikey' => $unikey,
+                    'fskey' => $fskey,
                 ]);
             }
 
             $plugin->install();
 
             $this->call('plugin:publish', [
-                'unikey' => $unikey,
+                'fskey' => $fskey,
             ]);
 
             event('plugin:installed', [[
-                'unikey' => $unikey,
+                'fskey' => $fskey,
             ]]);
 
-            $this->info("Installed: {$unikey}");
+            $this->info("Installed: {$fskey}");
         } catch (\Throwable $e) {
             $this->error("Install fail: {$e->getMessage()}");
 

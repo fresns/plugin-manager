@@ -12,7 +12,7 @@ use Illuminate\Console\Command;
 
 class PluginMakeCommand extends Command
 {
-    protected $signature = 'plugin:make {unikey}
+    protected $signature = 'plugin:make {fskey}
         {--force}
         ';
 
@@ -21,7 +21,7 @@ class PluginMakeCommand extends Command
     public function handle()
     {
         return $this->call('new', [
-            'unikey' => $this->argument('unikey'),
+            'fskey' => $this->argument('fskey'),
             '--force' => $this->option('force'),
         ]);
     }

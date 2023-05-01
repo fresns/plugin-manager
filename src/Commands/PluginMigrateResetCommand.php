@@ -13,9 +13,9 @@ use Illuminate\Console\Command;
 
 class PluginMigrateResetCommand extends Command
 {
-    use Traits\WorkPluginUnikeyTrait;
+    use Traits\WorkPluginFskeyTrait;
 
-    protected $signature = 'plugin:migrate-reset {unikey?}
+    protected $signature = 'plugin:migrate-reset {fskey?}
         {--database=}
         {--force=}
         {--realpath=}
@@ -26,8 +26,8 @@ class PluginMigrateResetCommand extends Command
 
     public function handle()
     {
-        $pluginUnikey = $this->getPluginUnikey();
-        $plugin = new Plugin($pluginUnikey);
+        $pluginFskey = $this->getPluginFskey();
+        $plugin = new Plugin($pluginFskey);
 
         if (! $plugin->isValidPlugin()) {
             return Command::FAILURE;
@@ -46,9 +46,9 @@ class PluginMigrateResetCommand extends Command
                 '--pretend' => $this->option('pretend') ?? false,
             ]);
 
-            $this->info("Migrate Reset: {$plugin->getUnikey()}");
+            $this->info("Migrate Reset: {$plugin->getFskey()}");
         } catch (\Throwable $e) {
-            $this->warn("Migrate Reset {$plugin->getUnikey()} fail\n");
+            $this->warn("Migrate Reset {$plugin->getFskey()} fail\n");
             $this->error($e->getMessage());
         }
 

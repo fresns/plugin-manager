@@ -13,18 +13,18 @@ use Illuminate\Console\Command;
 
 class PluginDeactivateCommand extends Command
 {
-    use Traits\WorkPluginUnikeyTrait;
+    use Traits\WorkPluginFskeyTrait;
 
-    protected $signature = 'plugin:deactivate {unikey?}';
+    protected $signature = 'plugin:deactivate {fskey?}';
 
     protected $description = 'Deactivate plugin';
 
     public function handle()
     {
-        $pluginUnikey = $this->getPluginUnikey();
+        $pluginFskey = $this->getPluginFskey();
 
-        if ($pluginUnikey) {
-            $this->deactivate($pluginUnikey);
+        if ($pluginFskey) {
+            $this->deactivate($pluginFskey);
         }
         // Deactivate all plugins
         else {
@@ -40,28 +40,28 @@ class PluginDeactivateCommand extends Command
     {
         $plugin = new Plugin();
 
-        collect($plugin->all())->map(function ($pluginUnikey) {
-            $this->deactivate($pluginUnikey);
+        collect($plugin->all())->map(function ($pluginFskey) {
+            $this->deactivate($pluginFskey);
         });
     }
 
-    public function deactivate(?string $pluginUnikey = null)
+    public function deactivate(?string $pluginFskey = null)
     {
-        $plugin = new Plugin($pluginUnikey);
-        $unikey = $plugin->getStudlyName();
+        $plugin = new Plugin($pluginFskey);
+        $fskey = $plugin->getStudlyName();
 
         event('plugin:deactivating', [[
-            'unikey' => $unikey,
+            'fskey' => $fskey,
         ]]);
 
         if ($result = $plugin->deactivate()) {
-            $this->info(sprintf('Plugin %s deactivate successfully', $pluginUnikey));
+            $this->info(sprintf('Plugin %s deactivate successfully', $pluginFskey));
         } else {
-            $this->error(sprintf('Plugin %s deactivate failure', $pluginUnikey));
+            $this->error(sprintf('Plugin %s deactivate failure', $pluginFskey));
         }
 
         event('plugin:deactivated', [[
-            'unikey' => $unikey,
+            'fskey' => $fskey,
         ]]);
 
         return $result;

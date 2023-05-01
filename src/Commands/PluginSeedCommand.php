@@ -13,9 +13,9 @@ use Illuminate\Console\Command;
 
 class PluginSeedCommand extends Command
 {
-    use Traits\WorkPluginUnikeyTrait;
+    use Traits\WorkPluginFskeyTrait;
 
-    protected $signature = 'plugin:seed {unikey?}
+    protected $signature = 'plugin:seed {fskey?}
         {--class=DatabaseSeeder}
         {--database=}
         {--force=}
@@ -25,8 +25,8 @@ class PluginSeedCommand extends Command
 
     public function handle()
     {
-        $pluginUnikey = $this->getPluginUnikey();
-        $plugin = new Plugin($pluginUnikey);
+        $pluginFskey = $this->getPluginFskey();
+        $plugin = new Plugin($pluginFskey);
 
         if (! $plugin->isValidPlugin()) {
             return Command::FAILURE;
@@ -43,9 +43,9 @@ class PluginSeedCommand extends Command
                 ]);
             }
 
-            $this->info("Seed: {$plugin->getUnikey()}");
+            $this->info("Seed: {$plugin->getFskey()}");
         } catch (\Throwable $e) {
-            $this->warn("Seed {$plugin->getUnikey()} fail\n");
+            $this->warn("Seed {$plugin->getFskey()} fail\n");
             $this->error($e->getMessage());
         }
 

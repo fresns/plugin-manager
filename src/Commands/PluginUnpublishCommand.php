@@ -14,16 +14,16 @@ use Illuminate\Support\Facades\File;
 
 class PluginUnpublishCommand extends Command
 {
-    use Traits\WorkPluginUnikeyTrait;
+    use Traits\WorkPluginFskeyTrait;
 
-    protected $signature = 'plugin:unpublish {unikey?}';
+    protected $signature = 'plugin:unpublish {fskey?}';
 
     protected $description = 'Distribute static resources of the plugin';
 
     public function handle()
     {
-        $pluginUnikey = $this->getPluginUnikey();
-        $plugin = new Plugin($pluginUnikey);
+        $pluginFskey = $this->getPluginFskey();
+        $plugin = new Plugin($pluginFskey);
 
         if (! $plugin->isValidPlugin()) {
             return Command::FAILURE;
@@ -31,7 +31,7 @@ class PluginUnpublishCommand extends Command
 
         File::deleteDirectory($plugin->getAssetsPath());
 
-        $this->info("Unpublished: {$plugin->getUnikey()}");
+        $this->info("Unpublished: {$plugin->getFskey()}");
 
         return Command::SUCCESS;
     }

@@ -19,12 +19,12 @@ trait StubTrait
     protected $runningAsRootDir = false;
     protected $buildClassName = null;
 
-    protected function buildClass($unikey)
+    protected function buildClass($fskey)
     {
         $this->runningAsRootDir = false;
-        if (str_starts_with($unikey, 'App')) {
+        if (str_starts_with($fskey, 'App')) {
             $this->runningAsRootDir = true;
-            $this->buildClassName = $unikey;
+            $this->buildClassName = $fskey;
         }
 
         $content = $this->getStubContents($this->getStub());
@@ -32,9 +32,9 @@ trait StubTrait
         return $content;
     }
 
-    protected function getPath($unikey)
+    protected function getPath($fskey)
     {
-        $path = parent::getPath($unikey);
+        $path = parent::getPath($fskey);
 
         $this->type = $path;
 
@@ -62,7 +62,7 @@ trait StubTrait
     {
         $stubName = $this->getStubName();
         if (! $stubName) {
-            throw new \RuntimeException('Please provider stub unikey in getStubName method');
+            throw new \RuntimeException('Please provider stub fskey in getStubName method');
         }
 
         $baseStubPath = base_path("stubs/{$stubName}.stub");
@@ -85,7 +85,7 @@ trait StubTrait
      */
     public function getClass()
     {
-        return class_basename($this->argument('unikey'));
+        return class_basename($this->argument('fskey'));
     }
 
     /**
@@ -225,7 +225,7 @@ trait StubTrait
     }
 
     /**
-     * Get the plugin unikey in lower case.
+     * Get the plugin fskey in lower case.
      *
      * @return string
      */
@@ -235,7 +235,7 @@ trait StubTrait
     }
 
     /**
-     * Get the plugin unikey in studly case.
+     * Get the plugin fskey in studly case.
      *
      * @return string
      */
@@ -245,7 +245,7 @@ trait StubTrait
     }
 
     /**
-     * Get the plugin unikey in studly case.
+     * Get the plugin fskey in studly case.
      *
      * @return string
      */
@@ -255,7 +255,7 @@ trait StubTrait
     }
 
     /**
-     * Get the plugin unikey in kebab case.
+     * Get the plugin fskey in kebab case.
      *
      * @return string
      */
@@ -289,26 +289,26 @@ trait StubTrait
         return str_replace('\\', '\\\\', GenerateConfigReader::read('provider')->getNamespace());
     }
 
-    public function __get($unikey)
+    public function __get($fskey)
     {
-        if ($unikey === 'plugin') {
-            // get Plugin Unikey from Namespace: Plugin\DemoTest => DemoTest
+        if ($fskey === 'plugin') {
+            // get Plugin Fskey from Namespace: Plugin\DemoTest => DemoTest
             $namespace = str_replace('\\', '/', app()->getNamespace());
             $namespace = rtrim($namespace, '/');
-            $pluginUnikey = basename($namespace);
+            $pluginFskey = basename($namespace);
 
             // when running in rootDir
-            if ($pluginUnikey == 'App') {
-                $pluginUnikey = null;
+            if ($pluginFskey == 'App') {
+                $pluginFskey = null;
             }
 
             if (empty($this->plugin)) {
-                $this->plugin = new \Fresns\PluginManager\Plugin($pluginUnikey);
+                $this->plugin = new \Fresns\PluginManager\Plugin($pluginFskey);
             }
 
             return $this->plugin;
         }
 
-        throw new \RuntimeException("unknown property $unikey");
+        throw new \RuntimeException("unknown property $fskey");
     }
 }

@@ -13,9 +13,9 @@ use Illuminate\Console\Command;
 
 class PluginMigrateRollbackCommand extends Command
 {
-    use Traits\WorkPluginUnikeyTrait;
+    use Traits\WorkPluginFskeyTrait;
 
-    protected $signature = 'plugin:migrate-rollback {unikey?}
+    protected $signature = 'plugin:migrate-rollback {fskey?}
         {--database=}
         {--force=}
         {--realpath=}
@@ -27,14 +27,14 @@ class PluginMigrateRollbackCommand extends Command
 
     public function handle()
     {
-        $pluginUnikey = $this->getPluginUnikey();
-        $plugin = new Plugin($pluginUnikey);
+        $pluginFskey = $this->getPluginFskey();
+        $plugin = new Plugin($pluginFskey);
 
         if (! $plugin->isValidPlugin()) {
             return Command::FAILURE;
         }
 
-        if ($plugin->isDeactivate()) {
+        if (! $plugin->isDeactivate()) {
             return Command::FAILURE;
         }
 
@@ -49,7 +49,7 @@ class PluginMigrateRollbackCommand extends Command
                     '--pretend' => $this->option('pretend') ?? false,
                 ]);
 
-                $this->info("Migrate Rollback: {$plugin->getUnikey()}");
+                $this->info("Migrate Rollback: {$plugin->getFskey()}");
                 $this->info('Migrate Rollback Path: '.str_replace(base_path().'/', '', $path));
 
                 if ($exitCode != 0) {
@@ -59,7 +59,7 @@ class PluginMigrateRollbackCommand extends Command
                 $this->info('Migrate Rollback: Nothing need to rollback');
             }
         } catch (\Throwable $e) {
-            $this->warn("Migrate Rollback {$plugin->getUnikey()} fail\n");
+            $this->warn("Migrate Rollback {$plugin->getFskey()} fail\n");
             $this->error($e->getMessage());
 
             return Command::FAILURE;

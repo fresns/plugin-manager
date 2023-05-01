@@ -14,16 +14,16 @@ use Illuminate\Support\Facades\File;
 
 class PluginPublishCommand extends Command
 {
-    use Traits\WorkPluginUnikeyTrait;
+    use Traits\WorkPluginFskeyTrait;
 
-    protected $signature = 'plugin:publish {unikey?}';
+    protected $signature = 'plugin:publish {fskey?}';
 
     protected $description = 'Distribute static resources of the plugin';
 
     public function handle()
     {
-        $pluginUnikey = $this->getPluginUnikey();
-        $plugin = new Plugin($pluginUnikey);
+        $pluginFskey = $this->getPluginFskey();
+        $plugin = new Plugin($pluginFskey);
 
         if ($this->validatePluginRootPath($plugin)) {
             $this->error('Failed to operate plugins root path');
@@ -38,7 +38,7 @@ class PluginPublishCommand extends Command
         File::cleanDirectory($plugin->getAssetsPath());
         File::copyDirectory($plugin->getAssetsSourcePath(), $plugin->getAssetsPath());
 
-        $this->info("Published: {$plugin->getUnikey()}");
+        $this->info("Published: {$plugin->getFskey()}");
 
         return Command::SUCCESS;
     }

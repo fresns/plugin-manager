@@ -19,7 +19,7 @@ class NewCommand extends Command
 {
     use Traits\StubTrait;
 
-    protected $signature = 'new {unikey}
+    protected $signature = 'new {fskey}
         {--force}
         ';
 
@@ -37,7 +37,7 @@ class NewCommand extends Command
     /**
      * @var string
      */
-    protected $pluginUnikey;
+    protected $pluginFskey;
 
     /**
      * Execute the console command.
@@ -49,14 +49,14 @@ class NewCommand extends Command
     public function handle()
     {
         $this->filesystem = $this->laravel['files'];
-        $this->pluginUnikey = Str::afterLast($this->argument('unikey'), '/');
+        $this->pluginFskey = Str::afterLast($this->argument('fskey'), '/');
 
-        $this->plugin = new Plugin($this->pluginUnikey);
+        $this->plugin = new Plugin($this->pluginFskey);
 
         // clear directory or exit when plugin exists.
         if (File::exists($this->plugin->getPluginPath())) {
             if (! $this->option('force')) {
-                $this->error("Plugin {$this->plugin->getUnikey()} exists");
+                $this->error("Plugin {$this->plugin->getFskey()} exists");
 
                 return Command::FAILURE;
             }
@@ -70,7 +70,7 @@ class NewCommand extends Command
         // composer dump-autoload
         Process::run('composer dump-autoload', $this->output);
 
-        $this->info("Package [{$this->pluginUnikey}] created successfully");
+        $this->info("Package [{$this->pluginFskey}] created successfully");
 
         return Command::SUCCESS;
     }
@@ -97,7 +97,7 @@ class NewCommand extends Command
                 continue;
             }
 
-            $path = config('plugins.paths.plugins').'/'.$this->argument('unikey').'/'.$folder->getPath();
+            $path = config('plugins.paths.plugins').'/'.$this->argument('fskey').'/'.$folder->getPath();
 
             $this->filesystem->makeDirectory($path, 0755, true);
             if (config('plugins.stubs.gitkeep')) {
@@ -147,9 +147,9 @@ class NewCommand extends Command
     public function generateFiles()
     {
         foreach ($this->getFiles() as $stub => $file) {
-            $pluginUnikey = $this->argument('unikey');
+            $pluginFskey = $this->argument('fskey');
 
-            $path = config('plugins.paths.plugins').'/'.$pluginUnikey.'/'.$file;
+            $path = config('plugins.paths.plugins').'/'.$pluginFskey.'/'.$file;
 
             if ($keys = $this->getReplaceKeys($path)) {
                 $file = $this->getReplacedContent($file, $keys);
