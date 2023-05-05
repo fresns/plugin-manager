@@ -17,8 +17,8 @@ class $STUDLY_NAME$Controller extends Controller
         ]);
 
         $where = [];
-        if (\request()->has('is_enable')) {
-            $where['is_enable'] = \request('is_enable');
+        if (\request()->has('is_enabled')) {
+            $where['is_enabled'] = \request('is_enabled');
         }
 
         // $data = $STUDLY_NAME$::query()->where($where)->get();
