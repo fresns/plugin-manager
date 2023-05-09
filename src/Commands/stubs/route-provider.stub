@@ -8,7 +8,7 @@
 
 namespace $NAMESPACE$\Providers;
 
-use App\Models\Plugin;
+use Fresns\MarketManager\Models\Plugin;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as BaseServiceProvider;
 

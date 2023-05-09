@@ -8,11 +8,13 @@
 
 namespace $NAMESPACE$;
 
+use Fresns\CmdWordManager\Contracts\CmdWordProviderContract;
+use Fresns\CmdWordManager\Traits\CmdWordProviderTrait;
 use Illuminate\Support\ServiceProvider;
 
-class $CLASS$ extends ServiceProvider implements \Fresns\CmdWordManager\Contracts\CmdWordProviderContract
+class $CLASS$ extends ServiceProvider implements CmdWordProviderContract
 {
-    use \Fresns\CmdWordManager\Traits\CmdWordProviderTrait;
+    use CmdWordProviderTrait;
 
     protected $fsKeyName = '$STUDLY_NAME$';
 
