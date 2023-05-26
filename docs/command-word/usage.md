@@ -75,6 +75,7 @@ $wordBody = [
 | 21007 | Command word response result is incorrect |
 | 21008 | Data anomalies, queries not available or data duplication |
 | 21009 | Execution anomalies, missing files or logging errors |
+| 21010 | Command word function is disabled |
 
 ## Response
 
