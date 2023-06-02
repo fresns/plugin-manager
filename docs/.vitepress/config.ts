@@ -40,6 +40,7 @@ export default defineConfig({
                     { text: 'Introduction', link: '/guide/' },
                     { text: 'Installation and Setup', link: '/guide/installation.md' },
                     { text: 'Plugin Structure', link: '/guide/structure.md' },
+                    { text: 'Use Cases', link: '/guide/use-cases.md' },
                 ]
             },
             {
@@ -150,6 +151,7 @@ export default defineConfig({
                             { text: '介绍', link: '/zh-Hans/guide/' },
                             { text: '安装和配置', link: '/zh-Hans/guide/installation.md' },
                             { text: '插件结构', link: '/zh-Hans/guide/structure.md' },
+                            { text: '使用案例', link: '/zh-Hans/guide/use-cases.md' },
                         ]
                     },
                     {
