@@ -34,8 +34,10 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // addSubscribeItem
         // \FresnsCmdWord::plugin()->addSubscribeItem($this->fresnsWordBody);
 
+        // addKeyValues to Config table
         // ConfigUtility::addFresnsConfigItems($this->fresnsConfigItems);
     }
 
@@ -44,8 +46,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        // removeSubscribeItem
         // \FresnsCmdWord::plugin()->removeSubscribeItem($this->fresnsWordBody);
 
+        // removeKeyValues from Config table
         // ConfigUtility::removeFresnsConfigItems($this->fresnsConfigItems);
     }
 };

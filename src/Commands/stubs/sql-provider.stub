@@ -57,9 +57,8 @@ class SqlLogServiceProvider extends ServiceProvider
      * Time unit conversion.
      *
      * @param $seconds
-     * @return string
      */
-    private function formatDuration($seconds)
+    private function formatDuration($seconds): string
     {
         if ($seconds < 0.001) {
             return round($seconds * 1000000).'μs';

@@ -3,26 +3,31 @@
 namespace Plugins\$STUDLY_NAME$\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Fresns\$STUDLY_NAME$\Models\$STUDLY_NAME$;
 
-class $STUDLY_NAME$Controller extends Controller
+class $STUDLY_NAME$Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         // code
+        $configs = [];
 
-        return view('$STUDLY_NAME$::index');
+        return view('$STUDLY_NAME$::index', [
+            'configs' => $configs,
+        ]);
     }
 
-    public function showSettingView()
+    public function showSettingView(Request $request)
     {
         // code
+        $configs = [];
 
-        return view('$STUDLY_NAME$::setting');
+        return view('$STUDLY_NAME$::setting', [
+            'configs' => $configs,
+        ]);
     }
 
-    public function saveSetting()
+    public function saveSetting(Request $request)
     {
         \request()->validate([
             // 'item_key1' => 'required|url',
