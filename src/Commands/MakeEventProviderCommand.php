@@ -18,6 +18,21 @@ class MakeEventProviderCommand extends GeneratorCommand
 
     protected $description = 'Generate an event service provider for specified plugin';
 
+    public function handle()
+    {
+        $path = $this->getPath('Providers/'.$this->getNameInput());
+        $pluginFskey = basename(dirname($path, 3));
+        $pluginJsonPath = dirname($path, 3) . '/plugin.json';
+
+        parent::handle();
+
+        $this->replaceInFile(
+            $this->getPluginJsonSearchContent($pluginFskey),
+            $this->getPluginJsonReplaceContent($this->getNameInput(), $pluginFskey),
+            $pluginJsonPath,
+        );
+    }
+
     protected function getStubName(): string
     {
         return 'event-provider';
