@@ -35,8 +35,9 @@ fresns make:rule                    // Generate Plugin Rule
 fresns make:resource                // Generate Plugin Resource
 fresns make:test                    // Generate Plugin Test
 fresns make:schedule-provider       // Generate Plugin Schedule Provider
-fresns make:cmd-word-provider       // Generate Plugin Command Word Provider (fresns/cmd-word-manager)
 fresns make:event-provider          // Generate Plugin Event Provider
+fresns make:sql-provider            // Generate Plugin SQL Provider
+fresns make:cmdword-provider        // Generate Plugin Command Word Provider (fresns/cmd-word-manager)
 ```
 
 ## Control

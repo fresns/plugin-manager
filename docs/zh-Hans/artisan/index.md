@@ -35,8 +35,9 @@ fresns make:rule                    // 生成插件 Rule
 fresns make:resource                // 生成插件 Resource
 fresns make:test                    // 生成插件 Test
 fresns make:schedule-provider       // 生成插件任务调度提供者
-fresns make:cmd-word-provider       // 生成插件命令字提供者 (fresns/cmd-word-manager)
 fresns make:event-provider          // 生成插件事件服务提供者
+fresns make:sql-provider            // 生成插件 SQL 提供者
+fresns make:cmdword-provider        // 生成插件命令字提供者 (fresns/cmd-word-manager)
 ```
 
 ## 控制指令

@@ -5,7 +5,7 @@ As an independent functional module, the plug-in adopts "[command word](https://
 ## Make
 
 ```php
-fresns make:cmd-word-provider
+fresns make:cmdword-provider
 ```
 
 Go to the plug-in directory and execute to generate the command word provider file.

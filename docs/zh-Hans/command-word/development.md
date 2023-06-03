@@ -5,7 +5,7 @@
 ## 生成
 
 ```php
-fresns make:cmd-word-provider
+fresns make:cmdword-provider
 ```
 
 进入插件目录，执行生成「命令字提供者」文件。
