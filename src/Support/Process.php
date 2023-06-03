@@ -21,10 +21,6 @@ class Process
 
         $process->setTimeout(900);
 
-        if ($process->isTty()) {
-            $process->setTty(true);
-        }
-
         try {
             if ($output !== false) {
                 $output = app(OutputInterface::class);
@@ -33,18 +29,24 @@ class Process
             $output = $output ?? null;
         }
 
+        if ('\\' !== DIRECTORY_SEPARATOR && file_exists('/dev/tty') && is_readable('/dev/tty')) {
+            try {
+                $process->setTty(true);
+            } catch (\RuntimeException $e) {
+                $output->writeln('  <bg=yellow;fg=black> WARN </> '.$e->getMessage().PHP_EOL);
+            }
+        }
+
         $envs = [
             'PATH' => rtrim(`echo \$PATH`),
+            'COMPOSER_MEMORY_LIMIT' => '-1',
             'COMPOSER_ALLOW_SUPERUSER' => 1,
         ] + $env;
 
         if ($output) {
-            $process->run(
-                function ($type, $line) use ($output) {
-                    $output->write($line);
-                },
-                $envs,
-            );
+            $process->run(function ($type, $line) use ($output) {
+                $output->write($line);
+            }, $envs);
         } else {
             $process->run(null, $envs);
         }
