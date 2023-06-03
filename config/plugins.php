@@ -109,7 +109,6 @@ return [
             'assets/sass/app'       => 'resources/assets/sass/app.scss',
             'webpack'               => 'webpack.mix.js',
             'package.json'          => 'package.json',
-            'installer'             => 'app/Support/Installer.php',
             'init_plugin_config'    => 'database/migrations/init_$SNAKE_NAME$_config.php',
             'composer.json'         => 'composer.json',
             'plugin.json'           => 'plugin.json',
