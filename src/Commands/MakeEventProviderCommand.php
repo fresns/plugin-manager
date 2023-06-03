@@ -28,7 +28,7 @@ class MakeEventProviderCommand extends GeneratorCommand
 
         $this->installPluginProviderAfter(
             $this->getPluginJsonSearchContent($pluginFskey),
-            $this->getPluginJsonReplaceContent($this->getNameInput(),$pluginFskey),
+            $this->getPluginJsonReplaceContent($this->getNameInput(), $pluginFskey),
             $pluginJsonPath
         );
     }
