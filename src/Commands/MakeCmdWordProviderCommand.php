@@ -22,10 +22,10 @@ class MakeCmdWordProviderCommand extends GeneratorCommand
     {
         $path = $this->getPath('Providers/'.$this->getNameInput());
         $pluginFskey = basename(dirname($path, 3));
-        $pluginJsonPath = dirname($path, 3) . '/plugin.json';
+        $pluginJsonPath = dirname($path, 3).'/plugin.json';
 
         $this->generateCmdWordService($pluginFskey);
-        
+
         parent::handle();
 
         $this->replaceInFile(
@@ -53,7 +53,7 @@ class MakeCmdWordProviderCommand extends GeneratorCommand
         if (! is_dir($dirpath)) {
             @mkdir($dirpath, 0755, true);
         }
-        
+
         if (! is_file($path)) {
             $stubPath = __DIR__.'/stubs/cmd-word-service.stub';
 
