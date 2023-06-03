@@ -10,7 +10,7 @@ namespace Fresns\PluginManager\Commands\Traits;
 
 trait WorkPluginFskeyTrait
 {
-    public function getPluginFskey()
+    public function getPluginFskey(): mixed
     {
         $pluginFskey = $this->argument('fskey');
         if (! $pluginFskey) {
@@ -23,7 +23,7 @@ trait WorkPluginFskeyTrait
         return $pluginFskey;
     }
 
-    public function validatePluginRootPath($plugin)
+    public function validatePluginRootPath($plugin): bool
     {
         $pluginRootPath = config('plugins.paths.plugins');
         $currentPluginRootPath = rtrim($plugin->getPluginPath(), '/');
