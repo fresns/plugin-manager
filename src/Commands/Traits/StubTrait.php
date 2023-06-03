@@ -40,17 +40,46 @@ trait StubTrait
 
     public function getPluginJsonReplaceContent($provider, $pluginFskey): string
     {
-        return sprintf('"Plugins\\\\%s\\\\Providers\\\\%s",%s        %s',
-            $pluginFskey,
-            $provider,
-            PHP_EOL,
-            $this->getPluginJsonSearchContent($pluginFskey)
-        );
+        $class = sprintf('Plugins\\%s\\Providers\\%s', $pluginFskey, $provider);
+        $class = str_replace('\\', '\\\\', $class);
+
+        return $class;
     }
 
     public function getPluginJsonSearchContent($pluginFskey): string
     {
-        return sprintf('"Plugins\\\\%s\\\\Providers\\\\%sServiceProvider",', $pluginFskey, $pluginFskey);
+        $class = sprintf('Plugins\\%s\\Providers\\%sServiceProvider', $pluginFskey, $pluginFskey);
+        $class = str_replace('\\', '\\\\', $class);
+
+        return $class;
+    }
+
+    /**
+     * Install the provider in the plugin.json file.
+     *
+     * @param  string  $after
+     * @param  string  $name
+     * @param  string  $group
+     */
+    protected function installPluginProviderAfter(string $after, string $name, string $pluginJsonPath): void
+    {
+        $pluginJson = file_get_contents($pluginJsonPath);
+
+        $providers = Str::before(Str::after($pluginJson, '"providers": ['), sprintf('],%s    "autoloadFiles"', PHP_EOL));
+
+        if (! Str::contains($providers, $name)) {
+            $modifiedProviders = str_replace(
+                sprintf('"%s",', $after),
+                sprintf('"%s",', $after).PHP_EOL.'        '.sprintf('"%s",', $name),
+                $providers,
+            );
+
+            $this->replaceInFile(
+                $providers,
+                $modifiedProviders,
+                $pluginJsonPath,
+            );
+        }
     }
 
     protected function getNameInput(): string

@@ -26,10 +26,10 @@ class MakeEventProviderCommand extends GeneratorCommand
 
         parent::handle();
 
-        $this->replaceInFile(
+        $this->installPluginProviderAfter(
             $this->getPluginJsonSearchContent($pluginFskey),
-            $this->getPluginJsonReplaceContent($this->getNameInput(), $pluginFskey),
-            $pluginJsonPath,
+            $this->getPluginJsonReplaceContent($this->getNameInput(),$pluginFskey),
+            $pluginJsonPath
         );
     }
 

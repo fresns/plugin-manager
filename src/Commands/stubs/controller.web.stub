@@ -3,9 +3,10 @@
 namespace Plugins\$STUDLY_NAME$\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 use Fresns\$STUDLY_NAME$\Models\$STUDLY_NAME$;
 
-class $STUDLY_NAME$Controller
+class $STUDLY_NAME$Controller extends Controller
 {
     public function index(Request $request)
     {
@@ -29,7 +30,7 @@ class $STUDLY_NAME$Controller
 
     public function saveSetting(Request $request)
     {
-        \request()->validate([
+        $request->validate([
             // 'item_key1' => 'required|url',
             // 'item_key2' => 'nullable|url',
         ]);

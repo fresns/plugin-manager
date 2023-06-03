@@ -156,12 +156,20 @@ class NewCommand extends Command
                 $path = $this->getReplacedContent($path, $keys);
             }
 
+            $content = $this->getStubContents($stub);
+
+            if ($stub == 'controller.web') {
+                if (class_exists(App\Http\Controllers\Controller::class)) {
+                    $content = str_replace("use Illuminate\Routing\Controller;", "use App\Http\Controllers\Controller;", $content);
+                }
+            }
+
             if (! $this->filesystem->isDirectory($dir = dirname($path))) {
                 $this->filesystem->makeDirectory($dir, 0775, true);
                 $this->removeParentDirGitKeep($dir);
             }
 
-            $this->filesystem->put($path, $this->getStubContents($stub));
+            $this->filesystem->put($path, $content);
             $this->removeParentDirGitKeep($path);
 
             $this->info("Created : {$path}");

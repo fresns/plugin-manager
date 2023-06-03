@@ -14,7 +14,7 @@ class MakeCmdWordProviderCommand extends GeneratorCommand
 {
     use Traits\StubTrait;
 
-    protected $signature = 'make:cmd-word-provider {fskey=CmdWordServiceProvider}';
+    protected $signature = 'make:cmdword-provider {fskey=CmdWordServiceProvider}';
 
     protected $description = 'Generate a cmd word service provider for specified plugin';
 
@@ -28,10 +28,10 @@ class MakeCmdWordProviderCommand extends GeneratorCommand
 
         parent::handle();
 
-        $this->replaceInFile(
+        $this->installPluginProviderAfter(
             $this->getPluginJsonSearchContent($pluginFskey),
-            $this->getPluginJsonReplaceContent($this->getNameInput(), $pluginFskey),
-            $pluginJsonPath,
+            $this->getPluginJsonReplaceContent($this->getNameInput(),$pluginFskey),
+            $pluginJsonPath
         );
     }
 
