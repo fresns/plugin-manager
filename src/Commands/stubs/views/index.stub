@@ -1,13 +1,13 @@
 @extends('$STUDLY_NAME$::layouts.master')
 
 @section('content')
-<div class="container">
-    <h1>Plugin: $STUDLY_NAME$</h1>
+    <div class="container">
+        <h1>Plugin: $STUDLY_NAME$</h1>
 
-    <p>
-        This view is loaded from plugin: {!! config('$KEBAB_NAME$.name') !!}
-    </p>
+        <p>
+            This view is loaded from plugin: {!! config('$KEBAB_NAME$.name') !!}
+        </p>
 
-    <a href="{{ route('$KEBAB_NAME$.setting') }}">Go to the $STUDLY_NAME$ plugin settings page.</a>
-</div>
+        <a href="{{ route('$KEBAB_NAME$.setting') }}">Go to the $STUDLY_NAME$ plugin settings page.</a>
+    </div>
 @endsection

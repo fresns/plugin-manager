@@ -5,39 +5,21 @@ namespace Plugins\$STUDLY_NAME$\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Fresns\$STUDLY_NAME$\Models\$STUDLY_NAME$;
-use MouYong\LaravelConfig\Models\Config;
 
 class $STUDLY_NAME$Controller extends Controller
 {
     public function index()
     {
-        $configs = Config::getValueByKeys([
-            // item_key1,
-            // item_key2,
-        ]);
+        // code
 
-        $where = [];
-        if (\request()->has('is_enabled')) {
-            $where['is_enabled'] = \request('is_enabled');
-        }
-
-        // $data = $STUDLY_NAME$::query()->where($where)->get();
-
-        return view('$STUDLY_NAME$::index', [
-            'configs' => $configs,
-        ]);
+        return view('$STUDLY_NAME$::index');
     }
 
     public function showSettingView()
     {
-        $configs = Config::getValueByKeys([
-            // item_key1,
-            // item_key2,
-        ]);
+        // code
 
-        return view('$STUDLY_NAME$::setting', [
-            'configs' => $configs,
-        ]);
+        return view('$STUDLY_NAME$::setting');
     }
 
     public function saveSetting()
@@ -48,11 +30,11 @@ class $STUDLY_NAME$Controller extends Controller
         ]);
 
         $itemKeys = [
-            // item_key1,
-            // item_key2,
+            // 'item_key1',
+            // 'item_key2',
         ];
 
-        // Config::updateConfigs($itemKeys, '$SNAKE_NAME$');
+        // code
 
         return redirect(route('$KEBAB_NAME$.setting'));
     }
