@@ -22,7 +22,7 @@ class MakeSqlProviderCommand extends GeneratorCommand
     {
         $path = $this->getPath('Providers/'.$this->getNameInput());
         $pluginFskey = basename(dirname($path, 3));
-        $pluginJsonPath = dirname($path, 3) . '/plugin.json';
+        $pluginJsonPath = dirname($path, 3).'/plugin.json';
 
         parent::handle();
 
