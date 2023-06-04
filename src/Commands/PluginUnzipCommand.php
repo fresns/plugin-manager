@@ -37,9 +37,9 @@ class PluginUnzipCommand extends Command
         $plugin = Json::make($pluginJsonPath);
 
         $pluginFskey = $plugin->get('fskey');
-        if (! $pluginFskey) {
+        if (! $pluginFskey || ! is_string($pluginFskey)) {
             \info('Failed to get plugin fskey: '.var_export($pluginFskey, true));
-            $this->error('install plugin error, plugin.json is invalid plugin json');
+            $this->error('install plugin error, plugin.json is invalid plugin json: '.var_export($pluginFskey, true));
 
             return Command::FAILURE;
         }
