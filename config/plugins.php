@@ -113,7 +113,6 @@ return [
             'composer.json'         => 'composer.json',
             'plugin.json'           => 'plugin.json',
             'gitignore'             => '.gitignore',
-            'readme'                => 'README.md',
         ],
         'gitkeep'      => true,
     ],
