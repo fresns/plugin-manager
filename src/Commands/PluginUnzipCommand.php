@@ -37,9 +37,9 @@ class PluginUnzipCommand extends Command
         $plugin = Json::make($pluginJsonPath);
 
         $pluginFskey = $plugin->get('fskey');
-        if (! $pluginFskey || ! is_string($pluginFskey)) {
+        if (! $pluginFskey) {
             \info('Failed to get plugin fskey: '.var_export($pluginFskey, true));
-            $this->error('install plugin error, plugin.json is invalid plugin json: '.var_export($pluginFskey, true));
+            $this->error('install plugin error, plugin.json is invalid plugin json');
 
             return Command::FAILURE;
         }
@@ -66,6 +66,10 @@ class PluginUnzipCommand extends Command
         $backupDir = config('plugins.paths.backups');
 
         File::ensureDirectoryExists($backupDir);
+
+        if (! is_file($backupDir.'/.gitignore')) {
+            file_put_contents($backupDir.'/.gitignore', '*'.PHP_EOL.'!.gitignore');
+        }
 
         $dirs = File::glob("$backupDir/$pluginFskey*");
 
