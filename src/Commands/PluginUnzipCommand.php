@@ -26,6 +26,12 @@ class PluginUnzipCommand extends Command
 
         $tmpDirPath = $this->zip->unpack($this->argument('path'));
 
+        if (! is_dir($tmpDirPath)) {
+            $this->error("install plugin error, plugin unzip dir doesn't exists: {$tmpDirPath}");
+
+            return Command::FAILURE;
+        }
+
         $pluginJsonPath = "{$tmpDirPath}/plugin.json";
         if (! file_exists($tmpDirPath)) {
             \info($message = 'Plugin file does not exist: '.$pluginJsonPath);

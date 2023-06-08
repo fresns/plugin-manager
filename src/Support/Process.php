@@ -29,12 +29,8 @@ class Process
             $output = $output ?? null;
         }
 
-        if ('\\' !== DIRECTORY_SEPARATOR && file_exists('/dev/tty') && is_readable('/dev/tty')) {
-            try {
-                $process->setTty(true);
-            } catch (\RuntimeException $e) {
-                $output->writeln('  <bg=yellow;fg=black> WARN </> '.$e->getMessage().PHP_EOL);
-            }
+        if ($process->isTty()) {
+            $process->setTty(true);
         }
 
         $envs = [

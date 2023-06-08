@@ -80,6 +80,7 @@ class PluginUninstallCommand extends Command
 
             $this->info("Uninstalled: {$pluginFskey}");
         } catch (\Throwable $e) {
+            info("Uninstall fail: {$e->getMessage()}");
             $this->error("Uninstall fail: {$e->getMessage()}");
 
             return Command::FAILURE;
