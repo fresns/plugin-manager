@@ -22,9 +22,9 @@ class PluginUnzipCommand extends Command
 
     public function handle()
     {
-        $this->zip = new Zip();
+        $zip = new Zip();
 
-        $tmpDirPath = $this->zip->unpack($this->argument('path'));
+        $tmpDirPath = $zip->unpack($this->argument('path'));
 
         if (! is_dir($tmpDirPath)) {
             $this->error("install plugin error, plugin unzip dir doesn't exists: {$tmpDirPath}");
