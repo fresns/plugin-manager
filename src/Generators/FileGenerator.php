@@ -41,8 +41,8 @@ class FileGenerator extends Generator
     /**
      * The constructor.
      *
-     * @param $path
-     * @param $contents
+     * @param  $path
+     * @param  $contents
      * @param  null  $filesystem
      */
     public function __construct($path, $contents, $filesystem = null)

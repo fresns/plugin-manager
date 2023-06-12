@@ -155,7 +155,7 @@ class NameParser
     /**
      * Determine whether the given type is same with the current schema action or type.
      *
-     * @param $type
+     * @param  $type
      * @return bool
      */
     public function is($type)
