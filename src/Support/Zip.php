@@ -75,7 +75,7 @@ class Zip
         // Make sure the unzip destination directory exists
         $targetPath = $targetPath ?? storage_path('app/extensions/.tmp');
         if (empty($targetPath)) {
-            \info("targetPath cannot be empty");
+            \info('targetPath cannot be empty');
             throw new \RuntimeException('targetPath cannot be empty');
         }
 
