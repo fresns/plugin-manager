@@ -75,11 +75,16 @@ class Zip
         // Make sure the unzip destination directory exists
         $targetPath = $targetPath ?? storage_path('app/extensions/.tmp');
         if (empty($targetPath)) {
-            throw new \RuntimeException('targetPath cannot be empty.');
+            \info("targetPath cannot be empty");
+            throw new \RuntimeException('targetPath cannot be empty');
         }
 
         if (! is_dir($targetPath)) {
             File::ensureDirectoryExists($targetPath);
+        }
+
+        if ($targetPath == $sourcePath) {
+            return $targetPath;
         }
 
         // Empty the directory to avoid leaving files of other plugins
@@ -89,8 +94,8 @@ class Zip
         if ($type == 1) {
             File::copyDirectory($sourcePath, $targetPath);
 
-            // Make sure the directory decompression level is the top level of the plugin directory
-            $this->ensureDoesntHaveSubdir($targetPath);
+            // Make sure the directory decompression level is the top level of the theme directory
+            $targetPath = $this->ensureDoesntHaveSubdir($targetPath);
 
             return $targetPath;
         }
@@ -100,8 +105,8 @@ class Zip
             $zipFile = $this->zipFile->openFile($sourcePath);
             $zipFile->extractTo($targetPath);
 
-            // Make sure the directory decompression level is the top level of the plugin directory
-            $this->ensureDoesntHaveSubdir($targetPath);
+            // Make sure the directory decompression level is the top level of the theme directory
+            $targetPath = $this->ensureDoesntHaveSubdir($targetPath);
 
             // Decompress to the specified directory
             return $targetPath;
@@ -115,16 +120,24 @@ class Zip
         $targetPath = $targetPath ?? storage_path('app/extensions/.tmp');
 
         $pattern = sprintf('%s/*', rtrim($targetPath, DIRECTORY_SEPARATOR));
-        $files = File::glob($pattern);
 
-        if (count($files) > 1) {
-            return $targetPath;
+        $files = [];
+        foreach (File::glob($pattern) as $file) {
+            if (str_contains($file, '__MACOSX')) {
+                continue;
+            }
+
+            $files[] = $file;
+        }
+
+        if (count($files) !== 1) {
+            throw new \RuntimeException("Unable to find the directory where the plugin is located: $targetPath");
         }
 
         $tmpDir = $targetPath.'-subdir';
         File::ensureDirectoryExists($tmpDir);
 
-        $firstEntryname = basename(current($files));
+        $firstEntryname = File::name(current($files));
 
         File::copyDirectory($targetPath."/{$firstEntryname}", $tmpDir);
         File::cleanDirectory($targetPath);
