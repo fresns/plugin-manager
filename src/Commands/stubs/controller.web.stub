@@ -21,6 +21,12 @@ class $STUDLY_NAME$Controller extends Controller
     public function showSettingView(Request $request)
     {
         // code
+        $itemKeys = [
+            // 'item_key1',
+            // 'item_key2',
+        ];
+
+        // $configs = Config::whereIn('item_key', $itemKeys)->where('item_tag', '$SNAKE_NAME$')->get();
         $configs = [];
 
         return view('$STUDLY_NAME$::setting', [
@@ -41,6 +47,7 @@ class $STUDLY_NAME$Controller extends Controller
         ];
 
         // code
+        // Config updateConfigs with $itemKeys and '$SNAKE_NAME$'
 
         return redirect(route('$KEBAB_NAME$.setting'));
     }
