@@ -9,6 +9,7 @@
 namespace $NAMESPACE$\Providers;
 
 use Fresns\MarketManager\Models\Plugin;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as BaseServiceProvider;
 
@@ -33,7 +34,18 @@ class RouteServiceProvider extends BaseServiceProvider
 
         try {
             if (class_exists(Plugin::class)) {
-                $pluginHost = Plugin::findByFskey('$STUDLY_NAME$')?->plugin_host;
+                $fskey = '$STUDLY_NAME$';
+                $cacheKey = "{$fskey}_model";
+
+                $pluginModel = Cache::get($cacheKey);
+                if (empty($pluginModel)) {
+                    $pluginModel = Plugin::withTrashed()->where('fskey', $fskey)->first();
+
+                    Cache::put($cacheKey, $pluginModel, now()->addMinutes(30));
+                }
+
+                $pluginHost = $pluginModel?->plugin_host ?? '';
+
                 $host = str_replace(['http://', 'https://'], '', rtrim($pluginHost, '/'));
             }
         } catch (\Throwable $e) {
@@ -56,8 +68,7 @@ class RouteServiceProvider extends BaseServiceProvider
      */
     protected function mapWebRoutes(): void
     {
-        Route::middleware('web')
-            ->group(dirname(__DIR__, 2) . '/routes/web.php');
+        Route::middleware('web')->group(dirname(__DIR__, 2) . '/routes/web.php');
     }
 
     /**
@@ -67,8 +78,6 @@ class RouteServiceProvider extends BaseServiceProvider
      */
     protected function mapApiRoutes(): void
     {
-        Route::prefix('api')
-            ->middleware('api')
-            ->group(dirname(__DIR__, 2) . '/routes/api.php');
+        Route::prefix('api')->middleware('api')->group(dirname(__DIR__, 2) . '/routes/api.php');
     }
 }
