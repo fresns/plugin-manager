@@ -32,25 +32,25 @@ class RouteServiceProvider extends BaseServiceProvider
     {
         $host = null;
 
-        try {
-            if (class_exists(Plugin::class)) {
-                $fskey = '$STUDLY_NAME$';
-                $cacheKey = "{$fskey}_model";
+        // try {
+        //     if (class_exists(Plugin::class)) {
+        //         $fskey = '$STUDLY_NAME$';
+        //         $cacheKey = "{$fskey}_model";
 
-                $pluginModel = Cache::get($cacheKey);
-                if (empty($pluginModel)) {
-                    $pluginModel = Plugin::withTrashed()->where('fskey', $fskey)->first();
+        //         $pluginModel = Cache::get($cacheKey);
+        //         if (empty($pluginModel)) {
+        //             $pluginModel = Plugin::withTrashed()->where('fskey', $fskey)->first();
 
-                    Cache::put($cacheKey, $pluginModel, now()->addMinutes(30));
-                }
+        //             Cache::put($cacheKey, $pluginModel, now()->addMinutes(30));
+        //         }
 
-                $pluginHost = $pluginModel?->plugin_host ?? '';
+        //         $pluginHost = $pluginModel?->plugin_host ?? '';
 
-                $host = str_replace(['http://', 'https://'], '', rtrim($pluginHost, '/'));
-            }
-        } catch (\Throwable $e) {
-            info("get plugin host failed: " . $e->getMessage());
-        }
+        //         $host = str_replace(['http://', 'https://'], '', rtrim($pluginHost, '/'));
+        //     }
+        // } catch (\Throwable $e) {
+        //     info("get plugin host failed: " . $e->getMessage());
+        // }
 
         Route::group([
             'domain' => $host,
