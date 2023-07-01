@@ -20,6 +20,9 @@ class $STUDLY_NAME$Controller extends Controller
 
     public function showSettingView(Request $request)
     {
+        config(['session.same_site' => 'none']);
+        config(['session.secure' => uniqid()]);
+
         // code
         $itemKeys = [
             // 'item_key1',
