@@ -1,9 +1,9 @@
 {
     "fskey": "$STUDLY_NAME$",
     "name": "$STUDLY_NAME$",
-    "description": "$STUDLY_NAME$ plugin made by fresns",
-    "author": "Fresns",
-    "authorLink": "https://fresns.org",
+    "description": "$STUDLY_NAME$ plugin made by $AUTHOR_NAME$",
+    "author": "$AUTHOR_NAME$",
+    "authorLink": "$AUTHOR_LINK$",
     "version": "1.0.0",
     "scene": [],
     "accessPath": "/$KEBAB_NAME$",

@@ -264,6 +264,26 @@ trait StubTrait
         return Json::make()->encode(config('plugins.composer.author'));
     }
 
+    public function getAuthorNameReplacement(): mixed
+    {
+        $authors = config('plugins.composer.author');
+        if (count($authors)) {
+            return $authors[0]['name'] ?? 'Fresns';
+        }
+
+        return 'Fresns';
+    }
+
+    public function getAuthorLinkReplacement(): mixed
+    {
+        $authors = config('plugins.composer.author');
+        if (count($authors)) {
+            return $authors[0]['homepage'] ?? 'https://fresns.org';
+        }
+
+        return 'https://fresns.org';
+    }
+
     /**
      * Get namespace for plugin service provider.
      */

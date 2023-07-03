@@ -1,6 +1,6 @@
 {
     "name": "$VENDOR$/$KEBAB_NAME$",
-    "description": "$STUDLY_NAME$ plugin made by fresns",
+    "description": "$STUDLY_NAME$ plugin made by $AUTHOR_NAME$",
     "license": "MIT",
     "authors": $AUTHORS$,
     "autoload": {
