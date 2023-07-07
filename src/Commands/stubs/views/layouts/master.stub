@@ -9,6 +9,7 @@
         <title>$STUDLY_NAME$</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.min.css">
+
         @stack('css')
     </head>
 
@@ -67,6 +68,7 @@
                 setTimeoutToastHide();
             };
         </script>
+
         @stack('script')
     </body>
 </html>
