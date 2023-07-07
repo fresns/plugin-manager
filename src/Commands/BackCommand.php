@@ -19,6 +19,11 @@ class BackCommand extends Command
     public function handle()
     {
         $basePath = base_path();
+
+        if (str_contains(strtolower(PHP_OS_FAMILY), 'win')) {
+            $basePath = str_replace(['\\', '/'], DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR, $basePath);
+        }
+
         if (getenv('PWD') != base_path()) {
             $this->warn('Back to the root directory');
             $this->line('');

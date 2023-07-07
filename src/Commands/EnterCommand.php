@@ -34,6 +34,10 @@ class EnterCommand extends Command
             return Command::FAILURE;
         }
 
+        if (str_contains(strtolower(PHP_OS_FAMILY), 'win')) {
+            $pluginPath = str_replace(['\\', '/'], DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR, $pluginPath);
+        }
+
         if (getenv('PWD') != $pluginPath) {
             $this->warn("Go to the plugin {$fskey} directory");
             $this->line('');
