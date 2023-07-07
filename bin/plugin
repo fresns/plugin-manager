@@ -140,14 +140,57 @@ $kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
 $status = $kernel->handle($input, new Symfony\Component\Console\Output\ConsoleOutput);
 
 // make:controller workaround for plugin
-if ($asPlugin && $grabCommand === 'make:controller' && $input->getArgument('fskey')) {
-    $fileName = $workDir . '/app/Http/Controllers/' . str_replace('\\', DIRECTORY_SEPARATOR, $input->getArgument('fskey')) . '.php';
+if ($asPlugin && $grabCommand === 'make:controller' && $input->getArgument('name')) {
+    $fileName = $workDir . '/app/Http/Controllers/' . str_replace('\\', DIRECTORY_SEPARATOR, $input->getArgument('name')) . '.php';
     $content = file_get_contents($fileName);
 
     if (strpos($content, 'use App\Http\Controllers\Controller;') === false) {
         $content = str_replace(
             "use Illuminate\Http\Request;",
             "use Illuminate\Http\Request;\nuse App\Http\Controllers\Controller;",
+            $content
+        );
+    }
+
+    file_put_contents($fileName, $content);
+}
+
+// make:request workaround for laravel and plugin
+if ($grabCommand === 'make:request' && $input->getArgument('name')) {
+    $fileName = $workDir . '/app/Http/Requests/' . str_replace('\\', DIRECTORY_SEPARATOR, $input->getArgument('name')) . '.php';
+    $content = file_get_contents($fileName);
+
+    if (strpos($content, 'use App\Http\Controllers\Controller;') === false) {
+        $content = str_replace(
+            "return false;",
+            "return true;",
+            $content
+        );
+
+        $content = str_replace(
+            <<<"TXT"
+                public function rules(): array
+                {
+                    return [
+                        //
+                    ];
+                }
+            TXT,
+            <<<'TXT'
+                public function rules(): array
+                {
+                    return match (\request()->route()->getActionMethod()) {
+                        default => [],
+                    };
+                }
+            
+                public function attributes(): array
+                {
+                    return [
+                        //
+                    ];
+                }
+            TXT,
             $content
         );
     }
