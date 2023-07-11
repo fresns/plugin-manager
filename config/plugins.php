@@ -102,7 +102,6 @@ return [
             'assets/css/app'        => 'resources/assets/css/app.css',
             'assets/js/app'         => 'resources/assets/js/app.js',
             'assets/js/bootstrap'   => 'resources/assets/js/bootstrap.js',
-            'assets/env'            => '.env',
             'views/layouts/master'  => 'resources/views/layouts/master.blade.php',
             'views/layouts/header'  => 'resources/views/layouts/header.blade.php',
             'views/layouts/footer'  => 'resources/views/layouts/footer.blade.php',

@@ -15,7 +15,5 @@
             "$PLUGIN_NAMESPACE$\\$STUDLY_NAME$\\Tests\\": "tests/"
         }
     },
-    "require": {
-        "php": ">= 8.0"
-    }
+    "require": {}
 }

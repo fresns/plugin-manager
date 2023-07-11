@@ -10,7 +10,7 @@ namespace Plugins\$STUDLY_NAME$\Services;
 
 class CmdWordService
 {
-    public function cmdWord($wordBody)
+    public function cmdWord(array $wordBody)
     {
         \info(__CLASS__ . '::' . __FUNCTION__, $wordBody);
     }

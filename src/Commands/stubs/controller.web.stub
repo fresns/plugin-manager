@@ -4,7 +4,6 @@ namespace Plugins\$STUDLY_NAME$\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Plugins\$STUDLY_NAME$\Models\$STUDLY_NAME$;
 
 class $STUDLY_NAME$Controller extends Controller
 {
