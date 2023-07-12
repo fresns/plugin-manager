@@ -20,16 +20,16 @@ use $PLUGIN_NAMESPACE$\$STUDLY_NAME$\Http\Controllers as WebController;
 |
 */
 
-Route::prefix('$KEBAB_NAME$')->group(function() {
-    Route::get('/', [WebController\$STUDLY_NAME$Controller::class, 'index'])->name('$KEBAB_NAME$.index');
-    Route::get('setting', [WebController\$STUDLY_NAME$Controller::class, 'showSettingView'])->name('$KEBAB_NAME$.setting');
-    Route::post('setting', [WebController\$STUDLY_NAME$Controller::class, 'saveSetting']);
+Route::group(function() {
+    Route::get('$KEBAB_NAME$', [WebController\$STUDLY_NAME$Controller::class, 'index'])->name('$KEBAB_NAME$.index');
+    Route::get('$KEBAB_NAME$/setting', [WebController\$STUDLY_NAME$Controller::class, 'showSettingView'])->name('$KEBAB_NAME$.setting');
+    Route::post('$KEBAB_NAME$/setting', [WebController\$STUDLY_NAME$Controller::class, 'saveSetting']);
 });
 
 // without VerifyCsrfToken
-// Route::prefix('$KEBAB_NAME$')->withoutMiddleware([
-//     \App\Http\Middleware\EncryptCookies::class,
-//     \App\Http\Middleware\VerifyCsrfToken::class,
-// ])->group(function() {
-//     Route::get('/', [WebController\$STUDLY_NAME$Controller::class, 'index']);
+// Route::withoutMiddleware([
+//         \App\Http\Middleware\EncryptCookies::class,
+//         \App\Http\Middleware\VerifyCsrfToken::class,
+//     ])->group(function() {
+//     Route::get('$KEBAB_NAME$', [WebController\$STUDLY_NAME$Controller::class, 'index']);
 // });
