@@ -25,6 +25,6 @@ use $PLUGIN_NAMESPACE$\$STUDLY_NAME$\Http\Controllers as ApiController;
 //     return $request->user();
 // });
 
-// Route::group(function() {
+// Route::group([], function() {
 //     Route::get('$KEBAB_NAME$', [ApiController\$STUDLY_NAME$Controller::class, 'index']);
 // });

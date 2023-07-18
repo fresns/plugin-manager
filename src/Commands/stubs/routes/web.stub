@@ -20,7 +20,7 @@ use $PLUGIN_NAMESPACE$\$STUDLY_NAME$\Http\Controllers as WebController;
 |
 */
 
-Route::group(function() {
+Route::group([], function() {
     Route::get('$KEBAB_NAME$', [WebController\$STUDLY_NAME$Controller::class, 'index'])->name('$KEBAB_NAME$.index');
     Route::get('$KEBAB_NAME$/setting', [WebController\$STUDLY_NAME$Controller::class, 'showSettingView'])->name('$KEBAB_NAME$.setting');
     Route::post('$KEBAB_NAME$/setting', [WebController\$STUDLY_NAME$Controller::class, 'saveSetting']);
@@ -28,8 +28,8 @@ Route::group(function() {
 
 // without VerifyCsrfToken
 // Route::withoutMiddleware([
-//         \App\Http\Middleware\EncryptCookies::class,
-//         \App\Http\Middleware\VerifyCsrfToken::class,
-//     ])->group(function() {
+//    \App\Http\Middleware\EncryptCookies::class,
+//    \App\Http\Middleware\VerifyCsrfToken::class,
+// ])->group(function() {
 //     Route::get('$KEBAB_NAME$', [WebController\$STUDLY_NAME$Controller::class, 'index']);
 // });
