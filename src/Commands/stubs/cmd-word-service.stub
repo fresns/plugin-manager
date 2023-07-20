@@ -8,10 +8,20 @@
 
 namespace Plugins\$STUDLY_NAME$\Services;
 
+use Fresns\CmdWordManager\Traits\CmdWordResponseTrait;
+
 class CmdWordService
 {
+    use CmdWordResponseTrait;
+
     public function cmdWord(array $wordBody)
     {
         \info(__CLASS__ . '::' . __FUNCTION__, $wordBody);
+
+        return $this->success([
+            'fskey' => basename(dirname(__DIR__, 2)),
+            'cmdWord' => __FUNCTION__,
+            'wordBody' => $wordBody,
+        ]);
     }
 }

@@ -91,7 +91,7 @@ return [
     'stubs' => [
         'path'         => dirname(__DIR__).'/src/Commands/stubs',
         'files'        => [
-            'controller.web'        => 'app/Http/Controllers/$STUDLY_NAME$Controller.php',
+            'controller.web'        => 'app/Http/Controllers/$STUDLY_NAME$SettingController.php',
             'scaffold/provider'     => 'app/Providers/$STUDLY_NAME$ServiceProvider.php',
             'route-provider'        => 'app/Providers/RouteServiceProvider.php',
             'command-provider'      => 'app/Providers/CommandServiceProvider.php',
