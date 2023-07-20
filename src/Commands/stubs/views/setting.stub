@@ -4,8 +4,8 @@
     <div class="container">
         <div class="card mx-auto mt-5" style="width: 75%;">
             <div class="card-body">
-                <h1 class="card-title">$STUDLY_NAME$ Settings</h1>
-                <a href="{{ route('$KEBAB_NAME$.index') }}">Back to $STUDLY_NAME$ plugin homepage.</a>
+                <h1 class="card-title">{{ config('$KEBAB_NAME$.name') }} Settings</h1>
+                <a href="{{ route('$KEBAB_NAME$.index') }}">Back to {{ config('$KEBAB_NAME$.name') }} plugin homepage.</a>
 
                 <form class="row g-3 mt-5" action="{{ route('$KEBAB_NAME$.setting') }}" method="post">
                     @csrf
