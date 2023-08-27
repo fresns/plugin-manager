@@ -22,6 +22,11 @@ Fresns is a free and open source social network service software, a general-purp
 - The official File Storage service plugin developed by Fresns. Supports local, ftp and sftp storage methods.
 - Repository: [https://github.com/fresns/extensions/tree/release/FileStorage](https://github.com/fresns/extensions/tree/release/FileStorage)
 
+## S3Storage
+
+- S3 storage, available from any storage service that supports the S3 protocol.
+- Repository: [https://github.com/fresns/extensions/tree/release/S3Storage](https://github.com/fresns/extensions/tree/release/S3Storage)
+
 ## OnlineDays
 
 - Counting the number of days users are online

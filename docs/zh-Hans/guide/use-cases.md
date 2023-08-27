@@ -22,6 +22,11 @@ Fresns 是一款免费开源的社交网络服务软件，专为跨平台而打�
 - Fresns 官方开发的「文件存储」服务插件，支持本地、FTP、SFTP 三种存储方式。
 - 仓库: [https://github.com/fresns/extensions/tree/release/FileStorage](https://github.com/fresns/extensions/tree/release/FileStorage)
 
+## S3 存储
+
+- S3 存储，支持 S3 协议的存储服务均可使用。
+- 仓库: [https://github.com/fresns/extensions/tree/release/S3Storage](https://github.com/fresns/extensions/tree/release/S3Storage)
+
 ## 在线天数
 
 - 统计用户的在线天数，每天只记数一次。
