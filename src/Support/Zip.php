@@ -94,7 +94,7 @@ class Zip
         if ($type == 1) {
             File::copyDirectory($sourcePath, $targetPath);
 
-            // Make sure the directory decompression level is the top level of the theme directory
+            // Make sure the directory decompression level is the top level of the plugin directory
             $targetPath = $this->ensureDoesntHaveSubdir($targetPath);
 
             return $targetPath;
@@ -105,7 +105,7 @@ class Zip
             $zipFile = $this->zipFile->openFile($sourcePath);
             $zipFile->extractTo($targetPath);
 
-            // Make sure the directory decompression level is the top level of the theme directory
+            // Make sure the directory decompression level is the top level of the plugin directory
             $targetPath = $this->ensureDoesntHaveSubdir($targetPath);
 
             // Decompress to the specified directory
