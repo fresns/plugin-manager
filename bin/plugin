@@ -42,7 +42,7 @@ if (!file_exists($rootDir . '/vendor/autoload.php')) {
     return 1;
 }
 
-$startPos = strpos($workDir, DIRECTORY_SEPARATOR . 'extensions/plugins' . DIRECTORY_SEPARATOR);
+$startPos = strpos($workDir, DIRECTORY_SEPARATOR . 'plugins' . DIRECTORY_SEPARATOR);
 if ($startPos === false) {
     $workDir = $rootDir;
 }

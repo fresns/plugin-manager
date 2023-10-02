@@ -1,4 +1,4 @@
-node_modules
+node_modules/
 npm-debug.log
 *-error.log
 *lock*
@@ -9,4 +9,5 @@ npm-debug.log
 .vscode
 .phpunit.result.cache
 .DS_Store
-dist
+dist/
+.idea/

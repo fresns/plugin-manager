@@ -32,7 +32,7 @@ class PluginInstallCommand extends Command
                 $pluginDirectory = $path;
 
                 if (strpos($pluginDirectory, '/') == false) {
-                    $pluginDirectory = "extensions/plugins/{$pluginDirectory}";
+                    $pluginDirectory = "plugins/{$pluginDirectory}";
                 }
 
                 if (str_starts_with($pluginDirectory, '/')) {
@@ -50,8 +50,8 @@ class PluginInstallCommand extends Command
                 return Command::FAILURE;
             }
 
-            $extensionPath = str_replace(base_path().'/', '', config('plugins.paths.plugins'));
-            if (! str_contains($path, $extensionPath)) {
+            $pluginsPath = config('plugins.paths.plugins');
+            if (! str_contains($path, $pluginsPath)) {
                 $exitCode = $this->call('plugin:unzip', [
                     'path' => $path,
                 ]);

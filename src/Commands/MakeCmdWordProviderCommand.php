@@ -21,8 +21,8 @@ class MakeCmdWordProviderCommand extends GeneratorCommand
     public function handle()
     {
         $path = $this->getPath('Providers/'.$this->getNameInput());
-        $pluginFskey = basename(dirname($path, 3));
-        $pluginJsonPath = dirname($path, 3).'/plugin.json';
+        $pluginFskey = basename(dirname($path, 2));
+        $pluginJsonPath = dirname($path, 2).'/plugin.json';
 
         $this->generateCmdWordService($pluginFskey);
 

@@ -12,7 +12,7 @@ return [
     // YOU COULD CUSTOM HERE
     'namespaces' => [
         $pluginsNamespace => [
-            base_path('extensions/plugins'),
+            base_path('plugins'),
         ],
     ],
 
@@ -22,7 +22,7 @@ return [
 
     'merge_plugin_config' => [
         'include' => [
-            ltrim(str_replace(base_path(), '', base_path('extensions/plugins/*/composer.json')), '/'),
+            ltrim(str_replace(base_path(), '', base_path('plugins/*/composer.json')), '/'),
         ],
         'recurse' => true,
         'replace' => false,
@@ -53,10 +53,11 @@ return [
     ],
 
     'paths' => [
-        'base' => base_path('extensions'),
-        'backups' => base_path('extensions/backups/plugins'),
-        'plugins' => base_path('extensions/plugins'),
-        'assets' => public_path('assets/plugins'),
+        'base' => base_path('plugins'),
+        'unzip_target_path' => base_path('storage/plugins/.tmp'),
+        'backups' => base_path('storage/plugins/backups'),
+        'plugins' => base_path('plugins'),
+        'assets' => public_path('assets'),
         'migration' => base_path('database/migrations'),
 
         'generator' => [
@@ -99,9 +100,8 @@ return [
             'scaffold/config'       => 'config/$KEBAB_NAME$.php',
             'init_plugin_config'    => 'database/migrations/init_$SNAKE_NAME$_config.php',
             'seeder'                => 'database/seeders/DatabaseSeeder.php',
-            'assets/css/app'        => 'resources/assets/css/app.css',
-            'assets/js/app'         => 'resources/assets/js/app.js',
-            'assets/js/bootstrap'   => 'resources/assets/js/bootstrap.js',
+            'assets/css/fresns'     => 'resources/assets/css/fresns.css',
+            'assets/js/fresns'      => 'resources/assets/js/fresns.js',
             'views/layouts/master'  => 'resources/views/layouts/master.blade.php',
             'views/layouts/header'  => 'resources/views/layouts/header.blade.php',
             'views/layouts/footer'  => 'resources/views/layouts/footer.blade.php',
@@ -111,7 +111,6 @@ return [
             'views/setting'         => 'resources/views/setting.blade.php',
             'routes/web'            => 'routes/web.php',
             'routes/api'            => 'routes/api.php',
-            'vite.config'           => 'vite.config.js',
             'package.json'          => 'package.json',
             'composer.json'         => 'composer.json',
             'plugin.json'           => 'plugin.json',

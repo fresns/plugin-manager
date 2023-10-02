@@ -20,7 +20,7 @@ class PluginListCommand extends Command
 
     public function handle()
     {
-        $pluginDir = config('plugins.paths.plugins', 'extensions/plugins');
+        $pluginDir = config('plugins.paths.plugins');
 
         $pluginDirs = File::glob(sprintf('%s/*', rtrim($pluginDir, '/')));
 

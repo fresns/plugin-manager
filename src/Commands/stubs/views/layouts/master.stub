@@ -9,6 +9,7 @@
         <title>$STUDLY_NAME$</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.min.css">
+        <link rel="stylesheet" href="{{ plugin_assets('$STUDLY_NAME$/css/fresns.css') }}">
 
         <style>
             .required::before {
@@ -42,6 +43,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/iframe-resizer/js/iframeResizer.contentWindow.min.js"></script>
+        <link rel="stylesheet" href="{{ plugin_assets('$STUDLY_NAME$/js/fresns.js') }}">
         <script>
             /* Tooltips */
             var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
@@ -61,7 +63,7 @@
 
             // tips
             window.tips = function (message, code = 200) {
-                let html = `<div aria-live="polite" aria-atomic="true" class="position-fixed top-50 start-50 translate-middle" style="z-index:99">
+                let html = `<div aria-live="polite" aria-atomic="true" class="position-fixed top-50 start-50 translate-middle" style="z-index:99999">
                     <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
                         <div class="toast-header">
                                 <img src="/static/images/icon.png" width="20px" height="20px" class="rounded me-2" alt="Fresns">
