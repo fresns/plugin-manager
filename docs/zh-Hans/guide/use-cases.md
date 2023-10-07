@@ -10,34 +10,34 @@ Fresns 是一款免费开源的社交网络服务软件，专为跨平台而打�
 ## 管理菜单
 
 - Fresns 官方开发的简易管理菜单。
-- 仓库: [https://github.com/fresns/extensions/tree/release/AdminMenu](https://github.com/fresns/extensions/tree/release/AdminMenu)
+- 仓库: [https://github.com/fresns/plugins/tree/3.x/AdminMenu](https://github.com/fresns/plugins/tree/3.x/AdminMenu)
 
 ## Fresns 简易管家
 
 - Fresns 官方开发的简易管理插件。
-- 仓库: [https://github.com/fresns/extensions/tree/release/EasyManager](https://github.com/fresns/extensions/tree/release/EasyManager)
+- 仓库: [https://github.com/fresns/plugins/tree/3.x/EasyManager](https://github.com/fresns/plugins/tree/3.x/EasyManager)
 
 ## Fresns 文件存储
 
 - Fresns 官方开发的「文件存储」服务插件，支持本地、FTP、SFTP 三种存储方式。
-- 仓库: [https://github.com/fresns/extensions/tree/release/FileStorage](https://github.com/fresns/extensions/tree/release/FileStorage)
+- 仓库: [https://github.com/fresns/plugins/tree/3.x/FileStorage](https://github.com/fresns/plugins/tree/3.x/FileStorage)
 
 ## S3 存储
 
 - S3 存储，支持 S3 协议的存储服务均可使用。
-- 仓库: [https://github.com/fresns/extensions/tree/release/S3Storage](https://github.com/fresns/extensions/tree/release/S3Storage)
+- 仓库: [https://github.com/fresns/plugins/tree/3.x/S3Storage](https://github.com/fresns/plugins/tree/3.x/S3Storage)
 
 ## 在线天数
 
 - 统计用户的在线天数，每天只记数一次。
-- 仓库: [https://github.com/fresns/extensions/tree/release/OnlineDays](https://github.com/fresns/extensions/tree/release/OnlineDays)
+- 仓库: [https://github.com/fresns/plugins/tree/3.x/OnlineDays](https://github.com/fresns/plugins/tree/3.x/OnlineDays)
 
 ## SMTP 邮件服务
 
 - Fresns 官方开发的 SMTP 发信方式的邮件插件。
-- 仓库: [https://github.com/fresns/extensions/tree/release/SmtpEmail](https://github.com/fresns/extensions/tree/release/SmtpEmail)
+- 仓库: [https://github.com/fresns/plugins/tree/3.x/SmtpEmail](https://github.com/fresns/plugins/tree/3.x/SmtpEmail)
 
 ## 标题图标
 
 - 内容图标管理器扩展，管理帖子和评论的标题图标。
-- 仓库: [https://github.com/fresns/extensions/tree/release/TitleIcons](https://github.com/fresns/extensions/tree/release/TitleIcons)
+- 仓库: [https://github.com/fresns/plugins/tree/3.x/TitleIcons](https://github.com/fresns/plugins/tree/3.x/TitleIcons)

@@ -5,13 +5,13 @@
 Unzip the plugin files into the `/plugins/` directory, the final directory will be `/plugins/{fskey}/`.
 
 ```php
-fresns plugin:unzip /www/wwwroot/fresns/storage/plugins/123e4567-e89b-12d3-a456-426614174000.zip
+fresns plugin:unzip /www/wwwroot/fresns/storage/plugins/downloads/123e4567-e89b-12d3-a456-426614174000.zip
 ```
 
 or
 
 ```php
-php artisan plugin:unzip /www/wwwroot/fresns/storage/plugins/123e4567-e89b-12d3-a456-426614174000.zip
+php artisan plugin:unzip /www/wwwroot/fresns/storage/plugins/downloads/123e4567-e89b-12d3-a456-426614174000.zip
 ```
 
 ## Publish Plugin
@@ -28,7 +28,7 @@ or
 php artisan plugin:publish DemoPlugin
 ```
 
-- `/plugins/DemoPlugin/Resources/assets/` Distribute to web directories `/public/assets/plugins/DemoPlugin/`
+- `/plugins/DemoPlugin/Resources/assets/` Distribute to web directories `/public/assets/DemoPlugin/`
 
 ## Unpublish
 
@@ -44,7 +44,7 @@ or
 php artisan plugin:unpublish DemoPlugin
 ```
 
-- `/plugins/DemoPlugin/Resources/assets/` Distribute to web directories `/public/assets/plugins/DemoPlugin/`
+- `/plugins/DemoPlugin/Resources/assets/` Distribute to web directories `/public/assets/DemoPlugin/`
 
 ## Update Plugin Composer Package
 
@@ -161,6 +161,6 @@ php artisan plugin:uninstall DemoPlugin --cleardata=false
 ```
 
 - `/plugins/DemoPlugin/` Physically deletion the folder.
-- `/public/assets/plugins/DemoPlugin/` Physically deletion the folder.
+- `/public/assets/DemoPlugin/` Physically deletion the folder.
 - Remove the plugin composer dependency package (skip if the main application or another plugin is in use)
 - Logically deletion the value of the record where the `fskey` column of the `plugins` table is `DemoPlugin`.

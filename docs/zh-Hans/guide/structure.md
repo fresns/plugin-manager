@@ -4,23 +4,22 @@
 
 ```php
 laravel/            // 主程序
-└── extensions/         // 扩展目录（插件和主题）
-    └── plugins/            // 插件目录
-        └── DemoPlugin/         // 示例插件
-            ├── app/
-            ├── config/
-            ├── database/
-            ├── resources/
-            │   ├── assets/
-            │   │   ├── images/
-            │   │   ├── js/
-            │   │   └── css/
-            │   ├── lang/
-            │   └── views/
-            ├── routes/
-            ├── tests/
-            ├── plugin.json
-            └── composer.json
+└── plugins/            // 插件目录
+    └── DemoPlugin/         // 示例插件
+        ├── app/
+        ├── config/
+        ├── database/
+        ├── resources/
+        │   ├── assets/
+        │   │   ├── images/
+        │   │   ├── js/
+        │   │   └── css/
+        │   ├── lang/
+        │   └── views/
+        ├── routes/
+        ├── tests/
+        ├── plugin.json
+        └── composer.json
 ```
 
 ## plugin.json
@@ -115,4 +114,4 @@ protected $listen = [
 
 | 插件文件夹 | 分发到站点资源目录 |
 | --- | --- |
-| /extensions/plugins/`{fskey}`/Resources/assets/ | /public/assets/plugins/`{fskey}`/ |
+| /plugins/`{fskey}`/Resources/assets/ | /public/assets/`{fskey}`/ |

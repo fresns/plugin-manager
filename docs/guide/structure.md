@@ -4,23 +4,22 @@
 
 ```php
 laravel/            // Main Program
-└── extensions/         // Extensions directory (plugins and themes)
-    └── plugins/            // Plugin directory
-        └── DemoPlugin/         // Demo plugin
-            ├── app/
-            ├── config/
-            ├── database/
-            ├── resources/
-            │   ├── assets/
-            │   │   ├── images/
-            │   │   ├── js/
-            │   │   └── css/
-            │   ├── lang/
-            │   └── views/
-            ├── routes/
-            ├── tests/
-            ├── plugin.json
-            └── composer.json
+└── plugins/            // Plugin directory
+    └── DemoPlugin/         // Demo plugin
+        ├── app/
+        ├── config/
+        ├── database/
+        ├── resources/
+        │   ├── assets/
+        │   │   ├── images/
+        │   │   ├── js/
+        │   │   └── css/
+        │   ├── lang/
+        │   └── views/
+        ├── routes/
+        ├── tests/
+        ├── plugin.json
+        └── composer.json
 ```
 
 ## plugin.json
@@ -115,4 +114,4 @@ Assets are distributed to the public directory when the plugin is installed and 
 
 | Plugin Folder | Publish to the site resource directory |
 | --- | --- |
-| /extensions/plugins/`{fskey}`/Resources/assets/ | /public/assets/plugins/`{fskey}`/ |
+| /plugins/`{fskey}`/Resources/assets/ | /public/assets/`{fskey}`/ |

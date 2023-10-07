@@ -32,8 +32,8 @@ php artisan vendor:publish --provider="Fresns\PluginManager\Providers\PluginServ
     "extra": {
         "merge-plugin": {
             "include": [
-                "extensions/plugins/*/composer.json"
-                // The windows system is: \\extensions\\plugins\\*\\composer.json
+                "plugins/*/composer.json"
+                // The windows system is: \\plugins\\*\\composer.json
             ],
             "recurse": true,
             "replace": false,
@@ -57,8 +57,6 @@ php artisan vendor:publish --provider="Fresns\PluginManager\Providers\PluginServ
 laravel/            // 主程序
 ├── config/             // 配置文件目录
 │   └── plugins.php         // 插件配置文件
-├── extensions/         // 扩展目录
-│   ├── plugins/            // 插件目录
-│   └── backups/            // 备份目录
+├── plugins/            // 插件目录
 └── fresns.json         // 插件启用停用状态
 ```
