@@ -14,7 +14,7 @@ class CustomCommand extends Command
 {
     protected $signature = 'custom';
 
-    protected $description = 'Customize extensions namespace or others by config/plugins.php';
+    protected $description = 'Customize plugin namespace or others by config/plugins.php';
 
     public function handle()
     {
