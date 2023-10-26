@@ -24,9 +24,6 @@ class $CLASS$ extends ServiceProvider
         // Registered::class => [
         //     SendEmailVerificationNotification::class,
         // ],
-        "plugins.clean_data" => [
-            // When the user uninstalls, if the data needs to be deleted, the listener is configured here.
-        ],
     ];
 
     /**
