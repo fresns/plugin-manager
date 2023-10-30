@@ -21,23 +21,25 @@ class MakeCmdWordProviderCommand extends GeneratorCommand
     public function handle()
     {
         $path = $this->getPath('Providers/'.$this->getNameInput());
-        $pluginFskey = basename(dirname($path, 2));
-        $pluginJsonPath = dirname($path, 2).'/plugin.json';
+        $pluginFskey = basename(dirname($path, 3));
+        $pluginJsonPath = dirname($path, 3).'/plugin.json';
 
         $this->generateCmdWordService($pluginFskey);
 
         parent::handle();
 
-        $this->installPluginProviderAfter(
-            $this->getPluginJsonSearchContent($pluginFskey),
-            $this->getPluginJsonReplaceContent($this->getNameInput(), $pluginFskey),
-            $pluginJsonPath
-        );
+        if (is_file($pluginJsonPath)) {
+            $this->installPluginProviderAfter(
+                $this->getPluginJsonSearchContent($pluginFskey),
+                $this->getPluginJsonReplaceContent($this->getNameInput(), $pluginFskey),
+                $pluginJsonPath
+            );
+        }
     }
 
     protected function getStubName(): string
     {
-        return 'cmd-word-provider';
+        return 'app/Providers/cmd-word-provider';
     }
 
     protected function getDefaultNamespace($rootNamespace)
@@ -55,7 +57,7 @@ class MakeCmdWordProviderCommand extends GeneratorCommand
         }
 
         if (! is_file($path)) {
-            $stubPath = __DIR__.'/stubs/cmd-word-service.stub';
+            $stubPath = __DIR__.'/stubs/app/Providers/cmd-word-provider.stub';
 
             $content = file_get_contents($stubPath);
 

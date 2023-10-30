@@ -21,9 +21,9 @@ use $PLUGIN_NAMESPACE$\$STUDLY_NAME$\Http\Controllers as WebController;
 */
 
 Route::group([], function() {
-    Route::get('$KEBAB_NAME$', [WebController\$STUDLY_NAME$SettingController::class, 'index'])->name('$KEBAB_NAME$.index');
-    Route::get('$KEBAB_NAME$/setting', [WebController\$STUDLY_NAME$SettingController::class, 'showSettingView'])->name('$KEBAB_NAME$.setting');
-    Route::post('$KEBAB_NAME$/setting', [WebController\$STUDLY_NAME$SettingController::class, 'saveSetting']);
+    Route::get('/', [WebController\$STUDLY_NAME$SettingController::class, 'index'])->name('/.index');
+    Route::get('setting', [WebController\$STUDLY_NAME$SettingController::class, 'showSettingView'])->name('$KEBAB_NAME$.setting');
+    Route::post('setting', [WebController\$STUDLY_NAME$SettingController::class, 'saveSetting']);
 });
 
 // without VerifyCsrfToken
@@ -31,5 +31,5 @@ Route::group([], function() {
 //    \App\Http\Middleware\EncryptCookies::class,
 //    \App\Http\Middleware\VerifyCsrfToken::class,
 // ])->group(function() {
-//     Route::get('$KEBAB_NAME$', [WebController\$STUDLY_NAME$SettingController::class, 'index']);
+//     Route::get('/', [WebController\$STUDLY_NAME$SettingController::class, 'index']);
 // });

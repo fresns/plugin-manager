@@ -29,7 +29,6 @@ class $CLASS$ extends ServiceProvider implements CmdWordProviderContract
         // ['word' => BWordService::CMD_STATIC_TEST, 'provider' => [BWordService::class, 'handleStaticTest']],
         // ['word' => TestModel::CMD_MODEL_TEST, 'provider' => [TestModel::class, 'handleModelTest']],
         // ['word' => 'cmdWord', 'provider' => [CmdWordService::class, 'cmdWord']],
-        ['word' => 'cmdWord', 'provider' => [CmdWordService::class, 'cmdWord']],
     ];
 
     /**

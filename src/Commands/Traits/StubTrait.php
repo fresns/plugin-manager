@@ -177,6 +177,10 @@ trait StubTrait
             }
         }
 
+        if (! file_exists($stubFilePath)) {
+            throw new \RuntimeException("stub path does not exists: {$stubPath}");
+        }
+
         $mimeType = File::mimeType($stubFilePath);
         if (
             str_contains($mimeType, 'application/')

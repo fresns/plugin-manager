@@ -21,21 +21,23 @@ class MakeScheduleProviderCommand extends GeneratorCommand
     public function handle()
     {
         $path = $this->getPath('Providers/'.$this->getNameInput());
-        $pluginFskey = basename(dirname($path, 2));
-        $pluginJsonPath = dirname($path, 2).'/plugin.json';
+        $pluginFskey = basename(dirname($path, 3));
+        $pluginJsonPath = dirname($path, 3).'/plugin.json';
 
         parent::handle();
 
-        $this->installPluginProviderAfter(
-            $this->getPluginJsonSearchContent($pluginFskey),
-            $this->getPluginJsonReplaceContent($this->getNameInput(), $pluginFskey),
-            $pluginJsonPath
-        );
+        if (is_file($pluginJsonPath)) {
+            $this->installPluginProviderAfter(
+                $this->getPluginJsonSearchContent($pluginFskey),
+                $this->getPluginJsonReplaceContent($this->getNameInput(), $pluginFskey),
+                $pluginJsonPath
+            );
+        }
     }
 
     protected function getStubName(): string
     {
-        return 'schedule-provider';
+        return 'app/Providers/schedule-provider';
     }
 
     protected function getDefaultNamespace($rootNamespace)
