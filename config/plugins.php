@@ -92,7 +92,7 @@ return [
     'stubs' => [
         'path'         => dirname(__DIR__).'/src/Commands/stubs',
         'files'        => [
-            'app/Http/Controllers/web-controller'       => 'app/Http/Controllers/WebController.php',
+            'app/Http/Controllers/setting-controller'   => 'app/Http/Controllers/$STUDLY_NAME$SettingController.php',
             'app/Providers/provider'                    => 'app/Providers/$STUDLY_NAME$ServiceProvider.php',
             'app/Providers/command-provider'            => 'app/Providers/CommandServiceProvider.php',
             'app/Providers/route-provider'              => 'app/Providers/RouteServiceProvider.php',
