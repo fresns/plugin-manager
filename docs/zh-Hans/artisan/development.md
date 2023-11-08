@@ -190,7 +190,7 @@ fresns make:event-provider
 
 - You need to add it yourself to the `providers` parameter of `plugin.json`.
 
-## 生成插件 SQL 提供者
+## 生成插件 SQL 服务提供者
 
 Generate a sql provider for specified plugin.
 
@@ -200,7 +200,15 @@ fresns make:sql-provider
 
 - You need to add it yourself to the `providers` parameter of `plugin.json`.
 
-## 生成插件命令字提供者
+## 生成插件 Exception 服务提供者
+
+Generate a exception provider for specified plugin.
+
+```php
+fresns make:exception-provider
+```
+
+## 生成插件「命令字」服务提供者
 
 Generate a [cmd word service provider](../command-word/) for specified plugin.
 

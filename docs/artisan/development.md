@@ -200,6 +200,14 @@ fresns make:sql-provider
 
 - You need to add it yourself to the `providers` parameter of `plugin.json`.
 
+## Generate Plugin Exception Provider
+
+Generate a exception provider for specified plugin.
+
+```php
+fresns make:exception-provider
+```
+
 ## Generate Plugin Command Word Provider
 
 Generate a [cmd word service provider](../command-word/) for specified plugin.
