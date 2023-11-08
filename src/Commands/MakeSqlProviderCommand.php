@@ -16,7 +16,7 @@ class MakeSqlProviderCommand extends GeneratorCommand
 
     protected $signature = 'make:sql-provider {fskey=SqlLogServiceProvider}';
 
-    protected $description = 'Generate a sql log service provider for specified plugin and need your manual reigster it.';
+    protected $description = 'Generate a sql log service provider for specified plugin and need your manual register it.';
 
     public function handle()
     {
