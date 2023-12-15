@@ -23,8 +23,6 @@ class $STUDLY_NAME$ServiceProvider extends BaseServiceProvider
 
         $this->loadMigrationsFrom(dirname(__DIR__, 2) . '/database/migrations');
 
-        $this->app->register(RouteServiceProvider::class);
-
         // Event::listen(UserCreated::class, UserCreatedListener::class);
     }
 

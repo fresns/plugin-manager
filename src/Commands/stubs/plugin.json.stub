@@ -9,7 +9,8 @@
     "accessPath": "/$KEBAB_NAME$",
     "settingsPath": "/$KEBAB_NAME$/setting",
     "providers": [
-        "$PLUGIN_NAMESPACE$\\$STUDLY_NAME$\\Providers\\$STUDLY_NAME$ServiceProvider"
+        "$PLUGIN_NAMESPACE$\\$STUDLY_NAME$\\Providers\\$STUDLY_NAME$ServiceProvider",
+        "$PLUGIN_NAMESPACE$\\$STUDLY_NAME$\\Providers\\RouteServiceProvider"
     ],
     "autoloadFiles": [],
     "aliases": {}
