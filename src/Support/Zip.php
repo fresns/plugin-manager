@@ -23,14 +23,14 @@ class Zip
     public function fixFilesChineseName($sourcePath)
     {
         $encoding_list = [
-            "ASCII", 'UTF-8', "GB2312", "GBK", 'BIG5'
+            'ASCII', 'UTF-8', 'GB2312', 'GBK', 'BIG5',
         ];
 
         try {
             $zip = new \ZipArchive();
             $openResult = $zip->open($sourcePath);
             if ($openResult !== true) {
-                throw new \Exception('Cannot Open zip file: ' . $sourcePath);
+                throw new \Exception('Cannot Open zip file: '.$sourcePath);
             }
             $fileNum = $zip->numFiles;
 
@@ -57,7 +57,7 @@ class Zip
 
     public function pack(string $sourcePath, ?string $filename = null, ?string $targetPath = null): ?string
     {
-        if (!File::exists($sourcePath)) {
+        if (! File::exists($sourcePath)) {
             throw new \RuntimeException("Directory to be decompressed does not exist {$sourcePath}");
         }
 
@@ -67,14 +67,14 @@ class Zip
 
         File::ensureDirectoryExists($targetPath);
 
-        $zipFilename = str_contains($filename, '.zip') ? $filename : $filename . '.zip';
+        $zipFilename = str_contains($filename, '.zip') ? $filename : $filename.'.zip';
         $zipFilepath = "{$targetPath}/{$zipFilename}";
 
         while (File::exists($zipFilepath)) {
             $basename = File::name($zipFilepath);
             $zipCount = count(File::glob("{$targetPath}/{$basename}*.zip"));
 
-            $zipFilename = $basename . $zipCount . '.zip';
+            $zipFilename = $basename.$zipCount.'.zip';
             $zipFilepath = "{$targetPath}/{$zipFilename}";
         }
 
@@ -114,7 +114,7 @@ class Zip
             throw new \RuntimeException('targetPath cannot be empty');
         }
 
-        if (!is_dir($targetPath)) {
+        if (! is_dir($targetPath)) {
             File::ensureDirectoryExists($targetPath);
         }
 
@@ -172,13 +172,13 @@ class Zip
             throw new \RuntimeException("Cannot handle the zip file, zip file count is: {$fileCount}, extract path is: {$targetPath}");
         }
 
-        $tmpDir = $targetPath . '-subdir';
+        $tmpDir = $targetPath.'-subdir';
         File::ensureDirectoryExists($tmpDir);
 
         $firstEntryname = File::basename(current($files));
 
-        $path = $targetPath . "/{$firstEntryname}";
-        $tmpTargetPath = $tmpDir . "/{$firstEntryname}";
+        $path = $targetPath."/{$firstEntryname}";
+        $tmpTargetPath = $tmpDir."/{$firstEntryname}";
         $parentDir = dirname($tmpTargetPath);
         File::ensureDirectoryExists($parentDir);
 
