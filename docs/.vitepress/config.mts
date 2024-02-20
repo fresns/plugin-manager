@@ -8,11 +8,11 @@ export default defineConfig({
     lastUpdated: true,
 
     head: [
-        ['link', { rel: 'icon', type: 'image/png', href: 'https://files.fresns.org/wiki/icons/pm.png' }],
+        ['link', { rel: 'icon', type: 'image/png', href: 'https://assets.fresns.com/images/icons/pm.png' }],
     ],
 
     themeConfig: {
-        logo: 'https://files.fresns.org/wiki/icons/pm.png',
+        logo: 'https://assets.fresns.com/images/icons/pm.png',
 
         nav: [
             { text: 'Home', link: '/' },

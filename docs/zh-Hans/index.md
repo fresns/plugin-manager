@@ -9,7 +9,7 @@ hero:
   text: 让 Laravel 应用更具组织性和可扩展性
   tagline: 插件管理器是一个便捷的 Laravel 扩展包，用于模块化管理您的庞大 Laravel 应用程序。每个插件就像一个独立的 Laravel 应用或者微服务，可以定义自己的视图、控制器和模型。
   image:
-      src: https://files.fresns.org/wiki/icons/pm.png
+      src: https://assets.fresns.com/images/icons/pm.png
       alt: PluginManager
   actions:
     - theme: brand

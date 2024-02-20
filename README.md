@@ -1,4 +1,4 @@
-<p align="center"><a href="https://pm.fresns.org" target="_blank"><img src="https://files.fresns.org/wiki/icons/pm.png" width="150"></a></p>
+<p align="center"><a href="https://pm.fresns.org" target="_blank"><img src="https://assets.fresns.com/images/icons/pm.png" width="150"></a></p>
 
 <p align="center">
 <img src="https://img.shields.io/badge/PHP-%5E8.0-blueviolet" alt="PHP">
