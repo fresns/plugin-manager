@@ -24,7 +24,7 @@ export default defineConfig({
 
         footer: {
             message: 'Released under the Apache-2.0 License',
-            copyright: 'Copyright © 2023 <a href="https://github.com/jevantang" target="_blank">Jevan Tang</a>',
+            copyright: 'Copyright © 2021-2024 <a href="https://github.com/jevantang" target="_blank">Jevan Tang</a>',
         },
 
         editLink: {
@@ -123,7 +123,7 @@ export default defineConfig({
 
                 footer: {
                     message: '遵循 Apache-2.0 开源协议',
-                    copyright: 'Copyright © 2023 <a href="https://github.com/jevantang" target="_blank">唐杰</a>',
+                    copyright: 'Copyright © 2021-2024 <a href="https://github.com/jevantang" target="_blank">唐杰</a>',
                 },
 
                 outlineTitle: '本页导览',
