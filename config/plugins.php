@@ -54,8 +54,8 @@ return [
 
     'paths' => [
         'base' => base_path('plugins'),
-        'unzip_target_path' => base_path('storage/plugins/.tmp'),
-        'backups' => base_path('storage/plugins/backups'),
+        'unzip_target_path' => base_path('storage/extensions/.tmp'),
+        'backups' => base_path('storage/extensions/backups'),
         'plugins' => base_path('plugins'),
         'assets' => public_path('assets'),
         'migration' => base_path('database/migrations'),
