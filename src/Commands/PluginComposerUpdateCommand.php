@@ -29,7 +29,7 @@ class PluginComposerUpdateCommand extends Command
             echo "home path permission is:" `ls -ld ~`
             echo ""
 
-            #test -f ~/.config/composer/compsoer.json && echo 1 || (mkdir -p ~/.config/composer && echo "{}" > ~/.config/composer/composer.json)
+            #test -f ~/.config/composer/composer.json && echo 1 || (mkdir -p ~/.config/composer && echo "{}" > ~/.config/composer/composer.json)
             #echo ""
 
             echo "global composer.json content": `cat ~/.config/composer/composer.json`

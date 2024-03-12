@@ -30,18 +30,11 @@
     ],
     "require": {
         "php": "^8.0.2",
-        "laravel/framework": "^9.0|^10.0",
+        "laravel/framework": "^9.0|^10.0|^11.0",
         "wikimedia/composer-merge-plugin": "dev-master",
         "nelexa/zip": "^4.0"
     },
-    "require-dev": {
-        "brainmaestro/composer-git-hooks": "^2.8",
-        "friendsofphp/php-cs-fixer": "^3.9",
-        "mockery/mockery": "^1.5",
-        "jetbrains/phpstorm-attributes": "^1.0",
-        "phpunit/phpunit": "^9.5",
-        "vimeo/psalm": "^4.26"
-    },
+    "require-dev": {},
     "autoload": {
         "psr-4": {
             "Fresns\\PluginManager\\": "src"
