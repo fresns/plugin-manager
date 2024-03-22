@@ -53,7 +53,6 @@ return [
     ],
 
     'paths' => [
-        'base' => base_path('plugins'),
         'unzip_target_path' => base_path('storage/extensions/.tmp'),
         'backups' => base_path('storage/extensions/backups'),
         'plugins' => base_path('plugins'),

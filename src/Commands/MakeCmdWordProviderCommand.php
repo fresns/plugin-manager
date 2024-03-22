@@ -57,7 +57,7 @@ class MakeCmdWordProviderCommand extends GeneratorCommand
         }
 
         if (! is_file($path)) {
-            $stubPath = __DIR__.'/stubs/app/Providers/cmd-word-provider.stub';
+            $stubPath = __DIR__.'/stubs/app/Services/cmd-word-service.stub';
 
             $content = file_get_contents($stubPath);
 
