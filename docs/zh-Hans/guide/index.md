@@ -4,7 +4,7 @@
 
 <p align="center">
 <img src="https://img.shields.io/badge/PHP-%5E8.0-blueviolet" alt="PHP" style="display:inline;">
-<img src="https://img.shields.io/badge/Laravel-9.x%7C10.x-orange" alt="Laravel" style="display:inline;margin:0 8px;">
+<img src="https://img.shields.io/badge/Laravel-9.x%7C10.x%7C11.x-orange" alt="Laravel" style="display:inline;margin:0 8px;">
 <img src="https://img.shields.io/badge/License-Apache--2.0-green" alt="License" style="display:inline;">
 </p>
 

@@ -4,7 +4,7 @@
 
 | Environment | Requirements |
 | --- | --- |
-| Laravel | 9.x or 10.x |
+| Laravel | 9.x / 10.x / 11.x |
 | PHP | 8.0 or higher |
 
 ## Installation
