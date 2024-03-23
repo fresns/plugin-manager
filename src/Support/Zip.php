@@ -168,7 +168,7 @@ class Zip
         }
 
         $fileCount = count($files);
-        if ($fileCount > 1) {
+        if (1 < $fileCount && $fileCount <= 3) {
             throw new \RuntimeException("Cannot handle the zip file, zip file count is: {$fileCount}, extract path is: {$targetPath}");
         }
 
