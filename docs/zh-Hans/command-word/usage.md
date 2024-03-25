@@ -123,18 +123,21 @@ $fresnsResp = \FresnsCmdWord::plugin('FresnsEmail')->sendEmail($wordBody);
 **处理异常情况**
 ```php
 if ($fresnsResp->isErrorResponse()) {
-    return $fresnsResp->errorResponse(); //报错时，输出全量参数(code+message+data)
+    return $fresnsResp->getErrorResponse();
 }
 ```
 
 **处理正常情况**
 ```php
-$fresnsResp->getOrigin(); //获取原始数据
+$fresnsResp->getOrigin(); //获取原始数据(code+message+data)
+
 $fresnsResp->getCode(); //只获取 code
 $fresnsResp->getMessage(); //只获取 message
 $fresnsResp->getData(); //只获取 data 全量数据
 $fresnsResp->getData('user.nickname'); //只获取 data 中指定参数，比如 data.user.nickname
+
 $fresnsResp->isSuccessResponse(); //判断请求是否为 true
 $fresnsResp->isErrorResponse(); //判断请求是否为 false
-$fresnsResp->getErrorResponse(); //获取错误响应对象
+
+$fresnsResp->getErrorResponse(); //内部使用输出原始数据，API 调用输出 JSON
 ```

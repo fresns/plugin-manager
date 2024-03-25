@@ -90,18 +90,21 @@ $fresnsResp = \FresnsCmdWord::plugin('FresnsEmail')->sendEmail($wordBody);
 **Handling abnormal situations**
 ```php
 if ($fresnsResp->isErrorResponse()) {
-    return $fresnsResp->errorResponse(); // When an error is reported, the full amount of parameters is output(code+message+data)
+    return $fresnsResp->getErrorResponse();
 }
 ```
 
 **Handling normal situations**
 ```php
-$fresnsResp->getOrigin(); // Obtaining raw data
+$fresnsResp->getOrigin(); // Obtaining raw data(code+message+data)
+
 $fresnsResp->getCode(); // Get code only
 $fresnsResp->getMessage(); // Get only the message
 $fresnsResp->getData(); // Get only the full amount of data
 $fresnsResp->getData('user.nickname'); // Get only the parameters specified in data, for example: data.user.nickname
+
 $fresnsResp->isSuccessResponse(); // Determine if the request is true
 $fresnsResp->isErrorResponse(); // Determine if the request is false
-$fresnsResp->getErrorResponse(); // Get the error response object
+
+$fresnsResp->getErrorResponse(); // Internal use returns raw data, API calls return JSON.
 ```
