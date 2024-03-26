@@ -24,14 +24,15 @@ class PluginActivateCommand extends Command
         $pluginFskey = $this->getPluginFskey();
 
         if ($pluginFskey) {
-            $this->activate($pluginFskey);
-        }
-        // Activate all plugins
-        else {
-            $this->activateAll();
+            $status = $this->activate($pluginFskey);
+        } else {
+            // Activate all plugins
+            $status = $this->activateAll();
         }
 
-        $this->info('Plugin activate successfully');
+        if (! $status) {
+            return Command::FAILURE;
+        }
 
         return Command::SUCCESS;
     }
@@ -40,31 +41,38 @@ class PluginActivateCommand extends Command
     {
         $plugin = new Plugin();
 
-        collect($plugin->all())->map(function ($pluginFskey) {
-            $this->activate($pluginFskey);
+        $status = true;
+
+        collect($plugin->all())->each(function ($pluginFskey) use (&$status) {
+            if (! $this->activate($pluginFskey)) {
+                $status = false;
+            }
         });
+
+        return $status;
     }
 
     public function activate(?string $pluginFskey = null)
     {
         $plugin = new Plugin($pluginFskey);
-
         $fskey = $plugin->getStudlyName();
 
         event('plugin:activating', [[
             'fskey' => $fskey,
         ]]);
 
-        if ($result = $plugin->activate()) {
-            $this->info(sprintf('Plugin %s activate successfully', $pluginFskey));
-        } else {
-            $this->error(sprintf('Plugin %s activate failure', $pluginFskey));
+        if ($plugin->activate()) {
+            $this->info(sprintf('Plugin %s activated successfully', $pluginFskey));
+
+            event('plugin:activated', [[
+                'fskey' => $fskey,
+            ]]);
+
+            return true;
         }
 
-        event('plugin:activated', [[
-            'fskey' => $fskey,
-        ]]);
+        $this->error(sprintf('Plugin %s activation failed', $pluginFskey));
 
-        return $result;
+        return false;
     }
 }

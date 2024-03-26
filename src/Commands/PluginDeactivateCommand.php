@@ -24,14 +24,15 @@ class PluginDeactivateCommand extends Command
         $pluginFskey = $this->getPluginFskey();
 
         if ($pluginFskey) {
-            $this->deactivate($pluginFskey);
-        }
-        // Deactivate all plugins
-        else {
-            $this->deactivateAll();
+            $status = $this->deactivate($pluginFskey);
+        } else {
+            // Deactivate all plugins
+            $status = $this->deactivateAll();
         }
 
-        $this->info('Plugin deactivate successfully');
+        if (! $status) {
+            return Command::FAILURE;
+        }
 
         return Command::SUCCESS;
     }
@@ -40,9 +41,15 @@ class PluginDeactivateCommand extends Command
     {
         $plugin = new Plugin();
 
-        collect($plugin->all())->map(function ($pluginFskey) {
-            $this->deactivate($pluginFskey);
+        $status = true;
+
+        collect($plugin->all())->each(function ($pluginFskey) use (&$status) {
+            if (! $this->deactivate($pluginFskey)) {
+                $status = false;
+            }
         });
+
+        return $status;
     }
 
     public function deactivate(?string $pluginFskey = null)
@@ -54,16 +61,18 @@ class PluginDeactivateCommand extends Command
             'fskey' => $fskey,
         ]]);
 
-        if ($result = $plugin->deactivate()) {
-            $this->info(sprintf('Plugin %s deactivate successfully', $pluginFskey));
-        } else {
-            $this->error(sprintf('Plugin %s deactivate failure', $pluginFskey));
+        if ($plugin->deactivate()) {
+            $this->info(sprintf('Plugin %s deactivated successfully', $pluginFskey));
+
+            event('plugin:deactivated', [[
+                'fskey' => $fskey,
+            ]]);
+
+            return true;
         }
 
-        event('plugin:deactivated', [[
-            'fskey' => $fskey,
-        ]]);
+        $this->error(sprintf('Plugin %s deactivated failed', $pluginFskey));
 
-        return $result;
+        return false;
     }
 }
