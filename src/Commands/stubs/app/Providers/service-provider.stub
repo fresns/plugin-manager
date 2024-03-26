@@ -10,7 +10,7 @@ namespace $NAMESPACE$\Providers;
 
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
-class $STUDLY_NAME$ServiceProvider extends BaseServiceProvider
+class PluginServiceProvider extends BaseServiceProvider
 {
     /**
      * Boot the application events.

@@ -8,7 +8,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use $PLUGIN_NAMESPACE$\$STUDLY_NAME$\Http\Controllers as ApiController;
+use $PLUGIN_NAMESPACE$\$STUDLY_NAME$\Http\Controllers\SettingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +22,7 @@ use $PLUGIN_NAMESPACE$\$STUDLY_NAME$\Http\Controllers as ApiController;
 */
 
 // Route::prefix('$KEBAB_NAME$')->name('$KEBAB_NAME$.')->group([], function() {
-//     Route::get('/', [ApiController\$STUDLY_NAME$SettingController::class, 'index'])->name('index');
+//     Route::get('/', [SettingController::class, 'index'])->name('index');
 
 //     Route::middleware('auth:api')->get('auth', function (Request $request) {
 //         return $request->user();

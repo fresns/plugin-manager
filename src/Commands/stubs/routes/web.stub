@@ -7,7 +7,7 @@
  */
 
 use Illuminate\Support\Facades\Route;
-use $PLUGIN_NAMESPACE$\$STUDLY_NAME$\Http\Controllers as WebController;
+use $PLUGIN_NAMESPACE$\$STUDLY_NAME$\Http\Controllers\SettingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,15 +21,15 @@ use $PLUGIN_NAMESPACE$\$STUDLY_NAME$\Http\Controllers as WebController;
 */
 
 Route::prefix('$KEBAB_NAME$')->name('$KEBAB_NAME$.')->group([], function() {
-    Route::get('/', [WebController\$STUDLY_NAME$SettingController::class, 'index'])->name('index');
-    Route::get('settings', [WebController\$STUDLY_NAME$SettingController::class, 'showSettingView'])->name('setting');
-    Route::post('setting', [WebController\$STUDLY_NAME$SettingController::class, 'saveSetting'])->name('save.setting');
+    Route::get('/', [SettingController::class, 'index'])->name('index');
+    Route::get('settings', [SettingController::class, 'showSettingView'])->name('setting');
+    Route::post('setting', [SettingController::class, 'saveSetting'])->name('save.setting');
 
     // without VerifyCsrfToken
     // Route::withoutMiddleware([
     //    \App\Http\Middleware\EncryptCookies::class,
     //    \App\Http\Middleware\VerifyCsrfToken::class,
     // ])->group(function() {
-    //     Route::get('example', [WebController\$STUDLY_NAME$SettingController::class, 'index'])->name('example');
+    //     Route::get('example', [SettingController::class, 'index'])->name('example');
     // });
 });

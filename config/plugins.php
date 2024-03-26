@@ -91,8 +91,8 @@ return [
     'stubs' => [
         'path' => dirname(__DIR__).'/src/Commands/stubs',
         'files' => [
-            'app/Http/Controllers/setting-controller' => 'app/Http/Controllers/$STUDLY_NAME$SettingController.php',
-            'app/Providers/provider' => 'app/Providers/$STUDLY_NAME$ServiceProvider.php',
+            'app/Http/Controllers/setting-controller' => 'app/Http/Controllers/SettingController.php',
+            'app/Providers/service-provider' => 'app/Providers/PluginServiceProvider.php',
             'app/Providers/command-provider' => 'app/Providers/CommandServiceProvider.php',
             'app/Providers/route-provider' => 'app/Providers/RouteServiceProvider.php',
             'config/config' => 'config/$KEBAB_NAME$.php',
