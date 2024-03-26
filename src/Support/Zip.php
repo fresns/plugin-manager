@@ -167,6 +167,12 @@ class Zip
             $files[] = $file;
         }
 
+        foreach ($files as $file) {
+            if (str_contains($file, 'plugin.json') || str_contains($file, 'theme.json')) {
+                return $targetPath;
+            }
+        }
+
         $fileCount = count($files);
         if (1 < $fileCount && $fileCount <= 3) {
             throw new \RuntimeException("Cannot handle the zip file, zip file count is: {$fileCount}, extract path is: {$targetPath}");
