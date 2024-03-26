@@ -30,7 +30,8 @@ class FresnsCommand extends Command
 
     public function activate(string $vendorBinPath)
     {
-        $command = sprintf('export %s', "PATH=$vendorBinPath:".'$PATH');
+        $rootDir = base_path();
+        $command = sprintf('export %s', "PATH=$rootDir:$vendorBinPath:".'$PATH');
         if (! str_contains(getenv('PATH'), $vendorBinPath)) {
             $this->warn('Add Project vendorBinPath');
             $this->line('');
