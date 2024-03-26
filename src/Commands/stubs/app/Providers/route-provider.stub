@@ -78,6 +78,6 @@ class RouteServiceProvider extends BaseServiceProvider
      */
     protected function mapApiRoutes(): void
     {
-        Route::prefix('api')->middleware('api')->group(dirname(__DIR__, 2) . '/routes/api.php');
+        Route::prefix('api')->name('api.')->middleware('api')->group(dirname(__DIR__, 2) . '/routes/api.php');
     }
 }

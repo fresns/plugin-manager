@@ -21,10 +21,10 @@ use $PLUGIN_NAMESPACE$\$STUDLY_NAME$\Http\Controllers as ApiController;
 |
 */
 
-// Route::middleware('auth:api')->get('$KEBAB_NAME$', function (Request $request) {
-//     return $request->user();
-// });
+// Route::prefix('$KEBAB_NAME$')->name('$KEBAB_NAME$.')->group([], function() {
+//     Route::get('/', [ApiController\$STUDLY_NAME$SettingController::class, 'index'])->name('index');
 
-// Route::group([], function() {
-//     Route::get('$KEBAB_NAME$', [ApiController\$STUDLY_NAME$SettingController::class, 'index']);
+//     Route::middleware('auth:api')->get('auth', function (Request $request) {
+//         return $request->user();
+//     })->name('auth');
 // });
