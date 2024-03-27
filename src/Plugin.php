@@ -258,7 +258,7 @@ class Plugin
             $plugin->manualAddNamespace();
 
             $serviceProvider = sprintf('%s\\Providers\\%sServiceProvider', $plugin->getClassNamespace(), $pluginFskey);
-            $pluginServiceProvider = sprintf('%s\\Providers\\PluginServiceProvider', $plugin->getClassNamespace(), $pluginFskey);
+            $pluginServiceProvider = sprintf('%s\\Providers\\PluginServiceProvider', $plugin->getClassNamespace());
 
             return class_exists($serviceProvider) || class_exists($pluginServiceProvider);
         } catch (\Throwable $e) {

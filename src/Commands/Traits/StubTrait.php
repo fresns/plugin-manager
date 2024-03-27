@@ -48,10 +48,21 @@ trait StubTrait
 
     public function getPluginJsonSearchContent($pluginFskey): string
     {
-        $class = sprintf('Plugins\\%s\\Providers\\%sServiceProvider', $pluginFskey, $pluginFskey);
-        $class = str_replace('\\', '\\\\', $class);
+        $pluginServiceProvider = sprintf('Plugins\\%s\\Providers\\PluginServiceProvider', $pluginFskey);
+        if (class_exists($pluginServiceProvider)) {
+            $class = str_replace('\\', '\\\\', $pluginServiceProvider);
 
-        return $class;
+            return $class;
+        }
+
+        $serviceProvider = sprintf('%s\\Providers\\%sServiceProvider', $pluginFskey, $pluginFskey);
+        if (class_exists($serviceProvider)) {
+            $class = str_replace('\\', '\\\\', $serviceProvider);
+
+            return $class;
+        }
+
+        throw new \RuntimeException('Service provider for the plugin not found');
     }
 
     /**
