@@ -258,8 +258,9 @@ class Plugin
             $plugin->manualAddNamespace();
 
             $serviceProvider = sprintf('%s\\Providers\\%sServiceProvider', $plugin->getClassNamespace(), $pluginFskey);
+            $pluginServiceProvider = sprintf('%s\\Providers\\PluginServiceProvider', $plugin->getClassNamespace(), $pluginFskey);;
 
-            return class_exists($serviceProvider);
+            return class_exists($serviceProvider) || class_exists($pluginServiceProvider);
         } catch (\Throwable $e) {
             \info("{$pluginFskey} registration failed, not a valid plugin: ".$e->getMessage());
 
