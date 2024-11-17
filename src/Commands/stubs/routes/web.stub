@@ -20,7 +20,7 @@ use $PLUGIN_NAMESPACE$\$STUDLY_NAME$\Http\Controllers\SettingController;
 |
 */
 
-Route::prefix('$KEBAB_NAME$')->name('$KEBAB_NAME$.')->group([], function() {
+Route::prefix('$KEBAB_NAME$')->name('$KEBAB_NAME$.')->group(function() {
     Route::get('/', [SettingController::class, 'index'])->name('index');
     Route::get('settings', [SettingController::class, 'showSettingView'])->name('setting');
     Route::post('setting', [SettingController::class, 'saveSetting'])->name('save.setting');
