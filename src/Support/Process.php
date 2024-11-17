@@ -35,6 +35,7 @@ class Process
 
         $envs = [
             'PATH' => rtrim(`echo \$PATH`),
+            'COMPOSER_HOME' => '~/.config/composer',
             'COMPOSER_MEMORY_LIMIT' => '-1',
             'COMPOSER_ALLOW_SUPERUSER' => 1,
         ] + $env;
