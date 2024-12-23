@@ -164,6 +164,10 @@ class NewCommand extends Command
                 }
             }
 
+            if ($stub == 'composer.json') {
+                $content = str_replace('"require": []', '"require": {}', $content);
+            }
+
             if (! $this->filesystem->isDirectory($dir = dirname($path))) {
                 $this->filesystem->makeDirectory($dir, 0775, true);
                 $this->removeParentDirGitKeep($dir);
