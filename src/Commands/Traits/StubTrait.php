@@ -215,7 +215,7 @@ trait StubTrait
 
     public function getReplaceKeys($content): ?array
     {
-        preg_match_all('/(\$[^\s.]*?\$)/', $content, $matches);
+        preg_match_all('/(\$[^\s.>\[]*?\$)/', $content, $matches);
 
         $keys = $matches[1] ?? [];
 
@@ -289,7 +289,7 @@ trait StubTrait
         return 'Fresns';
     }
 
-    public function getAuthorLinkReplacement(): mixed
+    public function getAuthorUrlReplacement(): mixed
     {
         $authors = config('plugins.composer.author');
         if (count($authors)) {
