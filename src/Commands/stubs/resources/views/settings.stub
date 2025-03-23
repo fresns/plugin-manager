@@ -7,7 +7,7 @@
                 <h1 class="card-title">{{ config('$KEBAB_NAME$.name') }} Settings</h1>
                 <a href="{{ route('$KEBAB_NAME$.index') }}">Back to {{ config('$KEBAB_NAME$.name') }} plugin homepage.</a>
 
-                <form class="row g-3 mt-5" action="{{ route('$KEBAB_NAME$.setting') }}" method="post">
+                <form class="row g-3 mt-5" action="{{ route('$KEBAB_NAME$.admin.update') }}" method="post">
                     @csrf
 
                     <div class="mb-3 row">

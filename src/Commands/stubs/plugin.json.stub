@@ -13,5 +13,5 @@
     "aliases": {},
     "panelUsages": [],
     "accessPath": "/$KEBAB_NAME$",
-    "settingsPath": "/$KEBAB_NAME$/setting"
+    "settingsPath": "/$KEBAB_NAME$/admin"
 }

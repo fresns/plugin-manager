@@ -91,7 +91,10 @@ return [
     'stubs' => [
         'path' => dirname(__DIR__).'/src/Commands/stubs',
         'files' => [
-            'app/Http/Controllers/setting-controller' => 'app/Http/Controllers/SettingController.php',
+            'app/Http/Controllers/controller' => 'app/Http/Controllers/Controller.php',
+            'app/Http/Controllers/admin-controller' => 'app/Http/Controllers/AdminController.php',
+            'app/Http/Controllers/api-controller' => 'app/Http/Controllers/ApiController.php',
+            'app/Http/Controllers/web-controller' => 'app/Http/Controllers/WebController.php',
             'app/Providers/service-provider' => 'app/Providers/PluginServiceProvider.php',
             'app/Providers/command-provider' => 'app/Providers/CommandServiceProvider.php',
             'app/Providers/route-provider' => 'app/Providers/RouteServiceProvider.php',

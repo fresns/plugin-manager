@@ -3,21 +3,10 @@
 namespace Plugins\$STUDLY_NAME$\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 
-class SettingController extends Controller
+class AdminController extends Controller
 {
     public function index(Request $request)
-    {
-        // code
-        $configs = [];
-
-        return view('$STUDLY_NAME$::index', [
-            'configs' => $configs,
-        ]);
-    }
-
-    public function showSettingView(Request $request)
     {
         config(['session.same_site' => 'none']);
         config(['session.secure' => uniqid()]);
@@ -31,12 +20,12 @@ class SettingController extends Controller
         // $configs = Config::whereIn('item_key', $itemKeys)->where('item_tag', '$SNAKE_NAME$')->get();
         $configs = [];
 
-        return view('$STUDLY_NAME$::setting', [
+        return view('$STUDLY_NAME$::settings', [
             'configs' => $configs,
         ]);
     }
 
-    public function saveSetting(Request $request)
+    public function update(Request $request)
     {
         $request->validate([
             // 'item_key1' => 'required|url',
@@ -51,6 +40,6 @@ class SettingController extends Controller
         // code
         // Config updateConfigs with $itemKeys and '$SNAKE_NAME$'
 
-        return redirect(route('$KEBAB_NAME$.setting'));
+        return redirect(route('$KEBAB_NAME$.admin.index'));
     }
 }

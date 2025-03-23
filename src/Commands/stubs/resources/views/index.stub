@@ -8,6 +8,6 @@
             This view is loaded from plugin: {{ config('$KEBAB_NAME$.name') }}
         </p>
 
-        <a href="{{ route('$KEBAB_NAME$.setting') }}">Go to the {{ config('$KEBAB_NAME$.name') }} plugin settings page.</a>
+        <a href="{{ route('$KEBAB_NAME$.admin.index') }}">Go to the {{ config('$KEBAB_NAME$.name') }} plugin settings page.</a>
     </div>
 @endsection

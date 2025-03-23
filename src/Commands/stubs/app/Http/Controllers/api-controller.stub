@@ -1,0 +1,20 @@
+<?php
+
+namespace Plugins\$STUDLY_NAME$\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
+
+class ApiController extends Controller
+{
+    public function configs(Request $request)
+    {
+        $configs = [];
+
+        return Response::json([
+            'code' => 0,
+            'message' => 'ok',
+            'data' => $configs,
+        ]);
+    }
+}

@@ -1,0 +1,18 @@
+<?php
+
+namespace Plugins\$STUDLY_NAME$\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class WebController extends Controller
+{
+    public function index(Request $request)
+    {
+        // code
+        $configs = [];
+
+        return view('$STUDLY_NAME$::index', [
+            'configs' => $configs,
+        ]);
+    }
+}

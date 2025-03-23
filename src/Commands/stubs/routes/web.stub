@@ -7,7 +7,8 @@
  */
 
 use Illuminate\Support\Facades\Route;
-use $PLUGIN_NAMESPACE$\$STUDLY_NAME$\Http\Controllers\SettingController;
+use $PLUGIN_NAMESPACE$\$STUDLY_NAME$\Http\Controllers\AdminController;
+use $PLUGIN_NAMESPACE$\$STUDLY_NAME$\Http\Controllers\WebController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,15 +22,18 @@ use $PLUGIN_NAMESPACE$\$STUDLY_NAME$\Http\Controllers\SettingController;
 */
 
 Route::prefix('$KEBAB_NAME$')->name('$KEBAB_NAME$.')->group(function() {
-    Route::get('/', [SettingController::class, 'index'])->name('index');
-    Route::get('settings', [SettingController::class, 'showSettingView'])->name('setting');
-    Route::post('setting', [SettingController::class, 'saveSetting'])->name('save.setting');
+    Route::get('/', [WebController::class, 'index'])->name('index');
 
     // without VerifyCsrfToken
     // Route::withoutMiddleware([
     //    \App\Http\Middleware\EncryptCookies::class,
     //    \App\Http\Middleware\VerifyCsrfToken::class,
     // ])->group(function() {
-    //     Route::get('example', [SettingController::class, 'index'])->name('example');
+    //     Route::get('example', [WebController::class, 'index'])->name('example');
     // });
+
+    Route::prefix('admin')->name('admin.')->group(function() {
+        Route::get('/', [AdminController::class, 'index'])->name('index');
+        Route::put('update', [AdminController::class, 'update'])->name('update');
+    });
 });
