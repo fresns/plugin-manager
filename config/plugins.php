@@ -109,7 +109,7 @@ return [
             'resources/views/layouts/tips' => 'resources/views/layouts/tips.blade.php',
             'resources/views/app' => 'resources/views/app.blade.php',
             'resources/views/index' => 'resources/views/index.blade.php',
-            'resources/views/setting' => 'resources/views/setting.blade.php',
+            'resources/views/settings' => 'resources/views/settings.blade.php',
             'routes/web' => 'routes/web.php',
             'routes/api' => 'routes/api.php',
             'package.json' => 'package.json',
