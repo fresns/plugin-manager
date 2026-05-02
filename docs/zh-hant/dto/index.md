@@ -32,3 +32,4 @@ php artisan make:dto BaseDTO --path /app/Fresns/Panel
 - [https://laravel.com/docs/10.x/validation#available-validation-rules](https://laravel.com/docs/10.x/validation#available-validation-rules)
 - [https://laravel.com/docs/11.x/validation#available-validation-rules](https://laravel.com/docs/11.x/validation#available-validation-rules)
 - [https://laravel.com/docs/12.x/validation#available-validation-rules](https://laravel.com/docs/12.x/validation#available-validation-rules)
+- [https://laravel.com/docs/13.x/validation#available-validation-rules](https://laravel.com/docs/13.x/validation#available-validation-rules)
