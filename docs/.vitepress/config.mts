@@ -24,7 +24,7 @@ export default defineConfig({
 
         footer: {
             message: 'Released under the Apache-2.0 License',
-            copyright: 'Copyright © 2021-2025 <a href="https://github.com/jevantang" target="_blank">Jevan Tang</a>',
+            copyright: 'Copyright © 2021-2026 <a href="https://github.com/jevantang" target="_blank">Jevan Tang</a>',
         },
 
         editLink: {
